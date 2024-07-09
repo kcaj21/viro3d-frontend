@@ -5,11 +5,14 @@ import { PluginConfig } from 'molstar/lib/mol-plugin/config';
 import { renderReact18 } from 'molstar/lib/mol-plugin-ui/react18';
 import { PluginUIContext } from "molstar/lib/mol-plugin-ui/context";
 import "molstar/lib/mol-plugin-ui/skin/light.scss";
+// import { Sequence } from 'molstar/lib/mol-model/sequence';
 
 const MySpec: PluginUISpec = {
     ...DefaultPluginUISpec(),
     config: [
-        [PluginConfig.VolumeStreaming.Enabled, false]
+      [PluginConfig.VolumeStreaming.Enabled, false],
+      [PluginConfig.Viewport.ShowAnimation, false],
+
     ]
 }
 
@@ -25,9 +28,7 @@ interface MolStarPluginProps {
 
 const MolstarPlugin: React.FC<MolStarPluginProps> = ({ modelUrl }) => {
     const parent = createRef<HTMLDivElement>();
-  
-    // In debug mode of react's strict mode, this code will
-    // be called twice in a row, which might result in unexpected behavior.
+
     useEffect(() => {
       async function init() {
           window.molstar = await createPluginUI({
@@ -54,6 +55,8 @@ const MolstarPlugin: React.FC<MolStarPluginProps> = ({ modelUrl }) => {
       };
     }, [modelUrl, parent]);
   
-    return <div ref={parent} style={{ width: 640, height: 480 }}/>;
+  
+  
+    return <div ref={parent} />;
   }
 export default MolstarPlugin;
