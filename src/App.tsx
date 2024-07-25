@@ -9,7 +9,7 @@ function App() {
           <div className="MolstarContainer w-3/6">
           <MolstarPlugin modelUrl="https://alphafold.ebi.ac.uk/files/AF-Q5VSL9-F1-model_v4.pdb" />
           </div>     
-          <div className="GenomeBroswerContainer w-2">
+          <div className="GenomeBroswerContainer w-2/6">
             <GenomeBrowser />
           </div>
         </div>

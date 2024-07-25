@@ -12,6 +12,11 @@ const MySpec: PluginUISpec = {
     config: [
       [PluginConfig.VolumeStreaming.Enabled, false],
       [PluginConfig.Viewport.ShowAnimation, false],
+      [PluginConfig.Viewport.ShowSettings, false],
+      [PluginConfig.Viewport.ShowExpand, false],
+      [PluginConfig.Viewport.ShowControls, false],
+      [PluginConfig.Viewport.ShowTrajectoryControls, false]
+
 
     ]
 }
@@ -57,6 +62,6 @@ const MolstarPlugin: React.FC<MolStarPluginProps> = ({ modelUrl }) => {
   
   
   
-    return <div ref={parent} />;
+    return <div ref={parent} style={{width: "600px", height: "400px", position: "relative"}} />;
   }
 export default MolstarPlugin;
