@@ -12,6 +12,23 @@ import { PluginLayoutControlsDisplay } from 'molstar/lib/mol-plugin/layout';
 
 const defaultSpec = DefaultPluginUISpec()
 
+const o = {
+  
+      layoutIsExpanded: false,
+      layoutShowControls: false,
+      layoutShowRemoteState: false,
+      layoutShowSequence: true,
+      layoutShowLog: false,
+      layoutShowLeftPanel: true,
+
+      viewportShowExpand: true,
+      viewportShowControls: false,
+      viewportShowSettings: false,
+      viewportShowSelectionMode: false,
+      viewportShowAnimation: false,
+  
+};
+
 const MySpec: PluginUISpec = {
   actions: defaultSpec.actions,
   behaviors: [
@@ -36,7 +53,7 @@ const MySpec: PluginUISpec = {
       ...defaultSpec.components,
       controls: {
           ...defaultSpec.components?.controls,
-          top: 'none',
+          top: o.layoutShowSequence ? undefined : 'none',
           bottom: 'none',
           left: 'none',
       },
