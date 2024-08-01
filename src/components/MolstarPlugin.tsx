@@ -19,9 +19,9 @@ const o = {
       layoutShowRemoteState: false,
       layoutShowSequence: true,
       layoutShowLog: false,
-      layoutShowLeftPanel: true,
+      layoutShowLeftPanel: false,
 
-      viewportShowExpand: true,
+      viewportShowExpand: false,
       viewportShowControls: false,
       viewportShowSettings: false,
       viewportShowSelectionMode: false,
@@ -56,6 +56,7 @@ const MySpec: PluginUISpec = {
           top: o.layoutShowSequence ? undefined : 'none',
           bottom: 'none',
           left: 'none',
+          right: 'none'
       },
       remoteState: 'none'
   },
@@ -64,7 +65,7 @@ const MySpec: PluginUISpec = {
       [PluginConfig.Viewport.ShowAnimation, false],
       [PluginConfig.Viewport.ShowSettings, true],
       [PluginConfig.Viewport.ShowExpand, false],
-      [PluginConfig.Viewport.ShowControls, true],
+      [PluginConfig.Viewport.ShowControls, false],
       [PluginConfig.Viewport.ShowTrajectoryControls, false]
 
     ]
@@ -111,6 +112,6 @@ const MolstarPlugin: React.FC<MolStarPluginProps> = ({ modelUrl }) => {
   
   
   
-    return <div ref={parent} style={{width: "600px", height: "400px", position: "relative"}} />;
+    return <div ref={parent} style={{width: "600px", height: "600px", position: "relative", marginTop: '96px'}} />;
   }
 export default MolstarPlugin;
