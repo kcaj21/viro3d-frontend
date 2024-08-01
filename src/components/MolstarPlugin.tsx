@@ -46,7 +46,7 @@ const MySpec: PluginUISpec = {
       initial: {
           isExpanded: false,
       showControls: true,
-      // controlsDisplay: 'reactive' as PluginLayoutControlsDisplay //adding this seems maybe to make the view window reactive to the setting panel
+      controlsDisplay: 'reactive' as PluginLayoutControlsDisplay //adding this seems maybe to make the view window reactive to the setting panel
       },
   },
   components: {
@@ -112,6 +112,6 @@ const MolstarPlugin: React.FC<MolStarPluginProps> = ({ modelUrl }) => {
   
   
   
-    return <div ref={parent} style={{width: "600px", height: "600px", position: "relative", marginTop: '96px'}} />;
+    return <div ref={parent} style={{width: "600px", height: "600px", position: "relative"}} />;
   }
 export default MolstarPlugin;
