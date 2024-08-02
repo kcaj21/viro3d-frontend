@@ -3,6 +3,8 @@ import { DefaultPluginUISpec, PluginUISpec } from 'molstar/lib/mol-plugin-ui/spe
 import { createPluginUI } from 'molstar/lib/mol-plugin-ui';
 import { PluginConfig } from 'molstar/lib/mol-plugin/config';
 import { renderReact18 } from 'molstar/lib/mol-plugin-ui/react18';
+import { PDBeStructureQualityReport } from 'molstar/lib/extensions/pdbe';
+
 import { PluginUIContext } from "molstar/lib/mol-plugin-ui/context";
 import "molstar/lib/mol-plugin-ui/skin/light.scss";
 import { PluginSpec } from 'molstar/lib/mol-plugin/spec';
@@ -38,7 +40,7 @@ const MySpec: PluginUISpec = {
 
       PluginSpec.Behavior(PluginBehaviors.CustomProps.StructureInfo),
       PluginSpec.Behavior(PluginBehaviors.CustomProps.Interactions),
-      PluginSpec.Behavior(PluginBehaviors.CustomProps.SecondaryStructure),
+    PluginSpec.Behavior(PluginBehaviors.CustomProps.SecondaryStructure),
   ],
   animations: defaultSpec.animations,
   customParamEditors: defaultSpec.customParamEditors,
