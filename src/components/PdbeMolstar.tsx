@@ -17,8 +17,9 @@ const MolstarViewer = () => {
       'animation',
     ],
     sequencePanel: true,
-      landscape: true,
+      landscape: false,
       reactive: true,
+      controlsDisplay: "reactive",
 
       hideControls: false
   });
@@ -41,9 +42,11 @@ const MolstarViewer = () => {
 
   return (
     <>
-      <div className='border-2 border-black rounded-lg' ref={viewerContainerRef} style={{ width: '800px', height: '600px', position: 'relative', float: 'left' }}>
-      </div>
-      <button onClick={handleClick}>Toggle Sequence Panel</button>
+        <div className="relative h-[80%] w-full max-height-full max-width-full  ">
+              <div ref={viewerContainerRef} >  
+              </div>
+        </div>
+      
     </>
   );
 };
