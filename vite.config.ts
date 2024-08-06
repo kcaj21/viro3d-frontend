@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'Molstar': 'molstar/lib'
+      'Molstar': 'molstar/lib',
+
     }
   }
 })

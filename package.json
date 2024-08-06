@@ -13,6 +13,8 @@
     "@jbrowse/plugin-linear-genome-view": "^2.12.3",
     "@jbrowse/react-app": "^2.12.3",
     "@jbrowse/react-linear-genome-view": "^2.12.3",
+    "feature-viewer-typescript": "^2.3.20",
+    "genome-browser": "^1.0.19",
     "igv": "^2.15.13",
     "igv_wrapper": "github:datavisyn/igv_wrapper",
     "molstar": "^4.4.1",

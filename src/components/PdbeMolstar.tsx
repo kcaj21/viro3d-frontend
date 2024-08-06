@@ -21,9 +21,16 @@ const PDBeMolStar: React.FC = () => {
           format: "pdb",
           binary: false,
         },
+        hideCanvasControls: [
+          'selection',
+          'animation',
+          'expand',
+          'controlToggle',
+          'controlInfo'
+        ],
         alphafoldView: true,
-        bgColor: { r: 0, g: 0, b: 0 },
-        // hideControls: true,
+        bgColor: { r: 242, g: 242, b: 242 },
+        hideControls: true,
         sequencePanel: true,
         reactive: true
       }
@@ -39,8 +46,8 @@ const PDBeMolStar: React.FC = () => {
 
   return (
     <>
-        <div className="relative h-[100%] w-full max-height-full max-width-full  ">
-              <div ref={viewerContainerRef} >  
+        <div className="relative h-[100%] w-full max-height-full max-width-full   ">
+              <div ref={viewerContainerRef} style={{border: "0px"}}  >  
               </div>
         </div>   
     </>
