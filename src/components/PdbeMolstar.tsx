@@ -9,7 +9,8 @@ const PDBeMolStar: React.FC = () => {
   // be called twice in a row, which might result in unexpected behavior.
   useEffect(() => {
     function init() {
-      const url = `https://alphafold.ebi.ac.uk/files/AF-Q5VSL9-F1-model_v4.pdb`
+      // const url = `https://alphafold.ebi.ac.uk/files/AF-Q5VSL9-F1-model_v4.pdb`
+      const url = `http://localhost:8000/pdb/CF-AFJ20476.1_38_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
 

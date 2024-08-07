@@ -1,34 +1,31 @@
-import React from 'react';
-
-type ProteinInfoProps = {
-    GenBankID: string
-}
+import React, { useState, useEffect } from 'react';
 
 const ProteinInfo: React.FC<ProteinInfoProps> = () => {
+  // Initialize proteinInfo as an empty array instead of undefined
+  const [proteinInfo, setProteinInfo] = useState([]);
 
+  async function fetchData(): Promise<any> {
+    const response = await fetch('http://localhost:8000/genbankid/CAX33877.1');
+    const data = await response.json();
+    return data;
+  }
+
+  useEffect(() => {
+    fetchData().then((data) => setProteinInfo(data.protein_structures));
+  }, []);
 
   return (
     <>
-<h1 className='text-6xl mb-6'>plDDT Score: 89.2</h1>
-  <ul className='text-slate-500 border-t mt-4 border-black '>
-    <li className='text-4xl mt-2'>GenbankID: 123</li>
-    <li className='text-4xl mt-2'>TaxID: 55012</li>
-    <li className='text-4xl mt-2'>Sequence: AAURKMGISUWCCJAORJFLLGH</li>
-    <li className='text-4xl mt-2'>Protein Length: 41</li>
-    <li className='text-4xl mt-2'>Genome Composition: dsRNA</li>
-    <li className='text-4xl mt-2'>Realm: Duplodnaviria</li>
-    <li className='text-4xl mt-2'>Kingdom: Heunggongvirae</li>
-    <li className='text-4xl mt-2'>Phylum: Peploviricota</li>
-    <li className='text-4xl mt-2'>Class: Herviviricetes</li>
-    <li className='text-4xl mt-2'>Order: Herpesvirales</li>
-    <li className='text-4xl mt-2'>Family: Orthoherpesviridae</li>
-    <li className='text-4xl mt-2'>Genus: Simplexvirus</li>
-    <li className='text-4xl mt-2'>Species: Simplexvirus atelinealpha1</li>          
-    <li className='text-4xl mt-2'>Genome Composition: dsRNA</li>
-  </ul>
+      <h1 className='text-6xl mb-6'>plDDT Score: 89.2</h1>
+      {/* Render the list only if proteinInfo has items */}
+      {proteinInfo.length > 0 && proteinInfo.map((protein) => (
+        <ul className='text-slate-500 border-t mt-4 border-black' key={protein.uniq_id}>
+          <li>{protein.uniq_id}</li>
+          <li>{protein.taxid}</li>
+        </ul>
+      ))}
     </>
   );
 };
 
 export default ProteinInfo;
-

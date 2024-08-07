@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import MolstarPlugin from "./components/MolstarPlugin";
 import GenomeBrowser from "./components/GenomeBrowser";
@@ -6,11 +7,8 @@ import ProteinInfo from "./components/ProteinInfo";
 import Navbar from "./components/Navbar";
 import FeatureBrowser from "./components/FeatureBrowser";
 
-
-
-
-
 function App() {
+
   return (
     <>
       <Navbar />
