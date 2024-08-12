@@ -6,17 +6,21 @@ import PdbeMolstar from "./components/PdbeMolstar";
 import ProteinInfo from "./components/ProteinInfo";
 import Navbar from "./components/Navbar";
 import FeatureBrowser from "./components/FeatureBrowser";
+import Footer from "./components/Footer";
+
 
 function App() {
 
   return (
     <>
       <Navbar />
-      <div className="IndexContainer my-24 mx-12 flex min-h-screen flex-col gap-4  ">
+      
+      <div className="IndexContainer mt-24 mx-12 flex min-h-screen flex-col gap-4  ">
+      {/* <Searchbar /> */}
         <div className="GenomeBrowserContainer  ">
-              <FeatureBrowser />
+          <FeatureBrowser />
         </div>
-        <div className='my-12 mx-12 flex gap-48 flex-col-1 min-h-full '>
+        <div className='mt-12 mx-12 flex gap-48 flex-col-1 min-h-full '>
           <div className='basis-1/2 '>
                 <PdbeMolstar />
           </div>
@@ -25,6 +29,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
