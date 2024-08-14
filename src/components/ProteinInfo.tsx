@@ -1,16 +1,20 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
 import { useProteinsGenbank } from '../hooks/useProteinsGenbank'
 
 
 const ProteinInfo: React.FC = () => {
 
-  const { proteinInfo } = useProteinsGenbank();
+    const { structureID } = useParams()
+    console.log(structureID)
+    const { proteinInfo } = useProteinsGenbank(structureID);
+    
 
   return (
     <>
       <table className='border-spacing-4 text-left border-separate text-2xl text-slate-500'>
         <tr>
-            <td className='text-6xl '>{proteinInfo['uniq_id']}</td>
+            <td className='text-6xl '>{proteinInfo[0]['uniq_id']}</td>
         </tr>
         {/* <hr className=' h-0.5 w-[150%]  my-4 bg-slate-500'></hr> */}
         <hr className=' w-[150%] my-1  border-0'></hr>
