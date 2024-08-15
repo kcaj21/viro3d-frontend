@@ -8,21 +8,26 @@ import Footer from "./components/Footer";
 import ResultsPage from "./components/ResultsPage";
 
 function App() {
-
   const [filter, setFilter] = useState([]);
 
   return (
     <>
-    <main className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className='container mt-24 py-4 mx-auto'>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/structureindex/:structureID" element={<StructureIndex filter={filter} />} />
-          <Route path="/resultspage/:speciesID" element={<ResultsPage setFilter={setFilter} />} />
-        </Routes>
+      <main className="flex min-h-screen flex-col">
+        <Navbar />
+        <div className="container mt-24 py-4 mx-auto">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/structureindex/:structureID"
+              element={<StructureIndex filter={filter} />}
+            />
+            <Route
+              path="/resultspage/:speciesID"
+              element={<ResultsPage setFilter={setFilter} />}
+            />
+          </Routes>
         </div>
-      <Footer />
+        <Footer />
       </main>
     </>
   );
