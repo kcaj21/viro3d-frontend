@@ -1,22 +1,30 @@
 import React from 'react';
-import { useProteinsGenbank } from '../hooks/useProteinsGenbank'
+import { useParams } from "react-router-dom";
+import { useProteinsSpecies } from '../hooks/useProteinsSpecies'
 
-type GenbankID = {
-    id: string;
-}
 
-const ResultsPage: React.FC<GenbankID> = ({ id }) => {
+const ResultsPage: React.FC = () => {
 
-    const { proteinInfo } = useProteinsGenbank(id)
+    const { speciesID } = useParams()
+
+    const { proteinInfo } = useProteinsSpecies(speciesID)
 
   return (
       <>
-          {proteinInfo.map((protein, index) => (
-              <li key={index}
-              >{protein.uniq_id}</li>
-          )   
-          )
-          }
+      <div className='min-h-screen'>
+            <ul>
+            {proteinInfo.map((protein, index) => (
+            <div>
+                <li key={index}
+                >{protein.protein_id}</li>
+                <li>{protein.taxid}</li>
+            </div>
+
+            )   
+            )
+            }
+            </ul>
+        </div>
     </>
   );
 };

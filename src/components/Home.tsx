@@ -6,7 +6,9 @@ const Home: React.FC = () => {
 
   return (
     <>
-    <p>Home</p>
+    <div className='min-h-screen'>
+    <p className=''>Home</p>
+    </div>
     </>
   );
 };
