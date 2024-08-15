@@ -3,56 +3,58 @@ import { useParams } from "react-router-dom";
 import { useProteinsGenbank } from '../hooks/useProteinsGenbank'
 
 
-const ProteinInfo: React.FC = () => {
+const ProteinInfo: React.FC = ({filter}) => {
 
     const { structureID } = useParams()
     console.log(structureID)
-    const { proteinInfo } = useProteinsGenbank(structureID);
+    // const { proteinInfo } = useProteinsGenbank(structureID);
+    // const { proteinInfo } = filter;
 
-    console.log(proteinInfo)
+
+    // console.log(proteinInfo)
     
 
   return (
     <>
       <table className='border-spacing-4 text-left border-separate text-2xl text-slate-500'>
         <tr>
-            <td className='text-6xl '>{proteinInfo['uniq_id']}</td>
+            <td className='text-6xl '>{filter['protein_id']}</td>
         </tr>
         {/* <hr className=' h-0.5 w-[150%]  my-4 bg-slate-500'></hr> */}
         <hr className=' w-[150%] my-1  border-0'></hr>
         <tr>
         <th className='font-light text-5xl'>plDTT Score:</th>
 
-            <td className='text-5xl'> {proteinInfo['colabfold_log_pLDDT']}</td>
+            <td className='text-5xl'> {filter['colabfold_log_pLDDT']}</td>
         </tr>
         <hr className=' h-0.5 w-[150%]  my-4 bg-slate-500'></hr>
         <tr>
             <th className='font-extralight'>Tax ID:</th>
-            <td>{proteinInfo['taxid']}</td>
+            <td>{filter['taxid']}</td>
         </tr>
         <tr>
             <th className='font-extralight'>Virus Name:</th>
-            <td>{proteinInfo['Virus name(s)']}</td>
+            <td>{filter['Virus name(s)']}</td>
         </tr>
         <tr>
             <th className='font-extralight'>Genome coverage:</th>
-            <td>{proteinInfo['Genome coverage']}</td>
+            <td>{filter['Genome coverage']}</td>
         </tr>
         <tr>
             <th className='font-extralight'>Genome Composition:</th>
-            <td>{proteinInfo['Genome composition']}</td>
+            <td>{filter['Genome composition']}</td>
         </tr>
         <tr>
             <th className='font-extralight'>Realm:</th>
-            <td>{proteinInfo['Realm']}</td>
+            <td>{filter['Realm']}</td>
         </tr>
         <tr>
             <th className='font-extralight'>Kingdom:</th>
-            <td>{proteinInfo['Kingdom']}</td>
+            <td>{filter['Kingdom']}</td>
         </tr>
         <tr>
             <th className='font-extralight'>Species:</th>
-            <td>{proteinInfo['Species']}</td>
+            <td>{filter['Species']}</td>
         </tr>
       </table>
     </>

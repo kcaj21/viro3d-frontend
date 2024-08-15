@@ -4,11 +4,11 @@ import ProteinInfo from "./ProteinInfo";
 import FeatureBrowser from "./FeatureBrowser";
 
 
-const StructureIndex: React.FC = () => {
+const StructureIndex: React.FC = ({filter}) => {
 
   return (
     <>
-      <div className="IndexContainer mt-24 mx-12 flex min-h-screen flex-col gap-4  ">
+      <div className="IndexContainer   flex min-h-screen flex-col gap-4  ">
       {/* <Searchbar /> */}
         <div className="GenomeBrowserContainer  ">
           <FeatureBrowser />
@@ -18,7 +18,7 @@ const StructureIndex: React.FC = () => {
               <PdbeMolstar />
           </div>
           <div className='basis-1/3 font-extralight'>
-            <ProteinInfo />
+            <ProteinInfo filter={filter} />
           </div>
         </div>
       </div>
