@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
             <select
               id="search-filter"
               onChange={handleFilter}
-              className="bg-[#f9f9f9] text-slate-500 rounded border-r-2 text-center"
+              className="bg-[#f9f9f9] text-slate-500 pr-6 rounded border-r-2 text-center"
             >
               <option value="species">Species</option>
               <option value="gene">Gene</option>
