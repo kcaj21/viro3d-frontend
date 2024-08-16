@@ -9,7 +9,7 @@ export function useProteinData(filterparam, id) {
             .then((data) => {
                 setProteinInfo(data.protein_structures)
             });
-    }, []);
+    }, [filterparam, id]);
 
 
     return {proteinInfo}

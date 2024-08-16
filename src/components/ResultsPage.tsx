@@ -12,6 +12,8 @@ const ResultsPage: React.FC<{
 
   const { proteinInfo } = useProteinData(filterParam, searchParam);
 
+  console.log(filterParam, searchParam)
+
   const handleClick = (proteinID) => {
     const filteredResults = proteinInfo.filter((protein) => {
       return protein.protein_id.includes(proteinID);
