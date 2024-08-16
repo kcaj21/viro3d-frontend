@@ -11,7 +11,7 @@ type NavbarProps = {
 };
 
 const Navbar: React.FC = () => {
-  const [searchParam, setSearchParam] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
 
   const handleText = (e) => {
     setSearchParam(e.target.value);

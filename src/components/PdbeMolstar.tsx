@@ -47,7 +47,7 @@ const PDBeMolStar: React.FC = () => {
 
   return (
     <>
-        <div className="relative h-[100%] w-full max-height-full max-width-full   ">
+        <div className="relative h-[100%] w-full max-height-full max-width-full  ">
               <div ref={viewerContainerRef} style={{border: "0px"}}  >  
               </div>
         </div>   
