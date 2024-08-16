@@ -14,11 +14,11 @@ const Navbar: React.FC = () => {
   const [searchParam, setSearchParam] = useState("");
   const [filterParam, setFilterParam] = useState("species");
 
-//change onChanges to onSubmits - bug where entering a new term in the searchbar on the results page wont update the state
+  //change onChanges to onSubmits - bug where entering a new term in the searchbar on the results page wont update the state
 
   const handleText = (e) => {
     setSearchParam(e.target.value);
-    console.log(searchParam)
+    console.log(searchParam);
   };
 
   const handleFilter = (e) => {
@@ -35,13 +35,17 @@ const Navbar: React.FC = () => {
           {/* <label for="search-filter">Search by...</label> */}
 
           <form className="flex flex-col-1 w-[50%] border-none rounded-md text-2xl bg-[#f9f9f9]">
-          <select id="search-filter" onChange={handleFilter} className='bg-[#f9f9f9] text-slate-500 rounded border-r-2 text-center'>
-            <option value="species">Species</option>
-            <option value="gene">Gene</option>
-            <option value="genbankid">GenbankID</option>
-            <option value="refseq">RefSeq</option>
-            <option value="taxid">TaxID</option>
-          </select>
+            <select
+              id="search-filter"
+              onChange={handleFilter}
+              className="bg-[#f9f9f9] text-slate-500 rounded border-r-2 text-center"
+            >
+              <option value="species">Species</option>
+              <option value="gene">Gene</option>
+              <option value="genbankid">GenbankID</option>
+              <option value="refseq">RefSeq</option>
+              <option value="taxid">TaxID</option>
+            </select>
             <input
               onChange={handleText}
               className=" text-slate-500 pl-4 outline-none h-12 w-full border-none rounded-md text-2xl  bg-[#f9f9f9]"

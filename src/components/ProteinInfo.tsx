@@ -5,10 +5,6 @@ import { useProteinsGenbank } from "../hooks/useProteinsGenbank";
 const ProteinInfo: React.FC = ({ filter }) => {
   const { structureID } = useParams();
   console.log(structureID);
-  // const { proteinInfo } = useProteinsGenbank(structureID);
-  // const { proteinInfo } = filter;
-
-  // console.log(proteinInfo)
 
   return (
     <>

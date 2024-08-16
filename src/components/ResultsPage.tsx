@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useProteinData } from "../hooks/useProteinData";
 
-
 import FeatureBrowser from "./FeatureBrowser";
 
 const ResultsPage: React.FC<{
@@ -11,11 +10,7 @@ const ResultsPage: React.FC<{
 }> = ({ setFilter }) => {
   const { filterParam, searchParam } = useParams();
 
-  const { proteinInfo } = useProteinData(filterParam, searchParam)
-
-
-
-  // const { proteinInfo } = useProteinsSpecies(searchParam);
+  const { proteinInfo } = useProteinData(filterParam, searchParam);
 
   const handleClick = (proteinID) => {
     const filteredResults = proteinInfo.filter((protein) => {
