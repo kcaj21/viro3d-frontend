@@ -22,7 +22,7 @@ function App() {
               element={<StructureIndex filter={filter} />}
             />
             <Route
-              path="/resultspage/:speciesID"
+              path="/resultspage/:filterParam/:searchParam"
               element={<ResultsPage setFilter={setFilter} />}
             />
           </Routes>

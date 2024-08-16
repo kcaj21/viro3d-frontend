@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useProteinsSpecies } from "../hooks/useProteinsSpecies";
+import { useProteinData } from "../hooks/useProteinData";
+
+
 import FeatureBrowser from "./FeatureBrowser";
 
 const ResultsPage: React.FC<{
   setFilter: React.Dispatch<React.SetStateAction<any[]>>;
 }> = ({ setFilter }) => {
-  const { speciesID } = useParams();
+  const { filterParam, searchParam } = useParams();
 
-  const { proteinInfo } = useProteinsSpecies(speciesID);
+  const { proteinInfo } = useProteinData(filterParam, searchParam)
+
+
+
+  // const { proteinInfo } = useProteinsSpecies(searchParam);
 
   const handleClick = (proteinID) => {
     const filteredResults = proteinInfo.filter((protein) => {
@@ -42,7 +48,7 @@ const ResultsPage: React.FC<{
                     <li className="px-8">
                       plDDT Score: {protein.colabfold_log_pLDDT}
                     </li>
-                    <li className="px-8">{protein.product}</li>
+                    <li className="px-8">{protein.gene}</li>
                     <li className="px-8">{protein.Species}</li>
                   </div>
                 </div>
