@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 
-export function useProteinData(filterparam, id) {
+export function useProteinData(filterparam, id, currentPage) {
     const [isLoading, setIsLoading] = useState(true);
     const [proteinInfo, setProteinInfo] = useState(null);
 
     useEffect(() => {
-
-
         setIsLoading(true)
-        fetch(`http://localhost:8000/${filterparam}/${id}`)
+        fetch(`http://localhost:8000/${filterparam}/${id}?page_size=10&page_num=${currentPage}`)
             .then((res) => res.json())
             .then((data) => {
                 setIsLoading(false);
@@ -19,7 +17,7 @@ export function useProteinData(filterparam, id) {
                 setProteinInfo(null)
                 setIsLoading(false)
               });
-    }, [filterparam, id]);
+    }, [filterparam, id, currentPage]);
 
 
     return {isLoading, proteinInfo}
