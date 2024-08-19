@@ -13,9 +13,13 @@ const ResultsPage: React.FC<{
 
   const { filterParam, searchParam } = useParams();
 
-  const { proteinInfo, isLoading } = useProteinData(filterParam, searchParam, currentPage);
+  const { proteinInfo, resultCount, isLoading } = useProteinData(filterParam, searchParam, currentPage);
 
   console.log(filterParam, searchParam)
+
+  useEffect(() => {
+    setCurrentPage(1)
+}, [searchParam]);
 
   const handleSelectStructure = (proteinID) => {
     const filteredResults = proteinInfo.filter((protein) => {
@@ -49,15 +53,27 @@ const ResultsPage: React.FC<{
     <>
       <div className="min-h-screen">
         <FeatureBrowser />
-        <div className="results-container mt-4 mb-4 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+          <div className="results-container min-h-screen mt-4 mb-4 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+            <div className='buttom-row flex flex-row justify-between font-light text-[#4a95c0]'>
+              <p className ='px-8 mt-6'>Showing {resultCount} results for "{searchParam}"</p>
+              <div className='pagination flex flex-col-2 gap-4 justify-end font-light px-8 py-4 text-[#4a95c0]'>
+                {currentPage > 1 && (
+                <button onClick={handlePrevPage} className='border-2 drop-shadow-md rounded-md bg-[#f9f9f9] hover:border-[#4a95c0] px-2 py-2'>Prev</button>
+                )}
+                <p className='py-2'>{currentPage} of {Math.ceil(resultCount / 10)}</p>
+                {currentPage < Math.ceil(resultCount / 10) && (
+                  <button onClick={handleNextPage} className='border-2 drop-shadow-md rounded-md bg-[#f9f9f9] hover:border-[#4a95c0] px-2 py-2'>Next</button>
+                )}
+              </div>
+            </div>
             <ul className="px-8 py-2">
               {proteinInfo.map((protein, index) => (
                 <Link to={{ pathname: `/structureindex/${protein.record_id}` }}>
                   <div key={protein.protein_id}
                     onClick={() => handleSelectStructure(protein.protein_id)}
-                    className="result-card drop-shadow-md flex flex-col-2 gap-8 border-2 hover:border-[#4a95c0] rounded-md mt-4 mb-4 bg-[#f9f9f9]"
+                    className="result-card drop-shadow-md min-h-[10%] flex flex-col-2 gap-8 border-2 hover:border-[#4a95c0] rounded-md  mb-4 bg-[#f9f9f9]"
                   >
-                    <div className="basis-1/4">
+                    <div className="basis-1/4 py-4">
                       <li
                         className=" px-6 py-2 text-[#4a95c0] font-light"
                         key={index}
@@ -65,23 +81,17 @@ const ResultsPage: React.FC<{
                         {protein.protein_id}
                       </li>
                     </div>
-                    <div className="basis-3/4 text-3xl font-thin">
+                    <div className="basis-3/4 py-4 text-3xl font-thin">
                       <li className="px-8">
                         plDDT Score: {protein.colabfold_log_pLDDT}
                       </li>
-                      <li className="px-8">{protein.gene}</li>
-                      <li className="px-8">{protein.Species}</li>
+                      <li className="px-8"> Product: {protein.product}</li>
+                      <li className="px-8"> Species: {protein.Species}</li>
                     </div>
                   </div>
                 </Link>
               ))}
             </ul>
-            <div className='pagination  flex flex-col-2 gap-4 justify-end font-light px-8 py-2 text-[#4a95c0]'>
-              {currentPage > 1 && (
-              <button onClick={handlePrevPage} className='border-2 rounded-md bg-[#f9f9f9] hover:border-[#4a95c0] px-2 py-2'>Prev</button>
-              )}
-              <button onClick={handleNextPage} className='border-2 rounded-md bg-[#f9f9f9] hover:border-[#4a95c0] px-2 py-2'>Next</button>
-            </div>
         </div>
       </div>
     </>

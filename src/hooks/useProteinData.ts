@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export function useProteinData(filterparam, id, currentPage) {
     const [isLoading, setIsLoading] = useState(true);
     const [proteinInfo, setProteinInfo] = useState(null);
+    const [resultCount, setResultCount] = useState(null)
 
     useEffect(() => {
         setIsLoading(true)
@@ -10,6 +11,7 @@ export function useProteinData(filterparam, id, currentPage) {
             .then((res) => res.json())
             .then((data) => {
                 setIsLoading(false);
+                setResultCount(data.count)
                 setProteinInfo(data.protein_structures)
             })
             .catch((error) => {
@@ -20,5 +22,5 @@ export function useProteinData(filterparam, id, currentPage) {
     }, [filterparam, id, currentPage]);
 
 
-    return {isLoading, proteinInfo}
+    return {isLoading, proteinInfo, resultCount}
 }

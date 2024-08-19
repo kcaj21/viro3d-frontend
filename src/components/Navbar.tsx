@@ -14,8 +14,6 @@ const Navbar: React.FC = () => {
   const [searchParam, setSearchParam] = useState("");
   const [filterParam, setFilterParam] = useState("species");
 
-  //change onChanges to onSubmits - bug where entering a new term in the searchbar on the results page wont update the state
-
   const handleText = (e) => {
     setSearchParam(e.target.value);
     console.log(searchParam);
@@ -36,8 +34,6 @@ const Navbar: React.FC = () => {
           <Link to={`/`}>
             <img src="src/assets/CVR_RGB.png" width="200"></img>
           </Link>
-          {/* <label for="search-filter">Search by...</label> */}
-
           <form className="flex flex-col-1 w-[50%] border-none rounded-md text-2xl bg-[#f9f9f9]">
             <select
               id="search-filter"
@@ -69,7 +65,6 @@ const Navbar: React.FC = () => {
               </svg>
             </Link>
           </form>
-
           <ul className="flex  p-4 md:p-0 md:flex-row md:space-x-32 font-extralight text-4xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">About</button>
             <button className="hover:text-[#50bde5]">Downloads</button>
