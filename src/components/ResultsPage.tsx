@@ -15,7 +15,7 @@ const ResultsPage: React.FC<{
 
   const { proteinInfo, resultCount, isLoading } = useProteinData(filterParam, searchParam, currentPage);
 
-  console.log(filterParam, searchParam)
+  // console.log(filterParam, searchParam)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -67,16 +67,16 @@ const ResultsPage: React.FC<{
               </div>
             </div>
             <ul className="px-8 py-2">
-              {proteinInfo.map((protein, index) => (
-                <Link to={{ pathname: `/structureindex/${protein.record_id}` }}>
-                  <div key={protein.protein_id}
+              {proteinInfo.map((protein) => (
+                <Link to={{ pathname: `/structureindex/${protein._id}` }} key={protein._id}>
+                  <div 
                     onClick={() => handleSelectStructure(protein.protein_id)}
                     className="result-card drop-shadow-md min-h-[10%] flex flex-col-2 gap-8 border-2 hover:border-[#4a95c0] rounded-md  mb-4 bg-[#f9f9f9]"
                   >
                     <div className="basis-1/4 py-4">
                       <li
                         className=" px-6 py-2 text-[#4a95c0] font-light"
-                        key={index}
+                        
                       >
                         {protein.protein_id}
                       </li>

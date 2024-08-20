@@ -1,8 +1,12 @@
-import React, { useState, useEffect, useRef, createRef } from 'react';
+import React, { useState, useEffect, useRef, createRef, } from 'react';
+import { useParams } from "react-router-dom";
 import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
 import { InitParams } from 'pdbe-molstar/lib/spec';
 
 const PDBeMolStar: React.FC = () => {
+
+  const {recordID} = useParams()
+
   const viewerContainerRef = createRef<HTMLDivElement>()
 
   // In debug mode of react's strict mode, this code will
@@ -10,7 +14,7 @@ const PDBeMolStar: React.FC = () => {
   useEffect(() => {
     function init() {
       // const url = `https://alphafold.ebi.ac.uk/files/AF-Q5VSL9-F1-model_v4.pdb`
-      const url = `http://localhost:8000/pdb/CF-AFJ20476.1_38_relaxed.pdb`
+      const url = `http://localhost:8000/pdb/CF-${recordID}_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
 

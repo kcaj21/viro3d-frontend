@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 
   const handleText = (e) => {
     setSearchParam(e.target.value);
-    console.log(searchParam);
+    // console.log(searchParam);
   };
 
   const handleFilter = (e) => {
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(searchParam);
+    // console.log(searchParam);
   };
 
   return (
