@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useProteinData } from "../hooks/useProteinData";
+import { useResultsPageData } from "../hooks/useResultsPageData";
 
 import FeatureBrowser from "./FeatureBrowser";
 
@@ -13,7 +13,7 @@ const ResultsPage: React.FC<{
 
   const { filterParam, searchParam } = useParams();
 
-  const { proteinInfo, resultCount, isLoading } = useProteinData(filterParam, searchParam, currentPage);
+  const { proteinInfo, resultCount, isLoading } = useResultsPageData(filterParam, searchParam, currentPage);
 
   // console.log(filterParam, searchParam)
 

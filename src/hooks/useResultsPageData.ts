@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useProteinData(filterparam, id, currentPage) {
+export function useResultsPageData(filterparam, id, currentPage) {
     const [isLoading, setIsLoading] = useState(true);
     const [proteinInfo, setProteinInfo] = useState(null);
     const [resultCount, setResultCount] = useState(null)

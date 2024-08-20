@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import PdbeMolstar from "./PdbeMolstar";
 import ProteinInfo from "./ProteinInfo";
 import FeatureBrowser from "./FeatureBrowser";
-import { useStructureIndex } from "../hooks/useStructureIndex";
+import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
 
 //BUG - refreshing page doesnt retain the proteinInfo state
@@ -14,7 +14,7 @@ const StructureIndex: React.FC = ({  }) => {
 
   // const [proteinInfo, setProteinInfo] = useState(filter)
 
-  const { proteinInfo } = useStructureIndex(recordID);
+  const { proteinInfo } = useStructureIndexData(recordID);
   
 
 

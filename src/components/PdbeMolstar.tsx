@@ -11,9 +11,9 @@ const PDBeMolStar: React.FC = () => {
 
   // In debug mode of react's strict mode, this code will
   // be called twice in a row, which might result in unexpected behavior.
+  
   useEffect(() => {
     function init() {
-      // const url = `https://alphafold.ebi.ac.uk/files/AF-Q5VSL9-F1-model_v4.pdb`
       const url = `http://localhost:8000/pdb/CF-${recordID}_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
