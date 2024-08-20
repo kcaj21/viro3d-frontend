@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PdbeMolstar from "./PdbeMolstar";
-import ProteinInfo from "./ProteinInfo";
-import FeatureBrowser from "./FeatureBrowser";
+import PdbeMolstar from "../components/PdbeMolstar";
+import ProteinInfo from "../components/ProteinInfo";
+import FeatureBrowser from "../components/FeatureBrowser";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
-
 
 //BUG - refreshing page doesnt retain the proteinInfo state
 
-const StructureIndex: React.FC = ({  }) => {
-
+const StructureIndex: React.FC = ({}) => {
   const { recordID } = useParams();
 
-  // const [proteinInfo, setProteinInfo] = useState(filter)
-
   const { proteinInfo } = useStructureIndexData(recordID);
-  
-
 
   return (
     <>

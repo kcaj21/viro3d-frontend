@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import StructureIndex from "./components/StructureIndex";
-import Footer from "./components/Footer";
-import ResultsPage from "./components/ResultsPage";
+import Navbar from "./components/ui/Navbar";
+import Home from "./pages/Home";
+import StructureIndex from "./pages/StructureIndex";
+import Footer from "./components/ui/Footer";
+import ResultsPage from "./pages/ResultsPage";
 
 function App() {
-  const [filter, setFilter] = useState([]);
-
   return (
     <>
       <main className="flex min-h-screen flex-col">
@@ -19,11 +17,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route
               path="/structureindex/:recordID"
-              element={<StructureIndex filter={filter} />}
+              element={<StructureIndex />}
             />
             <Route
               path="/resultspage/:filterParam/:searchParam"
-              element={<ResultsPage setFilter={setFilter} />}
+              element={<ResultsPage />}
             />
           </Routes>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type Link = {
   title: string;
@@ -14,6 +14,8 @@ const Navbar: React.FC = () => {
   const [searchParam, setSearchParam] = useState("");
   const [filterParam, setFilterParam] = useState("species");
 
+  const navigate = useNavigate();
+
   const handleText = (e) => {
     setSearchParam(e.target.value);
     // console.log(searchParam);
@@ -25,6 +27,8 @@ const Navbar: React.FC = () => {
 
   const handleSubmit = (e) => {
     // console.log(searchParam);
+    e.preventDefault();
+    navigate(`resultspage/${filterParam}/${searchParam}`);
   };
 
   return (
@@ -34,7 +38,10 @@ const Navbar: React.FC = () => {
           <Link to={`/`}>
             <img src="/CVR_RGB.png" width="200"></img>
           </Link>
-          <form className="flex flex-col-1 w-[50%] border-none rounded-md text-2xl bg-[#f9f9f9]">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col-1 w-[50%] border-none rounded-md text-2xl bg-[#f9f9f9]"
+          >
             <select
               id="search-filter"
               onChange={handleFilter}
@@ -52,9 +59,9 @@ const Navbar: React.FC = () => {
               type="text"
               placeholder="Search by GenbankID, Species, Gene or Sequence..."
             ></input>
-            <Link to={`resultspage/${filterParam}/${searchParam}`}>
+            <button>
               <svg
-                className="mr-4 mt-2"
+                className="mr-4"
                 fill="currentColor"
                 viewBox="0 0 16 16"
                 height="1em"
@@ -63,7 +70,7 @@ const Navbar: React.FC = () => {
               >
                 <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
               </svg>
-            </Link>
+            </button>
           </form>
           <ul className="flex  p-4 md:p-0 md:flex-row md:space-x-32 font-extralight text-4xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">About</button>
