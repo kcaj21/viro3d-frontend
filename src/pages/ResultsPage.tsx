@@ -34,7 +34,7 @@ const ResultsPage: React.FC<{
     <>
       {!isLoading && !proteinInfo ? (
         <div className="min-h-screen">
-          <div className="results-container flex flex-col items-center h-screen justify-center">
+          <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
             <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
           </div>
         </div>

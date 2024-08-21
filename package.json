@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sodaviz/soda": "^0.13.1",
+    "@types/d3": "^7.4.3",
+    "d3": "^7.4.4",
     "feature-viewer-typescript": "^2.3.20",
     "molstar": "^4.4.1",
     "pdbe-molstar": "^3.2.0",

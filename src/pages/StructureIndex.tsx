@@ -5,9 +5,10 @@ import ProteinInfo from "../components/ProteinInfo";
 import FeatureBrowser from "../components/FeatureBrowser";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
-//BUG - refreshing page doesnt retain the proteinInfo state
+const StructureIndex: React.FC = ({ }) => {
+  
+  document.documentElement.scrollTop = 0
 
-const StructureIndex: React.FC = ({}) => {
   const { recordID } = useParams();
 
   const { proteinInfo } = useStructureIndexData(recordID);
