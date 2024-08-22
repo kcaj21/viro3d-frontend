@@ -7,6 +7,7 @@ import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
 import ResultsPage from "./pages/ResultsPage";
 
+
 function App() {
   return (
     <>
