@@ -26,8 +26,8 @@ const StructureIndex: React.FC = ({ }) => {
     },
     {
       "id": "dfam-nrph-1-end",
-      "start": 10955,
-      "end": 10977,
+      "start": 10954.01,
+      "end": 10978,
       "strand": "-",
       "family": "TAR1",
       "evalue": 1.1e-103,
@@ -36,8 +36,8 @@ const StructureIndex: React.FC = ({ }) => {
     },
     {
       "id": "dfam-nrph-2-start",
-      "start": 10978,
-      "end": 10999,
+      "start": 10978.01,
+      "end": 10999.99,
       "strand": "-",
       "family": "TAR1",
       "evalue": 1.1e-103,
@@ -56,8 +56,8 @@ const StructureIndex: React.FC = ({ }) => {
     },
     {
     "id": "dfam-nrph-3",
-    "start": 11502,
-    "end": 11676,
+    "start": 12502,
+    "end": 12676,
     "strand": "-",
     "family": "L1MC4a_3end",
     "evalue": 6.9e-16,
@@ -81,7 +81,7 @@ const StructureIndex: React.FC = ({ }) => {
       <div className="IndexContainer flex min-h-screen flex-col gap-4  ">
         {/* <Searchbar /> */}
         <div className="GenomeBrowserContainer custom-scrollbar overflow-x-auto flex flex-col-1   ">
-          <FeatureBrowser annotations={annotations} id={id1} />
+          <FeatureBrowser annotations={annotations} id={id1}/>
           <FeatureBrowser annotations={annotations} id={id2}/>
           <FeatureBrowser annotations={annotations} id={id3}/>
           <FeatureBrowser annotations={annotations} id={id4}/>
@@ -89,7 +89,6 @@ const StructureIndex: React.FC = ({ }) => {
           <FeatureBrowser annotations={annotations} id={id6}/>
           <FeatureBrowser annotations={annotations} id={id7}/>
           <FeatureBrowser annotations={annotations} id={id8}/>
-
         </div>
         <div className="mt-12 mx-12 flex gap-24 flex-col-1 min-h-full ">
           <div className="w-[50%]">
