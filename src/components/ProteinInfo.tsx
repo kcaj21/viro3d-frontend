@@ -1,6 +1,4 @@
 import React, {useEffect} from "react";
-import { useParams } from "react-router-dom";
-import { useProteinsGenbank } from "../hooks/useProteinsGenbank";
 
 const ProteinInfo: React.FC = ({ proteinInfo }) => {
 

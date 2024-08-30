@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 
 export function useResultsPageData(filterparam, id, currentPage) {
   const [isLoading, setIsLoading] = useState(true);
-  const [proteinInfo, setProteinInfo] = useState(null);
+  const [data, setData] = useState(null);
   const [resultCount, setResultCount] = useState(null);
 
-  useEffect(() => {
+    useEffect(() => {
+      console.log('fetching')
     setIsLoading(true);
     fetch(
       `http://localhost:8000/${filterparam}/${id}?page_size=10&page_num=${currentPage}`
@@ -14,14 +15,14 @@ export function useResultsPageData(filterparam, id, currentPage) {
       .then((data) => {
         setIsLoading(false);
         setResultCount(data.count);
-        setProteinInfo(data.protein_structures);
+        setData(data);
       })
       .catch((error) => {
         console.error(error);
-        setProteinInfo(null);
+        setData(null);
         setIsLoading(false);
       });
   }, [filterparam, id, currentPage]);
 
-  return { isLoading, proteinInfo, resultCount };
+  return { isLoading, data, resultCount };
 }

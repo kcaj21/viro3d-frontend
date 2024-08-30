@@ -12,13 +12,13 @@ type NavbarProps = {
 
 const Navbar: React.FC = () => {
   const [searchParam, setSearchParam] = useState("");
-  const [filterParam, setFilterParam] = useState("species");
+  const [filterParam, setFilterParam] = useState("viruses");
 
   const navigate = useNavigate();
 
   const handleText = (e) => {
     setSearchParam(e.target.value);
-    // console.log(searchParam);
+    console.log(searchParam);
   };
 
   const handleFilter = (e) => {
@@ -29,6 +29,8 @@ const Navbar: React.FC = () => {
     // console.log(searchParam);
     e.preventDefault();
     navigate(`resultspage/${filterParam}/${searchParam}`);
+    console.log(filterParam);
+
   };
 
   return (
@@ -47,6 +49,7 @@ const Navbar: React.FC = () => {
               onChange={handleFilter}
               className="bg-[#f9f9f9] text-slate-500 pr-6 rounded border-r-2 text-center"
             >
+              <option value="viruses">Virus Name</option>
               <option value="species">Species</option>
               <option value="gene">Gene</option>
               <option value="genbankid">GenbankID</option>
