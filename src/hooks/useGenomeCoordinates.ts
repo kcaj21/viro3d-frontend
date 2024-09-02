@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 
-export function useGenomeCoordinates(id) {
-  const [isLoading, setIsLoading] = useState(true);
+export function useGenomeCoordinates(filterparam, id) {
+  // const [isLoading, setIsLoading] = useState(true);
   const [coordinates, setCoordinates] = useState(null);
 
     useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     fetch(
-        `http://localhost:8000/genome_coordinates/${id}`    
+        `http://localhost:8000/genome_coordinates/${filterparam}/${id}`    
     )
       .then((res) => res.json())
       .then((data) => {
-        setIsLoading(false);
+        // setIsLoading(false);
         setCoordinates(data);
       })
       .catch((error) => {
         console.error(error);
         setCoordinates(null);
-        setIsLoading(false);
+        // setIsLoading(false);
       });
-  }, [id]);
+  }, [filterparam, id]);
 
-  return { coordinates, isLoading };
+  return { coordinates };
 }

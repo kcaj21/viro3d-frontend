@@ -9,6 +9,12 @@ import "../customScrollBar.css";
 
 interface CustomAnnotation extends soda.Annotation {
   family: string;
+  gene_name: string;
+  virus_name: string;
+  nt_acc: string;
+  segment: string;
+  join: string;
+  
 }
 
 interface CustomRenderParams extends soda.RenderParams {
@@ -23,6 +29,8 @@ const FeatureBrowser: React.FC = ({ annotations, id }) => {
   let gene = annotations.filter((a) => a.join == "none");
 
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  console.log(annotations)
 
   useEffect(() => {
     if (!featureViewerRef.current) {
@@ -40,7 +48,7 @@ const FeatureBrowser: React.FC = ({ annotations, id }) => {
             // soda.rectangle({
             chart: this,
             annotations: gene,
-            fillColor: (d) => colors(d.a.family),
+            fillColor: (d) => colors(d.a.gene_name),
             strokeColor: "none",
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,
@@ -72,7 +80,7 @@ const FeatureBrowser: React.FC = ({ annotations, id }) => {
           soda.tooltip({
             chart: this,
             annotations: gene,
-            text: (d) => d.a.family,
+            text: (d) => d.a.gene_name,
           });
           soda.line({
             chart: this,

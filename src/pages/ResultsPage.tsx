@@ -5,12 +5,14 @@ import ProteinStructureResults from "../components/ProteinStructureResults";
 import VirusResults from "../components/VirusResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
-import FeatureBrowser from "../components/FeatureBrowser";
+import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 
 const ResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { filterParam, searchParam } = useParams();
+
+  console.log(filterParam);
 
   const { data, resultCount, isLoading } = useResultsPageData(
     filterParam,
@@ -105,7 +107,14 @@ const ResultsPage: React.FC = () => {
         </div>
       ) : (
         <div className="min-h-screen">
-          <FeatureBrowser annotations={annotations} id={id1} />
+          {filterParam !== "viruses" ? (
+          <FeatureBrowserContainer
+          filterParam={filterParam}
+          searchParam={searchParam}
+        />
+          ) : (
+            null
+          )}
           <div className="results-container min-h-screen mt-4 mb-4 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="buttom-row flex flex-row justify-between font-light text-[#4a95c0]">
               <p className="px-8 mt-6">

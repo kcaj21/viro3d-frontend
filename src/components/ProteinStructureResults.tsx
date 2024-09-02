@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProteinStructureResults: React.FC = ({ data }) => {
+
   return (
     <>
       <ul className="px-8 py-2">
