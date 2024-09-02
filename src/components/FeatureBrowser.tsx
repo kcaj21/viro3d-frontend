@@ -21,8 +21,14 @@ interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
 }
 
-const FeatureBrowser: React.FC = ({ annotations, id }) => {
+const FeatureBrowser: React.FC = ({ annotations }) => {
   const featureViewerRef = useRef<Chart<P> | null>(null);
+
+  //NEED valid div-id syntax e.g no spaces or fullstops etc -> create one in genome coordinates database
+
+  const id = annotations[0].gene_name
+
+  // console.log('here', annotations)
 
   let leftJoin = annotations.filter((a) => a.join == "left-join");
   let rightJoin = annotations.filter((a) => a.join == "right-join");

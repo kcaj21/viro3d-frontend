@@ -94,11 +94,11 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
   ) : (
     <>
       <div className="feature-browsers">
-        {/* {console.log(coordinates.segments[0].coordinates)}
+        {console.log(coordinates.segments[0].coordinates)}
         {coordinates.segments?.map((segment) => (
-              <FeatureBrowser annotations={annotations} id={segment.virus_name} />
-        ))} */}
-              <FeatureBrowser annotations={coordinates.segments[0].coordinates} id={'abc'} />
+              <FeatureBrowser annotations={segment.coordinates}  />
+        ))}
+              {/* <FeatureBrowser annotations={coordinates.segments[0].coordinates} id={'abc'} /> */}
       </div>
     </>
   );
