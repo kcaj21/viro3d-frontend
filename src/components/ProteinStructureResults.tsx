@@ -8,7 +8,7 @@ const ProteinStructureResults: React.FC = ({ data }) => {
       <ul className="px-8 py-2">
         {data.protein_structures?.map((protein) => (
           <Link
-            to={{ pathname: `/structureindex/${protein._id}` }}
+            to={{ pathname: `/structureindex/${protein['Virus name(s)']}/${protein._id}` }}
             key={protein._id}
           >
             <div className="result-card drop-shadow-md min-h-[10%] flex flex-col-2 gap-8 border-2 hover:border-[#4a95c0] rounded-md  mb-4 bg-[#f9f9f9]">
@@ -19,7 +19,7 @@ const ProteinStructureResults: React.FC = ({ data }) => {
               </div>
               <div className="basis-3/4 py-4 text-3xl font-thin">
                 <li className="px-8">
-                  plDDT Score: {protein.colabfold_log_pLDDT}
+                  plDDT Score: {protein.colabfold_json_pLDDT}
                 </li>
                 <li className="px-8"> Product: {protein.product}</li>
                 <li className="px-8"> Species: {protein.Species}</li>

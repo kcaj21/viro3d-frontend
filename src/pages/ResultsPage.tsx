@@ -32,61 +32,6 @@ const ResultsPage: React.FC = () => {
     setCurrentPage(currentPage - 1);
   };
 
-  const annotations = [
-    {
-      id: "dfam-nrph-1",
-      start: 10464,
-      end: 10954,
-      strand: "-",
-      family: "TAR1",
-      evalue: 1.1e-103,
-      divergence: 10.26,
-      join: "none",
-    },
-    {
-      id: "dfam-nrph-1-end",
-      start: 10954.01,
-      end: 10978,
-      strand: "-",
-      family: "TAR1",
-      evalue: 1.1e-103,
-      divergence: 10.26,
-      join: "left-join",
-    },
-    {
-      id: "dfam-nrph-2-start",
-      start: 10978.01,
-      end: 10999.99,
-      strand: "-",
-      family: "TAR1",
-      evalue: 1.1e-103,
-      divergence: 10.26,
-      join: "right-join",
-    },
-    {
-      id: "dfam-nrph-2",
-      start: 11000,
-      end: 11463,
-      strand: "-",
-      family: "TAR1",
-      evalue: 4.1e-165,
-      divergence: 8.78,
-      join: "none",
-    },
-    {
-      id: "dfam-nrph-3",
-      start: 12502,
-      end: 12676,
-      strand: "-",
-      family: "L1MC4a_3end",
-      evalue: 6.9e-16,
-      divergence: 31.22,
-      join: "none",
-    },
-  ];
-
-  const id1 = "soda-chart-1";
-
   // if filterparam is virus -> render virusResults component
   // if filterparam is for returning protein structures -> render proteinStructureResults etc..
 

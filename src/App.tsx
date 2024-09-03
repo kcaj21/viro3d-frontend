@@ -13,11 +13,11 @@ function App() {
     <>
       <main className="flex min-h-screen flex-col">
         <Navbar />
-        <div className="container mt-36 py-4 mx-auto">
+        <div className="container mt-36 my-auto mx-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
-              path="/structureindex/:recordID"
+              path="/structureindex/:virus_name/:recordID"
               element={<StructureIndex />}
             />
             <Route

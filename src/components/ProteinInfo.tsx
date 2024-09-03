@@ -1,6 +1,11 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
+import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
-const ProteinInfo: React.FC = ({ proteinInfo }) => {
+
+
+const ProteinInfo: React.FC = ({ recordID }) => {
+
+  const { proteinInfo } = useStructureIndexData(recordID);
 
   return !proteinInfo
   ? (<>Loading...</>) : (
