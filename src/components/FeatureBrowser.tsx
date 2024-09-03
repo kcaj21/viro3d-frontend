@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "feature-viewer-typescript/src/styles/styles.scss";
 import * as soda from "@sodaviz/soda";
 import { Chart } from "@sodaviz/soda";
@@ -20,6 +21,8 @@ interface CustomRenderParams extends soda.RenderParams {
 
 const FeatureBrowser: React.FC = ({ annotations }) => {
   const featureViewerRef = useRef<Chart<P> | null>(null);
+
+  const navigate = useNavigate()
 
   //NEED to replace '.' in record id with '_' so that it is valid syntax for a query selector
 
@@ -68,7 +71,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
                 CustomAnnotation,
                 Chart<CustomRenderParams>
               >
-            ) => alert(`${d.a.id} clicked`),
+            ) => navigate(`/structureindex/${d.a.virus_name}/${d.a.family}`, { state: { key: "value" } }),
           });
           soda.hoverBehavior({
             chart: this,
@@ -106,7 +109,6 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
   return (
     <>
       <div className="text-slate-500 min-w-[40vw] max-w-full ">
-        <div className="text-center">{id}</div>
         <div className="" id={id}></div>
       </div>
     </>

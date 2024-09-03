@@ -19,7 +19,7 @@ const ProteinInfo: React.FC = ({ recordID }) => {
         <tr>
           <th className="font-light  text-5xl">plDTT Score:</th>
 
-          <td className="text-5xl"> {proteinInfo["colabfold_log_pLDDT"]}</td>
+          <td className="text-5xl"> {proteinInfo["colabfold_json_pLDDT"]}</td>
         </tr>
         <hr className=" h-0.5 w-[150%]  my-4 bg-slate-500"></hr>
         <tr>

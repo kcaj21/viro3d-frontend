@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
 import { InitParams } from 'pdbe-molstar/lib/spec';
 
-const PDBeMolStar: React.FC = () => {
+const PDBeMolStar: React.FC = ({model}) => {
 
-  const {recordID} = useParams()
+  // const {recordID} = useParams()
 
   const viewerContainerRef = createRef<HTMLDivElement>()
 
@@ -14,7 +14,7 @@ const PDBeMolStar: React.FC = () => {
   
   useEffect(() => {
     function init() {
-      const url = `http://localhost:8000/pdb/CF-${recordID}_relaxed.pdb`
+      const url = `http://localhost:8000/pdb/CF-${model}_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
 
@@ -47,7 +47,7 @@ const PDBeMolStar: React.FC = () => {
 
     }
     init()
-  }, [])
+  }, [model])
 
   return (
     <>

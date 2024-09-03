@@ -18,7 +18,8 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
       {coordinates.segments.length > 1 ? (
         <div className="custom-scrollbar overflow-x-auto flex flex-grow">
           {coordinates.segments?.map((segment) => (
-            <div className="border-r-2 border-[#bec4cc]">
+            <div key={segment.coordinates[0].segment} className="border-r-2 border-[#bec4cc]">
+              <p className="text-center text-slate-500">{segment.coordinates[0].segment}</p>
               <FeatureBrowser annotations={segment.coordinates} />
             </div>
           ))}
