@@ -5,7 +5,6 @@ export function useGenomeCoordinates(filterparam, id) {
   const [coordinates, setCoordinates] = useState(null);
 
     useEffect(() => {
-    // setIsLoading(true);
     fetch(
         `http://localhost:8000/genome_coordinates/${filterparam}/${id}`    
     )

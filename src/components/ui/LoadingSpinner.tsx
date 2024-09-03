@@ -1,11 +1,12 @@
 import React from "react";
 
-const LoadingSpinner: React.FC = () => {
+const LoadingSpinner: React.FC = ({ color, size }) => {
+  console.log(size)
   return (
     <>
       <svg
         aria-hidden="true"
-        className="w-[15%] h-[15%] text-[#e6e6e6] animate-spin dark:text-gray-[#f9f9f9] fill-[#4a95c0]"
+        className={`w-[${size}%] h-[${size}%] text-[#e6e6e6] animate-spin dark:text-gray-[#f9f9f9] fill-[${color}]`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -4,12 +4,13 @@ import "feature-viewer-typescript/src/styles/styles.scss";
 import * as soda from "@sodaviz/soda";
 import { Chart } from "@sodaviz/soda";
 import * as d3 from "d3";
-import "../customScrollBar.css";
+import "/src/customScrollBar.css";
 
 interface CustomAnnotation extends soda.Annotation {
   family: string;
   gene_name: string;
   virus_name: string;
+  pept_cat: string;
   nt_acc: string;
   segment: string;
   join: string;
@@ -52,7 +53,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
             // soda.rectangle({
             chart: this,
             annotations: gene,
-            fillColor: (d) => colors(d.a.gene_name),
+            fillColor: (d) => colors(d.a.pept_cat),
             strokeColor: "none",
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,

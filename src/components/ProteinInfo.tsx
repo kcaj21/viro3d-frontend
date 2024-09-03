@@ -23,28 +23,29 @@ const ProteinInfo: React.FC = ({ recordID }) => {
         </tr>
         <hr className=" h-0.5 w-[150%]  my-4 bg-slate-500"></hr>
         <tr>
-          <th className="font-extralight">Tax ID:</th>
-          <td>{proteinInfo["taxid"]}</td>
+          <th className="font-extralight">Protein Name:</th>
+          <td>{proteinInfo["genbank_name"]}</td>
+        </tr>
+
+        <tr>
+          <th className="font-extralight">Peptide Category:</th>
+          <td>{proteinInfo["pept_cat"]}</td>
         </tr>
         <tr>
+          <th className="font-extralight">Uniprot ID:</th>
+          <td>{proteinInfo["uniprot_id"]}</td>
+        </tr>
+        <tr>
+          <th className="font-extralight">Genbank ID:</th>
+          <td>{proteinInfo["protein_id"]}</td>
+        </tr>
+        <tr>
+          <th className="font-extralight">Nucleotide Accession Number:</th>
+          <td>{proteinInfo["nt_acc"]}</td>
+          </tr>
+          <tr>
           <th className="font-extralight">Virus Name:</th>
           <td>{proteinInfo["Virus name(s)"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Genome coverage:</th>
-          <td>{proteinInfo["Genome coverage"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Genome Composition:</th>
-          <td>{proteinInfo["Genome composition"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Realm:</th>
-          <td>{proteinInfo["Realm"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Kingdom:</th>
-          <td>{proteinInfo["Kingdom"]}</td>
         </tr>
         <tr>
           <th className="font-extralight">Species:</th>

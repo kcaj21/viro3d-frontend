@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PdbeMolstar from "../components/PdbeMolstar";
+import PdbeMolstar from "../components/ui/PdbeMolstar";
 import ProteinInfo from "../components/ProteinInfo";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
@@ -16,11 +16,11 @@ const StructureIndex: React.FC = ({ }) => {
       <div className="IndexContainer flex flex-col gap-4  ">
         <FeatureBrowserContainer filterParam={'virus_name'} searchParam={virus_name} />
         </div>
-        <div className="mt-12 mx-12 flex gap-24 flex-col-1  ">
-          <div className="w-[50%]">
+        <div className="mt-12 mx-12 flex gap-16 flex-col-1 ">
+          <div className="basis-1/2">
             <PdbeMolstar model={recordID} />
           </div>
-          <div className=" font-extralight">
+          <div className="basis-1/2 font-extralight">
             <ProteinInfo recordID={recordID} />
           </div>
         </div>
