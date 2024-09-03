@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { FeatureViewer } from "feature-viewer-typescript";
 import "feature-viewer-typescript/src/styles/styles.scss";
-import { FeaturesList } from "feature-viewer-typescript/src/interfaces";
 import * as soda from "@sodaviz/soda";
 import { Chart } from "@sodaviz/soda";
 import * as d3 from "d3";
@@ -14,7 +12,6 @@ interface CustomAnnotation extends soda.Annotation {
   nt_acc: string;
   segment: string;
   join: string;
-  
 }
 
 interface CustomRenderParams extends soda.RenderParams {
@@ -24,11 +21,9 @@ interface CustomRenderParams extends soda.RenderParams {
 const FeatureBrowser: React.FC = ({ annotations }) => {
   const featureViewerRef = useRef<Chart<P> | null>(null);
 
-  //NEED valid div-id syntax e.g no spaces or fullstops etc -> create one in genome coordinates database
+  //NEED to replace '.' in record id with '_' so that it is valid syntax for a query selector
 
-  const id = annotations[0].gene_name
-
-  // console.log('here', annotations)
+  const id = annotations[0].nt_acc.replace(".", "_");
 
   let leftJoin = annotations.filter((a) => a.join == "left-join");
   let rightJoin = annotations.filter((a) => a.join == "right-join");
@@ -36,7 +31,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
 
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-  console.log(annotations)
+  console.log(annotations);
 
   useEffect(() => {
     if (!featureViewerRef.current) {
@@ -104,19 +99,13 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           });
         },
       });
-      // console.log(featureViewerRef.current.layout)
-
-      //             fetch("https://sodaviz.org/data/examples/default")
-      // .then(response => response.json())
-      // .then(annotations => featureViewerRef.current.render({ annotations }));
       featureViewerRef.current.render({ annotations });
-      // featureViewerRef.current.render({ });
     }
   }, []);
 
   return (
     <>
-      <div className="text-slate-500 min-w-[40vh] border-r-2 border-[#bec4cc] ">
+      <div className="text-slate-500 min-w-[40vw] max-w-full ">
         <div className="text-center">{id}</div>
         <div className="" id={id}></div>
       </div>

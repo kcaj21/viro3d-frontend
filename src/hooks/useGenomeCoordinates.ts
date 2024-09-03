@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export function useGenomeCoordinates(filterparam, id) {
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [coordinates, setCoordinates] = useState(null);
 
     useEffect(() => {
@@ -11,15 +11,15 @@ export function useGenomeCoordinates(filterparam, id) {
     )
       .then((res) => res.json())
       .then((data) => {
-        // setIsLoading(false);
         setCoordinates(data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
         setCoordinates(null);
-        // setIsLoading(false);
+        setIsLoading(false);
       });
   }, [filterparam, id]);
 
-  return { coordinates };
+  return { coordinates, isLoading };
 }
