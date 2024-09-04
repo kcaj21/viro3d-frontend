@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "feature-viewer-typescript/src/styles/styles.scss";
 import * as soda from "@sodaviz/soda";
 import { Chart } from "@sodaviz/soda";
+import { Transform } from "@sodaviz/soda";
 import * as d3 from "d3";
 import "/src/customScrollBar.css";
 
@@ -29,6 +30,9 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
 
   const id = annotations[0].nt_acc.replace(".", "_");
 
+        
+
+
   let all = annotations.filter((a) => a.join == "none");
   let leftJoin = annotations.filter((a) => a.join == "left-join");
   let rightJoin = annotations.filter((a) => a.join == "right-join");
@@ -37,9 +41,11 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
 
-  let colors = d3.scaleOrdinal(d3.schemeTableau10);
+  // let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
   console.log(annotations);
+
+
 
   useEffect(() => {
     if (!featureViewerRef.current) {
@@ -80,6 +86,8 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           });
         },
         postRender(params) {
+
+
           soda.clickBehavior({
             chart: this,
             annotations: all,
@@ -123,7 +131,14 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           });
         },
       });
+      featureViewerRef.current.transform = new Transform(3, 0, 0);
+
       featureViewerRef.current.render({ annotations });
+
+
+
+      
+
     }
   }, []);
 
