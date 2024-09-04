@@ -29,9 +29,13 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
 
   const id = annotations[0].nt_acc.replace(".", "_");
 
+  let all = annotations.filter((a) => a.join == "none");
   let leftJoin = annotations.filter((a) => a.join == "left-join");
   let rightJoin = annotations.filter((a) => a.join == "right-join");
-  let gene = annotations.filter((a) => a.join == "none");
+  let protein = all.filter((a) => a.pept_cat == "protein");
+  let region = all.filter((a) => a.pept_cat == "region");
+  let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
+
 
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
@@ -52,8 +56,24 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           soda.chevronRectangle({
             // soda.rectangle({
             chart: this,
-            annotations: gene,
-            fillColor: (d) => colors(d.a.pept_cat),
+            annotations: protein,
+            fillColor: '#ACCBE1',
+            strokeColor: "none",
+            orientation: (d) => d.a.strand,
+            chevronSpacing: 5,
+          });
+          soda.chevronRectangle({
+            chart: this,
+            annotations: region,
+            fillColor: '#7C98B3',
+            strokeColor: "none",
+            orientation: (d) => d.a.strand,
+            chevronSpacing: 5,
+          });
+          soda.chevronRectangle({
+            chart: this,
+            annotations: mat_pept,
+            fillColor: '#4a95c0',
             strokeColor: "none",
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,
@@ -62,7 +82,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
         postRender(params) {
           soda.clickBehavior({
             chart: this,
-            annotations: gene,
+            annotations: all,
             // this function is evaluated when a glyph is clicked
             click: (
               // s is a d3 Selection of the glyph in the DOM
@@ -76,7 +96,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           });
           soda.hoverBehavior({
             chart: this,
-            annotations: gene,
+            annotations: all,
             // this function is evaluated when a glyph is moused over
             mouseover: (s, d) => s.style("stroke", "#17a8e1"),
             // this function is evaluated when a glyph is no longer moused over
@@ -84,7 +104,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           });
           soda.tooltip({
             chart: this,
-            annotations: gene,
+            annotations: all,
             text: (d) => d.a.gene_name,
           });
           soda.line({

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {  } from "react";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
 
@@ -18,7 +18,6 @@ const ProteinInfo: React.FC = ({ recordID }) => {
         <hr className=" w-[150%] my-1  border-0"></hr>
         <tr>
           <th className="font-light  text-5xl">plDTT Score:</th>
-
           <td className="text-5xl"> {proteinInfo["colabfold_json_pLDDT"]}</td>
         </tr>
         <hr className=" h-0.5 w-[150%]  my-4 bg-slate-500"></hr>
@@ -26,7 +25,6 @@ const ProteinInfo: React.FC = ({ recordID }) => {
           <th className="font-extralight">Protein Name:</th>
           <td>{proteinInfo["genbank_name"]}</td>
         </tr>
-
         <tr>
           <th className="font-extralight">Peptide Category:</th>
           <td>{proteinInfo["pept_cat"]}</td>

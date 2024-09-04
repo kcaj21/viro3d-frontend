@@ -50,17 +50,13 @@ const Navbar: React.FC = () => {
               className="bg-[#f9f9f9] text-slate-500 pr-6 rounded border-r-2 text-center"
             >
               <option value="viruses">Virus Name</option>
-              <option value="species">Species</option>
-              <option value="gene">Gene</option>
-              <option value="genbankid">GenbankID</option>
-              <option value="refseq">RefSeq</option>
-              <option value="taxid">TaxID</option>
+              <option value="sequencematch">Sequence</option>
             </select>
             <input
               onChange={handleText}
               className=" text-slate-500 pl-4 outline-none h-12 w-full border-none rounded-md text-2xl  bg-[#f9f9f9]"
               type="text"
-              placeholder="Search by GenbankID, Species, Gene or Sequence..."
+              placeholder="Search Virus Name or Sequence..."
             ></input>
             <button>
               <svg

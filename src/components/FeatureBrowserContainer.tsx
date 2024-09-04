@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import FeatureBrowser from "./ui/FeatureBrowser";
 import LoadingSpinner from "./ui/LoadingSpinner";

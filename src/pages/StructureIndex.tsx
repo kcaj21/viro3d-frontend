@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import { useParams } from "react-router-dom";
 import PdbeMolstar from "../components/ui/PdbeMolstar";
 import ProteinInfo from "../components/ProteinInfo";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
-import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
 const StructureIndex: React.FC = ({ }) => {
   
