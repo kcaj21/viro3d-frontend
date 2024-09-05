@@ -40,7 +40,7 @@ const ResultsPage: React.FC = () => {
   return (
     <>
       {!isLoading && !data ? (
-        <div className="min-h-screen">
+        <div className="">
           <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
             <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
           </div>
@@ -53,15 +53,15 @@ const ResultsPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen">
+        <div className="">
           {filterParam !== "viruses" && filterParam !== "sequencematch" ? (
             <FeatureBrowserContainer
               filterParam={filterParam}
               searchParam={searchParam}
             />
           ) : null}
-          <div className="results-container min-h-screen mt-4 mb-4 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
-            <div className="buttom-row flex flex-row justify-between font-light text-[#4a95c0]">
+          <div className="results-container mt-4 mb-24 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+            <div className="buttom-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 mt-6 break-all">
                 Showing {resultCount} results for "{searchParam}"
               </p>
@@ -74,11 +74,16 @@ const ResultsPage: React.FC = () => {
                 />
               ) : null}
             </div>
-            {filterParam !== "viruses" ? (
-              <ProteinStructureResults data={data} filterParam={filterParam} />
-            ) : (
-              <VirusResults data={data} />
-            )}
+            <div className=''>
+              {filterParam !== "viruses" ? (
+                <ProteinStructureResults
+                  data={data}
+                  filterParam={filterParam}
+                />
+              ) : (
+                <VirusResults data={data} />
+              )}
+            </div>
           </div>
         </div>
       )}

@@ -19,9 +19,10 @@ interface CustomAnnotation extends soda.Annotation {
 
 interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
+  _transform: Transform
 }
 
-const FeatureBrowser: React.FC = ({ annotations }) => {
+const FeatureBrowser: React.FC = ({ annotations, _transform }) => {
   const featureViewerRef = useRef<Chart<P> | null>(null);
 
   const navigate = useNavigate()
@@ -30,9 +31,6 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
 
   const id = annotations[0].nt_acc.replace(".", "_");
 
-        
-
-
   let all = annotations.filter((a) => a.join == "none");
   let leftJoin = annotations.filter((a) => a.join == "left-join");
   let rightJoin = annotations.filter((a) => a.join == "right-join");
@@ -40,12 +38,8 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
   let region = all.filter((a) => a.pept_cat == "region");
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
-
   // let colors = d3.scaleOrdinal(d3.schemeTableau10);
-
-  console.log(annotations);
-
-
+  
 
   useEffect(() => {
     if (!featureViewerRef.current) {
@@ -57,7 +51,8 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
         rowHeight: 25,
         zoomConstraint: [1, 100],
         resizable: true,
-        draw(params) {
+        draw() {
+
           this.addAxis();
           soda.chevronRectangle({
             // soda.rectangle({
@@ -66,6 +61,7 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
             fillColor: '#ACCBE1',
             strokeColor: "none",
             orientation: (d) => d.a.strand,
+            chevronWidth: 7,
             chevronSpacing: 5,
           });
           soda.chevronRectangle({
@@ -74,6 +70,8 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
             fillColor: '#7C98B3',
             strokeColor: "none",
             orientation: (d) => d.a.strand,
+            chevronWidth: 7,
+
             chevronSpacing: 5,
           });
           soda.chevronRectangle({
@@ -83,11 +81,11 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
             strokeColor: "none",
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,
+            chevronWidth: 7,
+
           });
         },
-        postRender(params) {
-
-
+        postRender() {
           soda.clickBehavior({
             chart: this,
             annotations: all,
@@ -131,13 +129,10 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
           });
         },
       });
-      featureViewerRef.current.transform = new Transform(3, 0, 0);
-
+      // featureViewerRef.current.transform = new Transform(2, 0, 0);
       featureViewerRef.current.render({ annotations });
 
 
-
-      
 
     }
   }, []);
