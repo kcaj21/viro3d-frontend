@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, createRef, } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useEffect, createRef, } from 'react';
 import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
 import { InitParams } from 'pdbe-molstar/lib/spec';
 
@@ -17,7 +16,6 @@ const PDBeMolStar: React.FC = ({model}) => {
       const url = `http://localhost:8000/pdb/CF-${model}_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
-
 
       //Set options (Checkout available options list in the documentation)
       const options: Partial<InitParams> = {
@@ -37,7 +35,10 @@ const PDBeMolStar: React.FC = ({model}) => {
         bgColor: { r: 242, g: 242, b: 242 },
         hideControls: true,
         sequencePanel: true,
-        reactive: true
+        reactive: true,
+        hideStructure: ['het', 'water', 'nonStandard', 'carbs', 'coarse'],
+        //remove comment-out on line below to disable ball and stick from showing when you select a residue
+        // granularity: 'residueInstances'
       }
 
       if (viewerContainerRef.current === null) return

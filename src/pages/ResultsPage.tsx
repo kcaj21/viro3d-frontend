@@ -60,7 +60,7 @@ const ResultsPage: React.FC = () => {
               searchParam={searchParam}
             />
           ) : null}
-          <div className="results-container mt-4 mb-24 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+          <div className="results-container mt-8  border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="buttom-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 mt-6 break-all">
                 Showing {resultCount} results for "{searchParam}"

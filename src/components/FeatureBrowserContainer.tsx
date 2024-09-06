@@ -19,24 +19,28 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
     </>
   ) : (
     <>
-      <div className="">
-        {coordinates.segments.length > 1 ? (
-          <div className="custom-scrollbar overflow-x-auto flex flex-grow">
-            {coordinates.segments?.map((segment) => (
-              <div
-                key={segment.coordinates[0].segment}
-                className="border-r-2 border-[#bec4cc]"
-              >
-                <p className="text-center ">{segment.coordinates[0].segment}</p>
-                <FeatureBrowser annotations={segment.coordinates} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <FeatureBrowser annotations={coordinates.segments[0].coordinates} />
-        )}
+      <div className="text-slate-500">
+        <div className="">
+          {coordinates.segments.length > 1 ? (
+            <div className="custom-scrollbar overflow-x-auto flex flex-grow">
+              {coordinates.segments?.map((segment) => (
+                <div
+                  key={segment.coordinates[0].segment}
+                  className="border-r-2 border-[#bec4cc]"
+                >
+                  <p className="text-center ">
+                    {segment.coordinates[0].segment}
+                  </p>
+                  <FeatureBrowser annotations={segment.coordinates} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <FeatureBrowser annotations={coordinates.segments[0].coordinates} />
+          )}
         </div>
         <Legend />
+      </div>
     </>
   );
 };
