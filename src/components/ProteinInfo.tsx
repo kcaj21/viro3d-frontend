@@ -10,7 +10,7 @@ const ProteinInfo: React.FC = ({ recordID }) => {
   return !proteinInfo
   ? (<>Loading...</>) : (
     <>
-      <table className="border-spacing-4 text-left border-separate text-2xl text-slate-500">
+      <table className="border-spacing-4 min-w-[100%] min-h-[100%] text-left border-separate text-2xl text-slate-500">
         <tr>
           <td className="text-6xl ">{proteinInfo["_id"]}</td>
         </tr>
