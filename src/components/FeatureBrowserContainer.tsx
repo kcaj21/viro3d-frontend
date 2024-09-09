@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import FeatureBrowser from "./ui/FeatureBrowser";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import Legend from "./ui/Legend";
+import ControlsPopUp from "./ui/ControlsPopUp";
+import InfoIcon from "./ui/InfoIcon";
 
 const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
   const { coordinates, isLoading } = useGenomeCoordinates(
     filterParam,
     searchParam
   );
+
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsPopUpOpen(!isPopUpOpen);
+  };
 
   return isLoading ? (
     <>
@@ -20,8 +28,9 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
   ) : (
     <>
       <div className="text-slate-500">
-        <div className="">
-          {coordinates.segments.length > 1 ? (
+        <div className="relative">
+          {isPopUpOpen ? <ControlsPopUp handleClick={handleClick} /> : null}
+          {coordinates.segments?.length > 1 ? (
             <div className="custom-scrollbar overflow-x-auto flex flex-grow">
               {coordinates.segments?.map((segment) => (
                 <div
@@ -36,10 +45,23 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
               ))}
             </div>
           ) : (
-            <FeatureBrowser annotations={coordinates.segments[0].coordinates} />
+            <FeatureBrowser
+              annotations={coordinates.segments[0]?.coordinates}
+            />
           )}
         </div>
-        <Legend />
+        <div className="mt-1 flex flex-row justify-between">
+          <Legend />
+          <button
+            onClick={handleClick}
+            className="block"
+            data-modal-target="default-modal"
+            data-modal-show="default-modal"
+            type="button"
+          >
+            <InfoIcon />
+          </button>
+        </div>
       </div>
     </>
   );

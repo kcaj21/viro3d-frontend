@@ -2,7 +2,11 @@ import React, { useEffect, createRef, } from 'react';
 import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
 import { InitParams } from 'pdbe-molstar/lib/spec';
 
-const PDBeMolStar: React.FC = ({model}) => {
+type Model = {
+  modelID: String;
+}
+
+const PDBeMolStar: React.FC<Model> = ({modelID}) => {
 
   // const {recordID} = useParams()
 
@@ -13,7 +17,7 @@ const PDBeMolStar: React.FC = ({model}) => {
   
   useEffect(() => {
     function init() {
-      const url = `http://localhost:8000/pdb/CF-${model}_relaxed.pdb`
+      const url = `http://localhost:8000/pdb/CF-${modelID}_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
 
@@ -48,7 +52,7 @@ const PDBeMolStar: React.FC = ({model}) => {
 
     }
     init()
-  }, [model])
+  }, [modelID])
 
   return (
     <>

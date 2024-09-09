@@ -14,13 +14,14 @@ interface CustomAnnotation extends soda.Annotation {
   nt_acc: string;
   segment: string;
   join: string;
+  strand: string;
 }
 
 interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
 }
 
-const FeatureBrowser: React.FC = ({ annotations }) => {
+const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
   const featureViewerRef = useRef<Chart<P> | null>(null);
 
   const navigate = useNavigate()
@@ -37,8 +38,6 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
   let region = all.filter((a) => a.pept_cat == "region");
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
-  // let colors = d3.scaleOrdinal(d3.schemeTableau10);
-
   useEffect(() => {
     if (!featureViewerRef.current) {
       featureViewerRef.current = new soda.Chart<CustomRenderParams>({
@@ -51,7 +50,6 @@ const FeatureBrowser: React.FC = ({ annotations }) => {
         zoomConstraint: [0, 100],
         resizable: true,
         draw() {
-
           this.addAxis();
           soda.chevronRectangle({
             // soda.rectangle({

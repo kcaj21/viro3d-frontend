@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useGenomeCoordinates(id) {
+export function useGenomeCoordinates(id: string) {
   const [isLoading, setIsLoading] = useState(true);
   const [coordinates, setCoordinates] = useState(null);
 

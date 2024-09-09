@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useResultsPageData(filterparam, id, currentPage) {
+export function useResultsPageData(filterparam: string, id: string, currentpage: number) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const [resultCount, setResultCount] = useState(null);
@@ -9,7 +9,7 @@ export function useResultsPageData(filterparam, id, currentPage) {
     setIsLoading(true);
     if (filterparam !== 'sequencematch') {
       fetch(
-        `http://localhost:8000/${filterparam}/${id}?page_size=10&page_num=${currentPage}`
+        `http://localhost:8000/${filterparam}/${id}?page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -38,7 +38,7 @@ export function useResultsPageData(filterparam, id, currentPage) {
           setIsLoading(false);
         });
     }
-  }, [filterparam, id, currentPage]);
+  }, [filterparam, id, currentpage]);
 
   return { isLoading, data, resultCount };
 }

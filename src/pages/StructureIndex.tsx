@@ -17,7 +17,7 @@ const StructureIndex: React.FC = ({ }) => {
         </div>
         <div className="mt-12 flex gap-16 flex-col-1 ">
           <div className="basis-1/2">
-            <PdbeMolstar model={recordID} />
+            <PdbeMolstar modelID={recordID} />
           </div>
           <div className="basis-1/2 font-extralight min-h-full">
             <ProteinInfo recordID={recordID} />

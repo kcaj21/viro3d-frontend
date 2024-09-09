@@ -1,11 +1,33 @@
 import React from "react";
 
-const ControlsPopUp: React.FC = () => {
+const ControlsPopUp: React.FC = ({handleClick}) => {
   return (
     <>
-        <div className="flex items-center z-10 bg-[#d2cece00] gap-8 px-8 mx-auto py-2">
-            <p>Hello</p>
+      <div
+        id="default-modal"
+        aria-hidden="true"
+        className="overflow-y-auto p-4 font-extralight overflow-x-hidden absolute bottom-0 right-0 z-50 max-h-full"
+      >
+        <div className="relative  w-full max-w-2xl  max-h-full">
+          <div className="relative flex flex-row bg-[#64748be0] rounded-lg shadow">
+            <div className="flex items-center justify-between p-4 md:p-5  rounded-t dark:border-gray-600">
+              <h3 className="text-xl text-white">
+                Ctrl + Mouse Scroll to zoom on the Genome Browser
+              </h3>
+            </div>
+            <div className="flex items-center p-4 md:p-5 rounded-b border-gray-400">
+                          <button
+                              onClick={handleClick}
+                data-modal-hide="default-modal"
+                type="button"
+                className="text-white bg-[#56b3e6] hover:bg-[#61c8ff] focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                OK
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </>
   );
 };

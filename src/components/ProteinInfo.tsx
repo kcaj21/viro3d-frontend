@@ -1,9 +1,11 @@
 import React, {  } from "react";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
+type ProteinInfoProps = {
+  recordID: string;
+}
 
-
-const ProteinInfo: React.FC = ({ recordID }) => {
+const ProteinInfo: React.FC<ProteinInfoProps> = ({ recordID }) => {
 
   const { proteinInfo } = useStructureIndexData(recordID);
 

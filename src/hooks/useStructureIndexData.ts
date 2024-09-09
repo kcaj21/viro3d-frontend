@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useStructureIndexData(id) {
+export function useStructureIndexData(id: string) {
   const [isLoading, setIsLoading] = useState(true);
   const [proteinInfo, setProteinInfo] = useState(null);
 

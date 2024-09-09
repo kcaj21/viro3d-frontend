@@ -1,6 +1,11 @@
 import React from "react";
 
-const LoadingSpinner: React.FC = ({ color, size }) => {
+type LoadingSpinnerProps = {
+  color: String;
+  size: String;
+}
+
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ color, size }) => {
   return (
     <>
       <svg
