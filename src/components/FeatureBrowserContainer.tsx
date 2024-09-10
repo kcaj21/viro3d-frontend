@@ -14,8 +14,12 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
 
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
-  const handleClick = () => {
+  const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
+  };
+
+  const DownloadZip = () => {
+    'http://localhost:8000/zip?virus_name=hepatitis%20C%20virus%20genotype%203a&qualifier=BAA04609.1.1.1_7118&qualifier=BAA04609.1.1_7118'
   };
 
   return isLoading ? (
@@ -29,7 +33,7 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
     <>
       <div className="text-slate-500">
         <div className="relative">
-          {isPopUpOpen ? <ControlsPopUp handleClick={handleClick} /> : null}
+          {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
           {coordinates.segments?.length > 1 ? (
             <div className="custom-scrollbar overflow-x-auto flex flex-grow">
               {coordinates.segments?.map((segment) => (
@@ -52,15 +56,20 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
         </div>
         <div className="mt-1 flex flex-row justify-between">
           <Legend />
-          <button
-            onClick={handleClick}
-            className="block"
-            data-modal-target="default-modal"
-            data-modal-show="default-modal"
-            type="button"
-          >
-            <InfoIcon />
-          </button>
+            <div className="flex flex-row gap-4 ">
+              <a href={`http://localhost:8000/zip/${searchParam}`}>
+                <button className="hover:text-[#56b3e6]">Download PDBs</button>
+                </a>
+            <button
+              onClick={handlePopUp}
+              className="block"
+              data-modal-target="default-modal"
+              data-modal-show="default-modal"
+              type="button"
+            >
+              <InfoIcon />
+            </button>
+          </div>
         </div>
       </div>
     </>
