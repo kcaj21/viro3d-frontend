@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ClusterVisualization from "../components/ui/ClusterVisualisation";
 import "/src/customScrollBar.css";
 
@@ -63,7 +63,12 @@ let footerHeight = document.getElementById("footer")?.offsetHeight;
 let height = window.innerHeight - (navHeight + footerHeight);
 let width = window.innerWidth;
 
-const Home: React.FC = () => {
+const Home: React.FC = ({setSearchParam, setFilterParam}) => {
+
+  useEffect(() => {
+    setSearchParam('')
+    setFilterParam('')
+  }, []);
 
   return (
     <>

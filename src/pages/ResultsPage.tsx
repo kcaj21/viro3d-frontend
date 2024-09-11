@@ -7,7 +7,7 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 
-const ResultsPage: React.FC = () => {
+const ResultsPage: React.FC = ({ setFilterParam, setSearchParam }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const { filterParam, searchParam } = useParams();
@@ -24,12 +24,13 @@ const ResultsPage: React.FC = () => {
     } else {
       setCurrentPage(0);
     }
+    setFilterParam(filterParam);
+    setSearchParam(searchParam);
   }, [filterParam, searchParam]);
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
     // document.documentElement.scrollTop = 0
-
   };
 
   const handlePrevPage = () => {
@@ -56,36 +57,39 @@ const ResultsPage: React.FC = () => {
         </div>
       ) : (
         <div className="">
-          {filterParam !== "viruses" && filterParam !== "sequencematch" ? (
+          {/* {filterParam !== "viruses" && filterParam !== "sequencematch" ? (
             <FeatureBrowserContainer
               filterParam={filterParam}
               searchParam={searchParam}
             />
-          ) : null}
+          ) : null} */}
           <div className="results-container mt-8  border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 py-8 break-words">
-                Showing {resultCount} results for: "{searchParam}..."
+                Showing {resultCount} results for: "
+                {searchParam?.substring(0, 40)}..."
               </p>
             </div>
-            <div className=''>
+            <div className="">
               {filterParam !== "viruses" ? (
                 <ProteinStructureResults
                   data={data}
                   filterParam={filterParam}
+                  setFilterParam={setFilterParam}
+                  setSearchParam={setSearchParam}
                 />
               ) : (
                 <VirusResults data={data} />
               )}
-                </div>
-                {data.count > 10 ? (
-                <Pagination
-                  currentPage={currentPage}
-                  resultCount={resultCount}
-                  handleNextPage={handleNextPage}
-                  handlePrevPage={handlePrevPage}
-                />
-              ) : null}
+            </div>
+            {data.count > 10 ? (
+              <Pagination
+                currentPage={currentPage}
+                resultCount={resultCount}
+                handleNextPage={handleNextPage}
+                handlePrevPage={handlePrevPage}
+              />
+            ) : null}
           </div>
         </div>
       )}

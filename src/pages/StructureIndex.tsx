@@ -12,9 +12,9 @@ const StructureIndex: React.FC = ({ }) => {
 
   return (
     <>
-      <div className="IndexContainer flex flex-col gap-4 text-slate-500 ">
+      {/* <div className="IndexContainer flex flex-col gap-4 text-slate-500 ">
         <FeatureBrowserContainer filterParam={'virus_name'} searchParam={virus_name} />
-        </div>
+        </div> */}
         <div className="mt-12 flex gap-16 flex-col-1 ">
           <div className="basis-1/2">
             <PdbeMolstar modelID={recordID} />
