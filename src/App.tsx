@@ -5,7 +5,7 @@ import Navbar from "./components/ui/Navbar";
 import Home from "./pages/Home";
 import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
-import ResultsPage from "./pages/ResultsPage";
+import ResultsPage from "./pages/VirusResultsPage";
 
 
 function App() {

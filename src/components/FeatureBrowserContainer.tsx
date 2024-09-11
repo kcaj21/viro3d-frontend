@@ -5,24 +5,22 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import Legend from "./ui/Legend";
 import ControlsPopUp from "./ui/ControlsPopUp";
 import InfoIcon from "./ui/InfoIcon";
+import { useZipDownload } from "../hooks/useZipDownload";
 
 const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
-  const { coordinates, isLoading } = useGenomeCoordinates(
+  const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     filterParam,
     searchParam
   );
 
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const { isLoading: downloadLoading, handleDownload } = useZipDownload(searchParam);
 
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  const DownloadZip = () => {
-    'http://localhost:8000/zip?virus_name=hepatitis%20C%20virus%20genotype%203a&qualifier=BAA04609.1.1.1_7118&qualifier=BAA04609.1.1_7118'
-  };
-
-  return isLoading ? (
+  return genomeLoading ? (
     <>
       <div className="flex items-center justify-center gap-12">
         <h2 className="text-5xl text-slate-500">Loading Genome Browser...</h2>
@@ -56,10 +54,14 @@ const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
         </div>
         <div className="mt-1 flex flex-row justify-between">
           <Legend />
-            <div className="flex flex-row gap-4 ">
-              <a href={`http://localhost:8000/zip/${searchParam}`}>
-                <button className="hover:text-[#56b3e6]">Download PDBs</button>
-                </a>
+          <div className="flex flex-row gap-4 ">
+            <button 
+              onClick={handleDownload} 
+              disabled={downloadLoading}
+              className="hover:text-[#56b3e6]"
+            >
+              {downloadLoading ? 'Downloading...' : 'Download PDBs'}
+            </button>
             <button
               onClick={handlePopUp}
               className="block"

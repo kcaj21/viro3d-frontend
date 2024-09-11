@@ -28,6 +28,8 @@ const ResultsPage: React.FC = () => {
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
+    // document.documentElement.scrollTop = 0
+
   };
 
   const handlePrevPage = () => {
@@ -61,18 +63,10 @@ const ResultsPage: React.FC = () => {
             />
           ) : null}
           <div className="results-container mt-8  border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
-            <div className="buttom-row flex flex-row  justify-between font-light text-[#4a95c0]">
-              <p className="px-8 mt-6 break-all">
-                Showing {resultCount} results for "{searchParam}"
+            <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
+              <p className="px-8 py-8 break-words">
+                Showing {resultCount} results for: "{searchParam}..."
               </p>
-              {currentPage > 0 ? (
-                <Pagination
-                  currentPage={currentPage}
-                  resultCount={resultCount}
-                  handleNextPage={handleNextPage}
-                  handlePrevPage={handlePrevPage}
-                />
-              ) : null}
             </div>
             <div className=''>
               {filterParam !== "viruses" ? (
@@ -83,7 +77,15 @@ const ResultsPage: React.FC = () => {
               ) : (
                 <VirusResults data={data} />
               )}
-            </div>
+                </div>
+                {data.count > 10 ? (
+                <Pagination
+                  currentPage={currentPage}
+                  resultCount={resultCount}
+                  handleNextPage={handleNextPage}
+                  handlePrevPage={handlePrevPage}
+                />
+              ) : null}
           </div>
         </div>
       )}

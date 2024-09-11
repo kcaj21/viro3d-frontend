@@ -38,6 +38,27 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
   let region = all.filter((a) => a.pept_cat == "region");
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
+  // console.log(annotations[0].segment, 'genome length:', annotations[annotations.length - 1].end + 1) //9293
+
+  // console.log(annotations)
+
+  const highestEndCoordinate = annotations.reduce(
+    (prev, current) => {
+      return prev.end > current.end ? prev : current
+    }
+  );
+
+  const lowestStartCoordinate = annotations.reduce(
+    (prev, current) => {
+      return prev.start < current.start ? prev : current
+    }
+  );
+
+  const domainConstraint = [lowestStartCoordinate.start, highestEndCoordinate.end]
+
+  console.log('domain', domainConstraint)
+
+
   useEffect(() => {
     if (!featureViewerRef.current) {
       featureViewerRef.current = new soda.Chart<CustomRenderParams>({
@@ -45,7 +66,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
         zoomable: true,
         rowHeight: 25,
         //determines the genome coordinate range that you can scroll between, i think it should really always be between 0 and the end coordinate of the last gene
-        domainConstraint: () => [0, annotations[annotations.length - 1].end + 1],
+        domainConstraint: () => domainConstraint,
         // constrains only zooming
         zoomConstraint: [0, 100],
         resizable: true,
@@ -131,10 +152,12 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
             y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
             strokeColor: '#64748b'
           });
-          console.log(this.axisConfig.chart.initialDomain[1])
+          // console.log(this.axisConfig.chart.initialDomain[1])
         },
       });
-      featureViewerRef.current.render({ annotations, start: (annotations[0].start), end: (annotations[annotations.length - 1].end) + 1});
+      // featureViewerRef.current.render({ annotations});
+      featureViewerRef.current.render({ annotations, start: domainConstraint[0], end: domainConstraint[1] });
+      
     }
   }, []);
 
