@@ -38,10 +38,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
   let region = all.filter((a) => a.pept_cat == "region");
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
-  // console.log(annotations[0].segment, 'genome length:', annotations[annotations.length - 1].end + 1) //9293
-
-  // console.log(annotations)
-
   const highestEndCoordinate = annotations.reduce(
     (prev, current) => {
       return prev.end > current.end ? prev : current
@@ -55,9 +51,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
   );
 
   const domainConstraint = [lowestStartCoordinate.start, highestEndCoordinate.end]
-
-  console.log('domain', domainConstraint)
-
 
   useEffect(() => {
     if (!featureViewerRef.current) {
@@ -106,6 +99,8 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
           });
         },
         postRender() {
+          // soda.bind()
+          // d3.select('[id="AAR31562.1_100"]').style("stroke", "#49b8b0")
           soda.clickBehavior({
             chart: this,
             annotations: all,
@@ -152,12 +147,9 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
             y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
             strokeColor: '#64748b'
           });
-          // console.log(this.axisConfig.chart.initialDomain[1])
         },
       });
-      // featureViewerRef.current.render({ annotations});
-      featureViewerRef.current.render({ annotations, start: domainConstraint[0], end: domainConstraint[1] });
-      
+      featureViewerRef.current.render({ annotations, start: domainConstraint[0], end: domainConstraint[1] });      
     }
   }, []);
 

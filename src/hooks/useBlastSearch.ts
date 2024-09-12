@@ -4,9 +4,9 @@ export function useGenomeCoordinates(id: string) {
   const [isLoading, setIsLoading] = useState(true);
   const [coordinates, setCoordinates] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
     fetch(
-        `http://localhost:8000/sequencematch/${id}`    
+      `http://localhost:8000/sequencematch/${id}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -21,5 +21,4 @@ export function useGenomeCoordinates(id: string) {
   }, [id]);
 
   return { coordinates, isLoading };
-
-// 
+}

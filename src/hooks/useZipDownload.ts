@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function useZipDownload(id: string) {
-    // const [isLoading, setIsLoading] = useState(true);
-
 
     const [isLoading, setIsLoading] = useState(false);
 

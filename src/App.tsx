@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/ui/Navbar";
 import Home from "./pages/Home";
@@ -15,9 +15,9 @@ function App() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col">
+      <main className="flex  flex-col">
         <Navbar />
-        <div className="container mt-36 my-auto mx-auto">
+        <div className="container min-h-screen mt-48 my-auto mx-auto">
           {filterParam === "virus_name" ? (
             <FeatureBrowserContainer
               filterParam={filterParam}

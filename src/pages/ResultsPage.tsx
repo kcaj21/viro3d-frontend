@@ -5,7 +5,6 @@ import ProteinStructureResults from "../components/ProteinStructureResults";
 import VirusResults from "../components/VirusResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
-import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 
 const ResultsPage: React.FC = ({ setFilterParam, setSearchParam }) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -30,7 +29,6 @@ const ResultsPage: React.FC = ({ setFilterParam, setSearchParam }) => {
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
-    // document.documentElement.scrollTop = 0
   };
 
   const handlePrevPage = () => {
@@ -56,21 +54,15 @@ const ResultsPage: React.FC = ({ setFilterParam, setSearchParam }) => {
           </div>
         </div>
       ) : (
-        <div className="">
-          {/* {filterParam !== "viruses" && filterParam !== "sequencematch" ? (
-            <FeatureBrowserContainer
-              filterParam={filterParam}
-              searchParam={searchParam}
-            />
-          ) : null} */}
-          <div className="results-container mt-8  border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+        <div className="min-h-screen">
+          <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 py-8 break-words">
                 Showing {resultCount} results for: "
                 {searchParam?.substring(0, 40)}..."
               </p>
             </div>
-            <div className="">
+            <div className="min-h-[50vh]">
               {filterParam !== "viruses" ? (
                 <ProteinStructureResults
                   data={data}
