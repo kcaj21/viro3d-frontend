@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProteinStructureResults: React.FC = ({ data, filterParam, setFilterParam, setSearchParam }) => {
+const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
 
-  const handleMatchClick = (e) => {
-    setSearchParam(e)
-    setFilterParam('virus_name')
-  }
+  // const handleMatchClick = (e) => {
+  //   setSearchParam(e)
+  //   setFilterParam('virus_name')
+  // }
 
   return filterParam !== 'sequencematch' ?
     (

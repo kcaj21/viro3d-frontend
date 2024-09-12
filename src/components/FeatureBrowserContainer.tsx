@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import FeatureBrowser from "./ui/FeatureBrowser";
 import LoadingSpinner from "./ui/LoadingSpinner";
@@ -6,8 +6,10 @@ import Legend from "./ui/Legend";
 import ControlsPopUp from "./ui/ControlsPopUp";
 import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
+import { useParams } from "react-router-dom";
 
-const FeatureBrowserContainer: React.FC = ({ filterParam, searchParam }) => {
+const FeatureBrowserContainer: React.FC = ({filterParam, searchParam }) => {
+  
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     filterParam,
     searchParam

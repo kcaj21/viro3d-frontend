@@ -10,7 +10,6 @@ export function useStructureIndexData(id: string) {
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
-        console.log(data.protein_structure);
         setProteinInfo(data.protein_structure);
       })
       .catch((error) => {

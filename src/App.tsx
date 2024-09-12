@@ -1,39 +1,34 @@
 import React, { useState } from "react";
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/ui/Navbar";
 import Home from "./pages/Home";
 import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
-import ResultsPage from "./pages/ResultsPage";
+import ProteinResultsPage from "./pages/ProteinResultsPage";
 import FeatureBrowserContainer from "./components/FeatureBrowserContainer";
+import VirusResultsPage from "./pages/VirusResultsPage";
 
 function App() {
-
-  const [filterParam, setFilterParam] = useState("");
-  const [searchParam, setSearchParam] = useState("");
-
   return (
     <>
       <main className="flex  flex-col">
         <Navbar />
         <div className="container min-h-screen mt-48 my-auto mx-auto">
-          {filterParam === "virus_name" ? (
-            <FeatureBrowserContainer
-              filterParam={filterParam}
-              searchParam={searchParam}
-            />
-          ) : null}
           <Routes>
-            <Route path="/" element={<Home setFilterParam={setFilterParam} setSearchParam={setSearchParam} />} />
-            <Route
-              path="/structureindex/:virus_name/:recordID"
-              element={<StructureIndex />}
-            />
+            <Route path="/" element={<Home />}></Route>
             <Route
               path="/resultspage/:filterParam/:searchParam"
-              element={<ResultsPage setSearchParam={setSearchParam} setFilterParam={setFilterParam} />}
-            />
+              element={<VirusResultsPage />}
+            ></Route>
+            <Route
+              path="/proteinresultspage/:filterParam/:searchParam"
+              element={<ProteinResultsPage />}
+            ></Route>
+            <Route
+              path="/structureindex/:filterParam/:searchParam"
+              element={<StructureIndex />}
+            ></Route>
           </Routes>
         </div>
         <Footer />

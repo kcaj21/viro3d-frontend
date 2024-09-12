@@ -63,12 +63,7 @@ let footerHeight = document.getElementById("footer")?.offsetHeight;
 let height = window.innerHeight - (navHeight + footerHeight);
 let width = window.innerWidth;
 
-const Home: React.FC = ({setSearchParam, setFilterParam}) => {
-
-  useEffect(() => {
-    setSearchParam('')
-    setFilterParam('')
-  }, []);
+const Home: React.FC = ({}) => {
 
   return (
     <>

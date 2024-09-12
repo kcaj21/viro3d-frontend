@@ -7,7 +7,7 @@ const VirusResults: React.FC = ({ data }) => {
       <ul className="px-8 py-2">
         {data.viruses?.map((virus) => (
           <Link
-            to={{ pathname: `/resultspage/virus_name/${virus.virus_name}` }} 
+            to={{ pathname: `/proteinresultspage/virus_name/${virus.virus_name}` }} 
             key={virus.virus_name}
           >
             <div

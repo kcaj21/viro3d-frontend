@@ -8,19 +8,17 @@ const StructureIndex: React.FC = ({ }) => {
   
   document.documentElement.scrollTop = 0
 
-  const { virus_name, recordID } = useParams();
+  const { filterParam, searchParam } = useParams();
 
   return (
     <>
-      {/* <div className="IndexContainer flex flex-col gap-4 text-slate-500 ">
-        <FeatureBrowserContainer filterParam={'virus_name'} searchParam={virus_name} />
-        </div> */}
+      <FeatureBrowserContainer filterParam={'virus_name'} searchParam={filterParam} />
         <div className="mt-12 flex gap-16 flex-col-1 ">
           <div className="basis-1/2">
-            <PdbeMolstar modelID={recordID} />
+            <PdbeMolstar modelID={searchParam} />
           </div>
           <div className="basis-1/2 font-extralight min-h-full">
-            <ProteinInfo recordID={recordID} />
+            <ProteinInfo recordID={searchParam} />
           </div>
         </div>
     </>

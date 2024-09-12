@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "feature-viewer-typescript/src/styles/styles.scss";
 import * as soda from "@sodaviz/soda";
@@ -26,6 +26,13 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
 
   const navigate = useNavigate()
 
+  const [highlightCoordinates, setHighlightCoordinates] = useState(null)
+
+
+
+  //check if recordID matches the family property of any of the annotations
+  // if true, take start and end coords and pass to highlight function
+
   //NEED to replace '.' in record id with '_' so that it is valid syntax for a query selector
 
   const id = annotations[0].nt_acc.replace(".", "_");
@@ -51,6 +58,10 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
   );
 
   const domainConstraint = [lowestStartCoordinate.start, highestEndCoordinate.end]
+
+  const highlightSelectedGene = (startAndEnd) => {
+    featureViewerRef.current?.highlight(startAndEnd)
+  }
 
   useEffect(() => {
     if (!featureViewerRef.current) {
@@ -115,6 +126,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
               >
             ) => navigate(`/structureindex/${d.a.virus_name}/${d.a.family}`, { state: { key: "value" } }),
           });
+          // soda.getAnnotationById("")
           soda.hoverBehavior({
             chart: this,
             annotations: all,
@@ -152,6 +164,17 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
       featureViewerRef.current.render({ annotations, start: domainConstraint[0], end: domainConstraint[1] });      
     }
   }, []);
+
+  // useEffect(() => {
+  //   console.log('new recordID')
+  //   annotations.forEach((annotation) => {
+  //     if (annotation.family === recordID) {
+  //       const coords = { start: annotation.start, end: annotation.end }
+  //       console.log(coords)
+  //       highlightSelectedGene(coords)
+  //     }
+  //   })
+  // }, [recordID]);
 
   return (
     <>
