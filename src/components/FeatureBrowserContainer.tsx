@@ -8,7 +8,7 @@ import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
 import { useParams } from "react-router-dom";
 
-const FeatureBrowserContainer: React.FC = ({filterParam, searchParam }) => {
+const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }) => {
   
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     filterParam,
@@ -21,6 +21,12 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam }) => {
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
+
+  // useEffect(() => {
+    
+  // }, [recordID]);
+
+  // document.getElementById("myTextField").focus();
 
   return genomeLoading ? (
     <>
@@ -44,13 +50,13 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam }) => {
                   <p className="text-center ">
                     {segment.coordinates[0].segment}
                   </p>
-                  <FeatureBrowser annotations={segment.coordinates} />
+                  <FeatureBrowser annotations={segment.coordinates} recordID={recordID}/>
                 </div>
               ))}
             </div>
           ) : (
             <FeatureBrowser
-              annotations={coordinates.segments[0]?.coordinates}
+              annotations={coordinates.segments[0]?.coordinates} recordID={recordID}
             />
           )}
         </div>

@@ -12,12 +12,12 @@ const StructureIndex: React.FC = ({ }) => {
 
   return (
     <>
-      <FeatureBrowserContainer filterParam={'virus_name'} searchParam={filterParam} />
-        <div className="mt-12 flex gap-16 flex-col-1 ">
+      <FeatureBrowserContainer filterParam={'virus_name'} searchParam={filterParam} recordID={searchParam} />
+        <div className="mt-12 min-h-[60vh]  flex gap-16 flex-col-1 ">
           <div className="basis-1/2">
             <PdbeMolstar modelID={searchParam} />
           </div>
-          <div className="basis-1/2 font-extralight min-h-full">
+          <div className="basis-1/2 min-w-[30vw] font-extralight ">
             <ProteinInfo recordID={searchParam} />
           </div>
         </div>

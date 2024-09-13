@@ -21,17 +21,10 @@ interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
 }
 
-const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
+const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID }) => {
   const featureViewerRef = useRef<Chart<P> | null>(null);
 
   const navigate = useNavigate()
-
-  const [highlightCoordinates, setHighlightCoordinates] = useState(null)
-
-
-
-  //check if recordID matches the family property of any of the annotations
-  // if true, take start and end coords and pass to highlight function
 
   //NEED to replace '.' in record id with '_' so that it is valid syntax for a query selector
 
@@ -61,6 +54,8 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
 
   const highlightSelectedGene = (startAndEnd) => {
     featureViewerRef.current?.highlight(startAndEnd)
+    featureViewerRef.current?.addGlyphModifier
+    console.log(featureViewerRef.current?.highlightSelection.selectAll("rect"))
   }
 
   useEffect(() => {
@@ -165,16 +160,21 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations }) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log('new recordID')
-  //   annotations.forEach((annotation) => {
-  //     if (annotation.family === recordID) {
-  //       const coords = { start: annotation.start, end: annotation.end }
-  //       console.log(coords)
-  //       highlightSelectedGene(coords)
-  //     }
-  //   })
-  // }, [recordID]);
+  //check if recordID matches the family property of any of the annotations
+  // if true, take start and end coords and pass to highlight function
+
+  useEffect(() => {
+    console.log(recordID)
+    featureViewerRef.current?.clearHighlight()
+    annotations.forEach((annotation) => {
+      if (annotation.family === recordID) {
+        const coords = { start: annotation.start, end: annotation.end, color: '#e6e6e6', opacity: 0.9 }
+        console.log(coords)
+        highlightSelectedGene(coords)
+      }
+    })
+
+  }, [recordID]);
 
   return (
     <>

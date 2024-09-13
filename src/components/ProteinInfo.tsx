@@ -1,57 +1,43 @@
-import React, {  } from "react";
+import React from "react";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
 type ProteinInfoProps = {
   recordID: string;
-}
+};
 
 const ProteinInfo: React.FC<ProteinInfoProps> = ({ recordID }) => {
-
   const { proteinInfo } = useStructureIndexData(recordID);
 
-  return !proteinInfo
-  ? (<>Loading...</>) : (
+  return !proteinInfo ? (
+    <>Loading...</>
+  ) : (
     <>
-      <table className="border-spacing-4 min-w-[100%] min-h-[100%] text-left border-separate text-2xl text-slate-500">
-        <tr>
-          <td className="text-6xl ">{proteinInfo["_id"]}</td>
-        </tr>
-        {/* <hr className=' h-0.5 w-[150%]  my-4 bg-slate-500'></hr> */}
-        <hr className=" w-[150%] my-1  border-0"></hr>
-        <tr>
-          <th className="font-light  text-5xl">plDTT Score:</th>
-          <td className="text-5xl"> {proteinInfo["colabfold_json_pLDDT"]}</td>
-        </tr>
-        <hr className=" h-0.5 w-[150%]  my-4 bg-slate-500"></hr>
-        <tr>
-          <th className="font-extralight">Protein Name:</th>
-          <td>{proteinInfo["genbank_name"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Peptide Category:</th>
-          <td>{proteinInfo["pept_cat"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Uniprot ID:</th>
-          <td>{proteinInfo["uniprot_id"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Genbank ID:</th>
-          <td>{proteinInfo["protein_id"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Nucleotide Accession Number:</th>
-          <td>{proteinInfo["nt_acc"]}</td>
-          </tr>
-          <tr>
-          <th className="font-extralight">Virus Name:</th>
-          <td>{proteinInfo["Virus name(s)"]}</td>
-        </tr>
-        <tr>
-          <th className="font-extralight">Species:</th>
-          <td>{proteinInfo["Species"]}</td>
-        </tr>
-      </table>
+      <div className="table-container min-h-[60vh] ml-8">
+        <div className="heading-container min-h-[10vh]">
+          <h1 className=" mb-12 text-slate-500 text-6xl">
+            {proteinInfo["genbank_name"]}
+          </h1>
+        </div>
+        <dl className="grid grid-cols-2 gap-16">
+          <dt className="font-light text-slate-500  text-5xl">plDTT Score:</dt>
+          <dd className="font-extralight text-slate-500  text-5xl">
+            {proteinInfo["colabfold_json_pLDDT"]}
+          </dd>
+        </dl>
+        <hr className=" h-0.5 my-8 bg-slate-500"></hr>
+        <dl className="grid grid-cols-2 text-2xl text-slate-500 gap-16">
+          <dt className="font-extralight">Uniprot ID:</dt>
+          <dd>{proteinInfo["uniprot_id"]}</dd>
+          <dt className="font-extralight">Genbank ID:</dt>
+          <dd>{proteinInfo["protein_id"]}</dd>
+          <dt className="font-extralight">Nucleotide Accession Number:</dt>
+          <dd>{proteinInfo["nt_acc"]}</dd>
+          <dt className="font-extralight">Virus Name:</dt>
+          <dd>{proteinInfo["Virus name(s)"]}</dd>
+          <dt className="font-extralight">Species:</dt>
+          <dd>{proteinInfo["Species"]}</dd>
+        </dl>
+      </div>
     </>
   );
 };

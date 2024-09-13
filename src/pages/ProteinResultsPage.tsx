@@ -45,10 +45,10 @@ const ResultsPage: React.FC = () => {
         </div>
       ) : (
         <div className="min-h-screen">
-          <FeatureBrowserContainer
-            filterParam={filterParam}
-            searchParam={searchParam}
-          />
+              {filterParam !== 'sequencematch' ? (<FeatureBrowserContainer
+                filterParam={filterParam}
+                searchParam={searchParam}
+              />) : (null)}
           <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 py-8 break-words">

@@ -42,7 +42,7 @@ const PDBeMolStar: React.FC<Model> = ({modelID}) => {
         reactive: true,
         hideStructure: ['het', 'water', 'nonStandard', 'carbs', 'coarse'],
         //remove comment-out on line below to disable ball and stick from showing when you select a residue
-        // granularity: 'residueInstances'
+        granularity: 'residueInstances'
       }
 
       if (viewerContainerRef.current === null) return
