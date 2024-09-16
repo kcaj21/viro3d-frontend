@@ -5,6 +5,7 @@ import ProteinStructureResults from "../components/ProteinStructureResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
+import { filter } from "lodash";
 
 const ResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,10 +46,18 @@ const ResultsPage: React.FC = () => {
         </div>
       ) : (
         <div className="min-h-screen">
-              {filterParam !== 'sequencematch' ? (<FeatureBrowserContainer
-                filterParam={filterParam}
-                searchParam={searchParam}
-              />) : (null)}
+          {filterParam === "virus_name" ? (
+            <FeatureBrowserContainer
+              filterParam={filterParam}
+              searchParam={searchParam}
+            />
+          ) : null}
+          {filterParam === "genbankid" ? (
+            <FeatureBrowserContainer
+              filterParam={'virus_name'}
+              searchParam={data.protein_structures[0]['Virus name(s)']}
+            />
+          ) : null}
           <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 py-8 break-words">
