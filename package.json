@@ -12,8 +12,10 @@
   "dependencies": {
     "@sodaviz/soda": "^0.13.1",
     "@types/d3": "^7.4.3",
+    "@types/lodash": "^4.17.7",
     "d3": "^7.4.4",
     "feature-viewer-typescript": "^2.3.20",
+    "lodash": "^4.17.21",
     "molstar": "^4.4.1",
     "pdbe-molstar": "^3.2.0",
     "react": "^18.3.1",

@@ -19,7 +19,7 @@ const VirusResults: React.FC = ({ data }) => {
                 </li>
                 </div>
               <div className="basis-1/4 py-4 text-3xl font-thin border-l-2">
-                <li className="px-8 text-[#4a95c0] text-center font-light">Structures:</li>
+                <li className="px-8 text-[#4a95c0] text-center font-light">Structures: {virus.structure_count}</li>
               </div>
             </div>
           </Link>

@@ -6,6 +6,7 @@ type LoadingSpinnerProps = {
 }
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ color, size }) => {
+
   return (
     <>
       <svg

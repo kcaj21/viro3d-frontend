@@ -7,7 +7,7 @@ import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 
 const ResultsPage: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { filterParam, searchParam } = useParams();
 
