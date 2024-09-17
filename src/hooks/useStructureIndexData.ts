@@ -9,8 +9,8 @@ export function useStructureIndexData(id: string) {
     fetch(`http://localhost:8000/recordid/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setIsLoading(false);
         setProteinInfo(data.protein_structure);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);

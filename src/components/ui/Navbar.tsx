@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
   const [suggestion, setSuggestion] = useState("");
   const [filterParam, setFilterParam] = useState("viruses");
 
-  const { data } = useAutocomplete(suggestion, 0);
+  const { data } = useAutocomplete(filterParam, suggestion, 0);
 
   const ref = useRef();
 
@@ -91,8 +91,9 @@ const Navbar: React.FC = () => {
               className="bg-[#f9f9f9] text-slate-500 pr-6 rounded border-r-2 text-center"
             >
               <option value="viruses">Virus Name</option>
+              <option value="proteinname">Protein Name</option>
               <option value="sequencematch">Sequence</option>
-              <option value="genbankid">GenbankID</option>
+              <option value="genbankid">Protein ID</option>
             </select>
             <div className="input-container relative w-full">
               <div className="w-full flex justify-between">
@@ -131,6 +132,26 @@ const Navbar: React.FC = () => {
                     >
                       <li className="hover:bg-slate-100 border-0 rounded-lg">
                         {virus.virus_name}
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+              ) : null}
+              {isMenuOpen && filterParam === "proteinname" && suggestion && data ? (
+                <ul
+                  ref={ref}
+                  className="autocomplete w-full  absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
+                >
+                  {data.protein_structures?.map((protein) => (
+                    <Link
+                      onClick={clearSuggestion}
+                      to={{
+                        pathname: `/proteinresultspage/proteinname/${protein.genbank_name}`,
+                      }}
+                      key={protein.genbank_name}
+                    >
+                      <li className="hover:bg-slate-100 border-0 rounded-lg">
+                        {protein.genbank_name}
                       </li>
                     </Link>
                   ))}

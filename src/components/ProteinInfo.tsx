@@ -1,4 +1,5 @@
 import React from "react";
+import PDBeMolStar from "./ui/PdbeMolstar";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
 type ProteinInfoProps = {
@@ -6,7 +7,7 @@ type ProteinInfoProps = {
 };
 
 const ProteinInfo: React.FC<ProteinInfoProps> = ({ recordID }) => {
-  const { proteinInfo } = useStructureIndexData(recordID);
+  const { proteinInfo} = useStructureIndexData(recordID);
 
   return !proteinInfo ? (
     <>Loading...</>
@@ -37,7 +38,8 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({ recordID }) => {
           <dt className="font-extralight">Species:</dt>
           <dd>{proteinInfo["Species"]}</dd>
         </dl>
-      </div>
+        </div>
+        
     </>
   );
 };

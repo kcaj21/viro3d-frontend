@@ -5,7 +5,6 @@ import ProteinStructureResults from "../components/ProteinStructureResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
-import { filter } from "lodash";
 
 const ResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

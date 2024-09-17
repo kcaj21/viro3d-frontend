@@ -6,7 +6,7 @@ type Model = {
   modelID: String;
 }
 
-const PDBeMolStar: React.FC<Model> = ({modelID}) => {
+const PDBeMolStar: React.FC = ({modelID}) => {
 
   // const {recordID} = useParams()
 
@@ -16,6 +16,7 @@ const PDBeMolStar: React.FC<Model> = ({modelID}) => {
   // be called twice in a row, which might result in unexpected behavior.
   
   useEffect(() => {
+
     function init() {
       const url = `http://localhost:8000/pdb/CF-${modelID}_relaxed.pdb`
 
