@@ -21,10 +21,15 @@ interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
 }
 
-const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID }) => {
+const FeatureBrowser: React.FC<CustomRenderParams> = ({
+  annotations,
+  recordID,
+}) => {
+  const [highlightedGene, setHighlightedGene] = useState([]);
+
   const featureViewerRef = useRef<Chart<P> | null>(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //NEED to replace '.' in record id with '_' so that it is valid syntax for a query selector
 
@@ -38,24 +43,58 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
   let region = all.filter((a) => a.pept_cat == "region");
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
-  const highestEndCoordinate = annotations.reduce(
-    (prev, current) => {
-      return prev.end > current.end ? prev : current
+  const highestEndCoordinate = annotations.reduce((prev, current) => {
+    return prev.end > current.end ? prev : current;
+  });
+
+  const lowestStartCoordinate = annotations.reduce((prev, current) => {
+    return prev.start < current.start ? prev : current;
+  });
+
+  const domainConstraint = [
+    lowestStartCoordinate.start,
+    highestEndCoordinate.end,
+  ];
+
+  //if glyph is null after trying to get it with id, start a loop and append _1, _2 etc until hitting a null glyph, then break. Add the non-null glyphs to an array
+  //at the end of the function, loop over the array and add the fill to them
+
+  async function highlightSelectedGene() {
+    
+    if (highlightedGene) {
+      highlightedGene.forEach((gene) => {
+        console.log(gene["oldStyle"]);
+        gene["rect"]?.setAttribute("style", `${gene["oldStyle"]}`);
+      });
     }
-  );
 
-  const lowestStartCoordinate = annotations.reduce(
-    (prev, current) => {
-      return prev.start < current.start ? prev : current
+    let glyphs = [];
+    let glyph = document.getElementById(recordID);
+
+    if (!glyph) {
+      let splicedGenes = annotations
+        .filter((a) => a.family === recordID)
+        .filter((a) => a.join === "none");
+      splicedGenes.forEach((gene) => {
+        let tmp = document.getElementById(gene["id"]);
+        let rect = tmp?.querySelector("rect");
+        let oldStyle = rect?.getAttribute(`style`);
+        rect?.setAttribute("style", `fill: #41d3a2; `);
+        glyphs.push({
+          rect: rect,
+          oldStyle: oldStyle,
+        });
+      });
+    } else {
+      let rect = glyph?.querySelector("rect");
+      let oldStyle = await rect?.getAttribute(`style`);
+      rect?.setAttribute("style", `fill: #41d3a2; `);
+      glyphs.push({
+        rect: rect,
+        oldStyle: oldStyle,
+      });
     }
-  );
-
-  const domainConstraint = [lowestStartCoordinate.start, highestEndCoordinate.end]
-
-  const highlightSelectedGene = (startAndEnd) => {
-    featureViewerRef.current?.highlight(startAndEnd)
-    featureViewerRef.current?.addGlyphModifier
-    console.log(featureViewerRef.current?.highlightSelection.selectAll("rect"))
+    setHighlightedGene(glyphs);
   }
 
   useEffect(() => {
@@ -75,33 +114,33 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
             // soda.rectangle({
             chart: this,
             annotations: protein,
-            fillColor: '#ACCBE1',
+            fillColor: "#ACCBE1",
             strokeColor: "#64748b",
             orientation: (d) => d.a.strand,
             chevronWidth: 7,
             chevronSpacing: 5,
-            chevronStrokeColor:'#64748b'
+            chevronStrokeColor: "#64748b",
           });
           soda.chevronRectangle({
             chart: this,
             annotations: region,
-            fillColor: '#56b3e6',
+            fillColor: "#56b3e6",
             strokeColor: "#64748b",
             orientation: (d) => d.a.strand,
             chevronWidth: 7,
             chevronSpacing: 5,
-            chevronStrokeColor:'#64748b'
+            chevronStrokeColor: "#64748b",
           });
           soda.chevronRectangle({
             chart: this,
             annotations: mat_pept,
-            fillColor: '#49b8b0',
+            fillColor: "#25cfd8",
             strokeColor: "#64748b",
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,
             chevronWidth: 7,
             // chevronFillColor: '#64748b',
-            chevronStrokeColor:'#64748b'
+            chevronStrokeColor: "#64748b",
           });
         },
         postRender() {
@@ -119,7 +158,10 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
                 CustomAnnotation,
                 Chart<CustomRenderParams>
               >
-            ) => navigate(`/structureindex/${d.a.virus_name}/${d.a.family}`, { state: { key: "value" } }),
+            ) =>
+              navigate(`/structureindex/${d.a.virus_name}/${d.a.family}`, {
+                state: { key: "value" },
+              }),
           });
           // soda.getAnnotationById("")
           soda.hoverBehavior({
@@ -132,8 +174,8 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
           });
           soda.tooltip({
             chart: this,
-            textColor: '#FFFFFF',
-            backgroundColor: '#64748b',
+            textColor: "#FFFFFF",
+            backgroundColor: "#64748b",
             opacity: 0.7,
             annotations: all,
             text: (d) => d.a.gene_name,
@@ -144,7 +186,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
             selector: "left-join",
             y1: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
             y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 24,
-            strokeColor: '#64748b'
+            strokeColor: "#64748b",
           });
           soda.line({
             chart: this,
@@ -152,11 +194,15 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
             selector: "right-join",
             y1: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 24,
             y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
-            strokeColor: '#64748b'
+            strokeColor: "#64748b",
           });
         },
       });
-      featureViewerRef.current.render({ annotations, start: domainConstraint[0], end: domainConstraint[1] });      
+      featureViewerRef.current.render({
+        annotations,
+        start: domainConstraint[0],
+        end: domainConstraint[1],
+      });
     }
   }, []);
 
@@ -164,16 +210,21 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({ annotations, recordID })
   // if true, take start and end coords and pass to highlight function
 
   useEffect(() => {
-    console.log(recordID)
-    featureViewerRef.current?.clearHighlight()
-    annotations.forEach((annotation) => {
-      if (annotation.family === recordID) {
-        const coords = { start: annotation.start, end: annotation.end, color: '#e6e6e6', opacity: 0.9 }
-        console.log(coords)
-        highlightSelectedGene(coords)
-      }
-    })
+    // featureViewerRef.current?.clearHighlight();
+    // annotations.forEach((annotation) => {
+    //   if (annotation.family === recordID) {
+    //     const coords = {
+    //       start: annotation.start,
+    //       end: annotation.end,
+    //       color: "#e6e6e6",
+    //       opacity: 0.9,
+    //     };
+    //     highlightSelectedGene(coords);
 
+    //   }
+
+    // });
+    highlightSelectedGene();
   }, [recordID]);
 
   return (
