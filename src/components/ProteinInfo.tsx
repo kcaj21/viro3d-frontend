@@ -11,7 +11,11 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({ proteinInfo }) => {
     const cont = await document.getElementById('segment-container');
     const element =  await document.getElementById(proteinInfo?.nt_acc);
     const rect =   await element?.getBoundingClientRect();
-    cont?.scrollTo((rect?.x - 500), 0)
+    cont?.scrollTo({
+      top: 0,
+      left: rect?.x -500,
+      behavior: "smooth",
+    })
   }
 
   useEffect(() => {
