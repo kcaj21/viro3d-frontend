@@ -6,7 +6,6 @@ import Legend from "./ui/Legend";
 import ControlsPopUp from "./ui/ControlsPopUp";
 import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
-import { useParams } from "react-router-dom";
 
 const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }) => {
   
@@ -22,11 +21,8 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  // useEffect(() => {
-    
-  // }, [recordID]);
 
-  // document.getElementById("myTextField").focus();
+
 
   return genomeLoading ? (
     <>
@@ -41,10 +37,11 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
         <div className="relative">
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
           {coordinates.segments?.length > 1 ? (
-            <div className="custom-scrollbar overflow-x-auto flex flex-grow">
+            <div id='segment-container' className="custom-scrollbar overflow-x-auto flex flex-grow">
               {coordinates.segments?.map((segment) => (
                 <div
                   key={segment.coordinates[0].segment}
+                  id={segment.coordinates[0].nt_acc}
                   className="border-r-2 border-[#bec4cc]"
                 >
                   <p className="text-center ">
@@ -61,7 +58,7 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
           )}
         </div>
         <div className="mt-1 flex flex-row justify-between">
-          <Legend />
+          <Legend filterParam={filterParam} />
           <div className="flex flex-row gap-4 ">
             <button 
               onClick={handleDownload} 

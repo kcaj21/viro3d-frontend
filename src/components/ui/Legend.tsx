@@ -15,9 +15,13 @@ const Legend: React.FC = () => {
             <span className="">Region</span>
           </div>
           <div className="inline-flex items-center">
-            <span className="size-2 inline-block bg-[#49b9b0] rounded-full me-2"></span>
+            <span className="size-2 inline-block bg-[#91a8eb] rounded-full me-2"></span>
             <span className="">Mature Peptide</span>
-          </div>
+        </div>
+        <div className="inline-flex items-center">
+            <span className="size-2 inline-block bg-[#41d4a2] rounded-full me-2"></span>
+            <span className="">Currently Selected Protein</span>
+        </div>
         </div>
     </>
   );

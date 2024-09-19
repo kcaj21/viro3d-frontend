@@ -1,13 +1,22 @@
-import React from "react";
-import PDBeMolStar from "./ui/PdbeMolstar";
+import React, {useEffect} from "react";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 
 type ProteinInfoProps = {
   recordID: string;
 };
 
-const ProteinInfo: React.FC<ProteinInfoProps> = ({ recordID }) => {
-  const { proteinInfo} = useStructureIndexData(recordID);
+const ProteinInfo: React.FC<ProteinInfoProps> = ({ proteinInfo }) => {
+  
+  async function autoScroll() {
+    const cont = await document.getElementById('segment-container');
+    const element =  await document.getElementById(proteinInfo?.nt_acc);
+    const rect =   await element?.getBoundingClientRect();
+    cont?.scrollTo((rect?.x - 500), 0)
+  }
+
+  useEffect(() => {
+    autoScroll()
+  }, []);
 
   return !proteinInfo ? (
     <>Loading...</>

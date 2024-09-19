@@ -134,7 +134,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
           soda.chevronRectangle({
             chart: this,
             annotations: mat_pept,
-            fillColor: "#25cfd8",
+            fillColor: "#91a8eb",
             strokeColor: "#64748b",
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,

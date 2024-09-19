@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { debounce } from "lodash";
-
 
 export function useAutocomplete(filterParam: string, id: string, currentpage: number) {
   const [isLoading, setIsLoading] = useState(true);
