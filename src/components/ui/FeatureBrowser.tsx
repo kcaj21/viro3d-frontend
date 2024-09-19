@@ -56,29 +56,31 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     highestEndCoordinate.end,
   ];
 
-  //if glyph is null after trying to get it with id, start a loop and append _1, _2 etc until hitting a null glyph, then break. Add the non-null glyphs to an array
-  //at the end of the function, loop over the array and add the fill to them
-
   async function highlightSelectedGene() {
+
+    //check to see if there is already a gene highlighted and stored in state
     
     if (highlightedGene) {
-      highlightedGene.forEach((gene) => {
+       highlightedGene.forEach((gene) => {
         console.log(gene["oldStyle"]);
         gene["rect"]?.setAttribute("style", `${gene["oldStyle"]}`);
       });
     }
 
     let glyphs = [];
+
+    //the next line needs to be more efficient, its instantiaiting a null variable as a way of checking if the gene is spliced or not which is too expensive
     let glyph = document.getElementById(recordID);
 
+    //checking if glyph is null and if so, assuming it is spliced and now getting all the genes in the spliced gene by ID
     if (!glyph) {
       let splicedGenes = annotations
         .filter((a) => a.family === recordID)
         .filter((a) => a.join === "none");
-      splicedGenes.forEach((gene) => {
+      splicedGenes.forEach(async (gene) => {
         let tmp = document.getElementById(gene["id"]);
         let rect = tmp?.querySelector("rect");
-        let oldStyle = rect?.getAttribute(`style`);
+        let oldStyle = await rect?.getAttribute(`style`);
         rect?.setAttribute("style", `fill: #41d3a2; `);
         glyphs.push({
           rect: rect,
@@ -210,20 +212,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
   // if true, take start and end coords and pass to highlight function
 
   useEffect(() => {
-    // featureViewerRef.current?.clearHighlight();
-    // annotations.forEach((annotation) => {
-    //   if (annotation.family === recordID) {
-    //     const coords = {
-    //       start: annotation.start,
-    //       end: annotation.end,
-    //       color: "#e6e6e6",
-    //       opacity: 0.9,
-    //     };
-    //     highlightSelectedGene(coords);
-
-    //   }
-
-    // });
     highlightSelectedGene();
   }, [recordID]);
 
