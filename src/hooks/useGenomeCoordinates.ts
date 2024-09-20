@@ -4,7 +4,8 @@ export function useGenomeCoordinates(filterparam: string, id: string,) {
   const [isLoading, setIsLoading] = useState(true);
   const [coordinates, setCoordinates] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
+    setIsLoading(true);
     fetch(
         `http://localhost:8000/genome_coordinates/${filterparam}/${id}`    
     )

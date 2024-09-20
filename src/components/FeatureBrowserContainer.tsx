@@ -21,9 +21,6 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-
-
-
   return genomeLoading ? (
     <>
       <div className="flex items-center justify-center gap-12">
@@ -53,7 +50,7 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
             </div>
           ) : (
             <FeatureBrowser
-              annotations={coordinates.segments[0]?.coordinates} recordID={recordID}
+              annotations={coordinates.segments[0].coordinates} recordID={recordID}
             />
           )}
         </div>
