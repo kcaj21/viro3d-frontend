@@ -19,6 +19,7 @@ interface CustomAnnotation extends soda.Annotation {
 
 interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
+  recordID: string;
 }
 
 const FeatureBrowser: React.FC<CustomRenderParams> = ({
@@ -42,6 +43,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
   let protein = all.filter((a) => a.pept_cat == "protein");
   let region = all.filter((a) => a.pept_cat == "region");
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
+  let selectedProtein = annotations.filter((a) => a.family === recordID)
 
   const highestEndCoordinate = annotations.reduce((prev, current) => {
     return prev.end > current.end ? prev : current;
@@ -99,6 +101,30 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     setHighlightedGene(glyphs);
   }
 
+  //function zooms in on selected proteins if the genome exceeds 30kb in length
+  const autoZoom = () => {
+    //finds selected protein by taking the recordID and filtering annotations for objetcs that match by the family property
+    //it subtracts the start coordinate from the end coordinate and divides it by 2
+    let boundary = (30000 - (selectedProtein[0].end - selectedProtein[0].start)) / 2
+    // the boundary variable is calculated this way so that the genome browser wont be fully zoomed in on just the selected protein, it acts as a buffer zone to ensure some other annotations are still visible on either side
+    let start = selectedProtein[0].start - boundary
+    let end = selectedProtein[0].start + boundary
+    // if the start coordinate is < 30000, it will result in a negative number, so in this case start is set to 0
+    if (start < 0) {
+      return {
+        annotations,
+        start: 0,
+        end: end
+      }
+    } else {
+      return {
+        annotations,
+        start: start,
+        end: end
+      }
+    }
+  }
+
   useEffect(() => {
     if (!featureViewerRef.current) {
       featureViewerRef.current = new soda.Chart<CustomRenderParams>({
@@ -146,8 +172,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
           });
         },
         postRender() {
-          // soda.bind()
-          // d3.select('[id="AAR31562.1_100"]').style("stroke", "#49b8b0")
           soda.clickBehavior({
             chart: this,
             annotations: all,
@@ -200,11 +224,23 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
           });
         },
       });
-      featureViewerRef.current.render({
-        annotations,
-        start: domainConstraint[0],
-        end: domainConstraint[1],
-      });
+
+      // remove comment marks to use autoZoom
+      // if (recordID && domainConstraint[1] > 50000) {
+      //   featureViewerRef.current.render(autoZoom(recordID))
+      // } else {
+      //   featureViewerRef.current.render({
+      //     annotations,
+      //     start: domainConstraint[0],
+      //     end: domainConstraint[1],
+      //   });
+      // }
+
+              featureViewerRef.current.render({
+          annotations,
+          start: domainConstraint[0],
+          end: domainConstraint[1],
+        });
     }
   }, []);
 
