@@ -1,25 +1,26 @@
-import React, {useEffect} from "react";
-import { useStructureIndexData } from "../hooks/useStructureIndexData";
+import React, { useEffect } from "react";
 
 type ProteinInfoProps = {
   recordID: string;
 };
 
-const ProteinInfo: React.FC<ProteinInfoProps> = ({ proteinInfo }) => {
-  
+const ProteinInfo: React.FC<ProteinInfoProps> = ({
+  proteinInfo,
+  defaultModel,
+}) => {
   async function autoScroll() {
-    const cont = await document.getElementById('segment-container');
-    const element =  await document.getElementById(proteinInfo?.nt_acc);
-    const rect =   await element?.getBoundingClientRect();
+    const cont = await document.getElementById("segment-container");
+    const element = await document.getElementById(proteinInfo?.nt_acc);
+    const rect = await element?.getBoundingClientRect();
     cont?.scrollTo({
       top: 0,
       left: rect?.x -500,
       behavior: "smooth",
-    })
+    });
   }
 
   useEffect(() => {
-    autoScroll()
+    autoScroll();
   }, []);
 
   return !proteinInfo ? (
@@ -32,12 +33,25 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({ proteinInfo }) => {
             {proteinInfo["genbank_name"]}
           </h1>
         </div>
-        <dl className="grid grid-cols-2 gap-16">
-          <dt className="font-light text-slate-500  text-5xl">plDTT Score:</dt>
-          <dd className="font-extralight text-slate-500  text-5xl">
-            {proteinInfo["colabfold_json_pLDDT"]}
-          </dd>
-        </dl>
+        {defaultModel === "CF" ? (
+          <dl className="grid grid-cols-2 gap-16">
+            <dt className="font-light text-slate-500  text-5xl">
+              ColabFold plDTT Score:
+            </dt>
+            <dd className="font-extralight text-slate-500  text-5xl">
+              {proteinInfo["colabfold_json_pLDDT"]}
+            </dd>
+          </dl>
+        ) : (
+          <dl className="grid grid-cols-2 gap-16">
+            <dt className="font-light text-slate-500  text-5xl">
+              ESMFold plDTT Score:
+            </dt>
+            <dd className="font-extralight text-slate-500  text-5xl">
+              {proteinInfo["esmfold_log_pLDDT"]}
+            </dd>
+          </dl>
+        )}
         <hr className=" h-0.5 my-8 bg-slate-500"></hr>
         <dl className="grid grid-cols-2 text-2xl text-slate-500 gap-16">
           <dt className="font-extralight">Uniprot ID:</dt>
@@ -51,8 +65,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({ proteinInfo }) => {
           <dt className="font-extralight">Species:</dt>
           <dd>{proteinInfo["Species"]}</dd>
         </dl>
-        </div>
-        
+      </div>
     </>
   );
 };

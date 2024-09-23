@@ -1,4 +1,4 @@
-import React, { useEffect, createRef, } from 'react';
+import React, { useEffect, createRef, useState } from 'react';
 import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
 import { InitParams } from 'pdbe-molstar/lib/spec';
 
@@ -6,9 +6,14 @@ type Model = {
   modelID: String;
 }
 
-const PDBeMolStar: React.FC = ({modelID}) => {
+const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
+
+  // const [predictionModel, setPredictionModel] = useState(defaultModel)
+
 
   // const {recordID} = useParams()
+
+
 
   const viewerContainerRef = createRef<HTMLDivElement>()
 
@@ -18,7 +23,7 @@ const PDBeMolStar: React.FC = ({modelID}) => {
   useEffect(() => {
 
     function init() {
-      const url = `http://localhost:8000/pdb/CF-${modelID}_relaxed.pdb`
+      const url = `http://localhost:8000/pdb/${defaultModel}-${modelID}_relaxed.pdb`
 
       const pluginInstance = new PDBeMolstarPlugin()
 
@@ -60,7 +65,7 @@ const PDBeMolStar: React.FC = ({modelID}) => {
         <div className="relative h-[100%] w-full max-height-full max-width-full  ">
               <div ref={viewerContainerRef} style={{border: "0px"}}  >  
               </div>
-        </div>   
+        </div>
     </>
   );
 };

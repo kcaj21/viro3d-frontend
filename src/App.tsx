@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/ui/Navbar";
@@ -6,7 +5,6 @@ import Home from "./pages/Home";
 import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
 import ProteinResultsPage from "./pages/ProteinResultsPage";
-import FeatureBrowserContainer from "./components/FeatureBrowserContainer";
 import VirusResultsPage from "./pages/VirusResultsPage";
 
 function App() {
