@@ -5,11 +5,18 @@ import ProteinStructureResults from "../components/ProteinStructureResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
+import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 
 const ResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { filterParam, searchParam } = useParams();
+
+  const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
+    filterParam,
+    searchParam
+  );
+
 
   const { data, resultCount, isLoading } = useResultsPageData(
     filterParam,
@@ -46,17 +53,19 @@ const ResultsPage: React.FC = () => {
       ) : (
         <div className="min-h-screen">
           {filterParam === "virus_name" ? (
-            <FeatureBrowserContainer
-              filterParam={filterParam}
-              searchParam={searchParam}
+                <FeatureBrowserContainer
+                  searchParam={searchParam}
+                  filterParam={filterParam}
+              coordinates={coordinates}
+              genomeLoading={genomeLoading}
             />
           ) : null}
-          {filterParam === "genbankid" ? (
+          {/* {filterParam === "genbankid" ? (
             <FeatureBrowserContainer
               filterParam={'virus_name'}
               searchParam={data.protein_structures[0]['Virus name(s)']}
             />
-          ) : null}
+          ) : null} */}
           <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 py-8 break-words">

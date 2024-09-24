@@ -7,16 +7,19 @@ type ProteinInfoProps = {
 const ProteinInfo: React.FC<ProteinInfoProps> = ({
   proteinInfo,
   defaultModel,
+  nt_acc
 }) => {
   async function autoScroll() {
     const cont = await document.getElementById("segment-container");
-    const element = await document.getElementById(proteinInfo?.nt_acc);
+    console.log(nt_acc)
+    const element = await document.getElementById(proteinInfo.nt_acc);
     const rect = await element?.getBoundingClientRect();
-    cont?.scrollTo({
-      top: 0,
-      left: rect?.x -500,
-      behavior: "smooth",
-    });
+
+      cont?.scrollTo({
+        top: 0,
+        left: rect?.x - 500,
+        behavior: "smooth",
+      });
   }
 
   useEffect(() => {

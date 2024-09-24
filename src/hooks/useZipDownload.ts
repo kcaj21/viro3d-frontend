@@ -4,10 +4,10 @@ export function useZipDownload(id: string) {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleDownload = async () => {
+    const handleDownload = async (format: string) => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:8000/zip/${id}`);
+        const response = await fetch(`http://localhost:8000/zip/${id}/${format}`);
         if (!response.ok) {
           throw new Error('Failed to download PDBs');
         }

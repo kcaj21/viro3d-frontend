@@ -4,7 +4,7 @@ const InfoIcon: React.FC = () => {
   return (
     <>
       <svg
-              className=" fill-slate-500"
+              className=" fill-slate-500 hover:fill-[#56b3e6]"
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"

@@ -8,13 +8,6 @@ type Model = {
 
 const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
 
-  // const [predictionModel, setPredictionModel] = useState(defaultModel)
-
-
-  // const {recordID} = useParams()
-
-
-
   const viewerContainerRef = createRef<HTMLDivElement>()
 
   // In debug mode of react's strict mode, this code will
@@ -23,7 +16,7 @@ const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
   useEffect(() => {
 
     function init() {
-      const url = `http://localhost:8000/pdb/${defaultModel}-${modelID}_relaxed.pdb`
+      const url = `http://localhost:8000/pdb/${defaultModel}-${modelID}.cif`
 
       const pluginInstance = new PDBeMolstarPlugin()
 
@@ -31,15 +24,15 @@ const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
       const options: Partial<InitParams> = {
         customData: {
           url: url,
-          format: "pdb",
+          format: "cif",
           binary: false,
         },
         hideCanvasControls: [
           'selection',
           'animation',
           'expand',
-          'controlToggle',
-          'controlInfo'
+          // 'controlToggle',
+          // 'controlInfo'
         ],
         alphafoldView: true,
         bgColor: { r: 242, g: 242, b: 242 },
@@ -55,7 +48,6 @@ const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
 
       //Call render method to display the 3D view
       pluginInstance.render(viewerContainerRef.current, options)
-
     }
     init()
   }, [modelID])
@@ -63,7 +55,7 @@ const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
   return (
     <>
         <div className="relative h-[100%] w-full max-height-full max-width-full  ">
-              <div ref={viewerContainerRef} style={{border: "0px"}}  >  
+              <div id='pdbeMolstar' ref={viewerContainerRef} style={{border: "0px"}}  >  
               </div>
         </div>
     </>

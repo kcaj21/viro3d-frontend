@@ -4,9 +4,15 @@ import PdbeMolstar from "../components/ui/PdbeMolstar";
 import ProteinInfo from "../components/ProteinInfo";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
+import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 
 const StructureIndex: React.FC = ({}) => {
   const { filterParam, searchParam } = useParams();
+
+  const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
+    'virus_name',
+    filterParam
+  );
 
   const {
     proteinInfo,
@@ -24,9 +30,11 @@ const StructureIndex: React.FC = ({}) => {
       <FeatureBrowserContainer
         filterParam={"virus_name"}
         searchParam={filterParam}
+        coordinates={coordinates}
+        genomeLoading={genomeLoading}
         recordID={searchParam}
       />
-      {!proteinInfo ? (
+      {isLoading && genomeLoading ?  (
         <p>Loading...</p>
       ) : (
         <div className="mt-12 min-h-[60vh]  flex gap-16 flex-col-1 ">
@@ -36,7 +44,7 @@ const StructureIndex: React.FC = ({}) => {
               {isESMFoldModelPresent ? (
                 <div>
                   <button
-                    className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
+                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
                     onClick={handleESMFoldClick}
                   >
                     Switch to ESMFold Model

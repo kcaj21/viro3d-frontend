@@ -7,15 +7,22 @@ import ControlsPopUp from "./ui/ControlsPopUp";
 import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
 
-const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }) => {
-  
-  const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
-    filterParam,
-    searchParam
-  );
+const FeatureBrowserContainer: React.FC = ({
+  coordinates,
+  genomeLoading,
+  searchParam,
+  recordID,
+}) => {
+
+  //move fetch to parent component
+  // const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
+  //   filterParam,
+  //   searchParam
+  // );
 
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  const { isLoading: downloadLoading, handleDownload } = useZipDownload(searchParam);
+  const { isLoading: downloadLoading, handleDownload } =
+    useZipDownload(searchParam);
 
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
@@ -25,7 +32,7 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
     <>
       <div className="flex items-center justify-center gap-12">
         <h2 className="text-5xl text-slate-500">Loading Genome Browser...</h2>
-        <LoadingSpinner color={"#4a95c0"} size={"5"} />
+        {/* <LoadingSpinner color={"#4a95c0"} size={"5"} /> */}
       </div>
     </>
   ) : (
@@ -34,7 +41,10 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
         <div className="relative">
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
           {coordinates.segments?.length > 1 ? (
-            <div id='segment-container' className="custom-scrollbar overflow-x-auto flex flex-grow">
+            <div
+              id="segment-container"
+              className="custom-scrollbar overflow-x-auto flex flex-grow"
+            >
               {coordinates.segments?.map((segment) => (
                 <div
                   key={segment.coordinates[0].segment}
@@ -44,26 +54,43 @@ const FeatureBrowserContainer: React.FC = ({filterParam, searchParam, recordID }
                   <p className="text-center ">
                     {segment.coordinates[0].segment}
                   </p>
-                  <FeatureBrowser annotations={segment.coordinates} recordID={recordID}/>
+                  <FeatureBrowser
+                    annotations={segment.coordinates}
+                    recordID={recordID}
+                  />
                 </div>
               ))}
             </div>
           ) : (
             <FeatureBrowser
-              annotations={coordinates.segments[0].coordinates} recordID={recordID}
+              annotations={coordinates.segments[0].coordinates}
+              recordID={recordID}
             />
           )}
         </div>
         <div className="mt-1 flex flex-row justify-between">
-          <Legend filterParam={filterParam} />
+          <Legend />
           <div className="flex flex-row gap-4 ">
-            <button 
-              onClick={handleDownload} 
-              disabled={downloadLoading}
-              className="hover:text-[#56b3e6]"
-            >
-              {downloadLoading ? 'Downloading...' : 'Download PDBs'}
-            </button>
+            {downloadLoading ? (
+              <p>Downloading...</p>
+            ) : (
+              <>
+                <button
+                  onClick={() => handleDownload("_relaxed.pdb")}
+                  disabled={downloadLoading}
+                  className="hover:text-[#56b3e6]"
+                >
+                Download PDBs
+                </button>
+                <button
+                  onClick={() => handleDownload(".cif")}
+                  disabled={downloadLoading}
+                  className="hover:text-[#56b3e6]"
+                >
+                Download mmCIFs
+                </button>
+              </>
+            )}
             <button
               onClick={handlePopUp}
               className="block"
