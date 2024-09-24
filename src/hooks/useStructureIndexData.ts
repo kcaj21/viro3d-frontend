@@ -22,7 +22,7 @@ export function useStructureIndexData(id: string) {
       .then( async (data) => {
         setProteinInfo(data.protein_structure);
         if(
-          await data.protein_structure.esmfold_log_pLDDT >
+          await data.protein_structure.esmfold_log_pLDDT > 50 && data.protein_structure.esmfold_log_pLDDT >
           data.protein_structure.colabfold_json_pLDDT
         ) {
           setDefaultModel('EF');
