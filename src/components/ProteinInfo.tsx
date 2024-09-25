@@ -55,10 +55,10 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             </dl>
           ) : (
             <dl className="grid grid-cols-2 gap-16">
-              <dt className="font-light text-slate-500  text-5xl">
+              <dt className="font-light text-slate-500  text-4xl">
                 ESMFold plDTT Score:
               </dt>
-              <dd className="font-extralight text-slate-500  text-5xl">
+              <dd className="font-extralight text-slate-500  text-4xl">
                 {proteinInfo["esmfold_log_pLDDT"]}
               </dd>
             </dl>
