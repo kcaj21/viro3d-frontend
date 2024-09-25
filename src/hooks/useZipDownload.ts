@@ -7,7 +7,7 @@ export function useZipDownload(id: string) {
     const handleDownload = async (format: string) => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:8000/zip/${id}/${format}`);
+        const response = await fetch(`http://viro3d-dev.cvr.gla.ac.uk/api/zip/${id}/${format}`);
         if (!response.ok) {
           throw new Error('Failed to download PDBs');
         }

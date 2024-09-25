@@ -6,7 +6,7 @@ export function useGenomeCoordinates(id: string) {
 
   useEffect(() => {
     fetch(
-      `http://localhost:8000/sequencematch/${id}`
+      `http://viro3d-dev.cvr.gla.ac.uk/api/sequencematch/${id}`
     )
       .then((res) => res.json())
       .then((data) => {

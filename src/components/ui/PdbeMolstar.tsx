@@ -16,7 +16,7 @@ const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
   useEffect(() => {
 
     function init() {
-      const url = `http://localhost:8000/pdb/${defaultModel}-${modelID}.cif`
+      const url = `http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${modelID}.cif`
 
       const pluginInstance = new PDBeMolstarPlugin()
 
@@ -31,7 +31,7 @@ const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
           'selection',
           'animation',
           'expand',
-          // 'controlToggle',
+          'controlToggle',
           // 'controlInfo'
         ],
         alphafoldView: true,

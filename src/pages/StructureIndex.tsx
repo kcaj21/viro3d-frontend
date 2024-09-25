@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PdbeMolstar from "../components/ui/PdbeMolstar";
 import ProteinInfo from "../components/ProteinInfo";
@@ -10,7 +10,7 @@ const StructureIndex: React.FC = ({}) => {
   const { filterParam, searchParam } = useParams();
 
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
-    'virus_name',
+    "virus_name",
     filterParam
   );
 
@@ -23,7 +23,9 @@ const StructureIndex: React.FC = ({}) => {
     handleESMFoldClick,
   } = useStructureIndexData(searchParam);
 
-  document.documentElement.scrollTop = 0;
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, []);
 
   return (
     <>
@@ -34,7 +36,7 @@ const StructureIndex: React.FC = ({}) => {
         genomeLoading={genomeLoading}
         recordID={searchParam}
       />
-      {isLoading && genomeLoading ?  (
+      {isLoading && genomeLoading ? (
         <p>Loading...</p>
       ) : (
         <div className="mt-12 min-h-[60vh]  flex gap-16 flex-col-1 ">

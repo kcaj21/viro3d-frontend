@@ -9,7 +9,7 @@ export function useResultsPageData(filterparam: string, id: string, currentpage:
     setIsLoading(true);
     if (filterparam !== 'sequencematch') {
       fetch(
-        `http://localhost:8000/${filterparam}/${id}?page_size=10&page_num=${currentpage}`
+        `http://viro3d-dev.cvr.gla.ac.uk/api/${filterparam}/${id}?page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -24,7 +24,7 @@ export function useResultsPageData(filterparam: string, id: string, currentpage:
         });
     } else {
       fetch(
-        `http://localhost:8000/${filterparam}/${id}`
+        `http://viro3d-dev.cvr.gla.ac.uk/api/${filterparam}/${id}`
       )
         .then((res) => res.json())
         .then((data) => {
