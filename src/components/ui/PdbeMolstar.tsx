@@ -4,9 +4,10 @@ import { InitParams } from 'pdbe-molstar/lib/spec';
 
 type Model = {
   modelID: String;
+  defaultModel: String;
 }
 
-const PDBeMolStar: React.FC = ({defaultModel, modelID}) => {
+const PDBeMolStar: React.FC<Model> = ({defaultModel, modelID}) => {
 
   const viewerContainerRef = createRef<HTMLDivElement>()
 

@@ -257,6 +257,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
 
   useEffect(() => {
     highlightSelectedGene();
+
   }, [recordID]);
 
   return (

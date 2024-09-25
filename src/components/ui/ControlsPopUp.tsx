@@ -1,6 +1,10 @@
 import React from "react";
 
-const ControlsPopUp: React.FC = ({ handleClick }) => {
+type ControlsPopUpProps = {
+  handleClick: Function;
+}
+
+const ControlsPopUp: React.FC<ControlsPopUpProps> = ({ handleClick }) => {
   return (
     <>
       <div

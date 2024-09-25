@@ -37,7 +37,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
       <div className="table-container min-h-[60vh] ml-8">
         <div className="heading-container relative  min-h-[10vh]">
           {proteinInfo["genbank_name"].length < 60 ? (
-            <h1 className="mb-6  text-slate-500 text-5xl">
+            <h1 className="mb-6  text-slate-500 text-4xl">
               {proteinInfo["genbank_name"]}
             </h1>
           ) : (
@@ -46,10 +46,10 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
 
           {defaultModel === "CF" ? (
             <dl className="grid grid-cols-2 gap-16">
-              <dt className="font-light text-slate-500  text-5xl">
+              <dt className="font-light text-slate-500  text-4xl">
                 ColabFold plDTT Score:
               </dt>
-              <dd className="font-extralight text-slate-500  text-5xl">
+              <dd className="font-extralight text-slate-500  text-4xl">
                 {proteinInfo["colabfold_json_pLDDT"]}
               </dd>
             </dl>

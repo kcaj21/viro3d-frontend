@@ -39,7 +39,7 @@ const StructureIndex: React.FC = ({}) => {
       {isLoading && genomeLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className="mt-12 min-h-[60vh]  flex gap-16 flex-col-1 ">
+        <div className="mt-12 min-h-[75vh] max-h-[80vh] flex align-middle gap-16 flex-row-1 ">
           {defaultModel === "CF" ? (
             <div className="basis-1/2">
               <PdbeMolstar defaultModel={defaultModel} modelID={searchParam} />
@@ -70,7 +70,7 @@ const StructureIndex: React.FC = ({}) => {
               ) : null}
             </div>
           ) : null}
-          <div className="basis-1/2 min-w-[30vw] font-extralight ">
+          <div className="basis-1/2 min-w-[30vw]  font-extralight ">
             <ProteinInfo
               proteinInfo={proteinInfo}
               defaultModel={defaultModel}

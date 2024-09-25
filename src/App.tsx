@@ -10,7 +10,7 @@ import VirusResultsPage from "./pages/VirusResultsPage";
 function App() {
   return (
     <>
-      <main className="flex  flex-col">
+      <main className="flex flex-col">
         <Navbar />
         <div className="container min-h-screen mt-32 my-auto mx-auto">
           <Routes>
