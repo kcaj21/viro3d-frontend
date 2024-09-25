@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Tooltip from "./ui/Tooltip";
 
 type ProteinInfoProps = {
   recordID: string;
@@ -34,10 +35,15 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
   ) : (
     <>
       <div className="table-container min-h-[60vh] ml-8">
-        <div className="heading-container  min-h-[10vh]">
-          <h1 className="mb-6  text-slate-500 text-5xl">
-            {proteinInfo["genbank_name"]}
-          </h1>
+        <div className="heading-container relative  min-h-[10vh]">
+          {proteinInfo["genbank_name"].length < 60 ? (
+            <h1 className="mb-6  text-slate-500 text-5xl">
+              {proteinInfo["genbank_name"]}
+            </h1>
+          ) : (
+            <Tooltip text={proteinInfo["genbank_name"]} />
+          )}
+
           {defaultModel === "CF" ? (
             <dl className="grid grid-cols-2 gap-16">
               <dt className="font-light text-slate-500  text-5xl">
@@ -64,6 +70,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
           <dt className="font-extralight">Uniprot ID:</dt>
           <dd className="underline">
             <a
+              className=""
               target="blank"
               rel="noopener noreferrer"
               href={`https://www.uniprot.org/uniprotkb/${proteinInfo["uniprot_id"]}/entry`}
@@ -107,6 +114,12 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
           <dd>{proteinInfo["Species"]}</dd>
           <dt className="font-extralight">Family:</dt>
           <dd>{proteinInfo["Family"]}</dd>
+          {proteinInfo["host"] !== "" ? (
+            <>
+              <dt className="font-extralight">Host:</dt>
+              <dd>{proteinInfo["host"]}</dd>
+            </>
+          ) : null}
         </dl>
       </div>
     </>
