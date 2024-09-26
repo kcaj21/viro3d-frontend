@@ -9,7 +9,7 @@ export function useResultsPageData(filterparam: string, id: string, currentpage:
     setIsLoading(true);
     if (filterparam !== 'sequencematch') {
       fetch(
-        `http://viro3d-dev.cvr.gla.ac.uk/api/${filterparam}/${id}?page_size=10&page_num=${currentpage}`
+        `http://viro3d-dev.cvr.gla.ac.uk/api/${filterparam}/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {

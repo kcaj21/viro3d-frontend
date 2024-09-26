@@ -32,7 +32,7 @@ const FeatureBrowserContainer: React.FC = ({
     <>
       <div className="flex items-center justify-center gap-12">
         <h2 className="text-5xl text-slate-500">Loading Genome Browser...</h2>
-        {/* <LoadingSpinner color={"#4a95c0"} size={"5"} /> */}
+        <LoadingSpinner color={'#4a95c0'} size={'5'} />
       </div>
     </>
   ) : (

@@ -1,17 +1,16 @@
 import React from "react";
 
 type LoadingSpinnerProps = {
-  color: String;
   size: String;
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ color, size }) => {
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size }) => {
 
   return (
     <>
       <svg
         aria-hidden="true"
-        className={`w-[${size}%] h-[${size}%] text-[#e6e6e6] animate-spin dark:text-gray-[#f9f9f9] fill-[${color}]`}
+        className={`w-[5%] h-[5%] text-[#e6e6e6] animate-spin dark:text-gray-[#f9f9f9] fill-[#4a95c0]`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

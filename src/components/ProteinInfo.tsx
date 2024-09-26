@@ -45,14 +45,14 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
           )}
 
           {defaultModel === "CF" ? (
-            <dl className="grid grid-cols-2 gap-16">
-              <dt className="font-light text-slate-500  text-4xl">
+            <div className=" flex flex-row">
+              <dt className="font-light basis-2/3 text-slate-500  text-4xl">
                 ColabFold plDTT Score:
               </dt>
-              <dd className="font-extralight text-slate-500  text-4xl">
+              <dd className="font-extralight basis-1/3 text-slate-500  text-4xl">
                 {proteinInfo["colabfold_json_pLDDT"]}
               </dd>
-            </dl>
+            </div>
           ) : (
             <dl className="grid grid-cols-2 gap-16">
               <dt className="font-light text-slate-500  text-4xl">

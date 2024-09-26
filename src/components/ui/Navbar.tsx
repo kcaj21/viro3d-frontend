@@ -73,9 +73,9 @@ const Navbar: React.FC = () => {
   };
 
   const handleText = (e) => {
-    setSearchParam(e.target.value);
-    // debounce(autoComplete(searchParam), 300)
-    // autoComplete(e.target.value)
+    // setSearchParam((e.target.value.replace(/\//g, '%2F')));
+    setSearchParam(encodeURIComponent(e.target.value))
+    console.log(searchParam)
     debouncedSearch(e.target.value);
     setIsMenuOpen(true);
   };
@@ -92,6 +92,7 @@ const Navbar: React.FC = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearSuggestion();
+
     if (filterParam === "viruses") {
       navigate(`/resultspage/${filterParam}/${searchParam}`);
     } else {
@@ -173,14 +174,14 @@ const Navbar: React.FC = () => {
                 >
                   {data.protein_structures?.map((protein) => (
                     <Link
-                      onClick={clearSuggestion}
+                    onClick={clearSuggestion}
                       to={{
-                        pathname: `/proteinresultspage/proteinname/${protein.genbank_name}`,
+                        pathname:`/structureindex/${protein['Virus name(s)']}/${protein._id}`,
                       }}
                       key={protein.genbank_name}
                     >
                       <li className="hover:bg-slate-100 border-0 rounded-lg">
-                        {protein.genbank_name}
+                      {protein['Virus name abbreviation(s)']}: {protein.genbank_name}
                       </li>
                     </Link>
                   ))}

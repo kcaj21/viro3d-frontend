@@ -17,7 +17,6 @@ const ResultsPage: React.FC = () => {
     searchParam
   );
 
-
   const { data, resultCount, isLoading } = useResultsPageData(
     filterParam,
     searchParam,
@@ -47,7 +46,7 @@ const ResultsPage: React.FC = () => {
         <div className="min-h-screen">
           <div className="results-container flex flex-col items-center h-screen justify-center">
             <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
-            <LoadingSpinner color={"#4a95c0"} size={"15"} />
+            <LoadingSpinner size={'5'}  />
           </div>
         </div>
       ) : (
