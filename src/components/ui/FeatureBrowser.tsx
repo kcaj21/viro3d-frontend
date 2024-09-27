@@ -64,7 +64,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     
     if (highlightedGene) {
        highlightedGene.forEach((gene) => {
-        console.log(gene["oldStyle"]);
+        // console.log(gene["oldStyle"]);
         gene["rect"]?.setAttribute("style", `${gene["oldStyle"]}`);
       });
     }
@@ -105,7 +105,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
   const autoZoom = () => {
     //finds selected protein by taking the recordID and filtering annotations for objetcs that match by the family property
     //it subtracts the start coordinate from the end coordinate and divides it by 2
-    console.log(selectedProtein?.end)
+    // console.log(selectedProtein?.end)
 
     let boundary = (30000 - (selectedProtein?.end - selectedProtein?.start)) / 2
 
@@ -113,6 +113,9 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     let start = selectedProtein?.start - boundary
     let end = selectedProtein?.end + boundary
     // if the start coordinate is < 30000, it will result in a negative number, so in this case start is set to 0
+
+    // if (end > domainConstraint[1]) {end = domainConstraint[1]}
+
     if (start < 0) {
       return {
         annotations,
@@ -129,9 +132,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
   }
 
   useEffect(() => {
-
-    // console.log(JSON.stringify(selectedProtein[0]))
-    // console.log(Object.keys(selectedProtein))
 
     if (!featureViewerRef.current) {
       featureViewerRef.current = new soda.Chart<CustomRenderParams>({
@@ -233,21 +233,21 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
       });
 
       // remove comment marks to use autoZoom
-      // if (recordID && domainConstraint[1] > 30000) {
-      //   featureViewerRef.current.render(autoZoom(recordID))
-      // } else {
-      //   featureViewerRef.current.render({
-      //     annotations,
-      //     start: domainConstraint[0],
-      //     end: domainConstraint[1],
-      //   });
-      // }
-
-              featureViewerRef.current.render({
+      if (recordID && domainConstraint[1] > 60000 && selectedProtein) {
+        featureViewerRef.current.render(autoZoom())
+      } else {
+        featureViewerRef.current.render({
           annotations,
           start: domainConstraint[0],
           end: domainConstraint[1],
-              });
+        });
+      }
+
+          //     featureViewerRef.current.render({
+          // annotations,
+          // start: domainConstraint[0],
+          // end: domainConstraint[1],
+          //     });
     }
 
   }, []);

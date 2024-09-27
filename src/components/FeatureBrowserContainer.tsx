@@ -27,6 +27,14 @@ const FeatureBrowserContainer: React.FC = ({
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
+  console.log(coordinates)
+
+  // useEffect(() => {
+
+  //   console.log(coordinates.segments.filter((a) => a._id === recordID))
+  // }, [coordinates])
+
+  // let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
   return genomeLoading ? (
     <>

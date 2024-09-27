@@ -8,7 +8,6 @@ type ProteinInfoProps = {
 const ProteinInfo: React.FC<ProteinInfoProps> = ({
   proteinInfo,
   defaultModel,
-  nt_acc,
 }) => {
   const autoScroll = () => {
     const cont = document.getElementById("segment-container");
