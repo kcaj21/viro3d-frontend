@@ -13,7 +13,6 @@ const FeatureBrowserContainer: React.FC = ({
   searchParam,
   recordID,
 }) => {
-
   //move fetch to parent component
   // const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
   //   filterParam,
@@ -27,7 +26,7 @@ const FeatureBrowserContainer: React.FC = ({
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
-  console.log(coordinates)
+  console.log(coordinates);
 
   // useEffect(() => {
 
@@ -40,7 +39,7 @@ const FeatureBrowserContainer: React.FC = ({
     <>
       <div className="flex items-center justify-center gap-12">
         <h2 className="text-5xl text-slate-500">Loading Genome Browser...</h2>
-        <LoadingSpinner color={'#4a95c0'} size={'5'} />
+        <LoadingSpinner color={"#4a95c0"} size={"5"} />
       </div>
     </>
   ) : (
@@ -51,13 +50,13 @@ const FeatureBrowserContainer: React.FC = ({
           {coordinates.segments?.length > 1 ? (
             <div
               id="segment-container"
-              className="custom-scrollbar overflow-x-auto flex flex-grow"
+              className="custom-scrollbar overflow-x-auto flex flex-grow divide-x-2 divide-[#bec4cc]"
             >
               {coordinates.segments?.map((segment) => (
                 <div
                   key={segment.coordinates[0].segment}
                   id={segment.coordinates[0].nt_acc}
-                  className="border-r-2 border-[#bec4cc]"
+                  className=" drop-shadow-md"
                 >
                   <p className="text-center ">
                     {segment.coordinates[0].segment}
@@ -70,10 +69,12 @@ const FeatureBrowserContainer: React.FC = ({
               ))}
             </div>
           ) : (
-            <FeatureBrowser
-              annotations={coordinates.segments[0].coordinates}
-              recordID={recordID}
-            />
+            <div className="drop-shadow-md border-b-0 border-[#64748b] ">
+              <FeatureBrowser
+                annotations={coordinates.segments[0].coordinates}
+                recordID={recordID}
+              />
+            </div>
           )}
         </div>
         <div className="mt-1 flex flex-row justify-between">
@@ -88,14 +89,14 @@ const FeatureBrowserContainer: React.FC = ({
                   disabled={downloadLoading}
                   className="hover:text-[#56b3e6]"
                 >
-                Download PDBs
+                  Download PDBs
                 </button>
                 <button
                   onClick={() => handleDownload(".cif")}
                   disabled={downloadLoading}
                   className="hover:text-[#56b3e6]"
                 >
-                Download mmCIFs
+                  Download mmCIFs
                 </button>
               </>
             )}

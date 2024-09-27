@@ -45,7 +45,7 @@ const StructureIndex: React.FC = ({}) => {
             genomeLoading={genomeLoading}
             recordID={searchParam}
           />
-          <div className="mt-12 min-h-[75vh] max-h-[80vh] flex align-middle gap-16 flex-row-1 ">
+          <div className="mt-12  max-h-[80vh] flex gap-16 flex-row-1 ">
             {defaultModel === "CF" ? (
               <div className="basis-1/2">
                 <PdbeMolstar

@@ -55,7 +55,7 @@ const PDBeMolStar: React.FC<Model> = ({defaultModel, modelID}) => {
 
   return (
     <>
-        <div className="relative h-[100%] w-full max-height-full max-width-full  ">
+        <div className="relative h-[100%]  ">
               <div id='pdbeMolstar' ref={viewerContainerRef} style={{border: "0px"}}  >  
               </div>
         </div>
