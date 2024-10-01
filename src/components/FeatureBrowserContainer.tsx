@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import FeatureBrowser from "./ui/FeatureBrowser";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import Legend from "./ui/Legend";
+import FeatureBrowserLegend from "./ui/FeatureBrowserLegend";
 import ControlsPopUp from "./ui/ControlsPopUp";
 import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
@@ -21,7 +21,7 @@ const FeatureBrowserContainer: React.FC = ({
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
-  console.log(coordinates);
+  console.log(coordinates?.segments);
 
   return genomeLoading ? (
     <>
@@ -66,7 +66,7 @@ const FeatureBrowserContainer: React.FC = ({
           )}
         </div>
         <div className="mt-1 flex flex-row justify-between">
-          <Legend />
+          <FeatureBrowserLegend />
           <div className="flex flex-row gap-4 ">
             {downloadLoading ? (
               <p>Downloading...</p>

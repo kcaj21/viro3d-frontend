@@ -6,6 +6,7 @@ import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 import { useStructureIndexData } from "../hooks/useStructureIndexData";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
 
 const StructureIndex: React.FC = ({}) => {
   const { filterParam, searchParam } = useParams();
@@ -61,7 +62,8 @@ const StructureIndex: React.FC = ({}) => {
                       Switch to ESMFold Model
                     </button>
                   </div>
-                ) : null}
+                  ) : null}
+                  <PdbeMolstartLegend />
               </div>
             ) : null}
             {defaultModel === "EF" ? (
@@ -79,7 +81,8 @@ const StructureIndex: React.FC = ({}) => {
                       Switch to Colabfold Model
                     </button>
                   </div>
-                ) : null}
+                  ) : null}
+                  <PdbeMolstartLegend />
               </div>
             ) : null}
             <div className="basis-1/2 min-w-[30vw]  font-extralight ">

@@ -1,7 +1,6 @@
 import React from "react";
 
-const Legend: React.FC = () => {
-
+const FeatureBrowserLegend: React.FC = () => {
 
   return (
     <>
@@ -27,4 +26,4 @@ const Legend: React.FC = () => {
   );
 };
 
-export default Legend;
+export default FeatureBrowserLegend;
