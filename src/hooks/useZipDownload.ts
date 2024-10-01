@@ -9,18 +9,21 @@ export function useZipDownload(id: string) {
       try {
         const response = await fetch(`http://viro3d-dev.cvr.gla.ac.uk/api/zip/${id}/${format}`);
         if (!response.ok) {
-          throw new Error('Failed to download PDBs');
+          throw new Error('Failed to download Models');
         }
-        // Simulate file download (you might need to adjust this part based on your backend)
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${id} PDBs.zip`;
+        if (format === '.cif') {
+          link.download = `${id} mmCIFs.zip`;
+        } else {
+          link.download = `${id} PDBs.zip`;
+        }
         link.click();
         window.URL.revokeObjectURL(url);
       } catch (error) {
-        console.error('Error downloading PDBs:', error);
+        console.error('Error downloading Models:', error);
       } finally {
         setIsLoading(false);
       }

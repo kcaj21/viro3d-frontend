@@ -20,7 +20,6 @@ const FeatureBrowserContainer: React.FC = ({
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
-  console.log(coordinates?.segments);
 
   return genomeLoading ? (
     <>
@@ -76,14 +75,14 @@ const FeatureBrowserContainer: React.FC = ({
                   disabled={downloadLoading}
                   className="hover:text-[#56b3e6]"
                 >
-                  Download PDBs
+                  Download Genome PDBs
                 </button>
                 <button
                   onClick={() => handleDownload(".cif")}
                   disabled={downloadLoading}
                   className="hover:text-[#56b3e6]"
                 >
-                  Download mmCIFs
+                  Download Genome mmCIFs
                 </button>
               </>
             )}
