@@ -33,9 +33,9 @@ const StructureIndex: React.FC = ({}) => {
     <>
       {isLoading && genomeLoading ? (
         <div className="min-h-screen">
-        <div className="flex items-center justify-center gap-12">
-          <LoadingSpinner size={"5"} />
-        </div>
+          <div className="flex items-center justify-center gap-12">
+            <LoadingSpinner size={"5"} />
+          </div>
         </div>
       ) : (
         <>
@@ -62,8 +62,22 @@ const StructureIndex: React.FC = ({}) => {
                       Switch to ESMFold Model
                     </button>
                   </div>
-                  ) : null}
-                  <PdbeMolstartLegend />
+                ) : null}
+                <div className=" download-buttons-container flex flex-row ">
+                  <a
+                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                  >
+                    Download mmCIF
+                  </a>
+                  <a
+                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                  >
+                    Download PDB
+                  </a>
+                </div>
+                <PdbeMolstartLegend />
               </div>
             ) : null}
             {defaultModel === "EF" ? (
@@ -81,8 +95,22 @@ const StructureIndex: React.FC = ({}) => {
                       Switch to Colabfold Model
                     </button>
                   </div>
-                  ) : null}
-                  <PdbeMolstartLegend />
+                ) : null}
+                <div className=" download-buttons-container flex flex-row ">
+                  <a
+                    className="border border-[#313645] bg-[#a9a9a9] hover:bg-[#a9a9a9] text-white text-center w-full"
+                    // href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                  >
+                    Download mmCIF
+                  </a>
+                  <a
+                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                  >
+                    Download PDB
+                  </a>
+                </div>
+                <PdbeMolstartLegend />
               </div>
             ) : null}
             <div className="basis-1/2 min-w-[30vw]  font-extralight ">

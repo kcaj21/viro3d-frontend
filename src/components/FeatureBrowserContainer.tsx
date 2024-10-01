@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import FeatureBrowser from "./ui/FeatureBrowser";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import FeatureBrowserLegend from "./ui/FeatureBrowserLegend";

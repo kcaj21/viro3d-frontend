@@ -25,7 +25,7 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
               </div>
               <div className="basis-3/4 text-xl font-thin">
                 <li className="">
-                  plDDT Score: {protein.colabfold_json_pLDDT}
+                  pLDDT Score: {protein.colabfold_json_pLDDT}
                 </li>
                 <li className=""> Product: {protein.product}</li>
                 <li className=""> Species: {protein.Species}</li>

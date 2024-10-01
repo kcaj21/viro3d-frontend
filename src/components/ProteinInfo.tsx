@@ -42,26 +42,27 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
           ) : (
             <Tooltip text={proteinInfo["genbank_name"]} />
           )}
-
-          {defaultModel === "CF" ? (
-            <div className=" flex flex-row">
-              <dt className="font-light basis-2/3 text-slate-500  ">
-                ColabFold pLDTT Score:
-              </dt>
-              <dd className="font-extralight basis-1/3 text-slate-500  ">
-                {proteinInfo["colabfold_json_pLDDT"]}
-              </dd>
-            </div>
-          ) : (
-            <dl className="grid grid-cols-2 gap-16">
-              <dt className="font-light text-slate-500  ">
-                ESMFold pLDTT Score:
-              </dt>
-              <dd className="font-extralight text-slate-500  ">
-                {proteinInfo["esmfold_log_pLDDT"]}
-              </dd>
-            </dl>
-          )}
+          <div>
+            {defaultModel === "CF" ? (
+              <div className=" flex flex-row">
+                <dt className="font-light basis-2/3 text-slate-500  ">
+                  ColabFold pLDTT Score:
+                </dt>
+                <dd className="font-extralight basis-1/3 text-slate-500  ">
+                  {proteinInfo["colabfold_json_pLDDT"]}
+                </dd>
+              </div>
+            ) : (
+              <div className=" flex flex-row">
+                <dt className="font-light basis-2/3 text-slate-500  ">
+                  ESMFold pLDTT Score:
+                </dt>
+                <dd className="font-extralight basis-1/3 text-slate-500  ">
+                  {proteinInfo["esmfold_log_pLDDT"]}
+                </dd>
+              </div>
+            )}
+          </div>
         </div>
         <div className="body-container sm:text-sm 2xl:text-2xl text-slate-500">
           <hr className=" h-0.5 my-8 bg-slate-500"></hr>

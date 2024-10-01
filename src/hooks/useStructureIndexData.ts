@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export function useStructureIndexData(id: string) {
   const [isLoading, setIsLoading] = useState(true);
   const [proteinInfo, setProteinInfo] = useState(null);
-  const [defaultModel, setDefaultModel] = useState(null);
+  const [defaultModel, setDefaultModel] = useState('CF');
   const [isESMFoldModelPresent, setIsESMFoldModelPresent] = useState(false);
 
 
@@ -25,7 +25,7 @@ export function useStructureIndexData(id: string) {
           await data.protein_structure.esmfold_log_pLDDT > 50 && data.protein_structure.esmfold_log_pLDDT >
           data.protein_structure.colabfold_json_pLDDT
         ) {
-          setDefaultModel('EF');
+          setDefaultModel('CF');
           setIsESMFoldModelPresent(true)
         } else {
           setDefaultModel('CF');
