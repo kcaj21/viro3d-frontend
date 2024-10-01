@@ -107,31 +107,31 @@ const Navbar: React.FC = () => {
 
         className={`fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6] transition-transform duration-300 transform ${show ? 'translate-y-0' : '-translate-y-full'} `}
       >
-        <div className="flex items-center md:justify-around sm: justify-end mx-auto px-4 py-2">
+        <div className="flex items-center   md:justify-around sm: justify-end mx-auto px-4 py-2">
           <Link onClick={clearSuggestion} to={`/`}>
             <img src="/cvrbioinformatics.png" width="200"></img>
           </Link>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col-1 w-[50%] border-none rounded-md text-2xl bg-[#f9f9f9]"
+            className="flex flex-col-1 xl:w-[50%] border-0 border-[#f9f9f9] rounded  divide-x-4 text-2xl bg-[#f9f9f9]"
           >
             <select
               id="search-filter"
               onChange={handleFilter}
-              className="bg-[#f9f9f9] text-slate-500 pr-6 rounded border-r-2 text-center"
+              className="bg-[#f9f9f9] rounded text-slate-500 text-center"
             >
               <option value="viruses">Virus Name</option>
               <option value="proteinname">Protein Name</option>
               <option value="sequencematch">Sequence</option>
               <option value="genbankid">Protein ID</option>
-            </select>
+              </select>
             <div className="input-container relative w-full">
               <div className="w-full flex justify-between">
                 <input
                   onChange={handleText}
-                  className=" text-slate-500 pl-4 outline-none h-12 w-full border-none rounded-md text-2xl  bg-[#f9f9f9]"
+                  className=" text-slate-500 pl-4 outline-none h-12 w-full border-none  text-2xl  bg-[#f9f9f9]"
                   type="text"
-                  placeholder="Search Virus Name or Sequence..."
+                  // placeholder="Search Virus Name or Sequence..."
                 ></input>
                 <button>
                   <svg
@@ -144,7 +144,6 @@ const Navbar: React.FC = () => {
                   >
                     <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
                   </svg>
-                  
                 </button>
               </div>
               {isMenuOpen && filterParam === "viruses" && suggestion && data ? (
@@ -189,10 +188,11 @@ const Navbar: React.FC = () => {
               ) : null}
             </div>
           </form>
-          <ul className="flex  p-4 md:p-0 md:flex-row md:space-x-32 font-extralight text-4xl text-[#4a95c0]">
+          <ul className="flex  p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-4xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">About</button>
             <button className="hover:text-[#50bde5]">Downloads</button>
-            <button className="hover:text-[#50bde5]">API</button>
+            <button className="hover:text-[#50bde5]">
+              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a></button>
           </ul>
         </div>
       </nav>

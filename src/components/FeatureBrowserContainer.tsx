@@ -13,11 +13,6 @@ const FeatureBrowserContainer: React.FC = ({
   searchParam,
   recordID,
 }) => {
-  //move fetch to parent component
-  // const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
-  //   filterParam,
-  //   searchParam
-  // );
 
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const { isLoading: downloadLoading, handleDownload } =
@@ -27,13 +22,6 @@ const FeatureBrowserContainer: React.FC = ({
     setIsPopUpOpen(!isPopUpOpen);
   };
   console.log(coordinates);
-
-  // useEffect(() => {
-
-  //   console.log(coordinates.segments.filter((a) => a._id === recordID))
-  // }, [coordinates])
-
-  // let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
 
   return genomeLoading ? (
     <>

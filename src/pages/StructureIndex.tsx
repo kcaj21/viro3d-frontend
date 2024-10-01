@@ -45,7 +45,7 @@ const StructureIndex: React.FC = ({}) => {
             genomeLoading={genomeLoading}
             recordID={searchParam}
           />
-          <div className="mt-12  max-h-[80vh] flex gap-16 flex-row-1 ">
+          <div className="mt-12 max-h-[80vh] flex gap-16 flex-row-1 ">
             {defaultModel === "CF" ? (
               <div className="basis-1/2">
                 <PdbeMolstar
@@ -76,7 +76,7 @@ const StructureIndex: React.FC = ({}) => {
                       className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
                       onClick={handleCollabFoldClick}
                     >
-                      Switch to Collabfold Model
+                      Switch to Colabfold Model
                     </button>
                   </div>
                 ) : null}
