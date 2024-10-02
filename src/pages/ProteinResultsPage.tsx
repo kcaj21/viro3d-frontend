@@ -31,9 +31,6 @@ const ResultsPage: React.FC = () => {
     setCurrentPage(currentPage - 1);
   };
 
-  // if filterparam is virus -> render virusResults component
-  // if filterparam is for returning protein structures -> render proteinStructureResults etc..
-
   return (
     <>
       {!isLoading && !data ? (
@@ -46,20 +43,20 @@ const ResultsPage: React.FC = () => {
         <div className="min-h-screen">
           <div className="results-container flex flex-col items-center h-screen justify-center">
             <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
-            <LoadingSpinner size={'5'}  />
+            <LoadingSpinner size={"5"} />
           </div>
         </div>
       ) : (
         <div className="min-h-screen lg:mx-12 2xl:mx-0">
           {filterParam === "virus_name" ? (
-                <FeatureBrowserContainer
-                  searchParam={searchParam}
-                  filterParam={filterParam}
+            <FeatureBrowserContainer
+              searchParam={searchParam}
+              filterParam={filterParam}
               coordinates={coordinates}
               genomeLoading={genomeLoading}
             />
           ) : null}
-          <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+          <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
               <p className="px-8 py-8 break-words">
                 Showing {resultCount} results for: "

@@ -48,27 +48,19 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
               onClick={() =>
                 handleMatchClick(match.protein_structure["Virus name(s)"])
               }
-              className="result-card min-h-[10vh] drop-shadow-md  flex flex-col-2 gap-4 border-2 hover:border-[#4a95c0] rounded-md   bg-[#f9f9f9]"
+              className="result-card hover:-translate-y-1 transition ease-in-out drop-shadow-md sm:min-h-[10vh] sm:max-h-[10vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-col justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]"
             >
-              <div className="basis-1/4  px-4 py-2">
-                <li className=" text-[#4a95c0] font-light">
-                  {match.protein_structure.protein_id}
-                </li>
-                <li className=" text-lg text-[#4a95c0] font-light">
-                  Blastp Score: {match.score}
+              <div className="px-4 py-2">
+                <li className="2xl:text-2xl lg:text-lg sm:text-sm text-[#4a95c0] font-light">
+                  {match.protein_structure.genbank_name}
                 </li>
               </div>
-              <div className="basis-3/4 px-4 py-2 text-xl font-thin">
-                <li className="">
-                  plDDT Score: {match.protein_structure.colabfold_json_pLDDT}
+              <div className="flex flex-row xl:w-[50%]  divide-x text-center xl:fixed bottom-0 right-0 font-thin 2xl:text-lg sm:text-xs text-white">
+                <li className="bg-[#4a95c0] px-2 py-2 basis-1/2">
+                  Blastp Score: {match.score}
                 </li>
-                <li className="">
-                  {" "}
-                  Product: {match.protein_structure.product}
-                </li>
-                <li className="">
-                  {" "}
-                  Species: {match.protein_structure.Species}
+                <li className="bg-[#4a95c0] px-2 py-2 basis-1/2">
+                  pLDDT Score: {match.protein_structure.colabfold_json_pLDDT}
                 </li>
               </div>
             </div>

@@ -92,7 +92,7 @@ const StructureIndex: React.FC = ({}) => {
                       className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
                       onClick={handleCollabFoldClick}
                     >
-                      Switch to Colabfold Model
+                      Switch to ColabFold Model
                     </button>
                   </div>
                 ) : null}
