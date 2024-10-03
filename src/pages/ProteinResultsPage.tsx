@@ -58,7 +58,7 @@ const ResultsPage: React.FC = () => {
           ) : null}
           <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
-              <p className="px-8 py-8 break-words">
+              <p className="px-8 mt-8 md:text-xl xl:text-4xl break-words">
                 Showing {resultCount} results for: "
                 {searchParam?.substring(0, 40)}..."
               </p>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ResultToolTip from "./ui/ResultToolTip";
 
 const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
   return filterParam !== "sequencematch" ? (
@@ -48,18 +49,35 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
               onClick={() =>
                 handleMatchClick(match.protein_structure["Virus name(s)"])
               }
-              className="result-card hover:-translate-y-1 transition ease-in-out drop-shadow-md sm:min-h-[10vh] sm:max-h-[10vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-col justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]"
+              className="result-card hover:-translate-y-1 transition ease-in-out drop-shadow-md sm:min-h-[20vh] sm:max-h-[20vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-col justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]"
             >
-              <div className="px-4 py-2">
-                <li className="2xl:text-2xl lg:text-lg sm:text-sm text-[#4a95c0] font-light">
-                  {match.protein_structure.genbank_name}
+              {match.protein_structure.genbank_name.length < 40 ? (
+                <div className="px-4 py-2 2xl:text-2xl lg:text-lg sm:text-sm text-[#4a95c0] font-light">
+                  <li className="">{match.protein_structure.genbank_name}</li>
+                  <li className="text-slate-500">
+                  {match.protein_structure['Virus name(s)']}
+                  </li>
+                </div>
+              ) : (
+                <div className="px-4 py-2 2xl:text-2xl lg:text-lg sm:text-sm text-[#4a95c0] font-light">
+                  <li className="">
+                    <ResultToolTip
+                      text={match.protein_structure.genbank_name}
+                    />
+                  </li>
+                  <li className="text-slate-500">
+                  {match.protein_structure['Virus name(s)']}
+                  </li>
+                </div>
+              )}
+              <div className="flex flex-row w-[100%]  divide-x text-center fixed bottom-0 right-0 font-thin 2xl:text-lg sm:text-xs text-white">
+              <li className="bg-[#4a95c0] px-2 py-2 basis-1/3">
+                  evalue: {match.evalue}
                 </li>
-              </div>
-              <div className="flex flex-row xl:w-[50%]  divide-x text-center xl:fixed bottom-0 right-0 font-thin 2xl:text-lg sm:text-xs text-white">
-                <li className="bg-[#4a95c0] px-2 py-2 basis-1/2">
+                <li className="bg-[#4a95c0] px-2 py-2 basis-1/3">
                   Blastp Score: {match.score}
                 </li>
-                <li className="bg-[#4a95c0] px-2 py-2 basis-1/2">
+                <li className="bg-[#4a95c0] px-2 py-2 basis-1/3">
                   pLDDT Score: {match.protein_structure.colabfold_json_pLDDT}
                 </li>
               </div>

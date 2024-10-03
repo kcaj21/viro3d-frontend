@@ -57,7 +57,7 @@ const FeatureBrowserContainer: React.FC = ({
           ) : (
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
-                annotations={coordinates.segments[0].coordinates}
+                annotations={coordinates?.segments[0].coordinates}
                 recordID={recordID}
               />
             </div>
