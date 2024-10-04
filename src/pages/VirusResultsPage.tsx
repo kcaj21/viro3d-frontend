@@ -25,44 +25,48 @@ const VirusResultsPage: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen">
       {!isLoading && !data ? (
-        <div className="">
-          <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
-            <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
-          </div>
+        <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
+          <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
         </div>
       ) : !data ? (
-        <div className="min-h-screen">
-          <div className="results-container flex flex-col items-center h-screen justify-center">
-            <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
-            <LoadingSpinner size={'5'} />
-          </div>
+        <div className="results-container flex flex-col items-center h-screen justify-center">
+          <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
+          <LoadingSpinner size={"5"} />
         </div>
       ) : (
-        <div className="min-h-screen">
-          <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
-            <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
-              <p className="px-8 py-8 break-words">
-                Showing {resultCount} results for: "
-                {searchParam?.substring(0, 40)}..."
-              </p>
+        <>
+          {!data.viruses ? (
+            <div className="flex flex-col text-center items-center h-[50vh] justify-center">
+            <div className="mb-12  text-5xl text-slate-500">Error:</div>
+            <div className="  text-5xl text-slate-500">
+              {JSON.stringify(data.detail)}
             </div>
-            <div className="min-h-[50vh]">
-                <VirusResults data={data} />
-            </div>
-            {data.count > 10 ? (
-              <Pagination
-                currentPage={currentPage}
-                resultCount={resultCount}
-                handleNextPage={handleNextPage}
-                handlePrevPage={handlePrevPage}
-              />
-            ) : null}
           </div>
-        </div>
+          ) : (
+            <div className="results-container min-height-max mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+              <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
+                <p className="px-8 py-8 break-words">
+                  Showing {resultCount} results for: "{searchParam?.substring(0, 40)}..."
+                </p>
+              </div>
+              <div className="min-h-[50vh]">
+                <VirusResults data={data} />
+              </div>
+            </div>
+          )}
+          {data.count > 10 && (
+            <Pagination
+              currentPage={currentPage}
+              resultCount={resultCount}
+              handleNextPage={handleNextPage}
+              handlePrevPage={handlePrevPage}
+            />
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 };
 

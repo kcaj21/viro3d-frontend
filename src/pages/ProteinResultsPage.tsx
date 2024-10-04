@@ -47,35 +47,49 @@ const ResultsPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen lg:mx-12 2xl:mx-0">
-          {filterParam === "virus_name" ? (
-            <FeatureBrowserContainer
-              searchParam={searchParam}
-              filterParam={filterParam}
-              coordinates={coordinates}
-              genomeLoading={genomeLoading}
-            />
-          ) : null}
-          <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
-            <div className="button-row flex flex-row  justify-between font-light text-[#4a95c0]">
-              <p className="px-8 mt-8 md:text-xl xl:text-4xl break-words">
-                Showing {resultCount} results for: "
-                {searchParam?.substring(0, 40)}..."
-              </p>
+        <>
+          {!data.protein_structures ? (
+            <div className="flex flex-col text-center items-center h-[50vh] justify-center">
+              <div className="mb-12  text-5xl text-slate-500">Error:</div>
+              <div className="  text-5xl text-slate-500">
+                {JSON.stringify(data.detail)}
+              </div>
             </div>
-            <div className="min-h-[50vh]">
-              <ProteinStructureResults data={data} filterParam={filterParam} />
+          ) : (
+            <div className="min-h-screen lg:mx-12 2xl:mx-0">
+              {filterParam === "virus_name" ? (
+                <FeatureBrowserContainer
+                  searchParam={searchParam}
+                  filterParam={filterParam}
+                  coordinates={coordinates}
+                  genomeLoading={genomeLoading}
+                />
+              ) : null}
+              <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+                <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
+                  <p className="px-8 mt-8 md:text-xl xl:text-4xl break-words">
+                    Showing {resultCount} results for: "
+                    {searchParam?.substring(0, 40)}..."
+                  </p>
+                </div>
+                <div className="min-h-[50vh]">
+                  <ProteinStructureResults
+                    data={data}
+                    filterParam={filterParam}
+                  />
+                </div>
+              </div>
+              {data.count > 10 && (
+                <Pagination
+                  currentPage={currentPage}
+                  resultCount={resultCount}
+                  handleNextPage={handleNextPage}
+                  handlePrevPage={handlePrevPage}
+                />
+              )}
             </div>
-            {data.count > 10 ? (
-              <Pagination
-                currentPage={currentPage}
-                resultCount={resultCount}
-                handleNextPage={handleNextPage}
-                handlePrevPage={handlePrevPage}
-              />
-            ) : null}
-          </div>
-        </div>
+          )}
+        </>
       )}
     </>
   );

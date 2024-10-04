@@ -45,7 +45,7 @@ const FeatureBrowserContainer: React.FC = ({
                   className=" drop-shadow-md"
                 >
                   <p className="text-center ">
-                    {segment.coordinates[0].segment}
+                    {segment.coordinates[0].segment !== "Non-segmented" ? segment.coordinates[0].segment : segment.coordinates[0].nt_acc}
                   </p>
                   <FeatureBrowser
                     annotations={segment.coordinates}
