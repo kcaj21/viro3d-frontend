@@ -15,7 +15,7 @@ const ResultToolTip: React.FC<TooltipProps> = ({ text }) => {
       >
         <h1 className="cursor-default ">{text.substring(0, 40)}...</h1>
         <div
-          className={`fixed -top-40 -left-10 z-10 bg-[#64748b] rounded px-2 py-2 text-2xl opacity-95 text-[#FFFFFF]  ${
+          className={`fixed -top-10 -left-10 z-10 bg-[#64748b] rounded px-2 py-2 text-2xl opacity-95 text-[#FFFFFF]  ${
             showTooltip ? "" : "hidden"
           }`}
         >

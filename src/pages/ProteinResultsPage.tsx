@@ -48,7 +48,7 @@ const ResultsPage: React.FC = () => {
         </div>
       ) : (
         <>
-          {!data.protein_structures ? (
+          {data.detail ? (
             <div className="flex flex-col text-center items-center h-[50vh] justify-center">
               <div className="mb-12  text-5xl text-slate-500">Error:</div>
               <div className="  text-5xl text-slate-500">

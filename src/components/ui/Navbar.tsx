@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
   const debouncedSearch = debounce((search) => {
     setSuggestion(search);
     console.log(suggestion);
-  }, 300);
+  }, 100);
 
   const handleFilter = (e) => {
     setFilterParam(e.target.value);
