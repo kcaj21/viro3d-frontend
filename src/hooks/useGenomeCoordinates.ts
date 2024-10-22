@@ -7,7 +7,8 @@ export function useGenomeCoordinates(filterparam: string, id: string) {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-        `http://viro3d-dev.cvr.gla.ac.uk/api/genome_coordinates/${filterparam}/${id}`    
+        `http://viro3d-dev.cvr.gla.ac.uk/api/genome_coordinates/${filterparam}/?qualifier=${id}`
+        
     )
       .then((res) => res.json())
       .then((data) => {

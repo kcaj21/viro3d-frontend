@@ -78,8 +78,7 @@ const ResultsPage: React.FC = () => {
                     filterParam={filterParam}
                   />
                 </div>
-              </div>
-              {data.count > 10 && (
+                {data.count > 10 && (
                 <Pagination
                   currentPage={currentPage}
                   resultCount={resultCount}
@@ -87,6 +86,7 @@ const ResultsPage: React.FC = () => {
                   handlePrevPage={handlePrevPage}
                 />
               )}
+              </div>
             </div>
           )}
         </>

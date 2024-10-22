@@ -31,6 +31,7 @@ const FeatureBrowserContainer: React.FC = ({
   ) : (
     <>
       <div className="text-slate-500">
+        <h1 className="text-center mb-6 text-2xl" >{searchParam} Genome</h1>
         <div className="relative">
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
           {coordinates.segments?.length > 1 ? (
@@ -44,9 +45,10 @@ const FeatureBrowserContainer: React.FC = ({
                   id={segment.coordinates[0].nt_acc}
                   className=" drop-shadow-md"
                 >
-                  <p className="text-center ">
-                    {segment.coordinates[0].segment !== "Non-segmented" ? segment.coordinates[0].segment : segment.coordinates[0].nt_acc}
-                  </p>
+                  <h2 className="text-center ">
+                    {segment.coordinates[0].segment !== "Non-segmented" ? 
+                    <h3>Segment: {segment.coordinates[0].segment}</h3> : <h3>Isolate: {segment.coordinates[0].nt_acc}</h3>}
+                  </h2>
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID}

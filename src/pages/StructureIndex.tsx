@@ -98,8 +98,8 @@ const StructureIndex: React.FC = ({}) => {
                 ) : null}
                 <div className=" download-buttons-container flex flex-row ">
                   <a
-                    className="border border-[#313645] bg-[#a9a9a9] hover:bg-[#a9a9a9] text-white text-center w-full"
-                    // href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
                   >
                     Download mmCIF
                   </a>

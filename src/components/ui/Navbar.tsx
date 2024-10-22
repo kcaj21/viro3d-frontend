@@ -155,7 +155,7 @@ const Navbar: React.FC = () => {
                     <Link
                       onClick={clearSuggestion}
                       to={{
-                        pathname: `/proteinresultspage/virus_name/${virus.virus_name}`,
+                        pathname: `/proteinresultspage/virus_name/${encodeURIComponent(virus.virus_name)}`,
                       }}
                       key={virus.virus_name}
                     >
@@ -175,7 +175,7 @@ const Navbar: React.FC = () => {
                     <Link
                     onClick={clearSuggestion}
                       to={{
-                        pathname:`/structureindex/${protein['Virus name(s)']}/${protein._id}`,
+                        pathname:`/structureindex/${encodeURIComponent(protein['Virus name(s)'])}/${protein._id}`,
                       }}
                       key={protein.genbank_name}
                     >

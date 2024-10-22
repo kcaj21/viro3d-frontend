@@ -9,7 +9,7 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
         {data.protein_structures?.map((protein) => (
           <Link
             to={{
-              pathname: `/structureindex/${protein["Virus name(s)"]}/${protein._id}`,
+              pathname: `/structureindex/${encodeURIComponent(protein["Virus name(s)"])}/${protein._id}`,
             }}
             key={protein._id}
           >
@@ -23,6 +23,7 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
                 <div className="sm:hidden xl:block lg:text-base 2xl:text-xl font-thin">
                   {/* <li className=""> Product: {protein.product}</li> */}
                   <li className="">Peptide Category: {protein.pept_cat}</li>
+                  <li className="">{protein['Virus name(s)']}</li>
                 </div>
               </div>
               <div className="basis-1/3 flex flex-col justify-end ">
