@@ -192,7 +192,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
                 Chart<CustomRenderParams>
               >
             ) =>
-              navigate(`/structureindex/${d.a.virus_name}/${d.a.family}`, {
+              navigate(`/structureindex/${encodeURIComponent(d.a.virus_name)}/${d.a.family}`, {
                 state: { key: "value" },
               }),
           });
