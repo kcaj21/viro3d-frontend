@@ -3,7 +3,7 @@ import React from "react";
 const Pagination: React.FC = ({currentPage, resultCount, handleNextPage, handlePrevPage}) => {
   return (
     <>
-        <div className="pagination flex flex-col-2 gap-4 justify-end font-light px-8 py-4 text-[#4a95c0]">
+        <div className="pagination flex flex-col-2 gap-4 justify-end font-light px-8 py-4 text-3xl text-[#4a95c0]">
         {currentPage > 1 && (
             <button
             onClick={handlePrevPage}

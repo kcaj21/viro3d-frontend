@@ -77,14 +77,14 @@ const FeatureBrowserContainer: React.FC = ({
                   disabled={downloadLoading}
                   className="hover:text-[#56b3e6]"
                 >
-                  Download Genome PDBs
+                  Download All Structures (PDBs)
                 </button>
                 <button
                   onClick={() => handleDownload(".cif")}
                   disabled={downloadLoading}
                   className="hover:text-[#56b3e6]"
                 >
-                  Download Genome mmCIFs
+                  Download All Structures (mmCIFs)
                 </button>
               </>
             )}
