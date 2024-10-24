@@ -10,6 +10,8 @@ let width = window.innerWidth;
 
 const Home: React.FC = ({}) => {
 
+  
+
   return (
     <>
       <div className="min-h-screen text-[#4a95c0]">
@@ -27,6 +29,8 @@ const Home: React.FC = ({}) => {
           <path d="M17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6l7.7 7.7M8 6l8 8" />
         </svg>
         <p className="text-slate-500 text-3xl">Homepage under construction</p>
+        {/* <ClusterVisualization /> */}
+
       </div>
     </>
   );

@@ -1,56 +1,56 @@
-import * as d3 from 'd3';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { ForceGraph2D } from "react-force-graph";
+import LoadingSpinner from "./LoadingSpinner";
 
-const MARGIN = { top: 60, right: 60, bottom: 60, left: 60 };
+const ClusterVisualisation = () => {
+  const [data, setData] = useState(null);
 
-type ScatterplotProps = {
-  width: number;
-  height: number;
-  data: { x: number; y: number }[];
-};
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Replace 'YOUR_API_URL' with the actual URL of your JSON file
+        const response = await fetch(
+          "http://viro3d-dev.cvr.gla.ac.uk/api/graph_data/graph_data.json"
+        );
 
-const ClusterVisualisation = ({ width, height, data }: ScatterplotProps) => {
-  // Layout. The div size is set by the given props.
-  // The bounds (=area inside the axis) is calculated by substracting the margins
-  const boundsWidth = width - MARGIN.right - MARGIN.left;
-  const boundsHeight = height - MARGIN.top - MARGIN.bottom;
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-  // Scales
-  const yScale = d3.scaleLinear().domain([0, 100]).range([boundsHeight, 0]);
-  const xScale = d3.scaleLinear().domain([0, 100]).range([0, boundsWidth]);
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setData(null);
+      }
+    };
 
-  // Build the shapes
-  const allShapes = data.map((d, i) => {
+    fetchData();
+  }, []);
+
+  const navigate = useNavigate();
+  const handleNodeClick = (e) => {
+    // navigate(
+    //   `/structureindex/human%20parainfluenza%20virus%203/ABY47605.1_8839`
+    // );
+    console.log(e)
+  };
+
+  if (data === null) {
     return (
-      <circle
-        key={i}
-        r={13}
-        cx={xScale(d.y)}
-        cy={yScale(d.x)}
-        opacity={1}
-        stroke="#ACCBE1"
-        fill="#ACCBE1"
-        fillOpacity={0.2}
-        strokeWidth={1}
-      />
+      <div className="cluster-container flex flex-col items-center h-screen justify-center">
+        <h2 className="mb-12 text-5xl text-slate-500">Loading...</h2>
+        <LoadingSpinner size={"5"} />
+      </div>
     );
-  });
+  }
 
   return (
     <div>
-      <svg width={width} height={height}>
-        <g
-          width={boundsWidth}
-          height={boundsHeight}
-          transform={`translate(${[MARGIN.left, MARGIN.top].join(',')})`}
-        >
-          <g transform={`translate(0, ${boundsHeight})`}>
-          </g>
-          {allShapes}
-        </g>
-      </svg>
+      <ForceGraph2D graphData={data} onNodeClick={(e)=>window.open(`/structureindex/${e['Virus name(s)']}/${e.id}`,'_blank', 'rel=noopener noreferrer')} nodeAutoColorBy={d => d['Virus name(s)']} />
     </div>
   );
 };
-
 
 export default ClusterVisualisation;
