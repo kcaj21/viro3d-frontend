@@ -11,9 +11,11 @@ const FeatureBrowserContainer: React.FC = ({
   genomeLoading,
   searchParam,
   recordID,
+  Isolate
 }) => {
 
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [currentIsolate, setCurrentIsolate] = useState(Isolate);
   const { isLoading: downloadLoading, handleDownload } =
     useZipDownload(searchParam);
 
@@ -43,7 +45,7 @@ const FeatureBrowserContainer: React.FC = ({
                 <div
                   key={segment.coordinates[0].segment}
                   id={segment.coordinates[0].nt_acc}
-                  className=" drop-shadow-md"
+                  className='drop-shadow-md'
                 >
                   <h2 className="text-center ">
                     {segment.coordinates[0].segment !== "Non-segmented" ? 
@@ -60,6 +62,7 @@ const FeatureBrowserContainer: React.FC = ({
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
                 annotations={coordinates?.segments[0].coordinates}
+                // annotations={coordinates?.segments?.find(({ _id }) => _id === currentIsolate).coordinates}
                 recordID={recordID}
               />
             </div>
@@ -72,20 +75,24 @@ const FeatureBrowserContainer: React.FC = ({
               <p>Downloading...</p>
             ) : (
               <>
+              <div className="flex flex-row gap-2">
+                <p>Download All Structures:</p>
                 <button
                   onClick={() => handleDownload("_relaxed.pdb")}
                   disabled={downloadLoading}
-                  className="hover:text-[#56b3e6]"
+                  className="hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6]"
                 >
-                  Download All Structures (PDBs)
+                  PDBs
                 </button>
+                <p>/</p>
                 <button
                   onClick={() => handleDownload(".cif")}
                   disabled={downloadLoading}
-                  className="hover:text-[#56b3e6]"
+                  className="hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6]"
                 >
-                  Download All Structures (mmCIFs)
+                  mmCIFs
                 </button>
+                </div>
               </>
             )}
             <button

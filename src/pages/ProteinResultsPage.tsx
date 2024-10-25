@@ -63,6 +63,7 @@ const ResultsPage: React.FC = () => {
                   filterParam={filterParam}
                   coordinates={coordinates}
                   genomeLoading={genomeLoading}
+                  Isolate={coordinates.segments[0]._id}
                 />
               ) : null}
               <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
