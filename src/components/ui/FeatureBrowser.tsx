@@ -250,7 +250,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
           //     });
     }
 
-  }, []);
+  }, [annotations]);
 
   //check if recordID matches the family property of any of the annotations
   // if true, take start and end coords and pass to highlight function

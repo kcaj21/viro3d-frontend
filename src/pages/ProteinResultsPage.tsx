@@ -9,6 +9,7 @@ import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 
 const ResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentIsolate, setCurrentIsolate] = useState(0);
 
   const { filterParam, searchParam } = useParams();
 
@@ -30,6 +31,16 @@ const ResultsPage: React.FC = () => {
   const handlePrevPage = () => {
     setCurrentPage(currentPage - 1);
   };
+
+  const handleChange = (e) => {
+
+    let segmentIndex = coordinates.segments.findIndex(
+      (segment) => segment["_id"] === e.target.value
+  );
+  setCurrentIsolate(segmentIndex)
+  
+}
+
 
   return (
     <>
@@ -63,9 +74,20 @@ const ResultsPage: React.FC = () => {
                   filterParam={filterParam}
                   coordinates={coordinates}
                   genomeLoading={genomeLoading}
-                  Isolate={coordinates.segments[0]._id}
+                  isolate={currentIsolate}
                 />
               ) : null}
+                        {coordinates.segments.length > 1 ? (
+          <select
+            id="search-filter"
+            className="bg-[#f9f9f9] rounded text-slate-500 text-center"
+            onChange={handleChange}
+          >
+            {coordinates.segments?.map((segment) => (
+              <option value={`${segment._id}`}>{segment._id}</option>
+            ))}
+          </select>
+          ) : (null)}
               <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
                 <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
                   <p className="px-8 mt-8 md:text-xl xl:text-4xl break-words">

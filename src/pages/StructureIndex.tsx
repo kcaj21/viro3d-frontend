@@ -45,7 +45,7 @@ const StructureIndex: React.FC = ({}) => {
             coordinates={coordinates}
             genomeLoading={genomeLoading}
             recordID={searchParam}
-            Isolate={proteinInfo.nt_acc}
+            isolate={0}
           />
           <div className="mt-12 max-h-[80vh] flex gap-16 flex-row-1 ">
             {defaultModel === "CF" ? (
