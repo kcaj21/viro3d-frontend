@@ -6,6 +6,7 @@ import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
 import ProteinResultsPage from "./pages/ProteinResultsPage";
 import VirusResultsPage from "./pages/VirusResultsPage";
+import Test from "./pages/Test";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <div className="container min-h-screen mt-40 my-auto mx-auto">
           <Routes>
             <Route path="/" element={<Home />}></Route>
+            <Route path="/test" element={<Test />}></Route>
+
             <Route
               path="/resultspage/:filterParam/:searchParam"
               element={<VirusResultsPage />}
