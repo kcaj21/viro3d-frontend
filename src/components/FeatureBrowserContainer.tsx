@@ -11,10 +11,10 @@ const FeatureBrowserContainer: React.FC = ({
   genomeLoading,
   searchParam,
   recordID,
-  isolate
+  isolate,
 }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  // const [currentIsolate, setCurrentIsolate] = useState(isolate);
+  const [currentIsolate, setCurrentIsolate] = useState("");
   const { isLoading: downloadLoading, handleDownload } =
     useZipDownload(searchParam);
 
@@ -22,17 +22,16 @@ const FeatureBrowserContainer: React.FC = ({
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  // const handleChange = (e) => {
-
-  //     let segmentIndex = coordinates.segments.findIndex(
-  //       (segment) => segment["_id"] === e.target.value
-  //   );
-  //   setCurrentIsolate(segmentIndex)
-    
-  // }
-
   useEffect(() => {
+    setCurrentIsolate(isolate);
   }, [isolate]);
+
+  const handleChange = (e) => {
+    let segmentIndex = coordinates.segments.find(
+      (segment) => segment["_id"] === e.target.value
+    );
+    setCurrentIsolate(segmentIndex["_id"]);
+  };
 
   return genomeLoading ? (
     <>
@@ -44,7 +43,27 @@ const FeatureBrowserContainer: React.FC = ({
   ) : (
     <>
       <div className="text-slate-500">
+        <div className="flex flex-col items-center">
         <h1 className="text-center mb-6 text-2xl">{searchParam} Genome</h1>
+        {coordinates.segments.length > 1 && coordinates.segments[0].segment === "Non-segmented" ? (
+        <select
+        id="search-filter"
+        className="bg-[#f9f9f9] hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6] text-xl text-center  text-slate-500 mb-4"
+        onChange={handleChange}
+        
+      >
+        {coordinates.segments?.map((segment) => (
+    <option 
+    key={segment._id}
+    value={`${segment._id}`}
+    selected={currentIsolate === segment._id ? 'selected' : ''}
+  >
+    Isolate: {segment._id}
+  </option>
+        ))}
+      </select>
+          ) : null}
+          </div>
         <div className="relative">
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
           {coordinates.segments[0].segment !== "Non-segmented" ? (
@@ -59,11 +78,7 @@ const FeatureBrowserContainer: React.FC = ({
                   className="drop-shadow-md"
                 >
                   <h2 className="text-center ">
-                    {segment.coordinates[0].segment !== "Non-segmented" ? (
-                      <h3>Segment: {segment.coordinates[0].segment}</h3>
-                    ) : (
-                      <h3>Isolate: {segment.coordinates[0].nt_acc}</h3>
-                    )}
+                    Segment: {segment.coordinates[0].segment}
                   </h2>
                   <FeatureBrowser
                     annotations={segment.coordinates}
@@ -72,19 +87,43 @@ const FeatureBrowserContainer: React.FC = ({
                 </div>
               ))}
             </div>
-          ) : (
+          ) : null}
+          {coordinates.segments[0].segment === "Non-segmented" &&
+          coordinates.segments.length > 1 ? (
+            <div
+              id="segment-container"
+              className="custom-scrollbar overflow-x-auto flex-col flex-grow divide-[#bec4cc]"
+            >
+              {coordinates.segments?.map((segment) => (
+                <div
+                  key={segment.coordinates[0].segment}
+                  id={segment._id}
+                  className={`drop-shadow-md ${
+                    currentIsolate !== segment._id ? "hidden" : ""
+                  }`}
+                >
+                  <FeatureBrowser
+                    annotations={segment.coordinates}
+                    recordID={recordID}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+          {coordinates.segments[0].segment === "Non-segmented" &&
+          coordinates.segments.length === 1 ? (
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
-                annotations={coordinates?.segments[isolate]?.coordinates}
+                annotations={coordinates?.segments[0]?.coordinates}
                 // annotations={coordinates?.segments?.find(({ _id }) => _id === currentIsolate).coordinates}
                 recordID={recordID}
               />
             </div>
-          )}
+          ) : null}
         </div>
         <div className="mt-1 flex flex-row justify-between">
           <FeatureBrowserLegend />
-         
+
           <div className="flex flex-row gap-4 ">
             {downloadLoading ? (
               <p>Downloading...</p>
