@@ -8,7 +8,7 @@ export function useGraphData() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://viro3d-dev.cvr.gla.ac.uk/api/graph_data/graph_data.json"
+          "http://viro3d-dev.cvr.gla.ac.uk/api/graph_data/graph_data_viruses.json"
         );
 
         if (!response.ok) {
