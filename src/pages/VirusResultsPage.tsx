@@ -25,7 +25,7 @@ const VirusResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen">
+<div className="min-h-screen mt-40 my-auto mx-24">
       {!isLoading && !data ? (
         <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
           <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>

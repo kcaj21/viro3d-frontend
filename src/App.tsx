@@ -13,11 +13,10 @@ function App() {
     <>
       <main className="flex flex-col">
         <Navbar />
-        <div className="container min-h-screen mt-40 my-auto mx-auto">
+
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/test" element={<Test />}></Route>
-
             <Route
               path="/resultspage/:filterParam/:searchParam"
               element={<VirusResultsPage />}
@@ -31,7 +30,7 @@ function App() {
               element={<StructureIndex />}
             ></Route>
           </Routes>
-        </div>
+
         <Footer />
       </main>
     </>

@@ -33,6 +33,7 @@ const ResultsPage: React.FC = () => {
 
   return (
     <>
+    <div className="min-h-screen mt-40 my-auto mx-24">
       {!isLoading && !data ? (
         <div className="">
           <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
@@ -93,6 +94,7 @@ const ResultsPage: React.FC = () => {
           )}
         </>
       )}
+      </div>
     </>
   );
 };
