@@ -1,38 +1,51 @@
-import React, { useEffect } from "react";
-import ClusterVisualization from "../components/ui/ClusterVisualisation";
-import "/src/customScrollBar.css";
+import React, { useState } from "react";
+import VanillaTest from "../components/ui/VanillaTest";
+import ControlsPopUp from "../components/ui/ControlsPopUp";
+import ViewStructuresPopUp from "../components/ui/ViewStructuresPopUp";
+import InfoIcon from "../components/ui/InfoIcon";
+import ClusterVisualisationLegend from "../components/ui/ClusterVisualisationLegend";
+import ClusterVisualisation from "../components/ui/ClusterVisualisation";
 
-let navHeight = document.getElementById("navbar")?.offsetHeight;
-let footerHeight = document.getElementById("footer")?.offsetHeight;
+const Home: React.FC = () => {
 
-let height = window.innerHeight - (navHeight + footerHeight);
-let width = window.innerWidth;
 
-const Home: React.FC = ({}) => {
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [hoveredVirus, setHoveredVirus] = useState('');
+  const [popUpVirus, setPopUpVirus] = useState('');
+
+
+  const handleOpenPopUpClick = (virus) => {
+    setIsPopUpOpen(true)
+    setPopUpVirus(virus)
+  }
+
+  const handleClosePopUpClick = () => {
+    setIsPopUpOpen(false)
+  }
 
   
 
   return (
-    <>
-      <div className="min-h-screen text-[#4a95c0]">
-        <svg
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          height="3em"
-          width="3m"
-        >
-          <path d="M3 6 H21 A1 1 0 0 1 22 7 V13 A1 1 0 0 1 21 14 H3 A1 1 0 0 1 2 13 V7 A1 1 0 0 1 3 6 z" />
-          <path d="M17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6l7.7 7.7M8 6l8 8" />
-        </svg>
-        <p className="text-slate-500 text-3xl">Homepage under construction</p>
-        {/* <ClusterVisualization /> */}
-
+    <div
+      id="konva-container"
+      className=" mt-32 mx-12 border drop-shadow-md rounded border-slate-300 text-[#4a95c0] overflow-hidden relative"
+      style={{ height: "calc(100vh - 150px)"}} // Adjust height as needed
+    >
+      {/* <ControlsPopUp /> */}
+      <div className="flex flex-row justify-center">
+      <h1 className="mt-2 text-4xl font-light bg-[#e6e6e6] px-2 border-0 rounded text-[#3a5868] absolute z-10">{hoveredVirus}</h1>
       </div>
-    </>
+      <ClusterVisualisation setHoveredVirus={setHoveredVirus} handleOpenPopUpClick={handleOpenPopUpClick} />
+      {isPopUpOpen ? <ViewStructuresPopUp popUpVirus={popUpVirus} handleClosePopUpClick={handleClosePopUpClick} /> : null}
+      <div className="absolute top-0 left-0 flex flex-col text-[#3a5868b4] ">
+      <ClusterVisualisationLegend />
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-center gap-4 ">
+      <h3 className="mt-2  text-4xl font-light text-[#3a5868b4] z-10">Scroll to Zoom /</h3>
+      <h4 className="mt-2  text-4xl font-light text-[#3a5868b4] z-10">Drag to Pan /</h4>
+      <h4 className="mt-2  text-4xl font-light text-[#3a5868b4] z-10">Click to select a virus</h4>
+      </div>
+    </div>
   );
 };
 

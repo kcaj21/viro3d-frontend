@@ -1,159 +1,190 @@
-import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router";
-import { ForceGraph2D, ForceGraph3D} from "react-force-graph";
-import LoadingSpinner from "./LoadingSpinner";
+import React, { useRef, useEffect, useState } from "react";
+import Konva from "konva";
+import { useGraphData } from "../../hooks/useGraphData";
 
-const ClusterVisualisation = () => {
-  const [data, setData] = useState(null);
-  const myGraphRef = useRef();  // Create ref for ForceGraph2D
+const ClusterVisualisation = ( {setHoveredVirus, handleOpenPopUpClick} ) => {
+  const konvaContainerRef = useRef(null);
+  const stageRef = useRef(null);
+  const selectedNodeRef = useRef(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
+  const colourKeys = {"Riboviria": "#5cb7a8", "Monodnaviria": "#b87795", "Unclassified": "gray", "Varidnaviria": "#ddc454", "Ribozyviria": "#117733", "Duplodnaviria": "#8b81b9" }
+
+  const { data } = useGraphData();
+
+  // Function to calculate the center point of the nodes
+  const getCenterPoint = (nodes) => {
+    if (!nodes || nodes.length === 0) return { x: 0, y: 0 };
+
+    const sum = nodes.reduce(
+      (acc, node) => {
+        acc.x += node.x;
+        acc.y += node.y;
+        return acc;
+      },
+      { x: 0, y: 0 }
+    );
+
+    return {
+      x: sum.x / nodes.length,
+      y: sum.y / nodes.length,
+    };
+  };
+
+  // Set initial size
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "http://viro3d-dev.cvr.gla.ac.uk/api/graph_data/graph_data_viruses.json"
-        );
+    if (konvaContainerRef.current) {
+      const { clientWidth, clientHeight } = konvaContainerRef.current;
+      setContainerSize({ width: clientWidth, height: clientHeight });
+    }
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const json = await response.json();
-        setData(json);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setData(null);
+    const handleResize = () => {
+      if (konvaContainerRef.current) {
+        const { clientWidth, clientHeight } = konvaContainerRef.current;
+        setContainerSize({ width: clientWidth, height: clientHeight });
       }
     };
 
-    fetchData();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    // Adjust force settings after data is loaded and ref is assigned
-    if (myGraphRef.current && data) {
-      myGraphRef.current.d3Force('charge').strength(-70).distanceMax(5000); // Adjust to taste
-      
-    }
-  }, [data]);  // Runs when data is loaded
+  function addNode(obj, layer) {
+    const node = new Konva.Circle({
+      x: obj.x,
+      y: obj.y,
+      radius: 2,
+      // fill: "#89b717",
+      fill: colourKeys[obj.Realm],
+      id: obj.id,
+      strokeWidth: 0,
+    });
 
-  const navigate = useNavigate();
-  const handleNodeClick = (e) => {
-    console.log(e);
-  };
+    node.on("click", () => handleNodeClick(node, layer));
+    layer.add(node);
+    
 
-  if (data === null) {
-    return (
-      <div className="cluster-container flex flex-col items-center h-screen justify-center">
-        <h2 className="mb-12 text-5xl text-slate-500">Loading...</h2>
-        <LoadingSpinner size={"5"} />
-      </div>
-    );
   }
 
-  return (
-    <div>
-      <ForceGraph2D
-        ref={myGraphRef}  // Assign the ref here
-        graphData={data}
-        d3AlphaDecay={0.0228}
-        d3VelocityDecay={0.1}
-        enableNodeDrag={false}
-        nodeRelSize={64}
-        backgroundColor="#f9f9f9"
-        zoomToFit={[10]}
-        onNodeClick={(e) =>
-          window.open(
-            `/proteinresultspage/virus_name/${e['id']}`,
-            '_blank',
-            'rel=noopener noreferrer'
-          )
+  const handleNodeClick = (node, layer) => {
+    if (selectedNodeRef.current) {
+      selectedNodeRef.current.strokeWidth(0);
+      selectedNodeRef.current.zIndex(0);
+    console.log(selectedNodeRef.current.attrs.id)
+
+    }
+
+    node.stroke("#e2bd9d");
+    node.strokeWidth(1);
+    node.moveToTop();
+
+    selectedNodeRef.current = node;
+    layer.batchDraw();
+    handleOpenPopUpClick(selectedNodeRef.current.attrs.id)
+
+  };
+
+  useEffect(() => {
+    if (!stageRef.current && containerSize.width && containerSize.height) {
+      const initialScale = 1; 
+      const stage = new Konva.Stage({
+        container: konvaContainerRef.current,
+        width: containerSize.width,
+        height: containerSize.height,
+        draggable: true,
+        scale: { x: initialScale, y: initialScale },
+      });
+      stageRef.current = stage;
+
+      const tooltipLayer = new Konva.Layer();
+      const layer = new Konva.Layer();
+
+      const tooltip = new Konva.Label({
+        x: 10,
+        y: 10,
+        opacity: 0.75,
+        visible: false,
+        listening: false,
+      });
+
+      tooltip.add(
+        new Konva.Tag({
+          fill: "black",
+          pointerDirection: "down",
+          pointerWidth: 10,
+          pointerHeight: 10,
+          lineJoin: "round",
+        })
+      );
+
+      tooltip.add(
+        new Konva.Text({
+          text: "",
+          fontFamily: "Calibri",
+          fontSize: 18,
+          padding: 5,
+          fill: "white",
+        })
+      );
+
+      tooltipLayer.add(tooltip);
+
+      data?.nodes.forEach((nodeData) => addNode(nodeData, layer));
+      layer.draw();
+
+      stage.add(layer);
+      stage.add(tooltipLayer);
+
+      // Set initial view to the center of the nodes
+      const centerPoint = getCenterPoint(data?.nodes);
+      stage.position({
+        x: containerSize.width / 2 - centerPoint.x,
+        y: containerSize.height / 2 - centerPoint.y,
+      });
+
+      stage.on("mouseover mousemove", function (evt) {
+        const node = evt.target;
+        if (node) {
+          // const mousePos = node.getStage().getPointerPosition();
+          // tooltip.position({ x: mousePos.x, y: mousePos.y - 5 });
+          // tooltip.getText().text("node: " + node.id() + ", color: " + node.fill());
+          // tooltip.show();
+          // tooltipLayer.batchDraw();
+          setHoveredVirus(node.id())
         }
-        nodeAutoColorBy={(d) => d['id']}
-      />
-    </div>
-  );
+      });
+
+      stage.on("mouseout", () => {
+        tooltip.hide();
+        tooltipLayer.batchDraw();
+      });
+
+      stage.on("wheel", (e) => {
+        e.evt.preventDefault();
+        const scaleBy = 1.1;
+        const oldScale = stage.scaleX();
+        const mousePointTo = {
+          x: stage.getPointerPosition().x / oldScale - stage.x() / oldScale,
+          y: stage.getPointerPosition().y / oldScale - stage.y() / oldScale,
+        };
+        const newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
+        stage.scale({ x: newScale, y: newScale });
+        const newPos = {
+          x: -(mousePointTo.x - stage.getPointerPosition().x / newScale) * newScale,
+          y: -(mousePointTo.y - stage.getPointerPosition().y / newScale) * newScale,
+        };
+        stage.position(newPos);
+        stage.batchDraw();
+      });
+    }
+    return () => {
+      stageRef.current?.destroy();
+      stageRef.current = null;
+    };
+  }, [containerSize, data]);
+
+  return (
+  <div ref={konvaContainerRef} style={{ width: "100%", height: "100%", backgroundColor: "#f2f2f2" }} />);
 };
 
 export default ClusterVisualisation;
-
-
-// import { useEffect, useRef } from "react";
-// import { useGraphData } from "../../hooks/useGraphData";
-// import * as d3 from "d3";
-
-// const ClusterVisualisation = () => {
-
-
-// const { data } = useGraphData();
-// const canvasRef = useRef();
-  
-// let navHeight = document.getElementById("navbar")?.offsetHeight;
-// let footerHeight = document.getElementById("footer")?.offsetHeight;
-
-// let height = window.innerHeight - (navHeight + footerHeight);
-// let width = window.innerWidth;
-  
-//   useEffect(() => {
-//     if (!data || !canvasRef.current) return;
-
-//     const canvas = d3.select(canvasRef.current);
-//     const context = canvas.node().getContext("2d");
-
-//     // Calculate data bounds
-//     const xExtent = d3.extent(data, d => d.x);
-//     const yExtent = d3.extent(data, d => d.y);
-
-//     const x = d3.scaleLinear().domain(xExtent).range([0, width]);
-//     const y = d3.scaleLinear().domain(yExtent).range([height, 0]);
-
-//     // Calculate scale extent so all points are visible at minimum zoom level
-//     const minScale = Math.min(width / (x(xExtent[1]) - x(xExtent[0])), height / (y(yExtent[1]) - y(yExtent[0])));
-    
-//     const drawPoints = (transform) => {
-//       // Set the background color to black
-//       context.fillStyle = "black";
-//       context.fillRect(0, 0, width, height);
-
-//       context.save();
-//       context.translate(transform.x, transform.y);
-//       context.scale(transform.k, transform.k);
-
-//       // Set the circle color to blue
-//       context.fillStyle = "#4a95c0";
-//       data.forEach((d) => {
-//         context.beginPath();
-//         context.arc(x(d.x), y(d.y), 0.15, 0, 2 * Math.PI); // Draw small circles for each node
-//         context.fill();
-//       });
-//       context.restore();
-//     };
-
-//     // Adjust zoom to allow viewing the full dataset
-//     const zoom = d3.zoom()
-//       .scaleExtent([minScale, 100]) // Allow zooming out to see all points
-//       .on("zoom", (event) => {
-//         drawPoints(event.transform);
-//       });
-
-//     d3.select(canvasRef.current).call(zoom);
-
-//     // Initial draw with identity transform
-//     drawPoints(d3.zoomIdentity);
-
-//   }, [data]);
-
-//   return (
-//     <>
-//       {!data ? (
-//         <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
-//           <h2 className="mb-12 text-5xl text-slate-500">Loading</h2>
-//         </div>
-//       ) : (
-//         <canvas ref={canvasRef} width={width} height={height} />
-//       )}
-//     </>
-//   );
-// };
-
-// export default ClusterVisualisation;

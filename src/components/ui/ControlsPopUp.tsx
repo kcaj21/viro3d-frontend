@@ -10,7 +10,7 @@ const ControlsPopUp: React.FC<ControlsPopUpProps> = ({ handleClick }) => {
       <div
         id="default-modal"
         aria-hidden="true"
-        className="overflow-y-auto mb-1 font-extralight overflow-x-hidden absolute bottom-0 right-0 z-50 max-h-full"
+        className="overflow-y-auto mb-4 font-extralight overflow-x-hidden absolute bottom-0 right-0 z-50 "
       >
         <div className="relative  w-full max-w-2xl  max-h-full">
           <div className="relative flex flex-row bg-[#64748be0] rounded-lg shadow">
