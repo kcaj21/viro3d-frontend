@@ -6,14 +6,12 @@ import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
 import ProteinResultsPage from "./pages/ProteinResultsPage";
 import VirusResultsPage from "./pages/VirusResultsPage";
-import Test from "./pages/Test";
 
 function App() {
   return (
     <>
       <main className="flex flex-col">
         <Navbar />
-
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route
@@ -29,7 +27,6 @@ function App() {
               element={<StructureIndex />}
             ></Route>
           </Routes>
-
         <Footer />
       </main>
     </>

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Konva from "konva";
 import { useGraphData } from "../../hooks/useGraphData";
 
-const ClusterVisualisation = ( {setHoveredVirus, handleOpenPopUpClick} ) => {
+const ClusterVisualisation = ( {setHoveredVirus, handleViewStructurePopUpClick} ) => {
   const konvaContainerRef = useRef(null);
   const stageRef = useRef(null);
   const selectedNodeRef = useRef(null);
@@ -80,8 +80,7 @@ const ClusterVisualisation = ( {setHoveredVirus, handleOpenPopUpClick} ) => {
 
     selectedNodeRef.current = node;
     layer.batchDraw();
-    handleOpenPopUpClick(selectedNodeRef.current.attrs.id)
-
+    handleViewStructurePopUpClick(selectedNodeRef.current.attrs.id)
   };
 
   useEffect(() => {
@@ -145,11 +144,6 @@ const ClusterVisualisation = ( {setHoveredVirus, handleOpenPopUpClick} ) => {
       stage.on("mouseover mousemove", function (evt) {
         const node = evt.target;
         if (node) {
-          // const mousePos = node.getStage().getPointerPosition();
-          // tooltip.position({ x: mousePos.x, y: mousePos.y - 5 });
-          // tooltip.getText().text("node: " + node.id() + ", color: " + node.fill());
-          // tooltip.show();
-          // tooltipLayer.batchDraw();
           setHoveredVirus(node.id())
         }
       });

@@ -1,30 +1,30 @@
 import React, { useState } from "react";
-import VanillaTest from "../components/ui/VanillaTest";
-import ControlsPopUp from "../components/ui/ControlsPopUp";
 import ViewStructuresPopUp from "../components/ui/ViewStructuresPopUp";
-import InfoIcon from "../components/ui/InfoIcon";
 import ClusterVisualisationLegend from "../components/ui/ClusterVisualisationLegend";
 import ClusterVisualisation from "../components/ui/ClusterVisualisation";
 
 const Home: React.FC = () => {
 
 
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [isViewStructurePopUpOpen, setIsViewStructurePopUpOpen] = useState(false);
+  const [isLegendPopUpOpen, setIsLegendPopUpOpen] = useState(true);
   const [hoveredVirus, setHoveredVirus] = useState('');
   const [popUpVirus, setPopUpVirus] = useState('');
 
 
-  const handleOpenPopUpClick = (virus) => {
-    setIsPopUpOpen(true)
+  const handleViewStructurePopUpClick = (virus) => {
+    setIsViewStructurePopUpOpen(true)
     setPopUpVirus(virus)
   }
 
-  const handleClosePopUpClick = () => {
-    setIsPopUpOpen(false)
+  const handleCloseViewStructurePopUpClick = () => {
+    setIsViewStructurePopUpOpen(false)
   }
 
+  const handleLegendPopUpClick = () => {
+    setIsLegendPopUpOpen(!isLegendPopUpOpen)
+  }
   
-
   return (
     <div
       id="konva-container"
@@ -32,18 +32,27 @@ const Home: React.FC = () => {
       style={{ height: "calc(100vh - 150px)"}} // Adjust height as needed
     >
       {/* <ControlsPopUp /> */}
-      <div className="flex flex-row justify-center">
-      <h1 className="mt-2 text-4xl font-light bg-[#e6e6e6] px-2 border-0 rounded text-[#3a5868] absolute z-10">{hoveredVirus}</h1>
+      <div className="flex flex-row absolute w-full justify-center  ">
+        <div className="text-center absolute z-10 ">
+      <h1 className="mt-2 text-3xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4] ">Similarity of Structures between Species</h1>
+      <h2 className="mt-2 text-2xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4]  ">{hoveredVirus}</h2>
       </div>
-      <ClusterVisualisation setHoveredVirus={setHoveredVirus} handleOpenPopUpClick={handleOpenPopUpClick} />
-      {isPopUpOpen ? <ViewStructuresPopUp popUpVirus={popUpVirus} handleClosePopUpClick={handleClosePopUpClick} /> : null}
+      </div>
+      <ClusterVisualisation setHoveredVirus={setHoveredVirus} handleViewStructurePopUpClick={handleViewStructurePopUpClick} />
+      {isViewStructurePopUpOpen ? <ViewStructuresPopUp popUpVirus={popUpVirus} handleCloseViewStructurePopUpClick={handleCloseViewStructurePopUpClick} /> : null}
       <div className="absolute top-0 left-0 flex flex-col text-[#3a5868b4] ">
-      <ClusterVisualisationLegend />
+      <h3 className="text-4xl"></h3>
+      </div>
+      <div className="absolute top-0 left-0 flex flex-col text-[#3a5868b4] ">
+        {isLegendPopUpOpen ? (<ClusterVisualisationLegend handleLegendPopUpClick={handleLegendPopUpClick}/>) : (
+          <button onClick={handleLegendPopUpClick} className="mt-2 ml-2 text-2xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#6d828d] hover:text-[#505f66]">Show Legend</button>
+        )}
+      
       </div>
       <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-center gap-4 ">
-      <h3 className="mt-2  text-4xl font-light text-[#3a5868b4] z-10">Scroll to Zoom /</h3>
-      <h4 className="mt-2  text-4xl font-light text-[#3a5868b4] z-10">Drag to Pan /</h4>
-      <h4 className="mt-2  text-4xl font-light text-[#3a5868b4] z-10">Click to select a virus</h4>
+      <h4 className="mt-2  text-2xl font-light text-[#3a5868b4] z-10">Scroll to Zoom /</h4>
+      <h5 className="mt-2  text-2xl font-light text-[#3a5868b4] z-10">Drag to Pan /</h5>
+      <h6 className="mt-2  text-2xl font-light text-[#3a5868b4] z-10">Click to select a virus</h6>
       </div>
     </div>
   );
