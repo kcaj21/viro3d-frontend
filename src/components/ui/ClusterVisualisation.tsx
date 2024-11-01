@@ -57,7 +57,8 @@ const ClusterVisualisation = ( {setHoveredVirus, handleViewStructurePopUpClick} 
       // fill: "#89b717",
       fill: colourKeys[obj.Realm],
       id: obj.id,
-      strokeWidth: 0,
+      stroke: 'black',
+      strokeWidth: 0.15,
     });
 
     node.on("click", () => handleNodeClick(node, layer));
@@ -74,8 +75,8 @@ const ClusterVisualisation = ( {setHoveredVirus, handleViewStructurePopUpClick} 
 
     }
 
-    node.stroke("#e2bd9d");
-    node.strokeWidth(1);
+    node.stroke("orange");
+    node.strokeWidth(0.3);
     node.moveToTop();
 
     selectedNodeRef.current = node;
