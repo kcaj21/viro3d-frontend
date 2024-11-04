@@ -66,13 +66,7 @@ const ResultsPage: React.FC = () => {
                     genomeLoading={genomeLoading}
                     isolate={coordinates?.segments[0]["_id"]}
                   />
-                ) : (
-                  <div className="flex flex-col text-center items-center h-[10vh] justify-center">
-                    <div className="mb-6 text-5xl text-slate-500">
-                      Error: Genome coordinates could not be retrieved
-                    </div>
-                  </div>
-                )}
+                ) : null}
 
                 <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
                   <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
