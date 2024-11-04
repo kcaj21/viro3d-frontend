@@ -38,7 +38,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
   }, []);
 
   function addNode(obj, layer) {
-    const initialRadius = 3; // Initial node size, will be scaled with zoom
+    const initialRadius = 5; // Initial node size, will be scaled with zoom
 
     const node = new Konva.Circle({
       x: obj.x,
@@ -84,7 +84,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
 
   useEffect(() => {
     if (!stageRef.current && containerSize.width && containerSize.height) {
-      const initialScale = 1;
+      const initialScale = 0.7;
       const stage = new Konva.Stage({
         container: konvaContainerRef.current,
         width: containerSize.width,
@@ -126,7 +126,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
 
       // Define min and max radius values for nodes
       const minRadius = 0.08; // Minimum size for nodes
-      const maxRadius = 3;   // Maximum size for nodes
+      const maxRadius = 5;   // Maximum size for nodes
 
       // Wheel event for zooming with constrained node size
       stage.on("wheel", (e) => {

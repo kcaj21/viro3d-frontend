@@ -33,67 +33,73 @@ const ResultsPage: React.FC = () => {
 
   return (
     <>
-    <div className="min-h-screen mt-40 my-auto mx-24">
-      {!isLoading && !data ? (
-        <div className="">
-          <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
-            <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
-          </div>
-        </div>
-      ) : !data ? (
-        <div className="min-h-screen">
-          <div className="results-container flex flex-col items-center h-screen justify-center">
-            <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
-            <LoadingSpinner size={"5"} />
-          </div>
-        </div>
-      ) : (
-        <>
-          {data.detail ? (
-            <div className="flex flex-col text-center items-center h-[50vh] justify-center">
-              <div className="mb-12  text-5xl text-slate-500">Error:</div>
-              <div className="  text-5xl text-slate-500">
-                {JSON.stringify(data.detail)}
-              </div>
+      <div className="min-h-screen mt-40 my-auto mx-24">
+        {!isLoading && !data ? (
+          <div className="">
+            <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
+              <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
             </div>
-          ) : (
-            <div className="min-h-screen lg:mx-12 2xl:mx-0">
-              {filterParam === "virus_name" ? (
-                <FeatureBrowserContainer
-                  searchParam={searchParam}
-                  filterParam={filterParam}
-                  coordinates={coordinates}
-                  genomeLoading={genomeLoading}
-                  isolate={coordinates?.segments[0]["_id"]}
-                />
-              ) : null}
-
-              <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
-                <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
-                  <p className="px-8 mt-8 md:text-xl xl:text-4xl break-words">
-                    Showing {resultCount} results for: "
-                    {searchParam?.substring(0, 40)}..."
-                  </p>
+          </div>
+        ) : !data ? (
+          <div className="min-h-screen">
+            <div className="results-container flex flex-col items-center h-screen justify-center">
+              <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
+              <LoadingSpinner size={"5"} />
+            </div>
+          </div>
+        ) : (
+          <>
+            {data.detail ? (
+              <div className="flex flex-col text-center items-center h-[50vh] justify-center">
+                <div className="mb-12  text-5xl text-slate-500">Error:</div>
+                <div className="  text-5xl text-slate-500">
+                  {JSON.stringify(data.detail)}
                 </div>
-                <div className="min-h-[50vh]">
-                  <ProteinStructureResults
-                    data={data}
+              </div>
+            ) : (
+              <div className="min-h-screen lg:mx-12 2xl:mx-0">
+                {filterParam === "virus_name" && coordinates.segments ? (
+                  <FeatureBrowserContainer
+                    searchParam={searchParam}
                     filterParam={filterParam}
+                    coordinates={coordinates}
+                    genomeLoading={genomeLoading}
+                    isolate={coordinates?.segments[0]["_id"]}
                   />
-                </div>
-                {data.count > 10 && (
-                  <Pagination
-                    currentPage={currentPage}
-                    resultCount={resultCount}
-                    handleNextPage={handleNextPage}
-                    handlePrevPage={handlePrevPage}
-                  />
+                ) : (
+                  <div className="flex flex-col text-center items-center h-[10vh] justify-center">
+                    <div className="mb-6 text-5xl text-slate-500">
+                      Error: Genome coordinates could not be retrieved
+                    </div>
+                  </div>
                 )}
+
+                <div className="results-container min-h-full mt-8 border-0 text-5xl rounded-md drop-shadow-lg text-slate-500 bg-[#e6e6e6]">
+                  <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
+                    <p className="px-8 mt-8 md:text-xl xl:text-4xl break-words">
+                      Showing {resultCount} results for: "
+                      {searchParam?.substring(0, 40)}..."
+                    </p>
+                  </div>
+                  <div className="min-h-[50vh]">
+                    <ProteinStructureResults
+                      data={data}
+                      filterParam={filterParam}
+                    />
+                  </div>
+                  {data.count > 10 && (
+                    <Pagination
+                      currentPage={currentPage}
+                      resultCount={resultCount}
+                      handleNextPage={handleNextPage}
+                      handlePrevPage={handlePrevPage}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </>
-      )}
+            )}
+          </>
+        )}
       </div>
     </>
   );
