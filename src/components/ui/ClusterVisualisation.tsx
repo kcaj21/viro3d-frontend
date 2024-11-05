@@ -42,7 +42,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
 
     const node = new Konva.Circle({
       x: obj.x,
-      y: obj.y,
+      y: -obj.y,
       radius: initialRadius,
       fill: colourKeys[obj.Realm],
       id: obj.id,

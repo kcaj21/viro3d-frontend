@@ -35,16 +35,18 @@ const Navbar: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
+  //remove comments on useEffect to enable dynamic navbar
 
-      // cleanup function
-      return () => {
-        window.removeEventListener('scroll', controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     window.addEventListener('scroll', controlNavbar);
+
+  //     // cleanup function
+  //     return () => {
+  //       window.removeEventListener('scroll', controlNavbar);
+  //     };
+  //   }
+  // }, [lastScrollY]);
 
   const { data } = useAutocomplete(filterParam, suggestion, 0);
 
@@ -83,7 +85,7 @@ const Navbar: React.FC = () => {
   const debouncedSearch = debounce((search) => {
     setSuggestion(search);
     console.log(suggestion);
-  }, 100);
+  }, 400);
 
   const handleFilter = (e) => {
     setFilterParam(e.target.value);
@@ -105,7 +107,7 @@ const Navbar: React.FC = () => {
       <nav
         id="navbar"
 
-        className={`fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6] transition-transform duration-300 transform ${show ? 'translate-y-0' : '-translate-y-full'} `}
+        className={`fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${show ? 'translate-y-0' : '-translate-y-full'} `}
       >
         <div className="flex items-center   md:justify-around sm: justify-end mx-auto px-4 py-2">
           <Link onClick={clearSuggestion} to={`/`}>
@@ -155,12 +157,12 @@ const Navbar: React.FC = () => {
                     <Link
                       onClick={clearSuggestion}
                       to={{
-                        pathname: `/proteinresultspage/virus_name/${encodeURIComponent(virus.virus_name)}`,
+                        pathname: `/proteinresultspage/virus_name/${encodeURIComponent(virus._id)}`,
                       }}
-                      key={virus.virus_name}
+                      key={virus._id}
                     >
                       <li className="hover:bg-slate-100 border-0 rounded-lg">
-                        {virus.virus_name}
+                        {virus._id}
                       </li>
                     </Link>
                   ))}

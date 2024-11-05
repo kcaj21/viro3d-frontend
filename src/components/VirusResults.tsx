@@ -8,21 +8,21 @@ const VirusResults: React.FC = ({ data }) => {
         {data.viruses?.map((virus) => (
           <Link
             to={{
-              pathname: `/proteinresultspage/virus_name/${encodeURIComponent(virus.virus_name)}`,
+              pathname: `/proteinresultspage/virus_name/${encodeURIComponent(virus._id)}`,
             }}
-            key={virus.virus_name}
+            key={virus._id}
           >
             <div className="result-card hover:-translate-y-1 transition ease-in-out drop-shadow-md sm:min-h-[10vh] sm:max-h-[10vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-col justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
               <div className="2xl:text-3xl lg:text-xl sm:text-sm text-[#4a95c0] font-light">
                 <li className="px-6 py-2 text-[#4a95c0] font-light">
-                  {virus.virus_name}
+                  {virus._id}
                 </li>
               </div>
-              <div className=" py-4 ">
+              {/* <div className=" py-4 ">
                 <li className=" bg-[#4a95c0] w-[33%] fixed bottom-0 right-0 sm:py-1 sm:px-1 lg:px-2 lg:py-2 lg:text-sm 2xl:text-2xl sm:text-xs text-white text-center font-light">
                   Structures: {virus.structure_count}
                 </li>
-              </div>
+              </div> */}
             </div>
           </Link>
         ))}

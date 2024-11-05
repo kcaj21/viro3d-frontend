@@ -177,6 +177,22 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
             // chevronFillColor: '#64748b',
             chevronStrokeColor: "#64748b",
           });
+          soda.line({
+            chart: this,
+            annotations: leftJoin,
+            selector: "left-join",
+            y1: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
+            y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 24,
+            strokeColor: "#64748b",
+          });
+          soda.line({
+            chart: this,
+            annotations: rightJoin,
+            selector: "right-join",
+            y1: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 24,
+            y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
+            strokeColor: "#64748b",
+          });
         },
         postRender() {
           soda.clickBehavior({
@@ -212,22 +228,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
             opacity: 0.7,
             annotations: all,
             text: (d) => d.a.gene_name,
-          });
-          soda.line({
-            chart: this,
-            annotations: leftJoin,
-            selector: "left-join",
-            y1: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
-            y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 24,
-            strokeColor: "#64748b",
-          });
-          soda.line({
-            chart: this,
-            annotations: rightJoin,
-            selector: "right-join",
-            y1: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 24,
-            y2: (d) => d.c.layout.row(d) * d.c.rowHeight + d.c.rowHeight / 8,
-            strokeColor: "#64748b",
           });
         },
       });

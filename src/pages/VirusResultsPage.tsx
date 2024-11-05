@@ -54,9 +54,7 @@ const VirusResultsPage: React.FC = () => {
               <div className="min-h-[50vh]">
                 <VirusResults data={data} />
               </div>
-            </div>
-          )}
-          {data.count > 10 && (
+              {data.count > 10 && (
             <Pagination
               currentPage={currentPage}
               resultCount={resultCount}
@@ -64,6 +62,9 @@ const VirusResultsPage: React.FC = () => {
               handlePrevPage={handlePrevPage}
             />
           )}
+            </div>
+          )}
+
         </>
       )}
     </div>
