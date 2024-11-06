@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Konva from "konva";
 import { useGraphData } from "../../hooks/useGraphData";
-import d3 from "d3";
 
 const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }) => {
   const konvaContainerRef = useRef(null);
@@ -131,7 +130,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
       // Wheel event for zooming with constrained node size
       stage.on("wheel", (e) => {
         e.evt.preventDefault();
-        const scaleBy = 1.175;
+        const scaleBy = 1.1;
         const oldScale = stage.scaleX();
         const newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
 

@@ -12,6 +12,8 @@ const ResultsPage: React.FC = () => {
 
   const { filterParam, searchParam } = useParams();
 
+  console.log(searchParam)
+
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     filterParam,
     searchParam

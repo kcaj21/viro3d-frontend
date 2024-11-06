@@ -46,7 +46,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             {defaultModel === "CF" ? (
               <div className=" flex flex-row">
                 <dt className="font-light basis-2/3 text-slate-500  ">
-                  ColabFold pLDTT Score:
+                  ColabFold pLDDT Score:
                 </dt>
                 <dd className="font-extralight basis-1/3 text-slate-500  ">
                   {proteinInfo["colabfold_json_pLDDT"]}
@@ -55,7 +55,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             ) : (
               <div className=" flex flex-row">
                 <dt className="font-light basis-2/3 text-slate-500  ">
-                  ESMFold pLDTT Score:
+                  ESMFold pLDDT Score:
                 </dt>
                 <dd className="font-extralight basis-1/3 text-slate-500  ">
                   {proteinInfo["esmfold_log_pLDDT"]}
@@ -119,7 +119,9 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
                 <dt className="font-extralight">Host:</dt>
                 <dd>{proteinInfo["host"]}</dd>
               </>
-            ) : null}
+              ) : null}
+                          <dt className="font-extralight">Length (No. of Residues):</dt>
+                          <dd>{proteinInfo["protlen"]}</dd>
           </dl>
         </div>
       </div>

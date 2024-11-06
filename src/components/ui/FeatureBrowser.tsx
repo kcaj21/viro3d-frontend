@@ -262,7 +262,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
 
   return (
     <>
-      <div className="text-slate-500 min-w-[40vw] max-w-full ">
+      <div className="text-slate-500 min-w-[50vw] max-w-full ">
         <div className="" id={id}></div>
       </div>
     </>
