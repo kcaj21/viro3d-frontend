@@ -23,42 +23,22 @@ const Navbar: React.FC = () => {
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY) {
-        // if scrolling down, hide the navbar
         setShow(false);
       } else {
-        // if scrolling up, show the navbar
         setShow(true);
       }
-
-      // remember the current page location for the next move
       setLastScrollY(window.scrollY);
     }
   };
-
-  //remove comments on useEffect to enable dynamic navbar
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     window.addEventListener('scroll', controlNavbar);
-
-  //     // cleanup function
-  //     return () => {
-  //       window.removeEventListener('scroll', controlNavbar);
-  //     };
-  //   }
-  // }, [lastScrollY]);
 
   const { data } = useAutocomplete(filterParam, suggestion, 0);
 
   const ref = useRef();
 
   const checkIfClickedOutside = (e) => {
-    // If the menu is open and the clicked target is not within the menu,
-    // then close the menu
     if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
       setIsMenuOpen(false);
     }
-    console.log("clicked");
   };
 
   useEffect(() => {
@@ -75,11 +55,8 @@ const Navbar: React.FC = () => {
   };
 
   const handleText = (e) => {
-    // setSearchParam((e.target.value.replace(/\//g, '%2F')));
     setSearchParam(encodeURIComponent(e.target.value));
-    console.log(searchParam);
     debouncedSearch(e.target.value);
-    // setIsMenuOpen(true);
   };
 
   const debouncedSearch = debounce((search) => {
@@ -89,8 +66,9 @@ const Navbar: React.FC = () => {
     ) {
       setSuggestion(search);
       setIsMenuOpen(true);
-    } else {setIsMenuOpen(false)}
-    console.log(suggestion);
+    } else {
+      setIsMenuOpen(false);
+    }
   }, 0);
 
   const handleFilter = (e) => {
@@ -108,6 +86,12 @@ const Navbar: React.FC = () => {
     }
   };
 
+  // New function to clear the search input
+  const clearSearch = () => {
+    setSearchParam("");
+    setSuggestion("");
+  };
+
   return (
     <>
       <nav
@@ -116,18 +100,18 @@ const Navbar: React.FC = () => {
           show ? "translate-y-0" : "-translate-y-full"
         } `}
       >
-        <div className="flex items-center   md:justify-around sm: justify-end mx-auto px-4 py-2">
+        <div className="flex items-center md:justify-around sm:justify-end mx-auto px-4 py-2">
           <Link onClick={clearSuggestion} to={`/`}>
-            <img src="/cvrbioinformatics.png" width="200"></img>
+            <img src="/cvrbioinformatics.png" width="150"></img>
           </Link>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col-1 xl:w-[50%] border-0 border-[#f9f9f9] rounded  divide-x-4 text-2xl bg-[#f9f9f9]"
+            className="flex flex-col-1 xl:w-[50%] border-0 border-[#f9f9f9] rounded-full divide-x-4 text-2xl bg-[#f9f9f9]"
           >
             <select
               id="search-filter"
               onChange={handleFilter}
-              className="bg-[#f9f9f9] rounded text-slate-500 text-center"
+              className="bg-[#f9f9f9] rounded-full text-slate-500 px-2 text-center"
             >
               <option value="viruses">Virus Name</option>
               <option value="proteinname">Protein Name</option>
@@ -135,13 +119,33 @@ const Navbar: React.FC = () => {
               <option value="genbankid">Protein ID</option>
             </select>
             <div className="input-container relative w-full">
-              <div className="w-full flex justify-between">
+              <div className="w-full flex items-center">
                 <input
+                  value={decodeURIComponent(searchParam)}
                   onChange={handleText}
-                  className=" text-slate-500 pl-4 outline-none h-12 w-full border-none  text-2xl  bg-[#f9f9f9]"
+                  className="text-slate-500 pl-4 outline-none h-12 w-full border-none text-2xl bg-[#f9f9f9]"
                   type="text"
-                  // placeholder="Search Virus Name or Sequence..."
-                ></input>
+                />
+                {searchParam && (
+                  <button
+                    type="button"
+                    onClick={clearSearch}
+                    className="mr-2 text-gray-400 hover:text-gray-600"
+                  >
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      height="1.5em"
+                      width="1.5em"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9.293l3.646-3.647a.5.5 0 11.708.708L10.707 10l3.647 3.646a.5.5 0 01-.708.708L10 10.707l-3.646 3.647a.5.5 0 11-.708-.708L9.293 10 5.646 6.354a.5.5 0 11.708-.708L10 9.293z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                )}
                 <button>
                   <svg
                     className="mr-4"
@@ -159,7 +163,7 @@ const Navbar: React.FC = () => {
                 <ul
                   key={`${filterParam}-${suggestion}`}
                   ref={ref}
-                  className="autocomplete w-full  absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
+                  className="autocomplete w-full absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
                 >
                   {data.viruses?.map((virus) => (
                     <Link
@@ -207,9 +211,8 @@ const Navbar: React.FC = () => {
               ) : null}
             </div>
           </form>
-          <ul className="flex  p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-4xl text-[#4a95c0]">
+          <ul className="flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-3xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">About</button>
-            {/* <button className="hover:text-[#50bde5]">Downloads</button> */}
             <button className="hover:text-[#50bde5]">
               <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
             </button>
