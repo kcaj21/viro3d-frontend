@@ -115,7 +115,6 @@ const FeatureBrowserContainer: React.FC = ({
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
                 annotations={coordinates?.segments[0]?.coordinates}
-                // annotations={coordinates?.segments?.find(({ _id }) => _id === currentIsolate).coordinates}
                 recordID={recordID}
               />
             </div>
@@ -123,7 +122,6 @@ const FeatureBrowserContainer: React.FC = ({
         </div>
         <div className="mt-1 flex flex-row justify-between">
           <FeatureBrowserLegend />
-
           <div className="flex flex-row gap-4 ">
             {downloadLoading ? (
               <p>Downloading...</p>
@@ -131,6 +129,7 @@ const FeatureBrowserContainer: React.FC = ({
               <>
                 <div className="flex flex-row gap-2">
                   <p>Download All Structures:</p>
+                  <div className="flex flex-row gap-2">
                   <button
                     onClick={() => handleDownload("_relaxed.pdb")}
                     disabled={downloadLoading}
@@ -138,7 +137,6 @@ const FeatureBrowserContainer: React.FC = ({
                   >
                     PDBs
                   </button>
-                  <p>/</p>
                   <button
                     onClick={() => handleDownload(".cif")}
                     disabled={downloadLoading}
@@ -146,6 +144,7 @@ const FeatureBrowserContainer: React.FC = ({
                   >
                     mmCIFs
                   </button>
+                  </div>
                 </div>
               </>
             )}

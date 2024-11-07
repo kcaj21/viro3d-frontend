@@ -30,7 +30,6 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
                   </div>
                 </div>
                 <div className=" sm:text-xs xl:text-sm 2xl:text-xl  font-thin break-all">
-                  {/* <li className=""> Product: {protein.product}</li> */}
                   <li className="sm:hidden md:block">Peptide Category: {protein.pept_cat}</li>
                   {protein["Virus name(s)"].length > 40 ? (
                       <ResultToolTip
@@ -43,7 +42,7 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
                 </div>
               </div>
               <div className="basis-1/3 flex flex-col justify-end ">
-                <li className="lg:text-sm 2xl:text-2xl xs:text-xs text-white font-thin sm:py-1 sm:px-1 lg:px-2 lg:py-2 bg-[#4a95c0]  ">
+                <li className="lg:text-sm 2xl:text-2xl xs:text-xs text-white font-thin sm:py-1 sm:px-1 lg:px-2 lg:py-2 bg-[#4a95c0]">
                   pLDDT Score: {protein.colabfold_json_pLDDT}
                 </li>
               </div>

@@ -6,8 +6,9 @@ export function useAutocomplete(filterParam: string, id: string, currentpage: nu
   const [resultCount, setResultCount] = useState(null);
 
   useEffect(() => { 
-    if (id.length > 2 && filterParam === "viruses" || filterParam === "proteinname") {
+    if (filterParam === "viruses" || filterParam === "proteinname") {
       setIsLoading(true);
+      setData(null)
       fetch(
         `http://viro3d-dev.cvr.gla.ac.uk/api/${filterParam}/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )

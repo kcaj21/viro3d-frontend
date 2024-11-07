@@ -32,7 +32,7 @@ const StructureIndex: React.FC = ({}) => {
   return (
     <>
     <div className="min-h-screen mt-40 my-auto mx-24">
-      {isLoading && genomeLoading ? (
+      {!proteinInfo ? (
         <div className="min-h-screen">
           <div className="flex items-center justify-center gap-12">
             <LoadingSpinner size={"5"} />

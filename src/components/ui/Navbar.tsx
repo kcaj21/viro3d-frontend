@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const controlNavbar = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY) {
         // if scrolling down, hide the navbar
         setShow(false);
@@ -76,16 +76,22 @@ const Navbar: React.FC = () => {
 
   const handleText = (e) => {
     // setSearchParam((e.target.value.replace(/\//g, '%2F')));
-    setSearchParam(encodeURIComponent(e.target.value))
-    console.log(searchParam)
+    setSearchParam(encodeURIComponent(e.target.value));
+    console.log(searchParam);
     debouncedSearch(e.target.value);
-    setIsMenuOpen(true);
+    // setIsMenuOpen(true);
   };
 
   const debouncedSearch = debounce((search) => {
-    setSuggestion(search);
+    if (
+      (search.length > 4 && filterParam === "proteinname") ||
+      (search.length > 2 && filterParam === "viruses")
+    ) {
+      setSuggestion(search);
+      setIsMenuOpen(true);
+    } else {setIsMenuOpen(false)}
     console.log(suggestion);
-  }, 400);
+  }, 0);
 
   const handleFilter = (e) => {
     setFilterParam(e.target.value);
@@ -106,8 +112,9 @@ const Navbar: React.FC = () => {
     <>
       <nav
         id="navbar"
-
-        className={`fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${show ? 'translate-y-0' : '-translate-y-full'} `}
+        className={`fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${
+          show ? "translate-y-0" : "-translate-y-full"
+        } `}
       >
         <div className="flex items-center   md:justify-around sm: justify-end mx-auto px-4 py-2">
           <Link onClick={clearSuggestion} to={`/`}>
@@ -126,7 +133,7 @@ const Navbar: React.FC = () => {
               <option value="proteinname">Protein Name</option>
               <option value="sequencematch">Sequence</option>
               <option value="genbankid">Protein ID</option>
-              </select>
+            </select>
             <div className="input-container relative w-full">
               <div className="w-full flex justify-between">
                 <input
@@ -150,6 +157,7 @@ const Navbar: React.FC = () => {
               </div>
               {isMenuOpen && filterParam === "viruses" && suggestion && data ? (
                 <ul
+                  key={`${filterParam}-${suggestion}`}
                   ref={ref}
                   className="autocomplete w-full  absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
                 >
@@ -157,7 +165,9 @@ const Navbar: React.FC = () => {
                     <Link
                       onClick={clearSuggestion}
                       to={{
-                        pathname: `/proteinresultspage/virus_name/${encodeURIComponent(virus._id)}`,
+                        pathname: `/proteinresultspage/virus_name/${encodeURIComponent(
+                          virus._id
+                        )}`,
                       }}
                       key={virus._id}
                     >
@@ -168,21 +178,28 @@ const Navbar: React.FC = () => {
                   ))}
                 </ul>
               ) : null}
-              {isMenuOpen && filterParam === "proteinname" && suggestion && data ? (
+              {isMenuOpen &&
+              filterParam === "proteinname" &&
+              suggestion &&
+              data ? (
                 <ul
+                  key={`${filterParam}-${suggestion}`}
                   ref={ref}
-                  className="autocomplete w-full  absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
+                  className="autocomplete w-full absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
                 >
                   {data.protein_structures?.map((protein) => (
                     <Link
-                    onClick={clearSuggestion}
+                      onClick={clearSuggestion}
                       to={{
-                        pathname:`/structureindex/${encodeURIComponent(protein['Virus name(s)'])}/${protein._id}`,
+                        pathname: `/structureindex/${encodeURIComponent(
+                          protein["Virus name(s)"]
+                        )}/${protein._id}`,
                       }}
-                      key={protein.genbank_name}
+                      key={protein._id}
                     >
                       <li className="hover:bg-slate-100 border-0 rounded-lg">
-                      {protein['Virus name abbreviation(s)']}: {protein.genbank_name}
+                        {protein["Virus name abbreviation(s)"]}:{" "}
+                        {protein.genbank_name}
                       </li>
                     </Link>
                   ))}
@@ -192,9 +209,10 @@ const Navbar: React.FC = () => {
           </form>
           <ul className="flex  p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-4xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">About</button>
-            <button className="hover:text-[#50bde5]">Downloads</button>
+            {/* <button className="hover:text-[#50bde5]">Downloads</button> */}
             <button className="hover:text-[#50bde5]">
-              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a></button>
+              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
+            </button>
           </ul>
         </div>
       </nav>
