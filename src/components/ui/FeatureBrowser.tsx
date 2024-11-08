@@ -59,11 +59,10 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
   ];
 
   async function highlightSelectedGene() {
-
     //check to see if there is already a gene highlighted and stored in state
-    
+
     if (highlightedGene) {
-       highlightedGene.forEach((gene) => {
+      highlightedGene.forEach((gene) => {
         // console.log(gene["oldStyle"]);
         gene["rect"]?.setAttribute("style", `${gene["oldStyle"]}`);
       });
@@ -107,11 +106,13 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     //it subtracts the start coordinate from the end coordinate and divides it by 2
     // console.log(selectedProtein?.end)
 
-    let boundary = (30000 - (selectedProtein?.end - selectedProtein?.start)) / 2
+    let boundary =
+      (30000 - (selectedProtein?.end - selectedProtein?.start)) / 2;
 
     // the boundary variable is calculated this way so that the genome browser wont be fully zoomed in on just the selected protein, it acts as a buffer zone to ensure some other annotations are still visible on either side
-    let start = selectedProtein?.start - boundary
-    let end = selectedProtein?.end + boundary
+    let start = selectedProtein?.start - boundary;
+    let end = selectedProtein?.end + boundary;
+
     // if the start coordinate is < 30000, it will result in a negative number, so in this case start is set to 0
 
     // if (end > domainConstraint[1]) {end = domainConstraint[1]}
@@ -120,19 +121,18 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
       return {
         annotations,
         start: 0,
-        end: end
-      }
+        end: end,
+      };
     } else {
       return {
         annotations,
         start: start,
-        end: end
-      }
+        end: end,
+      };
     }
-  }
+  };
 
   useEffect(() => {
-
     if (!featureViewerRef.current) {
       featureViewerRef.current = new soda.Chart<CustomRenderParams>({
         selector: `div#${id}`,
@@ -146,7 +146,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
         draw() {
           this.addAxis();
           soda.chevronRectangle({
-            // soda.rectangle({
             chart: this,
             annotations: protein,
             fillColor: "#ACCBE1",
@@ -174,7 +173,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
             orientation: (d) => d.a.strand,
             chevronSpacing: 5,
             chevronWidth: 7,
-            // chevronFillColor: '#64748b',
             chevronStrokeColor: "#64748b",
           });
           soda.line({
@@ -208,11 +206,16 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
                 Chart<CustomRenderParams>
               >
             ) =>
-              navigate(`/structureindex/${encodeURIComponent(d.a.virus_name)}/${d.a.family}`, {
-                state: { key: "value" },
-              }),
+              navigate(
+                `/structureindex/${encodeURIComponent(d.a.virus_name)}/${
+                  d.a.family
+                }`,
+                {
+                  state: { key: "value" },
+                }
+              ),
           });
-          // soda.getAnnotationById("")
+
           soda.hoverBehavior({
             chart: this,
             annotations: all,
@@ -234,7 +237,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
 
       // remove comment marks to use autoZoom
       if (recordID && domainConstraint[1] > 60000 && selectedProtein) {
-        featureViewerRef.current.render(autoZoom())
+        featureViewerRef.current.render(autoZoom());
       } else {
         featureViewerRef.current.render({
           annotations,
@@ -242,14 +245,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
           end: domainConstraint[1],
         });
       }
-
-          //     featureViewerRef.current.render({
-          // annotations,
-          // start: domainConstraint[0],
-          // end: domainConstraint[1],
-          //     });
     }
-
   }, [annotations]);
 
   //check if recordID matches the family property of any of the annotations
@@ -257,7 +253,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
 
   useEffect(() => {
     highlightSelectedGene();
-
   }, [recordID]);
 
   return (

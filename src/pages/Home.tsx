@@ -28,8 +28,8 @@ const Home: React.FC = () => {
   return (
     <div
       id="konva-container"
-      className=" mt-32 mx-12 border drop-shadow-md rounded border-slate-300 text-[#4a95c0] overflow-hidden relative"
-      style={{ height: "calc(100vh - 150px)"}}
+      className=" mt-24 mx-4 border drop-shadow-md rounded border-slate-300 text-[#4a95c0] overflow-hidden relative"
+      style={{ height: "calc(100vh - 110px)"}}
     >
       {/* <ControlsPopUp /> */}
       <div className="flex flex-row absolute w-full justify-center  ">

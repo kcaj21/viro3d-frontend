@@ -212,9 +212,11 @@ const Navbar: React.FC = () => {
             </div>
           </form>
           <ul className="flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-3xl text-[#4a95c0]">
-            <button className="hover:text-[#50bde5]">About</button>
             <button className="hover:text-[#50bde5]">
-              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
+            <a href="/about">About</a>
+            </button>
+            <button className="hover:text-[#50bde5]">
+              <a href="api/docs">API</a>
             </button>
           </ul>
         </div>
