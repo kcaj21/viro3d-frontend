@@ -130,7 +130,7 @@ const Navbar: React.FC = () => {
                   <button
                     type="button"
                     onClick={clearSearch}
-                    className="mr-2 text-gray-400 hover:text-gray-600"
+                    className="mr-2 text-[#9ca3af] text-3xl hover:text-gray-600 border-0 rounded-full hover:bg-[#4343431e]"
                   >
                     <svg
                       fill="currentColor"
@@ -146,16 +146,17 @@ const Navbar: React.FC = () => {
                     </svg>
                   </button>
                 )}
-                <button>
+                <button className="border-0 px-2 py-1 mr-2 text-[#9ca3af] hover:text-gray-600 rounded-full  hover:bg-[#4343431e]">
                   <svg
-                    className="mr-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    width="1.5em"
+                    height="1.5em"
+                    viewBox="0 0 24 24"
                     fill="currentColor"
-                    viewBox="0 0 16 16"
-                    height="1em"
-                    width="1em"
-                    onClick={handleSubmit}
                   >
-                    <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
+                    <path d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 19.585938 21.585938 C 20.137937 22.137937 21.033938 22.137938 21.585938 21.585938 C 22.137938 21.033938 22.137938 20.137938 21.585938 19.585938 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z"></path>
                   </svg>
                 </button>
               </div>
@@ -202,7 +203,9 @@ const Navbar: React.FC = () => {
                       key={protein._id}
                     >
                       <li className="hover:bg-slate-100 border-0 rounded-lg">
-                        {protein["Virus name abbreviation(s)"]}:{" "}
+                        {protein["Virus name abbreviation(s)"] !== ""
+                          ? `${protein["Virus name abbreviation(s)"]}: `
+                          : `${protein["Virus name(s)"]}: `}
                         {protein.genbank_name}
                       </li>
                     </Link>
@@ -213,7 +216,7 @@ const Navbar: React.FC = () => {
           </form>
           <ul className="flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-3xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">
-            <a href="/about">About</a>
+              <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
               <a href="api/docs">API</a>
