@@ -179,7 +179,7 @@ const About: React.FC = () => {
             </TabButton>
             <TabButton
               selectTab={() => handeTabChange("Modeling Approaches")}
-              active={tab === "Modeling Approaches "}
+              active={tab === "Modeling Approaches"}
             >
               Modeling Approaches
             </TabButton>

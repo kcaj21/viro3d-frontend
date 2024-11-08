@@ -83,7 +83,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
               <a
                 target="blank"
                 rel="noopener noreferrer"
-                href={`https://www.ncbi.nlm.nih.gov/protein/${proteinInfo["uniprot_id"]}`}
+                href={`https://www.ncbi.nlm.nih.gov/protein/${proteinInfo["protein_id"]}`}
               >
                 {proteinInfo["protein_id"]}
               </a>
