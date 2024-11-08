@@ -44,22 +44,42 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
           )}
           <div>
             {defaultModel === "CF" ? (
-              <div className=" flex flex-row">
-                <dt className="font-light basis-2/3 text-slate-500  ">
-                  ColabFold pLDDT Score:
-                </dt>
-                <dd className="font-extralight basis-1/3 text-slate-500  ">
-                  {proteinInfo["colabfold_json_pLDDT"]}
-                </dd>
+              <div className="flex flex-col gap-4">
+                <div className=" flex flex-row">
+                  <dt className="font-light basis-2/3 text-slate-500  ">
+                    ColabFold pLDDT Score:
+                  </dt>
+                  <dd className="font-extralight basis-1/3 text-slate-500  ">
+                    {proteinInfo["colabfold_json_pLDDT"]}
+                  </dd>
+                </div>
+                <div className=" flex flex-row">
+                  <dt className="font-light basis-2/3 text-slate-500  ">
+                    pTM Score:
+                  </dt>
+                  <dd className="font-extralight basis-1/3 text-slate-500  ">
+                    {proteinInfo["colabfold_json_pTM"]}
+                  </dd>
+                </div>
               </div>
             ) : (
-              <div className=" flex flex-row">
-                <dt className="font-light basis-2/3 text-slate-500  ">
-                  ESMFold pLDDT Score:
-                </dt>
-                <dd className="font-extralight basis-1/3 text-slate-500  ">
-                  {proteinInfo["esmfold_log_pLDDT"]}
-                </dd>
+              <div className="flex flex-col gap-4">
+                <div className=" flex flex-row">
+                  <dt className="font-light basis-2/3 text-slate-500  ">
+                    ESMFold pLDDT Score:
+                  </dt>
+                  <dd className="font-extralight basis-1/3 text-slate-500  ">
+                    {proteinInfo["esmfold_log_pLDDT"]}
+                  </dd>
+                </div>
+                <div className=" flex flex-row">
+                  <dt className="font-light basis-2/3 text-slate-500  ">
+                    pTM Score:
+                  </dt>
+                  <dd className="font-extralight basis-1/3 text-slate-500  ">
+                    {proteinInfo["esmfold_log_pTM"]}
+                  </dd>
+                </div>
               </div>
             )}
           </div>
@@ -70,7 +90,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             <dt className="font-extralight">Uniprot ID:</dt>
             <dd className="underline">
               <a
-                className=""
+                className="hover:text-[#56b3e6]"
                 target="blank"
                 rel="noopener noreferrer"
                 href={`https://www.uniprot.org/uniprotkb/${proteinInfo["uniprot_id"]}/entry`}
@@ -81,6 +101,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             <dt className="font-extralight">Genbank ID:</dt>
             <dd className="underline">
               <a
+                className="hover:text-[#56b3e6]"
                 target="blank"
                 rel="noopener noreferrer"
                 href={`https://www.ncbi.nlm.nih.gov/protein/${proteinInfo["protein_id"]}`}
@@ -91,6 +112,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             <dt className="font-extralight">Tax ID:</dt>
             <dd className="underline">
               <a
+                className="hover:text-[#56b3e6]"
                 target="blank"
                 rel="noopener noreferrer"
                 href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id= ${proteinInfo["taxid"]}`}
@@ -101,6 +123,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             <dt className="font-extralight">Nucleotide Accession Number:</dt>
             <dd className="underline">
               <a
+                className="hover:text-[#56b3e6]"
                 target="blank"
                 rel="noopener noreferrer"
                 href={`https://www.ncbi.nlm.nih.gov/nuccore/${proteinInfo["nt_acc"]}`}
@@ -119,9 +142,9 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
                 <dt className="font-extralight">Host:</dt>
                 <dd>{proteinInfo["host"]}</dd>
               </>
-              ) : null}
-                          <dt className="font-extralight">Length (No. of Residues):</dt>
-                          <dd>{proteinInfo["protlen"]}</dd>
+            ) : null}
+            <dt className="font-extralight">Length (No. of Residues):</dt>
+            <dd>{proteinInfo["protlen"]}</dd>
           </dl>
         </div>
       </div>

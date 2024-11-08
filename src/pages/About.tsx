@@ -50,14 +50,11 @@ const About: React.FC = () => {
             <dt className="text-[#4a95c0] font-bold">2. ESMFold </dt>
             <dd>
               {" "}
-              We generated multiple sequence alignments (MSAs) using MMseqs2
-              (Steinegger and Soeding 2017) run against diverse databases
-              including colabfold_envdb_202108, pdb100_230517 and uniref30_2302.
-              These MSAs were used as input to LocalColabFold v.1.5.2 (Mirdita
-              et al. 2022, Jumper et al. 2021) allowing structural prediction
-              for 85,162 protein sequences. For each sequence, five models were
-              produced, and the highest-ranked structure was refined using Amber
-              force field relaxation (Case et al. 2023) to ensure structural{" "}
+              Structures were also predicted with ESMFold, an
+              alternative approach built on the protein language model ESM-2
+              v.1.0.3 (Lin et al. 2023). This resulted in 84,964 structural
+              predictions, which were also refined by relaxation using the Amber
+              force field.{" "}
             </dd>
           </dl>
           <p>
