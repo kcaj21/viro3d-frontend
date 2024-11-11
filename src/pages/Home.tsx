@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   return (
     <div
       id="konva-container"
-      className=" mt-24 mx-4 border drop-shadow-md rounded border-slate-300 text-[#4a95c0] overflow-hidden relative"
+      className=" sm:mt-24 xs:mx-0 xs:mt-0 lg:mx-4 xs:min-h-full sm:min-h-full border drop-shadow-md rounded xs:w-full sm:w-[98%] border-slate-300 text-[#4a95c0] overflow-hidden relative"
       style={{ height: "calc(100vh - 110px)"}}
     >
       {/* <ControlsPopUp /> */}
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
       <div className="absolute top-0 left-0 flex flex-col text-[#3a5868b4] ">
       <h3 className="text-4xl"></h3>
       </div>
-      <div className="absolute top-0 left-0 flex flex-col text-[#3a5868b4] ">
+      <div className="absolute xs:bottom-0 md:top-0 left-0 flex flex-col text-[#3a5868b4] ">
         {isLegendPopUpOpen ? (<ClusterVisualisationLegend handleLegendPopUpClick={handleLegendPopUpClick}/>) : (
           <button onClick={handleLegendPopUpClick} className="mt-2 ml-2 xl:text-2xl lg:text-xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#6d828d] hover:text-[#505f66]">Legend</button>
         )}

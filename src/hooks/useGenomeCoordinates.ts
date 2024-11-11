@@ -5,6 +5,7 @@ export function useGenomeCoordinates(filterparam: string, id: string) {
   const [coordinates, setCoordinates] = useState(null);
 
   useEffect(() => {
+    if (filterparam === "virus_name") {
     setIsLoading(true);
     fetch(
         `http://viro3d-dev.cvr.gla.ac.uk/api/genome_coordinates/${filterparam}/?qualifier=${encodeURIComponent(id)}`
@@ -20,6 +21,7 @@ export function useGenomeCoordinates(filterparam: string, id: string) {
         setCoordinates(null);
         setIsLoading(false);
       });
+    }
   }, [filterparam, id]);
 
   return { coordinates, isLoading };

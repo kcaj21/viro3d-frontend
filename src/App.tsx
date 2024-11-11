@@ -12,7 +12,7 @@ import About from "./pages/About";
 function App() {
   return (
     <>
-      <main className="flex flex-col">
+      <main className="">
         <Navbar />
           <Routes>
             <Route path="/" element={<Home />}></Route>

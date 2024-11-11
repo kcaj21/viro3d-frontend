@@ -8,10 +8,6 @@ type Link = {
   href: string;
 };
 
-type NavbarProps = {
-  links: Link[];
-};
-
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchParam, setSearchParam] = useState("");
@@ -77,6 +73,7 @@ const Navbar: React.FC = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (searchParam.length > 0) {
     clearSuggestion();
 
     if (filterParam === "viruses") {
@@ -84,6 +81,7 @@ const Navbar: React.FC = () => {
     } else {
       navigate(`/proteinresultspage/${filterParam}/${searchParam}`);
     }
+  }
   };
 
   // New function to clear the search input
@@ -96,17 +94,17 @@ const Navbar: React.FC = () => {
     <>
       <nav
         id="navbar"
-        className={`fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${
+        className={`xs:block sm:fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${
           show ? "translate-y-0" : "-translate-y-full"
         } `}
       >
-        <div className="flex items-center md:justify-around sm:justify-end mx-auto px-4 py-2">
+        <div className="flex items-center md:justify-around sm:justify-end mx-auto px-4 sm:py-2 xs:py-0">
           <Link onClick={clearSuggestion} to={`/`}>
-            <img src="/cvrbioinformatics.png" width="150"></img>
+            <img className="xs:hidden sm:block" src="/cvrbioinformatics.png" width="150"></img>
           </Link>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col-1 xl:w-[50%] border-0 border-[#f9f9f9] rounded-full divide-x-4 text-2xl bg-[#f9f9f9]"
+            className="flex flex-col-1 xl:w-[50%] border-0 border-[#f9f9f9] rounded-full divide-x-4 xs:text-xs sm:text-2xl bg-[#f9f9f9]"
           >
             <select
               id="search-filter"
@@ -123,14 +121,14 @@ const Navbar: React.FC = () => {
                 <input
                   value={decodeURIComponent(searchParam)}
                   onChange={handleText}
-                  className="text-slate-500 pl-4 outline-none h-12 w-full border-none text-2xl bg-[#f9f9f9]"
+                  className="text-slate-500 pl-4 outline-none sm:h-12 xs:h-8 w-full border-none xs:text-xs sm:text-2xl bg-[#f9f9f9]"
                   type="text"
                 />
                 {searchParam && (
                   <button
                     type="button"
                     onClick={clearSearch}
-                    className="mr-2 text-[#9ca3af] text-3xl hover:text-gray-600 border-0 rounded-full hover:bg-[#4343431e]"
+                    className="mr-2 text-[#9ca3af] text-3xl hover:text-[#777d88] border-0 rounded-full hover:bg-[#4343431e]"
                   >
                     <svg
                       fill="currentColor"
@@ -146,7 +144,7 @@ const Navbar: React.FC = () => {
                     </svg>
                   </button>
                 )}
-                <button className="border-0 px-2 py-1 mr-2 text-[#9ca3af] hover:text-gray-600 rounded-full  hover:bg-[#4343431e]">
+                <button className="border-0 px-2 py-1 mr-2 text-[#9ca3af] hover:text-[#777d88] rounded-full  hover:bg-[#4343431e]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
@@ -214,7 +212,7 @@ const Navbar: React.FC = () => {
               ) : null}
             </div>
           </form>
-          <ul className="flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight text-3xl text-[#4a95c0]">
+          <ul className=" flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight xs:text-sm sm:text-3xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">
               <a href="/about">About</a>
             </button>

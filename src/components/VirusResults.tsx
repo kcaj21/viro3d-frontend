@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const VirusResults: React.FC = ({ data }) => {
   return (
     <>
-      <ul className="px-8 py-8 grid grid-cols-2 gap-4">
+      <ul className="px-8 py-auto grid sm:grid-cols-2 xs:grid-cols-1 gap-4">
         {data.viruses?.map((virus) => (
           <Link
             to={{
@@ -12,9 +12,9 @@ const VirusResults: React.FC = ({ data }) => {
             }}
             key={virus._id}
           >
-            <div className="result-card hover:-translate-y-1 transition ease-in-out drop-shadow-md sm:min-h-[10vh] sm:max-h-[10vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-col justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
-              <div className="2xl:text-3xl lg:text-xl sm:text-sm text-[#4a95c0] font-light">
-                <li className="px-6 py-6 text-[#4a95c0] text-center font-light">
+            <div className="result-card hover:-translate-y-1 transition ease-in-out drop-shadow-md xs:min-h-[10vh] sm:min-h-[10vh] sm:max-h-[10vh] md:min-h-[15vh] md:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-col justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
+              <div className="2xl:text-3xl sm:text-xl text-[#4a95c0] font-light">
+                <li className="px-6 md:py-6 sm:py-auto  text-[#4a95c0] text-center font-light">
                   {virus._id}
                 </li>
               </div>

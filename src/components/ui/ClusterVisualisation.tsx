@@ -7,6 +7,11 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
   const stageRef = useRef(null);
   const selectedNodeRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const lastCenterRef = useRef(null);
+  const lastDistRef = useRef(0);
+  const dragStoppedRef = useRef(false);
+  
+
 
   const colourKeys = {
     "Riboviria": "#5cb7a8",
@@ -18,6 +23,17 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
   };
 
   const { data } = useGraphData();
+
+  function getDistance(p1, p2) {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+  }
+
+  function getCenter(p1, p2) {
+    return {
+      x: (p1.x + p2.x) / 2,
+      y: (p1.y + p2.y) / 2,
+    };
+  }
 
   useEffect(() => {
     if (konvaContainerRef.current) {
@@ -50,6 +66,8 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
     });
 
     node.on("click", () => handleNodeClick(node, layer));
+    node.on("tap", () => handleNodeClick(node, layer));
+
 
     // Mouseover event to display tooltip
     node.on("mouseover", () => {
@@ -98,6 +116,8 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
       layer.draw();
 
       stage.add(layer);
+
+      Konva.hitOnDragEnabled = true;
 
       // Set initial view to the center of the nodes
       const getCenterPoint = (nodes) => {
@@ -159,6 +179,81 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
         stage.position(newPos);
         stage.batchDraw();
       });
+
+      // const minRadius = 0.08; // Minimum size for nodes
+      // const maxRadius = 5;   // Maximum size for nodes
+      
+      stage.on('touchmove', (e) => {
+        e.evt.preventDefault();
+        const touch1 = e.evt.touches[0];
+        const touch2 = e.evt.touches[1];
+      
+        if (touch1 && !touch2 && !stage.isDragging() && dragStoppedRef.current) {
+          stage.startDrag();
+          dragStoppedRef.current = false;
+        }
+      
+        if (touch1 && touch2) {
+          if (stage.isDragging()) {
+            dragStoppedRef.current = true;
+            stage.stopDrag();
+          }
+      
+          const p1 = { x: touch1.clientX, y: touch1.clientY };
+          const p2 = { x: touch2.clientX, y: touch2.clientY };
+      
+          if (!lastCenterRef.current) {
+            lastCenterRef.current = getCenter(p1, p2);
+            return;
+          }
+          const newCenter = getCenter(p1, p2);
+          const dist = getDistance(p1, p2);
+      
+          if (!lastDistRef.current) {
+            lastDistRef.current = dist;
+          }
+      
+          const pointTo = {
+            x: (newCenter.x - stage.x()) / stage.scaleX(),
+            y: (newCenter.y - stage.y()) / stage.scaleX(),
+          };
+      
+          const scale = stage.scaleX() * (dist / lastDistRef.current);
+          stage.scaleX(scale);
+          stage.scaleY(scale);
+      
+          // Update each node's radius based on the new scale
+          let scaledRadius = 12 / scale; // Adjust sensitivity here
+          scaledRadius = Math.max(minRadius, Math.min(scaledRadius, maxRadius)); // Constrain radius
+      
+          layer.getChildren().forEach((node) => {
+            if (node.className === 'Circle') {
+              node.radius(scaledRadius);
+            }
+          });
+      
+          const dx = newCenter.x - lastCenterRef.current.x;
+          const dy = newCenter.y - lastCenterRef.current.y;
+      
+          const newPos = {
+            x: newCenter.x - pointTo.x * scale + dx,
+            y: newCenter.y - pointTo.y * scale + dy,
+          };
+      
+          stage.position(newPos);
+      
+          lastDistRef.current = dist;
+          lastCenterRef.current = newCenter;
+          layer.batchDraw(); // Ensure the layer redraws with updated radii
+        }
+      });
+      
+      
+      stage.on('touchend', () => {
+        lastDistRef.current = 0;
+        lastCenterRef.current = null;
+      });
+      
     }
     return () => {
       stageRef.current?.destroy();

@@ -6,7 +6,7 @@ export function useAutocomplete(filterParam: string, id: string, currentpage: nu
   const [resultCount, setResultCount] = useState(null);
 
   useEffect(() => { 
-    if (filterParam === "viruses" || filterParam === "proteinname") {
+    if (filterParam === "viruses" && id || filterParam === "proteinname" && id) {
       setIsLoading(true);
       setData(null)
       fetch(

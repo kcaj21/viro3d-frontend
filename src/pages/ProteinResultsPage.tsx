@@ -60,7 +60,7 @@ const ResultsPage: React.FC = () => {
               </div>
             ) : (
               <div className="min-h-screen lg:mx-12 2xl:mx-0">
-                {filterParam === "virus_name" && coordinates.segments ? (
+                {filterParam === "virus_name" && coordinates?.segments ? (
                   <FeatureBrowserContainer
                     searchParam={searchParam}
                     filterParam={filterParam}
