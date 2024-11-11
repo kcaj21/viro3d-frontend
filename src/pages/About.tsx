@@ -120,12 +120,12 @@ const About: React.FC = () => {
             feedback on Viro3D should be sent to:
           </p>
           <a
-            href="mailto:Joe.Grove@glasgow.ac.uk"
+            href="mailto:cvr-webresource-support@lists.cent.gla.ac.uk"
             target="_blank"
             rel="noreferrer"
             className=" hover:text-[#50bde5] underline"
           >
-            joe.grove@glasgow.ac.uk
+            cvr-webresource-support@lists.cent.gla.ac.uk
           </a>
         </div>
       ),

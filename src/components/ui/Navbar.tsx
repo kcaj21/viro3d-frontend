@@ -74,14 +74,14 @@ const Navbar: React.FC = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchParam.length > 0) {
-    clearSuggestion();
+      clearSuggestion();
 
-    if (filterParam === "viruses") {
-      navigate(`/resultspage/${filterParam}/${searchParam}`);
-    } else {
-      navigate(`/proteinresultspage/${filterParam}/${searchParam}`);
+      if (filterParam === "viruses") {
+        navigate(`/resultspage/${filterParam}/${searchParam}`);
+      } else {
+        navigate(`/proteinresultspage/${filterParam}/${searchParam}`);
+      }
     }
-  }
   };
 
   // New function to clear the search input
@@ -94,22 +94,25 @@ const Navbar: React.FC = () => {
     <>
       <nav
         id="navbar"
-        className={`xs:block sm:fixed top-0 left-0 right-0 z-20 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${
+        className={`absolute top-0 left-0 right-0 z-50 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${
           show ? "translate-y-0" : "-translate-y-full"
         } `}
       >
-        <div className="flex items-center md:justify-around sm:justify-end mx-auto px-4 sm:py-2 xs:py-0">
+        <div className="flex items-center sm:justify-around xs:justify-between mx-auto px-4 xs:py-2">
           <Link onClick={clearSuggestion} to={`/`}>
-            <img className="xs:hidden sm:block" src="/cvrbioinformatics.png" width="150"></img>
+            <img
+              className="xs:hidden sm:block sm:w-[15vw] md:w-[12vw] lg:w-[10vw] xl:w-[8.5vw]"
+              src="/cvrbioinformatics.png"
+            ></img>
           </Link>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col-1 xl:w-[50%] border-0 border-[#f9f9f9] rounded-full divide-x-4 xs:text-xs sm:text-2xl bg-[#f9f9f9]"
+            className="flex flex-col-1 xs:w-[100%] sm:w-[55%] lg:w-[66%]  border-0 border-[#f9f9f9] rounded-full divide-x-4 xs:text-lg sm:text-base lg:text-2xl bg-[#f9f9f9]"
           >
             <select
               id="search-filter"
               onChange={handleFilter}
-              className="bg-[#f9f9f9] rounded-full text-slate-500 px-2 text-center"
+              className="bg-[#f9f9f9] rounded-full xs:text-lg lg:text-2xl text-slate-500 px-2 text-center"
             >
               <option value="viruses">Virus Name</option>
               <option value="proteinname">Protein Name</option>
@@ -117,18 +120,18 @@ const Navbar: React.FC = () => {
               <option value="genbankid">Protein ID</option>
             </select>
             <div className="input-container relative w-full">
-              <div className="w-full flex items-center">
+              <div className=" flex items-center">
                 <input
                   value={decodeURIComponent(searchParam)}
                   onChange={handleText}
-                  className="text-slate-500 pl-4 outline-none sm:h-12 xs:h-8 w-full border-none xs:text-xs sm:text-2xl bg-[#f9f9f9]"
+                  className="text-slate-500 pl-4 outline-none sm:h-12  w-full border-none xs:text-lg lg:text-2xl bg-[#f9f9f9]"
                   type="text"
                 />
                 {searchParam && (
                   <button
                     type="button"
                     onClick={clearSearch}
-                    className="mr-2 text-[#9ca3af] text-3xl hover:text-[#777d88] border-0 rounded-full hover:bg-[#4343431e]"
+                    className="mr-2 text-[#9ca3af] xs:text-sm md:text-xl hover:text-[#777d88] border-0 rounded-full hover:bg-[#4343431e]"
                   >
                     <svg
                       fill="currentColor"
@@ -162,7 +165,7 @@ const Navbar: React.FC = () => {
                 <ul
                   key={`${filterParam}-${suggestion}`}
                   ref={ref}
-                  className="autocomplete w-full absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
+                  className="autocomplete w-full lg:text-2xl xs:text-lg absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
                 >
                   {data.viruses?.map((virus) => (
                     <Link
@@ -174,7 +177,7 @@ const Navbar: React.FC = () => {
                       }}
                       key={virus._id}
                     >
-                      <li className="hover:bg-slate-100 border-0 rounded-lg">
+                      <li className="hover:bg-slate-100 border-0 border-b">
                         {virus._id}
                       </li>
                     </Link>
@@ -212,7 +215,7 @@ const Navbar: React.FC = () => {
               ) : null}
             </div>
           </form>
-          <ul className=" flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 font-extralight xs:text-sm sm:text-3xl text-[#4a95c0]">
+          <ul className="xs:hidden sm:block flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 xs:space-x-2 font-extralight xs:text-sm sm:text-xl lg:text-3xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">
               <a href="/about">About</a>
             </button>
@@ -220,6 +223,27 @@ const Navbar: React.FC = () => {
               <a href="api/docs">API</a>
             </button>
           </ul>
+          <div>
+          <button
+            className="sm:hidden p-2 text-[#4a95c0]"
+            // onClick={toggleMenu}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+          </div>
         </div>
       </nav>
     </>
