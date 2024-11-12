@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   return (
     <div
       id="konva-container"
-      className=" sm:mt-24 xs:mx-0 xs:mt-12 lg:mx-4 xs:min-h-full border drop-shadow-md rounded xs:w-full sm:w-[98%] border-slate-300 text-[#4a95c0] overflow-hidden relative"
+      className=" sm:mt-24 xs:mx-0 xs:mt-14 lg:mx-4 xs:min-h-full border drop-shadow-md rounded xs:w-full sm:w-[98%] border-slate-300 text-[#4a95c0] overflow-hidden relative"
       style={{ height: "calc(100vh - 110px)"}}
     >
       {/* <ControlsPopUp /> */}

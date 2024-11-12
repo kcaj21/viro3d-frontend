@@ -14,24 +14,23 @@ function App() {
     <>
       <main className="">
         <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/test" element={<Test />}></Route>
-            <Route path="/about" element={<About />}></Route>
-
-            <Route
-              path="/resultspage/:filterParam/:searchParam"
-              element={<VirusResultsPage />}
-            ></Route>
-            <Route
-              path="/proteinresultspage/:filterParam/:searchParam"
-              element={<ProteinResultsPage />}
-            ></Route>
-            <Route
-              path="/structureindex/:filterParam/:searchParam"
-              element={<StructureIndex />}
-            ></Route>
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/test" element={<Test />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route
+            path="/resultspage/:filterParam/:searchParam"
+            element={<VirusResultsPage />}
+          ></Route>
+          <Route
+            path="/proteinresultspage/:filterParam/:searchParam"
+            element={<ProteinResultsPage />}
+          ></Route>
+          <Route
+            path="/structureindex/:filterParam/:searchParam"
+            element={<StructureIndex />}
+          ></Route>
+        </Routes>
         <Footer />
       </main>
     </>
