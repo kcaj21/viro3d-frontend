@@ -10,7 +10,7 @@ const About: React.FC = () => {
       title: "Data Collection and Structure Prediction",
       id: "Data Collection and Structure Prediction",
       content: (
-        <p className="text-2xl text-[#6d828d]">
+        <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
           Viro3D’s dataset includes 6,721 GenBank nucleotide sequences from
           4,407 virus isolates (representing 3,106 virus species). This
           constitutes all viruses with invertebrate and/or vertebrate host
@@ -27,7 +27,7 @@ const About: React.FC = () => {
       title: "Modeling Approaches",
       id: "Modeling Approaches",
       content: (
-        <div className="flex flex-col text-2xl text-[#6d828d] justify-evenly gap-8">
+        <div className="flex flex-col xs:text-xl lg:text-2xl text-[#6d828d] justify-evenly gap-8">
           <h2>
             To predict protein structures, we applied two cutting-edge
             computational methods to the same sequence set:
@@ -72,7 +72,7 @@ const About: React.FC = () => {
       title: "Web resource implementation",
       id: "Web resource implementation",
       content: (
-        <ul className="flex flex-col gap-2 text-2xl text-[#6d828d]">
+        <ul className="flex flex-col gap-2 xs:text-xl lg:text-2xl text-[#6d828d]">
           <li>React</li>
           <li>Typescript</li>
           <li>FastAPI</li>
@@ -88,7 +88,7 @@ const About: React.FC = () => {
       title: "Enabling New Research",
       id: "Enabling New Research",
       content: (
-        <p className="text-2xl text-[#6d828d]">
+        <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
           Viro3D provides a vital resource for virology research, addressing a
           gap in structural coverage and supporting functional annotation,
           evolutionary studies, and educational applications. With extensive
@@ -104,7 +104,7 @@ const About: React.FC = () => {
       title: "Limitations and Feedback",
       id: "Limitations and Feedback",
       content: (
-        <div className="flex flex-col gap-4 text-2xl text-[#6d828d]">
+        <div className="flex flex-col gap-4 xs:text-xl lg:text-2xl text-[#6d828d]">
           <p>
             We regard Viro3D as a work in progress. The 4,407 viruses included
             in phase one represent only a fraction of the virosphere and do not
@@ -134,7 +134,7 @@ const About: React.FC = () => {
       title: "Funding",
       id: "Funding",
       content: (
-        <p className="text-2xl text-[#6d828d]">
+        <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
           Viro3D is supported by UKRI MRC core funding to the MRC-University of
           Glasgow Centre for Virus Research, and by grants from the Wellcome
           Trust and Medical Research Foundation.
@@ -154,10 +154,10 @@ const About: React.FC = () => {
 
   return (
     <section className="" id="/">
-      <div className="mt-32 mx-36 min-h-screen px-24 py-24 bg-[#f2f2f2] border drop-shadow-md rounded border-slate-300">
+      <div className="xs:mt-24 xs:mb-12 lg:mt-32 xs:mx-4 lg:mx-36 min-h-screen xs:px-8 lg:px-24 py-24 bg-[#f2f2f2] border drop-shadow-md rounded border-slate-300">
         <div className="mt-4 md:mt-0 flex flex-col gap-8 h-full">
-          <h1 className="text-6xl text-[#4a95c0] font-bold  mb-8">About</h1>
-          <p className="text-3xl text-[#6d828d]">
+          <h1 className="xs:text-3xl lg:text-6xl text-[#4a95c0] font-bold  mb-8">About</h1>
+          <p className="xs:text-xl lg:text-3xl text-[#6d828d]">
             Viro3D is a comprehensive, searchable and browsable database of
             viral protein structure predictions, containing over 85,000
             structural models from more than 4,400 human and animal viruses. The
@@ -165,7 +165,7 @@ const About: React.FC = () => {
             protein structure, function, and evolution, as well as to explore
             the contribution of viruses to overall protein structure diversity.
           </p>
-          <div className="flex text-xl flex-row justify-evenly mt-8 mb-8">
+          <div className="flex xs:text-lg lg:text-xl xs:flex-col xs:gap-4 lg:flex-row justify-evenly mt-8 mb-8">
             <TabButton
               selectTab={() =>
                 handeTabChange("Data Collection and Structure Prediction")

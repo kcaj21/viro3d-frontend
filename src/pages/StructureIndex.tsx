@@ -7,6 +7,7 @@ import { useStructureIndexData } from "../hooks/useStructureIndexData";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
+import Tooltip from "../components/ui/Tooltip";
 
 const StructureIndex: React.FC = ({}) => {
   const { filterParam, searchParam } = useParams();
@@ -31,99 +32,104 @@ const StructureIndex: React.FC = ({}) => {
 
   return (
     <>
-    <div className="min-h-screen mt-32 mb-32 my-auto mx-24">
-      {!proteinInfo ? (
-        <div className="min-h-screen">
-          <div className="flex items-center justify-center gap-12">
-            <LoadingSpinner size={"5"} />
-          </div>
-        </div>
-      ) : (
-        <>
-          <FeatureBrowserContainer
-            filterParam={"virus_name"}
-            searchParam={filterParam}
-            coordinates={coordinates}
-            genomeLoading={genomeLoading}
-            recordID={searchParam}
-            isolate={proteinInfo["nt_acc"]}
-          />
-          <div className="mt-12 max-h-[80vh] flex gap-16 flex-row-1 ">
-            {defaultModel === "CF" ? (
-              <div className="basis-1/2">
-                <PdbeMolstar
-                  defaultModel={defaultModel}
-                  modelID={searchParam}
-                />
-                {isESMFoldModelPresent ? (
-                  <div>
-                    <button
-                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
-                      onClick={handleESMFoldClick}
-                    >
-                      Switch to ESMFold Model
-                    </button>
-                  </div>
-                ) : null}
-                <div className=" download-buttons-container flex flex-row ">
-                  <a
-                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
-                  >
-                    Download mmCIF
-                  </a>
-                  <a
-                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
-                  >
-                    Download PDB
-                  </a>
-                </div>
-                <PdbeMolstartLegend />
-              </div>
-            ) : null}
-            {defaultModel === "EF" ? (
-              <div className="basis-1/2">
-                <PdbeMolstar
-                  defaultModel={defaultModel}
-                  modelID={searchParam}
-                />
-                {isESMFoldModelPresent ? (
-                  <div>
-                    <button
-                      className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
-                      onClick={handleCollabFoldClick}
-                    >
-                      Switch to ColabFold Model
-                    </button>
-                  </div>
-                ) : null}
-                <div className=" download-buttons-container flex flex-row ">
-                  <a
-                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
-                  >
-                    Download mmCIF
-                  </a>
-                  <a
-                    className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                    href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
-                  >
-                    Download PDB
-                  </a>
-                </div>
-                <PdbeMolstartLegend />
-              </div>
-            ) : null}
-            <div className="basis-1/2 min-w-[30vw]  font-extralight ">
-              <ProteinInfo
-                proteinInfo={proteinInfo}
-                defaultModel={defaultModel}
-              />
+      <div className="min-h-screen xs:mt-24 sm:mt-32 xs:mb-96 sm:mb-32 sm:my-auto sm:mx-4 lg:mx-8 2xl:mx-24">
+        {!proteinInfo ? (
+          <div className="min-h-screen">
+            <div className="flex items-center justify-center gap-12">
+              <LoadingSpinner size={"5"} />
             </div>
           </div>
-        </>
-      )}
+        ) : (
+          <>
+            <FeatureBrowserContainer
+              filterParam={"virus_name"}
+              searchParam={filterParam}
+              coordinates={coordinates}
+              genomeLoading={genomeLoading}
+              recordID={searchParam}
+              isolate={proteinInfo["nt_acc"]}
+            />
+            <div className="mobile-heading sm:hidden ">
+              <h1 className="mx-12 text-2xl text-slate-500 ">
+                {proteinInfo["genbank_name"]}
+              </h1>
+            </div>
+            <div className="sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
+              {defaultModel === "CF" ? (
+                <div className="sm:basis-1/2 xs:mx-8">
+                  <PdbeMolstar
+                    defaultModel={defaultModel}
+                    modelID={searchParam}
+                  />
+                  {isESMFoldModelPresent ? (
+                    <div>
+                      <button
+                        className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
+                        onClick={handleESMFoldClick}
+                      >
+                        Switch to ESMFold Model
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className=" download-buttons-container flex flex-row ">
+                    <a
+                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                    >
+                      Download mmCIF
+                    </a>
+                    <a
+                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                    >
+                      Download PDB
+                    </a>
+                  </div>
+                  <PdbeMolstartLegend />
+                </div>
+              ) : null}
+              {defaultModel === "EF" ? (
+                <div className="sm:basis-1/2 xs:mx-8">
+                  <PdbeMolstar
+                    defaultModel={defaultModel}
+                    modelID={searchParam}
+                  />
+                  {isESMFoldModelPresent ? (
+                    <div>
+                      <button
+                        className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
+                        onClick={handleCollabFoldClick}
+                      >
+                        Switch to ColabFold Model
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className=" download-buttons-container flex flex-row ">
+                    <a
+                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                    >
+                      Download mmCIF
+                    </a>
+                    <a
+                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                    >
+                      Download PDB
+                    </a>
+                  </div>
+                  <PdbeMolstartLegend />
+                </div>
+              ) : null}
+              <div className="sm:basis-1/2 sm:min-w-[30vw] font-extralight ">
+                <ProteinInfo
+                  proteinInfo={proteinInfo}
+                  defaultModel={defaultModel}
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

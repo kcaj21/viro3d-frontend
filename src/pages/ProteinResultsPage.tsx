@@ -35,7 +35,7 @@ const ResultsPage: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen mt-40 my-auto mx-24">
+      <div className="min-h-screen xs:mt-24 xs:mb-12 sm:mt-40 my-auto xs:mx-4 md:mx-24">
         {!isLoading && !data ? (
           <div className="">
             <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
@@ -59,7 +59,7 @@ const ResultsPage: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="min-h-screen lg:mx-12 2xl:mx-0">
+              <div className=" min-h-screen lg:mx-12 2xl:mx-0">
                 {filterParam === "virus_name" && coordinates?.segments ? (
                   <FeatureBrowserContainer
                     searchParam={searchParam}
@@ -72,7 +72,7 @@ const ResultsPage: React.FC = () => {
 
                 <div className="results-container min-h-full mt-8 text-5xl border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
                   <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
-                    <p className="px-8 mt-8 xs:text-xs sm:text-base md:text-xl xl:text-3xl break-all">
+                    <p className="px-8 mt-8 xs:text-lg md:text-xl xl:text-3xl break-all">
                       Showing {resultCount} results for: "
                       {searchParam?.substring(0, 40)}..."
                     </p>

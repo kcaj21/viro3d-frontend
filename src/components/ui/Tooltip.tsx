@@ -11,7 +11,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text }) => {
       <div
         onMouseEnter={() => setShowToolTip(true)}
         onMouseLeave={() => setShowToolTip(false)}
-        className="tooltip-container"
+        className="tooltip-container xs:hidden lg:block"
       >
         <h1 className="mb-6 cursor-default text-slate-500 text-4xl">{text.substring(0, 60)}...</h1>
         <div

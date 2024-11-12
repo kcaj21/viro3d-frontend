@@ -35,35 +35,35 @@ const FeatureBrowserContainer: React.FC = ({
 
   return genomeLoading ? (
     <>
-      <div className="flex items-center justify-center gap-12">
+      <div className="xs:hidden  sm:flex items-center justify-center gap-12">
         <h2 className="text-5xl text-slate-500">Loading Genome Browser...</h2>
         <LoadingSpinner color={"#4a95c0"} size={"5"} />
       </div>
     </>
   ) : (
     <>
-      <div className="text-slate-500">
+      <div className="hidden sm:block text-slate-500 ">
         <div className="flex flex-col items-center">
-        <h1 className="text-center mb-6 text-2xl">{searchParam} Genome</h1>
-        {coordinates.segments.length > 1 && coordinates.segments[0].segment === "Non-segmented" ? (
-        <select
-        id="search-filter"
-        className="bg-[#f9f9f9] hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6] text-xl text-center  text-slate-500 mb-4"
-        onChange={handleChange}
-        
-      >
-        {coordinates.segments?.map((segment) => (
-    <option 
-    key={segment._id}
-    value={`${segment._id}`}
-    selected={currentIsolate === segment._id ? 'selected' : ''}
-  >
-    Isolate: {segment._id}
-  </option>
-        ))}
-      </select>
+          <h1 className="text-center mb-6 text-2xl">{searchParam} Genome</h1>
+          {coordinates.segments.length > 1 &&
+          coordinates.segments[0].segment === "Non-segmented" ? (
+            <select
+              id="search-filter"
+              className="bg-[#f9f9f9] hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6] text-xl text-center  text-slate-500 mb-4"
+              onChange={handleChange}
+            >
+              {coordinates.segments?.map((segment) => (
+                <option
+                  key={segment._id}
+                  value={`${segment._id}`}
+                  selected={currentIsolate === segment._id ? "selected" : ""}
+                >
+                  Isolate: {segment._id}
+                </option>
+              ))}
+            </select>
           ) : null}
-          </div>
+        </div>
         <div className="relative">
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
           {coordinates.segments[0].segment !== "Non-segmented" ? (
@@ -130,20 +130,20 @@ const FeatureBrowserContainer: React.FC = ({
                 <div className="flex flex-row gap-2">
                   <p>Download All Structures:</p>
                   <div className="flex flex-row gap-2">
-                  <button
-                    onClick={() => handleDownload("_relaxed.pdb")}
-                    disabled={downloadLoading}
-                    className="hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6]"
-                  >
-                    PDBs
-                  </button>
-                  <button
-                    onClick={() => handleDownload(".cif")}
-                    disabled={downloadLoading}
-                    className="hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6]"
-                  >
-                    mmCIFs
-                  </button>
+                    <button
+                      onClick={() => handleDownload("_relaxed.pdb")}
+                      disabled={downloadLoading}
+                      className="hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6]"
+                    >
+                      PDBs
+                    </button>
+                    <button
+                      onClick={() => handleDownload(".cif")}
+                      disabled={downloadLoading}
+                      className="hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6]"
+                    >
+                      mmCIFs
+                    </button>
                   </div>
                 </div>
               </>

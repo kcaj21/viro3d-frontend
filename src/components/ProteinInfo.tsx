@@ -33,10 +33,10 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
     <>Loading...</>
   ) : (
     <>
-      <div className="table-container  ml-8">
-        <div className="heading-container relative sm:text-2xl 2xl:text-4xl  min-h-[10vh]">
+      <div className="table-container xs:my-8  xs:mx-8 sm:ml-8">
+        <div className="heading-container relative xs:text-2xl 2xl:text-4xl  min-h-[10vh]">
           {proteinInfo["genbank_name"].length < 70 ? (
-            <h1 className="mb-6  text-slate-500 ">
+            <h1 className="hidden sm:block mb-6  text-slate-500 ">
               {proteinInfo["genbank_name"]}
             </h1>
           ) : (
@@ -45,7 +45,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
           <div>
             {defaultModel === "CF" ? (
               <div className="flex flex-col gap-4">
-                <div className=" flex flex-row">
+                <div className=" flex flex-row ">
                   <dt className="font-light basis-2/3 text-slate-500  ">
                     ColabFold pLDDT Score:
                   </dt>
@@ -84,9 +84,9 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
             )}
           </div>
         </div>
-        <div className="body-container sm:text-sm 2xl:text-2xl text-slate-500">
+        <div className="body-container xs:text-base lg:text-xl 2xl:text-2xl text-slate-500">
           <hr className=" h-0.5 my-8 bg-slate-500"></hr>
-          <dl className="grid grid-cols-2 sm:gap-8 2xl:gap-8">
+          <dl className="grid grid-cols-2 xs:gap-4 2xl:gap-8">
             <dt className="font-extralight">Uniprot ID:</dt>
             <dd className="underline">
               <a
