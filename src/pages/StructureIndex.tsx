@@ -7,7 +7,6 @@ import { useStructureIndexData } from "../hooks/useStructureIndexData";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
-import Tooltip from "../components/ui/Tooltip";
 
 const StructureIndex: React.FC = ({}) => {
   const { filterParam, searchParam } = useParams();
@@ -41,19 +40,32 @@ const StructureIndex: React.FC = ({}) => {
           </div>
         ) : (
           <>
+            <div className="desktop-back-button hidden md:block py-2 ">
+              {filterParam ? (
+                <a
+                  href={`/proteinresultspage/virus_name/${encodeURIComponent(
+                    filterParam
+                  )}`}
+                  className="text-xl px-2 py-2 rounded-md drop-shadow-md border-0 bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center"
+                >
+                 &lt; Back
+                </a>
+              ) : null}
+            </div>
             <FeatureBrowserContainer
               filterParam={"virus_name"}
               searchParam={filterParam}
               coordinates={coordinates}
               genomeLoading={genomeLoading}
               recordID={searchParam}
-              isolate={proteinInfo["nt_acc"]}
+              isolate={proteinInfo["Virus isolate designation"]}
             />
             <div className="mobile-heading sm:hidden ">
               <h1 className="mx-12 text-2xl text-slate-500 ">
                 {proteinInfo["genbank_name"]}
               </h1>
             </div>
+
             <div className="sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
               {defaultModel === "CF" ? (
                 <div className="sm:basis-1/2 xs:mx-8">

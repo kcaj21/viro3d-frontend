@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
               <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href="api/docs">API</a>
+              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
             </button>
           </ul>
           <form
@@ -140,6 +140,7 @@ const Navbar: React.FC = () => {
                 <input
                   value={decodeURIComponent(searchParam)}
                   onChange={handleText}
+                  // placeholder="Dengue Virus"
                   className="text-slate-500 pl-4 outline-none sm:h-12  w-full border-none xs:text-lg lg:text-2xl bg-[#f9f9f9]"
                   type="text"
                 />
@@ -239,7 +240,7 @@ const Navbar: React.FC = () => {
               <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href="api/docs">API</a>
+              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
             </button>
           </ul>
           <div>

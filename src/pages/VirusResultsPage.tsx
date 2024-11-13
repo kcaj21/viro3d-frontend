@@ -25,7 +25,7 @@ const VirusResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen mt-24 my-auto xs:mx-4 md:mx-24 xs:mb-12 xs:text-xl text-5xl">
+    <div className="h-screen xs:mt-24 lg:mt-32 md:mb-2 my-auto xs:mx-4 md:mx-24 xs:mb-96 xs:text-xl 2xl:text-5xl">
       {!isLoading && !data ? (
         <div className="results-container flex flex-col items-center h-screen w-screen justify-center">
           <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
@@ -45,7 +45,7 @@ const VirusResultsPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="results-container flex flex-col justify-between min-h-screen mt-8 border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
+            <div className="results-container flex flex-col justify-between  mt-8 border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
               <div>
                 <div className="button-row flex flex-row justify-between xs:text-xl lg:text-2xl 2xl:text-3xl font-light text-[#4a95c0]">
                   <p className="px-8 py-8 break-words">
@@ -53,7 +53,7 @@ const VirusResultsPage: React.FC = () => {
                     {searchParam?.substring(0, 40)}..."
                   </p>
                 </div>
-                <div className="min-h-[50vh]">
+                <div className="xs:min-h[100vh] xs:max-h-[100v] md:min-h-[70vh] md:max-h-[70vh]">
                   <VirusResults data={data} />
                 </div>
               </div>

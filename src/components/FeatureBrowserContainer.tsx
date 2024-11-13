@@ -15,6 +15,8 @@ const FeatureBrowserContainer: React.FC = ({
 }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [currentIsolate, setCurrentIsolate] = useState("");
+  const [isolateDesignations, setIsolateDesignations] = useState(null);
+
   const { isLoading: downloadLoading, handleDownload } =
     useZipDownload(searchParam);
 
@@ -22,16 +24,43 @@ const FeatureBrowserContainer: React.FC = ({
     setIsPopUpOpen(!isPopUpOpen);
   };
 
+  const areSegmentsUnique = (coords) => {
+    const seenSegments = new Set();
+
+    for (const segment of coords.segments) {
+      if (seenSegments.has(segment.segment)) {
+        return false;
+      }
+      seenSegments.add(segment.segment);
+    }
+
+    return true;
+  };
+
+  console.log(isolate);
+
+  useEffect(() => {
+    if (coordinates) {
+      const array = [...new Set(coordinates?.segments?.map(segment => segment.isolate_designation))]
+
+      setIsolateDesignations(array);
+    }
+  }, [coordinates]);
+
   useEffect(() => {
     setCurrentIsolate(isolate);
   }, [isolate]);
 
   const handleChange = (e) => {
     let segmentIndex = coordinates.segments.find(
-      (segment) => segment["_id"] === e.target.value
+      (segment) => segment["isolate_designation"] === e.target.value
     );
-    setCurrentIsolate(segmentIndex["_id"]);
+    console.log("seg index is:", segmentIndex);
+    setCurrentIsolate(segmentIndex["isolate_designation"]);
   };
+
+  //change currentIsolate from nt_acc to isolate_designation and pass it to chikungunya-like viruses too
+  //
 
   return genomeLoading ? (
     <>
@@ -46,36 +75,67 @@ const FeatureBrowserContainer: React.FC = ({
         <div className="flex flex-col items-center">
           <h1 className="text-center mb-6 text-2xl">{searchParam} Genome</h1>
           {coordinates.segments.length > 1 &&
-          coordinates.segments[0].segment === "Non-segmented" ? (
+          coordinates.segments[0].segment === "Non-segmented" || coordinates.segments[0].segment !== "Non-segmented" && !areSegmentsUnique(coordinates)  ? (
             <select
               id="search-filter"
               className="bg-[#f9f9f9] hover:text-[#56b3e6] border-b-2 border-[#56b4e600] hover:border-[#56b3e6] text-xl text-center  text-slate-500 mb-4"
               onChange={handleChange}
             >
-              {coordinates.segments?.map((segment) => (
+              {isolateDesignations?.map((segment) => (
                 <option
-                  key={segment._id}
-                  value={`${segment._id}`}
-                  selected={currentIsolate === segment._id ? "selected" : ""}
+                  key={segment}
+                  value={`${segment}`}
+                  selected={
+                    currentIsolate === segment
+                      ? "selected"
+                      : ""
+                  }
                 >
-                  Isolate: {segment._id}
+                  Isolate: {segment}
                 </option>
               ))}
             </select>
           ) : null}
         </div>
         <div className="relative">
-          {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
-          {coordinates.segments[0].segment !== "Non-segmented" ? (
+          {coordinates.segments[0].segment !== "Non-segmented" &&
+          areSegmentsUnique(coordinates) ? (
             <div
               id="segment-container"
               className="custom-scrollbar overflow-x-auto flex flex-grow divide-x-2 divide-[#bec4cc]"
             >
               {coordinates.segments?.map((segment) => (
                 <div
-                  key={segment.coordinates[0].segment}
+                  key={segment.coordinates[0].nt_acc}
                   id={segment.coordinates[0].nt_acc}
                   className="drop-shadow-md"
+                >
+                  <h2 className="text-center ">
+                    Segment: {segment.coordinates[0].segment}
+                  </h2>
+                  <FeatureBrowser
+                    annotations={segment.coordinates}
+                    recordID={recordID}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+          {coordinates.segments[0].segment !== "Non-segmented" &&
+          !areSegmentsUnique(coordinates) ? (
+            <div
+              id="segment-container"
+              className="custom-scrollbar overflow-x-auto flex flex-grow divide-x-2 divide-[#bec4cc]"
+            >
+              {coordinates.segments?.map((segment) => (
+                <div
+                  key={segment.coordinates[0].nt_acc}
+                  id={segment.coordinates[0].nt_acc}
+                  className={`drop-shadow-md ${
+                    currentIsolate !== segment.isolate_designation
+                      ? "hidden"
+                      : ""
+                  }`}
                 >
                   <h2 className="text-center ">
                     Segment: {segment.coordinates[0].segment}
@@ -96,10 +156,12 @@ const FeatureBrowserContainer: React.FC = ({
             >
               {coordinates.segments?.map((segment) => (
                 <div
-                  key={segment.coordinates[0].segment}
+                  key={segment.coordinates[0].nt_acc}
                   id={segment._id}
                   className={`drop-shadow-md ${
-                    currentIsolate !== segment._id ? "hidden" : ""
+                    currentIsolate !== segment.isolate_designation
+                      ? "hidden"
+                      : ""
                   }`}
                 >
                   <FeatureBrowser
@@ -119,6 +181,7 @@ const FeatureBrowserContainer: React.FC = ({
               />
             </div>
           ) : null}
+          {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}
         </div>
         <div className="mt-1 flex flex-row justify-between">
           <FeatureBrowserLegend />

@@ -12,8 +12,6 @@ const ResultsPage: React.FC = () => {
 
   const { filterParam, searchParam } = useParams();
 
-  console.log(searchParam)
-
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     filterParam,
     searchParam
@@ -66,7 +64,7 @@ const ResultsPage: React.FC = () => {
                     filterParam={filterParam}
                     coordinates={coordinates}
                     genomeLoading={genomeLoading}
-                    isolate={coordinates?.segments[0]["_id"]}
+                    isolate={coordinates?.segments[0]["isolate_designation"]}
                   />
                 ) : null}
 
