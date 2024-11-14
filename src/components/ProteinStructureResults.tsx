@@ -15,7 +15,7 @@ const ProteinStructureResults: React.FC = ({ data, filterParam }) => {
             }}
             key={protein._id}
           >
-            <div className="result-card hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md sm:min-h-[10vh] sm:max-h-[10vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[15vh] 2xl:max-h-[15vh] flex flex-row justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
+            <div className="result-card hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md xs:min-h-[12.5vh] xs:max-h-[12.5vh] sm:min-h-[30vh] sm:max-h-[30vh] md:min-h-[30vh] md:max-h-[30vh] lg:min-h-[15vh] lg:max-h-[15vh] 2xl:min-h-[10vh] 2xl:max-h-[10vh] flex flex-row justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
               <div className="px-4 py-2 flex flex-col justify-evenly  basis-2/3">
                 <div className="">
                   <div className=" 2xl:text-2xl  lg:text-base xs:text-xs text-[#4a95c0] font-light">
