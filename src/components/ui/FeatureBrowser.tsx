@@ -20,11 +20,13 @@ interface CustomAnnotation extends soda.Annotation {
 interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
   recordID: string;
+  browserWidth: number;
 }
 
 const FeatureBrowser: React.FC<CustomRenderParams> = ({
   annotations,
   recordID,
+  browserWidth
 }) => {
   const [highlightedGene, setHighlightedGene] = useState([]);
 
@@ -257,7 +259,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
 
   return (
     <>
-      <div className="text-slate-500 min-w-[50vw] max-w-full ">
+      <div className={`text-slate-500 min-w-[${browserWidth}vw] max-w-full`}>
         <div className="" id={id}></div>
       </div>
     </>
