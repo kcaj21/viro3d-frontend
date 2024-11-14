@@ -50,11 +50,10 @@ const About: React.FC = () => {
             <dt className="text-[#4a95c0] font-bold">2. ESMFold </dt>
             <dd>
               {" "}
-              Structures were also predicted with ESMFold, an
-              alternative approach built on the protein language model ESM-2
-              v.1.0.3 (Lin et al. 2023). This resulted in 84,964 structural
-              predictions, which were also refined by relaxation using the Amber
-              force field.{" "}
+              Structures were also predicted with ESMFold, an alternative
+              approach built on the protein language model ESM-2 v.1.0.3 (Lin et
+              al. 2023). This resulted in 84,964 structural predictions, which
+              were also refined by relaxation using the Amber force field.{" "}
             </dd>
           </dl>
           <p>
@@ -141,6 +140,19 @@ const About: React.FC = () => {
         </p>
       ),
     },
+    {
+      title: "Feedback",
+      id: "Feedback",
+      content: (
+        <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
+          If you find this online resource valuable and would like to support
+          the expansion of viral protein structures, please consider sending a
+          letter of support on your institution’s letterhead. Your endorsement
+          will strengthen our funding applications and help us enhance and
+          expand this web resource.
+        </p>
+      ),
+    },
   ];
 
   const [tab, setTab] = useState("Data Collection and Structure Prediction");
@@ -156,7 +168,9 @@ const About: React.FC = () => {
     <section className="" id="/">
       <div className="xs:mt-24 xs:mb-12 lg:mt-32 xs:mx-4 lg:mx-36 min-h-screen xs:px-8 lg:px-24 py-24 bg-[#f2f2f2] border drop-shadow-md rounded border-slate-300">
         <div className="mt-4 md:mt-0 flex flex-col gap-8 h-full">
-          <h1 className="xs:text-3xl lg:text-6xl text-[#4a95c0] font-bold  mb-8">About</h1>
+          <h1 className="xs:text-3xl lg:text-6xl text-[#4a95c0] font-bold  mb-8">
+            About
+          </h1>
           <p className="xs:text-xl lg:text-3xl text-[#6d828d]">
             Viro3D is a comprehensive, searchable and browsable database of
             viral protein structure predictions, containing over 85,000
@@ -203,6 +217,12 @@ const About: React.FC = () => {
               active={tab === "Funding"}
             >
               Funding
+            </TabButton>
+            <TabButton
+              selectTab={() => handeTabChange("Feedback")}
+              active={tab === "Feedback"}
+            >
+              Feedback
             </TabButton>
           </div>
           <div className="mt-8">
