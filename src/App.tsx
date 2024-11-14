@@ -31,6 +31,7 @@ function App() {
             element={<StructureIndex />}
           ></Route>
         </Routes>
+        <p className="fixed z-50 2xl:text-4xl lg:text-xl  text-[#d1d1d1] top-0 right-0 my-1 mx-4">Viro3D Beta</p>
         <Footer />
       </main>
     </>

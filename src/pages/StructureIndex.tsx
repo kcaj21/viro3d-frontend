@@ -48,7 +48,7 @@ const StructureIndex: React.FC = ({}) => {
                   )}`}
                   className="text-xl px-2 py-2 rounded-md drop-shadow-md border-0 bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center"
                 >
-                 &lt; Back
+                  &lt; Back
                 </a>
               ) : null}
             </div>
@@ -69,10 +69,6 @@ const StructureIndex: React.FC = ({}) => {
             <div className="sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
               {defaultModel === "CF" ? (
                 <div className="sm:basis-1/2 xs:mx-8">
-                  <PdbeMolstar
-                    defaultModel={defaultModel}
-                    modelID={searchParam}
-                  />
                   {isESMFoldModelPresent ? (
                     <div>
                       <button
@@ -83,6 +79,11 @@ const StructureIndex: React.FC = ({}) => {
                       </button>
                     </div>
                   ) : null}
+                  <PdbeMolstar
+                    defaultModel={defaultModel}
+                    modelID={searchParam}
+                  />
+
                   <div className=" download-buttons-container flex flex-row ">
                     <a
                       className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
@@ -102,10 +103,6 @@ const StructureIndex: React.FC = ({}) => {
               ) : null}
               {defaultModel === "EF" ? (
                 <div className="sm:basis-1/2 xs:mx-8">
-                  <PdbeMolstar
-                    defaultModel={defaultModel}
-                    modelID={searchParam}
-                  />
                   {isESMFoldModelPresent ? (
                     <div>
                       <button
@@ -116,6 +113,10 @@ const StructureIndex: React.FC = ({}) => {
                       </button>
                     </div>
                   ) : null}
+                  <PdbeMolstar
+                    defaultModel={defaultModel}
+                    modelID={searchParam}
+                  />
                   <div className=" download-buttons-container flex flex-row ">
                     <a
                       className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
