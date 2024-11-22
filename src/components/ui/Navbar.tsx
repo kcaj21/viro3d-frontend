@@ -128,7 +128,7 @@ const Navbar: React.FC = () => {
             <select
               id="search-filter"
               onChange={handleFilter}
-              className="bg-[#f9f9f9] rounded-full xs:text-lg lg:text-2xl text-slate-500 px-2 text-center"
+              className="bg-[#f9f9f9] rounded-full xs:text-lg lg:text-2xl text-slate-500 px-6 text-center"
             >
               <option value="viruses">Virus Name</option>
               <option value="proteinname">Protein Name</option>

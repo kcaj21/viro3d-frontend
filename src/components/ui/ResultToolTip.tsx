@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 type TooltipProps = {
   text: string;
+  textLength: number;
 };
 
 const ResultToolTip: React.FC<TooltipProps> = ({ text, textLength }) => {

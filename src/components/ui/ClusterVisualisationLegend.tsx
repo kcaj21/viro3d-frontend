@@ -1,9 +1,10 @@
 import React from "react";
 
-const ClusterVisualisationLegend: React.FC = ({handleLegendPopUpClick}) => {
+type ClusterVisualisationLegendProps = {
+  handleLegendPopUpClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
-//   const colourKeys = {"Riboviria": "#5cb7a8", "Monodnaviria": "#b87795", "Unclassified": "gray", "Varidnaviria": "#f1e9c5", "Ribozyviria": "#117733", "Duplodnaviria": "#8b81b9" }
-
+const ClusterVisualisationLegend: React.FC<ClusterVisualisationLegendProps> = ({handleLegendPopUpClick}) => {
 
   return (
     <>

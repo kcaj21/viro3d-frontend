@@ -10,8 +10,6 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
   const lastCenterRef = useRef(null);
   const lastDistRef = useRef(0);
   const dragStoppedRef = useRef(false);
-  
-
 
   const colourKeys = {
     "Riboviria": "#5cb7a8",

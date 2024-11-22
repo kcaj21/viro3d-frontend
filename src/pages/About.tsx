@@ -1,7 +1,4 @@
 import React, { useState, useTransition } from "react";
-import ViewStructuresPopUp from "../components/ui/ViewStructuresPopUp";
-import ClusterVisualisationLegend from "../components/ui/ClusterVisualisationLegend";
-import ClusterVisualisation from "../components/ui/ClusterVisualisation";
 import TabButton from "../components/ui/TabButton";
 
 const About: React.FC = () => {
@@ -165,7 +162,7 @@ const About: React.FC = () => {
   const [tab, setTab] = useState("Data Collection and Structure Prediction");
   const [isPending, startTransition] = useTransition();
 
-  const handeTabChange = (id) => {
+  const handeTabChange = (id: string) => {
     startTransition(() => {
       setTab(id);
     });
@@ -225,12 +222,6 @@ const About: React.FC = () => {
             >
               Funding
             </TabButton>
-            {/* <TabButton
-              selectTab={() => handeTabChange("Feedback")}
-              active={tab === "Feedback"}
-            >
-              Feedback
-            </TabButton> */}
           </div>
           <div className="mt-8">
             {TAB_DATA?.find((t) => t.id === tab)?.content}

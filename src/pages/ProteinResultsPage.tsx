@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useResultsPageData } from "../hooks/useResultsPageData";
 import ProteinStructureResults from "../components/ProteinStructureResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
@@ -80,6 +79,7 @@ const ResultsPage: React.FC = () => {
                     <ProteinStructureResults
                       data={data}
                       filterParam={filterParam}
+                      searchParam={searchParam}
                     />
                   </div>
                   {data.count > 10 && (

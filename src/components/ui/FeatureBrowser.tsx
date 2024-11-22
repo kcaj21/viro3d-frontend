@@ -239,7 +239,6 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
         },
       });
 
-      // remove comment marks to use autoZoom
       if (recordID && genome_length_bp > 60000 && selectedProtein) {
         featureViewerRef.current.render(autoZoom());
       } else {
