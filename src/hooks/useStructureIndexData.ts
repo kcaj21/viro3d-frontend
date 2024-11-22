@@ -17,7 +17,7 @@ export function useStructureIndexData(id: string) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`http://viro3d-dev.cvr.gla.ac.uk/api/recordid/${id}`)
+    fetch(`http://viro3d-dev.cvr.gla.ac.uk/api/proteins/recordid/${id}`)
       .then((res) => res.json())
       .then( async (data) => {
         setProteinInfo(data.protein_structure);

@@ -21,12 +21,14 @@ interface CustomRenderParams extends soda.RenderParams {
   annotations: CustomAnnotation[];
   recordID: string;
   browserWidth: number;
+  genome_length_bp: number;
 }
 
 const FeatureBrowser: React.FC<CustomRenderParams> = ({
   annotations,
   recordID,
-  browserWidth
+  browserWidth,
+  genome_length_bp
 }) => {
   const [highlightedGene, setHighlightedGene] = useState([]);
 
@@ -238,13 +240,13 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
       });
 
       // remove comment marks to use autoZoom
-      if (recordID && domainConstraint[1] > 60000 && selectedProtein) {
+      if (recordID && genome_length_bp > 60000 && selectedProtein) {
         featureViewerRef.current.render(autoZoom());
       } else {
         featureViewerRef.current.render({
           annotations,
-          start: domainConstraint[0],
-          end: domainConstraint[1],
+          start: 0,
+          end: genome_length_bp,
         });
       }
     }

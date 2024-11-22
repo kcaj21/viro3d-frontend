@@ -62,7 +62,7 @@ const StructureIndex: React.FC = ({}) => {
             />
             <div className="mobile-heading sm:hidden ">
               <h1 className="mx-12 text-2xl text-slate-500 ">
-                {proteinInfo["genbank_name"]}
+                {proteinInfo["genbank_name_curated"]}
               </h1>
             </div>
 

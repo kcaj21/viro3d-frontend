@@ -6,6 +6,7 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
+import { useProteins } from "../hooks/useProteins";
 
 const ResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +18,7 @@ const ResultsPage: React.FC = () => {
     searchParam
   );
 
-  const { data, resultCount, isLoading } = useResultsPageData(
+  const { data, resultCount, isLoading } = useProteins(
     filterParam,
     searchParam,
     currentPage

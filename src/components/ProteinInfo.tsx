@@ -35,12 +35,12 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
     <>
       <div className="table-container xs:my-8  xs:mx-8 sm:ml-8">
         <div className="heading-container relative xs:text-2xl 2xl:text-4xl  min-h-[10vh]">
-          {proteinInfo["genbank_name"].length < 70 ? (
+          {proteinInfo["genbank_name_curated"].length < 70 ? (
             <h1 className="hidden sm:block mb-6  text-slate-500 ">
-              {proteinInfo["genbank_name"]}
+              {proteinInfo["genbank_name_curated"]}
             </h1>
           ) : (
-            <Tooltip text={proteinInfo["genbank_name"]} />
+            <Tooltip text={proteinInfo["genbank_name_curated"]} />
           )}
           <div>
             {defaultModel === "CF" ? (
@@ -86,7 +86,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
         </div>
         <div className="body-container xs:text-base lg:text-xl 2xl:text-2xl text-slate-500">
           <hr className=" h-0.5 my-8 bg-slate-500"></hr>
-          <dl className="grid grid-cols-2 xs:gap-4 2xl:gap-8">
+          <dl className="grid grid-cols-2 xs:gap-4 2xl:gap-6">
             <dt className="font-extralight">Uniprot ID:</dt>
             <dd className="underline">
               <a

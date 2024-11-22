@@ -78,7 +78,7 @@ const FeatureBrowserContainer: React.FC = ({
         */}
         <div className="isolate-dropdown-menu flex flex-col items-center">
           <h1 className="text-center mb-6 text-2xl">{searchParam} Genome</h1>
-          {(coordinates.segments.length > 1 &&
+          {(coordinates?.segments?.length > 1 &&
             coordinates.segments[0].segment === "Non-segmented") ||
           (coordinates.segments[0].segment !== "Non-segmented" &&
             !areSegmentsUnique(coordinates)) ? (
@@ -124,8 +124,7 @@ const FeatureBrowserContainer: React.FC = ({
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID}
-                    browserWidth={50}
-                  />
+                    browserWidth={50} genome_length_bp={segment.genome_length_bp}                  />
                 </div>
               ))}
             </div>
@@ -160,6 +159,7 @@ const FeatureBrowserContainer: React.FC = ({
                     annotations={segment.coordinates}
                     recordID={recordID}
                     browserWidth={92}
+                    genome_length_bp={segment.genome_length_bp}
                   />
                 </div>
               ))}
@@ -191,8 +191,7 @@ const FeatureBrowserContainer: React.FC = ({
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID}
-                    browserWidth={50}
-                  />
+                    browserWidth={50} genome_length_bp={segment.genome_length_bp}                  />
                 </div>
               ))}
             </div>
@@ -207,10 +206,9 @@ const FeatureBrowserContainer: React.FC = ({
           coordinates.segments.length === 1 ? (
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
-                annotations={coordinates?.segments[0]?.coordinates}
-                recordID={recordID}
-                browserWidth={50}
-              />
+                    annotations={coordinates?.segments[0]?.coordinates}
+                    recordID={recordID}
+                    browserWidth={50} genome_length_bp={coordinates?.segments[0]?.genome_length_bp}              />
             </div>
           ) : null}
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}

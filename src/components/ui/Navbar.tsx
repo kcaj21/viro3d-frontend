@@ -227,7 +227,7 @@ const Navbar: React.FC = () => {
                         {protein["Virus name abbreviation(s)"] !== ""
                           ? `${protein["Virus name abbreviation(s)"]}: `
                           : `${protein["Virus name(s)"]}: `}
-                        {protein.genbank_name}
+                        {protein.genbank_name_curated}
                       </li>
                     </Link>
                   ))}
@@ -400,7 +400,7 @@ const Navbar: React.FC = () => {
                             {protein["Virus name abbreviation(s)"] !== ""
                               ? `${protein["Virus name abbreviation(s)"]}: `
                               : `${protein["Virus name(s)"]}: `}
-                            {protein.genbank_name}
+                            {protein.genbank_name_curated}
                           </li>
                         </Link>
                       ))}

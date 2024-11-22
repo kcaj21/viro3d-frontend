@@ -4,13 +4,14 @@ import { useResultsPageData } from "../hooks/useResultsPageData";
 import VirusResults from "../components/VirusResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
+import { useViruses } from "../hooks/useViruses";
 
 const VirusResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { filterParam, searchParam } = useParams();
 
-  const { data, resultCount, isLoading } = useResultsPageData(
+  const { data, resultCount, isLoading } = useViruses(
     filterParam,
     searchParam,
     currentPage
