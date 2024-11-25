@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Tooltip from "./ui/Tooltip";
+import { ProteinStructure } from "../types/proteinstructure";
 
 type ProteinInfoProps = {
-  recordID: string;
+  proteinInfo: ProteinStructure;
+  defaultModel: string;
 };
 
 const ProteinInfo: React.FC<ProteinInfoProps> = ({

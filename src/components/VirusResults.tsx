@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { VirusData } from "../types/virusdata";
 
-const VirusResults: React.FC = ({ data }) => {
+type VirusResultsProps = {
+  data: VirusData;
+}
+
+const VirusResults: React.FC<VirusResultsProps> = ({ data }) => {
   return (
     <>
       <ul className="px-8 py-auto grid sm:grid-cols-2 xs:grid-cols-1 gap-4">
@@ -18,11 +23,6 @@ const VirusResults: React.FC = ({ data }) => {
                   {virus._id}
                 </li>
               </div>
-              {/* <div className=" py-4 ">
-                <li className=" bg-[#4a95c0] w-[33%] fixed bottom-0 right-0 sm:py-1 sm:px-1 lg:px-2 lg:py-2 lg:text-sm 2xl:text-2xl sm:text-xs text-white text-center font-light">
-                  Structures: {virus.structure_count}
-                </li>
-              </div> */}
             </div>
           </Link>
         ))}

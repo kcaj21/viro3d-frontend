@@ -1,8 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ResultToolTip from "./ui/ResultToolTip";
+import { ProteinData } from "../types/proteindata";
+import { BlastMatchData } from "../types/blastmatchdata";
 
-const ProteinStructureResults: React.FC = ({
+type ProteinStructureResultsProps = {
+  data: ProteinData | BlastMatchData;
+  filterParam: string | undefined;
+  searchParam: string | undefined;
+};
+
+const ProteinStructureResults: React.FC<ProteinStructureResultsProps> = ({
   data,
   filterParam,
   searchParam,
@@ -10,7 +18,7 @@ const ProteinStructureResults: React.FC = ({
   return filterParam !== "sequencematch" ? (
     <>
       <ul className="xs:px-4 sm:px-8 py-8 grid sm:grid-cols-2 xs:grid-cols-1 gap-4">
-        {data.protein_structures?.map((protein) => (
+      {"protein_structures" in data && data.protein_structures?.map((protein) => (
           <Link
             to={{
               pathname: `/structureindex/${encodeURIComponent(
@@ -60,7 +68,7 @@ const ProteinStructureResults: React.FC = ({
   ) : (
     <>
       <ul className="px-8 py-8 grid xs:grid-col-1 sm:grid-cols-2 gap-4">
-        {data.matches?.map((match) => (
+        {"matches" in data && data.matches?.map((match) => (
           <Link
             to={{
               pathname: `/structureindex/${match.protein_structure["Virus name(s)"]}/${match.protein_structure._id}`,
@@ -68,9 +76,6 @@ const ProteinStructureResults: React.FC = ({
             key={match.protein_structure._id}
           >
             <div
-              onClick={() =>
-                handleMatchClick(match.protein_structure["Virus name(s)"])
-              }
               className="result-card-by-sequence-match min-h-[90vh] flex flex-col justify-between hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md xs:min-h-[20vh] xs:max-h-[20vh] sm:min-h-[35vh] sm:max-h-[35vh] md:min-h-[40vh] md:max-h-[40vh] lg:min-h-[20vh] lg:max-h-[20vh] 2xl:min-h-[20vh] 2xl:max-h-[20vh]  border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]"
             >
               <div className="flex flex-row justify-between">
@@ -102,23 +107,25 @@ const ProteinStructureResults: React.FC = ({
                   pLDDT Score: {match.protein_structure.colabfold_json_pLDDT}
                 </div>
               </div>
-              <div className="flex flex-row w-[100%]   divide-x text-center font-thin 2xl:text-lg xs:text-xs text-white">
-                <li className="bg-[#4a95c0] xs:px-2 sm:py-2 basis-1/3">
-                  evalue: {match.evalue}
-                </li>
-                <li className="bg-[#4a95c0] xs:px-2 sm:py-2 basis-1/3">
-                  Blastp Score: {match.score}
-                </li>
-                <li className="bg-[#4a95c0] xs:px-2 sm:py-2 basis-1/3">
-                  Seq. Identity:&nbsp;
-                  {((match.positives / searchParam.length) * 100).toFixed(0)}%
-                </li>
+              <div className="flex flex-row w-[100%] divide-x text-center font-thin 2xl:text-lg xs:text-xs text-white">
+                {searchParam ? (
+                  <>
+                    <li className="bg-[#4a95c0] xs:px-2 sm:py-2 basis-1/3">
+                      evalue: {match.evalue}
+                    </li>
+                    <li className="bg-[#4a95c0] xs:px-2 sm:py-2 basis-1/3">
+                      Blastp Score: {match.score}
+                    </li>
+                    <li className="bg-[#4a95c0] xs:px-2 sm:py-2 basis-1/3">
+                      Seq. Identity:&nbsp;
+                      {((match.positives / searchParam.length) * 100).toFixed(
+                        0
+                      )}
+                      %
+                    </li>
+                  </>
+                ) : null}
               </div>
-              {/* <div className="basis-1/3 flex flex-col justify-end ">
-                <li className="lg:text-sm 2xl:text-2xl xs:text-xs text-white font-thin xs:py-1 xs:px-1 lg:px-2 lg:py-2 bg-[#4a95c0]">
-                  pLDDT Score: {protein.colabfold_json_pLDDT}
-                </li>
-              </div> */}
             </div>
           </Link>
         ))}

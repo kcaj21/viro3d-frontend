@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api_url } from "../api";
 
 export function useStructureIndexData(id: string) {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,7 @@ export function useStructureIndexData(id: string) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`http://viro3d-dev.cvr.gla.ac.uk/api/proteins/recordid/${id}`)
+    fetch(`http://${api_url}/api/proteins/recordid/${id}`)
       .then((res) => res.json())
       .then( async (data) => {
         setProteinInfo(data.protein_structure);

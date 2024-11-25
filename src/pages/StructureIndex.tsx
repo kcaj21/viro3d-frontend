@@ -13,17 +13,16 @@ const StructureIndex: React.FC = ({}) => {
 
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     "virus_name",
-    filterParam
+    filterParam ?? ""
   );
 
   const {
     proteinInfo,
-    isLoading,
     defaultModel,
     isESMFoldModelPresent,
     handleCollabFoldClick,
     handleESMFoldClick,
-  } = useStructureIndexData(searchParam);
+  } = useStructureIndexData(searchParam ?? "");
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -35,7 +34,7 @@ const StructureIndex: React.FC = ({}) => {
         {!proteinInfo ? (
           <div className="min-h-screen">
             <div className="flex items-center justify-center gap-12">
-              <LoadingSpinner size={"5"} />
+              <LoadingSpinner />
             </div>
           </div>
         ) : (
@@ -52,14 +51,17 @@ const StructureIndex: React.FC = ({}) => {
                 </a>
               ) : null}
             </div>
-            <FeatureBrowserContainer
-              filterParam={"virus_name"}
-              searchParam={filterParam}
-              coordinates={coordinates}
-              genomeLoading={genomeLoading}
-              recordID={searchParam}
-              isolate={proteinInfo["Virus isolate designation"]}
-            />
+            {coordinates ? (
+              <FeatureBrowserContainer
+                filterParam={"virus_name"}
+                searchParam={filterParam ?? ""}
+                coordinates={coordinates}
+                genomeLoading={genomeLoading}
+                recordID={searchParam ?? ""}
+                isolate={proteinInfo["Virus isolate designation"]}
+              />
+            ) : null}
+
             <div className="mobile-heading sm:hidden ">
               <h1 className="mx-12 text-2xl text-slate-500 ">
                 {proteinInfo["genbank_name"]}
@@ -81,7 +83,7 @@ const StructureIndex: React.FC = ({}) => {
                   ) : null}
                   <PdbeMolstar
                     defaultModel={defaultModel}
-                    modelID={searchParam}
+                    modelID={searchParam ?? ""}
                   />
 
                   <div className=" download-buttons-container flex flex-row ">
@@ -115,7 +117,7 @@ const StructureIndex: React.FC = ({}) => {
                   ) : null}
                   <PdbeMolstar
                     defaultModel={defaultModel}
-                    modelID={searchParam}
+                    modelID={searchParam ?? ""}
                   />
                   <div className=" download-buttons-container flex flex-row ">
                     <a

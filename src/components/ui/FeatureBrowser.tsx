@@ -109,9 +109,9 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     //finds selected protein by taking the recordID and filtering annotations for objetcs that match by the family property
     //it subtracts the start coordinate from the end coordinate and divides it by 2
     // console.log(selectedProtein?.end)
-
+    if(selectedProtein) {
     let boundary =
-      (30000 - (selectedProtein?.end - selectedProtein?.start)) / 2;
+      (30000 - (selectedProtein.end - selectedProtein.start)) / 2;
 
     // the boundary variable is calculated this way so that the genome browser wont be fully zoomed in on just the selected protein, it acts as a buffer zone to ensure some other annotations are still visible on either side
     let start = selectedProtein?.start - boundary;
@@ -133,7 +133,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
         start: start,
         end: end,
       };
-    }
+    }}
   };
 
   useEffect(() => {

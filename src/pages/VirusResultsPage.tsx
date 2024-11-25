@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import VirusResults from "../components/VirusResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -10,9 +10,9 @@ const VirusResultsPage: React.FC = () => {
 
   const { filterParam, searchParam } = useParams();
 
-  const { data, resultCount, isLoading } = useViruses(
-    filterParam,
-    searchParam,
+  const { data, isLoading } = useViruses(
+    filterParam ?? "",
+    searchParam ?? "",
     currentPage
   );
 
@@ -33,7 +33,7 @@ const VirusResultsPage: React.FC = () => {
       ) : !data ? (
         <div className="results-container flex flex-col items-center h-screen justify-center">
           <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
-          <LoadingSpinner size={"5"} />
+          <LoadingSpinner />
         </div>
       ) : (
         <>
@@ -49,7 +49,7 @@ const VirusResultsPage: React.FC = () => {
               <div>
                 <div className="button-row flex flex-row justify-between xs:text-xl lg:text-2xl 2xl:text-3xl font-light text-[#4a95c0]">
                   <p className="px-8 py-8 break-words">
-                    Showing {resultCount} results for: "
+                    Showing {data.count} results for: "
                     {searchParam?.substring(0, 40)}..."
                   </p>
                 </div>
@@ -57,10 +57,10 @@ const VirusResultsPage: React.FC = () => {
                   <VirusResults data={data} />
                 </div>
               </div>
-              {data.count > 10 && (
+              {data.count && data.count > 10 && (
                 <Pagination
                   currentPage={currentPage}
-                  resultCount={resultCount}
+                  resultCount={data.count}
                   handleNextPage={handleNextPage}
                   handlePrevPage={handlePrevPage}
                 />

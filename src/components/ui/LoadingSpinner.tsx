@@ -1,10 +1,6 @@
 import React from "react";
 
-type LoadingSpinnerProps = {
-  size: String;
-}
-
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size }) => {
+const LoadingSpinner: React.FC = () => {
 
   return (
     <>

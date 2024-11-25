@@ -6,7 +6,6 @@ import StructureIndex from "./pages/StructureIndex";
 import Footer from "./components/ui/Footer";
 import ProteinResultsPage from "./pages/ProteinResultsPage";
 import VirusResultsPage from "./pages/VirusResultsPage";
-import Test from "./pages/Test";
 import About from "./pages/About";
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/test" element={<Test />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route
             path="/resultspage/:filterParam/:searchParam"

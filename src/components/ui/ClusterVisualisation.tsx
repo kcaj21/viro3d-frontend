@@ -1,8 +1,20 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Konva from "konva";
 import { useGraphData } from "../../hooks/useGraphData";
 
-const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }) => {
+type ClusterVisualisationProps = {
+  setHoveredVirus: React.Dispatch<React.SetStateAction<string>>;
+  handleViewStructurePopUpClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+type NodeData = {
+  id: string;
+  x: number;
+  y: number;
+  Realm: string;
+};
+
+const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({ setHoveredVirus, handleViewStructurePopUpClick }) => {
   const konvaContainerRef = useRef(null);
   const stageRef = useRef(null);
   const selectedNodeRef = useRef(null);
@@ -22,11 +34,11 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
 
   const { data } = useGraphData();
 
-  function getDistance(p1, p2) {
+  function getDistance(p1: { x: number; y: number }, p2: { x: number; y: number }) {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
   }
 
-  function getCenter(p1, p2) {
+  function getCenter(p1: { x: number; y: number }, p2: { x: number; y: number }) {
     return {
       x: (p1.x + p2.x) / 2,
       y: (p1.y + p2.y) / 2,
@@ -50,7 +62,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  function addNode(obj, layer) {
+  function addNode(obj: NodeData, layer: Konva.Layer) {
     const initialRadius = 5; // Initial node size, will be scaled with zoom
 
     const node = new Konva.Circle({
@@ -75,13 +87,13 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
 
     // Mouseout event to hide tooltip
     node.on("mouseout", () => {
-      setHoveredVirus(null);
+      setHoveredVirus("");
     });
 
     layer.add(node);
   }
 
-  const handleNodeClick = (node, layer) => {
+  const handleNodeClick = (node: Konva.Node, layer: Konva.Layer) => {
     if (selectedNodeRef.current) {
       selectedNodeRef.current.strokeWidth(0.015);
       selectedNodeRef.current.stroke('black');
@@ -101,7 +113,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
     if (!stageRef.current && containerSize.width && containerSize.height) {
       const initialScale = 0.7;
       const stage = new Konva.Stage({
-        container: konvaContainerRef.current,
+        container: konvaContainerRef.current as unknown as HTMLDivElement,
         width: containerSize.width,
         height: containerSize.height,
         draggable: true,
@@ -110,7 +122,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
       stageRef.current = stage;
 
       const layer = new Konva.Layer();
-      data?.nodes.forEach((nodeData) => addNode(nodeData, layer));
+      data?.nodes?.forEach((nodeData: NodeData) => addNode(nodeData, layer));
       layer.draw();
 
       stage.add(layer);
@@ -118,7 +130,7 @@ const ClusterVisualisation = ({ setHoveredVirus, handleViewStructurePopUpClick }
       Konva.hitOnDragEnabled = true;
 
       // Set initial view to the center of the nodes
-      const getCenterPoint = (nodes) => {
+      const getCenterPoint = (nodes: NodeData[]): { x: number; y: number } => {
         if (!nodes || nodes.length === 0) return { x: 0, y: 0 };
         const sum = nodes.reduce(
           (acc, node) => {

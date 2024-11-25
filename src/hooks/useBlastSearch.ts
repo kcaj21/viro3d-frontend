@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api_url } from "../api";
 
 export function useGenomeCoordinates(id: string) {
   const [isLoading, setIsLoading] = useState(true);
@@ -6,7 +7,7 @@ export function useGenomeCoordinates(id: string) {
 
   useEffect(() => {
     fetch(
-      `http://viro3d-dev.cvr.gla.ac.uk/api/sequencematch/${id}`
+      `http://${api_url}/api/sequencematch/${id}`
     )
       .then((res) => res.json())
       .then((data) => {

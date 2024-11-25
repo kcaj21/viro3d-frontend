@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
+import { ProteinData } from "../types/proteindata";
+import { api_url } from "../api";
 
 export function useProteins(filterparam: string, id: string, currentpage: number) {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [resultCount, setResultCount] = useState(null);
+  const [data, setData] = useState<ProteinData | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
       fetch(
-        `http://viro3d-dev.cvr.gla.ac.uk/api/proteins/${filterparam}/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+        `http://${api_url}/api/proteins/${filterparam}/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {
           setIsLoading(false);
-          setResultCount(data.count);
           setData(data);
         })
         .catch((error) => {
@@ -23,5 +23,5 @@ export function useProteins(filterparam: string, id: string, currentpage: number
         });
   }, [filterparam, id, currentpage]);
 
-  return { isLoading, data, resultCount };
+  return { isLoading, data };
 }

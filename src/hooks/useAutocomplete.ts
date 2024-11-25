@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api_url } from "../api";
 
 export function useAutocomplete(filterParam: string, id: string, currentpage: number) {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,7 +11,7 @@ export function useAutocomplete(filterParam: string, id: string, currentpage: nu
       setIsLoading(true);
       setData(null)
       fetch(
-        `http://viro3d-dev.cvr.gla.ac.uk/api/viruses/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+        `http://${api_url}/api/viruses/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -27,7 +28,7 @@ export function useAutocomplete(filterParam: string, id: string, currentpage: nu
       setIsLoading(true);
       setData(null)
       fetch(
-        `http://viro3d-dev.cvr.gla.ac.uk/api/proteins/proteinname/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+        `http://${api_url}/api/proteins/proteinname/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {

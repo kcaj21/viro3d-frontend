@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ProteinStructureResults from "../components/ProteinStructureResults";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -13,13 +13,13 @@ const ResultsPage: React.FC = () => {
   const { filterParam, searchParam } = useParams();
 
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
-    filterParam,
-    searchParam
+    filterParam ?? "",
+    searchParam ?? "",
   );
 
-  const { data, resultCount, isLoading } = useProteins(
-    filterParam,
-    searchParam,
+  const { data, isLoading } = useProteins(
+    filterParam ?? "",
+    searchParam ?? "",
     currentPage
   );
 
@@ -44,7 +44,7 @@ const ResultsPage: React.FC = () => {
           <div className="min-h-screen">
             <div className="results-container flex flex-col items-center h-screen justify-center">
               <h2 className="mb-12 text-5xl text-slate-500">Searching...</h2>
-              <LoadingSpinner size={"5"} />
+              <LoadingSpinner />
             </div>
           </div>
         ) : (
@@ -71,7 +71,7 @@ const ResultsPage: React.FC = () => {
                 <div className="results-container min-h-full mt-8 text-5xl border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
                   <div className="button-row flex flex-row justify-between font-light text-[#4a95c0]">
                     <p className="px-8 mt-8 xs:text-lg md:text-xl xl:text-3xl break-all">
-                      Showing {resultCount} results for: "
+                      Showing {data.count} results for: "
                       {searchParam?.substring(0, 40)}..."
                     </p>
                   </div>
@@ -85,7 +85,7 @@ const ResultsPage: React.FC = () => {
                   {data.count > 10 && (
                     <Pagination
                       currentPage={currentPage}
-                      resultCount={resultCount}
+                      resultCount={data.count}
                       handleNextPage={handleNextPage}
                       handlePrevPage={handlePrevPage}
                     />

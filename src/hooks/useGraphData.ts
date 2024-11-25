@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api_url } from "../api";
 
 export function useGraphData() {
 
@@ -8,7 +9,7 @@ export function useGraphData() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://viro3d-dev.cvr.gla.ac.uk/api/graph_data/graph_data_decoded.json"
+          `http://${api_url}/api/graph_data/graph_data_decoded.json`
         );
 
         if (!response.ok) {

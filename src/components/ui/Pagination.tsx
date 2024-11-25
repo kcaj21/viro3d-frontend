@@ -1,6 +1,13 @@
 import React from "react";
 
-const Pagination: React.FC = ({currentPage, resultCount, handleNextPage, handlePrevPage}) => {
+type PaginationProps = {
+  currentPage: number;
+  resultCount: number;
+  handleNextPage: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handlePrevPage: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({currentPage, resultCount, handleNextPage, handlePrevPage}) => {
   return (
     <>
         <div className="pagination flex flex-col-2 gap-4 xs:justify-between sm:justify-end font-light px-8 py-4 xs:text-2xl sm:text-3xl text-[#4a95c0]">

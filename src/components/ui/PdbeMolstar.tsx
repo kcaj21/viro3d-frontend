@@ -1,18 +1,15 @@
-import React, { useEffect, createRef, useState } from 'react';
+import React, { useEffect, createRef } from 'react';
 import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
 import { InitParams } from 'pdbe-molstar/lib/spec';
 
 type Model = {
-  modelID: String;
-  defaultModel: String;
+  modelID: string;
+  defaultModel: string;
 }
 
 const PDBeMolStar: React.FC<Model> = ({defaultModel, modelID}) => {
 
   const viewerContainerRef = createRef<HTMLDivElement>()
-
-  // In debug mode of react's strict mode, this code will
-  // be called twice in a row, which might result in unexpected behavior.
   
   useEffect(() => {
 

@@ -1,6 +1,10 @@
-import React from 'react'
+type TabButtonProps = {
+  active: boolean;
+  selectTab: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  children: string
+}
 
-const TabButton = ({ active, selectTab, children }) => {
+const TabButton: React.FC<TabButtonProps> = ({ active, selectTab, children }) => {
 
     const buttonClasses = active ? 'text-[#4a95c0] border-b border-[#4a95c0]' : 'text-[#4a95c0]'
 

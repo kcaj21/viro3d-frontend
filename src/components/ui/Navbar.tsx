@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
 
   const ref = useRef();
 
-  const checkIfClickedOutside = (e) => {
+  const checkIfClickedOutside = (e: { target: any; }) => {
     if (isAutoCompleteOpen && ref.current && !ref.current.contains(e.target)) {
       setIsAutoCompleteOpen(false);
     }
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
     setSuggestion("");
   };
 
-  const handleText = (e) => {
+  const handleText = (e: { target: { value: string; }; }) => {
     setSearchParam(encodeURIComponent(e.target.value));
     debouncedSearch(e.target.value);
   };
@@ -285,22 +285,6 @@ const Navbar: React.FC = () => {
         </div>
         {isMobileMenuOpen ? (
           <div className=" z-10 h-[10vh] w-full">
-            <div className="flex flex-row justify-center gap-4">
-              {/* <Link onClick={clearSuggestion} to={`/`}>
-              <img
-                className="sm:hidden w-[25vw]"
-                src="/cvrbioinformatics.png"
-              ></img>
-            </Link> */}
-              {/* <ul className=" flex flex-row justify-center  xs:space-x-2 font-extralight xs:text-sm text-[#4a95c0]">
-              <button className="hover:text-[#50bde5]">
-                <a href="/about">About</a>
-              </button>
-              <button className="hover:text-[#50bde5]">
-                <a href="api/docs">API</a>
-              </button>
-            </ul> */}
-            </div>
             <div className="pl-4 pr-4 ">
               <form
                 onSubmit={handleSubmit}

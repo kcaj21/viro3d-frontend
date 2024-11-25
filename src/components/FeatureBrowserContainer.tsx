@@ -5,8 +5,19 @@ import FeatureBrowserLegend from "./ui/FeatureBrowserLegend";
 import ControlsPopUp from "./ui/ControlsPopUp";
 import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
+import { Coordinates } from "../types/coordinates";
 
-const FeatureBrowserContainer: React.FC = ({
+
+type FeatureBrowserContainerProps = {
+  coordinates: Coordinates;
+  genomeLoading: boolean;
+  searchParam: string | undefined;
+  recordID?: string;
+  isolate: string;
+  filterParam: string;
+}
+
+const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
   coordinates,
   genomeLoading,
   searchParam,
@@ -15,7 +26,7 @@ const FeatureBrowserContainer: React.FC = ({
 }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [currentIsolate, setCurrentIsolate] = useState("");
-  const [isolateDesignations, setIsolateDesignations] = useState(null);
+  const [isolateDesignations, setIsolateDesignations] = useState<string[] | null>(null);
 
   const { isLoading: downloadLoading, handleDownload } =
     useZipDownload(searchParam);
@@ -24,7 +35,7 @@ const FeatureBrowserContainer: React.FC = ({
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  const areSegmentsUnique = (coords) => {
+  const areSegmentsUnique = (coords: { qualifier?: string; segments: any; }) => {
     const seenSegments = new Set();
 
     for (const segment of coords.segments) {
@@ -53,19 +64,18 @@ const FeatureBrowserContainer: React.FC = ({
     setCurrentIsolate(isolate);
   }, [isolate]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { value: string; }; }) => {
     let segmentIndex = coordinates.segments.find(
-      (segment) => segment["isolate_designation"] === e.target.value
+      (segment) => segment.isolate_designation === e.target.value
     );
-    console.log("seg index is:", segmentIndex);
-    setCurrentIsolate(segmentIndex["isolate_designation"]);
+    setCurrentIsolate(segmentIndex?.isolate_designation || "");
   };
 
   return genomeLoading ? (
     <>
       <div className="xs:hidden  sm:flex items-center justify-center gap-12">
         <h2 className="text-5xl text-slate-500">Loading Genome Browser...</h2>
-        <LoadingSpinner color={"#4a95c0"} size={"5"} />
+        <LoadingSpinner />
       </div>
     </>
   ) : (

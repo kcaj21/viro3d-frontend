@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import { Coordinates } from "../types/coordinates";
+import { api_url } from "../api";
 
 export function useGenomeCoordinates(filterparam: string, id: string) {
   const [isLoading, setIsLoading] = useState(true);
-  const [coordinates, setCoordinates] = useState(null);
+  const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
 
   useEffect(() => {
     if (filterparam === "virus_name") {
     setIsLoading(true);
     fetch(
-        `http://viro3d-dev.cvr.gla.ac.uk/api/genome_coordinates/${filterparam}/?qualifier=${encodeURIComponent(id)}`
+        `http://${api_url}/api/genome_coordinates/${filterparam}/?qualifier=${encodeURIComponent(id)}`
         
     )
       .then((res) => res.json())
