@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { api_url } from "../utils/api";
+import { NodeData } from "../types/nodedata";
+
+type GraphData = {
+  nodes: NodeData[]; // Adjust based on the structure of nodes
+};
 
 export function useGraphData() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<GraphData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {

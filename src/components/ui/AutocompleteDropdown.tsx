@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ProteinData } from "../../types/proteindata";
 import { VirusData } from "../../types/virusdata";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 type AutocompleteDropdownProps = {
   data: VirusData | ProteinData;
   isAutoCompleteOpen: boolean;
+  setIsAutoCompleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
   filterParam: string;
   suggestion: string;
   clearSuggestion: () => void;
@@ -14,11 +15,27 @@ type AutocompleteDropdownProps = {
 const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
   data,
   isAutoCompleteOpen,
+  setIsAutoCompleteOpen,
   filterParam,
   suggestion,
   clearSuggestion,
 }) => {
   const ref = useRef<HTMLUListElement | null>(null);
+
+  const checkIfClickedOutside = (e: { target: any }) => {
+    if (isAutoCompleteOpen && ref.current && !ref.current.contains(e.target)) {
+      setIsAutoCompleteOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", checkIfClickedOutside);
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [checkIfClickedOutside]);
+
+  
 
   return (
     <>

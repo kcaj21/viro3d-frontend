@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
 import { useAutocomplete } from "../../hooks/useAutocomplete";
@@ -16,36 +16,21 @@ const Navbar: React.FC = () => {
   const [searchParam, setSearchParam] = useState("");
   const [suggestion, setSuggestion] = useState("");
   const [filterParam, setFilterParam] = useState("viruses");
-  const [show, setShow] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // const [show, setShow] = useState(true);
+  // const [lastScrollY, setLastScrollY] = useState(0);
 
-  const controlNavbar = () => {
-    if (typeof window !== "undefined") {
-      if (window.scrollY > lastScrollY) {
-        setShow(false);
-      } else {
-        setShow(true);
-      }
-      setLastScrollY(window.scrollY);
-    }
-  };
+  // const controlNavbar = () => {
+  //   if (typeof window !== "undefined") {
+  //     if (window.scrollY > lastScrollY) {
+  //       setShow(false);
+  //     } else {
+  //       setShow(true);
+  //     }
+  //     setLastScrollY(window.scrollY);
+  //   }
+  // };
 
   const { data } = useAutocomplete(filterParam, suggestion, 0);
-
-  const ref = useRef();
-
-  const checkIfClickedOutside = (e: { target: any }) => {
-    if (isAutoCompleteOpen && ref.current && !ref.current.contains(e.target)) {
-      setIsAutoCompleteOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", checkIfClickedOutside);
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [checkIfClickedOutside]);
 
   const navigate = useNavigate();
 
@@ -70,11 +55,13 @@ const Navbar: React.FC = () => {
     }
   }, 0);
 
-  const handleFilter = (e) => {
+  const handleFilter = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setFilterParam(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (searchParam.length > 0) {
       clearSuggestion();
@@ -104,9 +91,7 @@ const Navbar: React.FC = () => {
     <>
       <nav
         id="navbar"
-        className={`absolute top-0 left-0 right-0 z-50 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform ${
-          show ? "translate-y-0" : "-translate-y-full"
-        } `}
+        className={`absolute top-0 left-0 right-0 z-50 border-b-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6e7] transition-transform duration-300 transform `}
       >
         <div className="flex items-center xs:justify-around  sm:mx-auto sm:px-4 sm:py-2">
           <Link onClick={clearSuggestion} to={`/`}>
@@ -180,13 +165,16 @@ const Navbar: React.FC = () => {
                   </svg>
                 </button>
               </div>
-              <AutocompleteDropdown
-                data={data}
-                isAutoCompleteOpen={isAutoCompleteOpen}
-                filterParam={filterParam}
-                suggestion={suggestion}
-                clearSuggestion={clearSuggestion}
-              />
+              {data ? (
+                <AutocompleteDropdown
+                  data={data}
+                  isAutoCompleteOpen={isAutoCompleteOpen}
+                  setIsAutoCompleteOpen={setIsAutoCompleteOpen}
+                  filterParam={filterParam}
+                  suggestion={suggestion}
+                  clearSuggestion={clearSuggestion}
+                />
+              ) : null}
             </div>
           </form>
           <ul className="xs:hidden sm:block flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 xs:space-x-2 font-extralight xs:text-sm sm:text-xl lg:text-3xl text-[#4a95c0]">
@@ -283,13 +271,16 @@ const Navbar: React.FC = () => {
                       </button>
                     )}
                   </div>
-                  <AutocompleteDropdown
-                    data={data}
-                    isAutoCompleteOpen={isAutoCompleteOpen}
-                    filterParam={filterParam}
-                    suggestion={suggestion}
-                    clearSuggestion={clearSuggestion}
-                  />
+                  {data ? (
+                    <AutocompleteDropdown
+                      data={data}
+                      isAutoCompleteOpen={isAutoCompleteOpen}
+                      setIsAutoCompleteOpen={setIsAutoCompleteOpen}
+                      filterParam={filterParam}
+                      suggestion={suggestion}
+                      clearSuggestion={clearSuggestion}
+                    />
+                  ) : null}
                 </div>
               </form>
             </div>
