@@ -45,9 +45,9 @@ const StructureIndex: React.FC = ({}) => {
                   href={`/proteinresultspage/virus_name/${encodeURIComponent(
                     filterParam
                   )}`}
-                  className="text-xl px-2 py-2 rounded-md drop-shadow-md border-0 bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center"
+                  className="text-xl px-2 py-2 rounded-md drop-shadow-md border-0  bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center"
                 >
-                  &lt; Back
+                  Virus Structure List
                 </a>
               ) : null}
             </div>

@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react";
-import { api_url } from "../api";
+import { api_url } from "../utils/api";
 
 export function useStructureIndexData(id: string) {
   const [isLoading, setIsLoading] = useState(true);
   const [proteinInfo, setProteinInfo] = useState(null);
-  const [defaultModel, setDefaultModel] = useState('CF');
+  const [defaultModel, setDefaultModel] = useState("CF");
   const [isESMFoldModelPresent, setIsESMFoldModelPresent] = useState(false);
 
-
   const handleCollabFoldClick = () => {
-    setDefaultModel('CF')
-  }
+    setDefaultModel("CF");
+  };
 
   const handleESMFoldClick = () => {
-    setDefaultModel('EF')
-  }
+    setDefaultModel("EF");
+  };
 
   useEffect(() => {
     setIsLoading(true);
     fetch(`http://${api_url}/api/proteins/recordid/${id}`)
       .then((res) => res.json())
-      .then( async (data) => {
+      .then(async (data) => {
         setProteinInfo(data.protein_structure);
-        if(
-          await data.protein_structure.esmfold_log_pLDDT > 50 && data.protein_structure.esmfold_log_pLDDT >
-          data.protein_structure.colabfold_json_pLDDT
+        if (
+          (await data.protein_structure.esmfold_log_pLDDT) > 50 &&
+          data.protein_structure.esmfold_log_pLDDT >
+            data.protein_structure.colabfold_json_pLDDT
         ) {
-          setDefaultModel('CF');
-          setIsESMFoldModelPresent(true)
+          setDefaultModel("CF");
+          setIsESMFoldModelPresent(true);
         } else {
-          setDefaultModel('CF');
-          setIsESMFoldModelPresent(false)
+          setDefaultModel("CF");
+          setIsESMFoldModelPresent(false);
         }
         setIsLoading(false);
       })
@@ -41,5 +41,12 @@ export function useStructureIndexData(id: string) {
       });
   }, [id]);
 
-  return { isLoading, proteinInfo, defaultModel, isESMFoldModelPresent, handleCollabFoldClick, handleESMFoldClick };
+  return {
+    isLoading,
+    proteinInfo,
+    defaultModel,
+    isESMFoldModelPresent,
+    handleCollabFoldClick,
+    handleESMFoldClick,
+  };
 }

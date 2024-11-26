@@ -160,7 +160,7 @@ const About: React.FC = () => {
   ];
 
   const [tab, setTab] = useState("Data Collection and Structure Prediction");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const handeTabChange = (id: string) => {
     startTransition(() => {

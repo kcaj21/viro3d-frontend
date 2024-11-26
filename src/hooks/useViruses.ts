@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { VirusData } from "../types/virusdata";
-import { api_url } from "../api";
+import { api_url } from "../utils/api";
 
-export function useViruses(filterparam: string, id: string, currentpage: number) {
+export function useViruses(
+  filterparam: string,
+  id: string,
+  currentpage: number
+) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<VirusData | null>(null);
 

@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
 import { useAutocomplete } from "../../hooks/useAutocomplete";
+import { api_url } from "../../utils/api";
+import AutocompleteDropdown from "./AutocompleteDropdown";
 
 type Link = {
   title: string;
@@ -32,7 +34,7 @@ const Navbar: React.FC = () => {
 
   const ref = useRef();
 
-  const checkIfClickedOutside = (e: { target: any; }) => {
+  const checkIfClickedOutside = (e: { target: any }) => {
     if (isAutoCompleteOpen && ref.current && !ref.current.contains(e.target)) {
       setIsAutoCompleteOpen(false);
     }
@@ -51,7 +53,7 @@ const Navbar: React.FC = () => {
     setSuggestion("");
   };
 
-  const handleText = (e: { target: { value: string; }; }) => {
+  const handleText = (e: { target: { value: string } }) => {
     setSearchParam(encodeURIComponent(e.target.value));
     debouncedSearch(e.target.value);
   };
@@ -118,7 +120,7 @@ const Navbar: React.FC = () => {
               <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
+              <a href={`http://${api_url}/api/docs`}>API</a>
             </button>
           </ul>
           <form
@@ -178,61 +180,13 @@ const Navbar: React.FC = () => {
                   </svg>
                 </button>
               </div>
-              {isAutoCompleteOpen &&
-              filterParam === "viruses" &&
-              suggestion &&
-              data ? (
-                <ul
-                  key={`${filterParam}-${suggestion}`}
-                  ref={ref}
-                  className="autocomplete w-full lg:text-2xl xs:text-lg absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
-                >
-                  {data.viruses?.map((virus) => (
-                    <Link
-                      onClick={clearSuggestion}
-                      to={{
-                        pathname: `/proteinresultspage/virus_name/${encodeURIComponent(
-                          virus._id
-                        )}`,
-                      }}
-                      key={virus._id}
-                    >
-                      <li className="hover:bg-slate-100 border-0 border-b">
-                        {virus._id}
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              ) : null}
-              {isAutoCompleteOpen &&
-              filterParam === "proteinname" &&
-              suggestion &&
-              data ? (
-                <ul
-                  key={`${filterParam}-${suggestion}`}
-                  ref={ref}
-                  className="autocomplete w-full absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
-                >
-                  {data.protein_structures?.map((protein) => (
-                    <Link
-                      onClick={clearSuggestion}
-                      to={{
-                        pathname: `/structureindex/${encodeURIComponent(
-                          protein["Virus name(s)"]
-                        )}/${protein._id}`,
-                      }}
-                      key={protein._id}
-                    >
-                      <li className="hover:bg-slate-100 border-0 rounded-lg">
-                        {protein["Virus name abbreviation(s)"] !== ""
-                          ? `${protein["Virus name abbreviation(s)"]}: `
-                          : `${protein["Virus name(s)"]}: `}
-                        {protein.genbank_name_curated}
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              ) : null}
+              <AutocompleteDropdown
+                data={data}
+                isAutoCompleteOpen={isAutoCompleteOpen}
+                filterParam={filterParam}
+                suggestion={suggestion}
+                clearSuggestion={clearSuggestion}
+              />
             </div>
           </form>
           <ul className="xs:hidden sm:block flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 xs:space-x-2 font-extralight xs:text-sm sm:text-xl lg:text-3xl text-[#4a95c0]">
@@ -240,7 +194,7 @@ const Navbar: React.FC = () => {
               <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href="http://viro3d-dev.cvr.gla.ac.uk/api/docs">API</a>
+              <a href={`http://${api_url}/api/docs`}>API</a>
             </button>
           </ul>
           <div>
@@ -329,67 +283,13 @@ const Navbar: React.FC = () => {
                       </button>
                     )}
                   </div>
-                  {isAutoCompleteOpen &&
-                  filterParam === "viruses" &&
-                  suggestion &&
-                  data ? (
-                    <ul
-                      key={`${filterParam}-${suggestion}`}
-                      ref={ref}
-                      className="autocomplete w-full lg:text-2xl xs:text-lg absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
-                    >
-                      {data.viruses?.map((virus) => (
-                        <Link
-                          onClick={() => {
-                            clearSuggestion();
-                            toggleMobileMenu();
-                          }}
-                          to={{
-                            pathname: `/proteinresultspage/virus_name/${encodeURIComponent(
-                              virus._id
-                            )}`,
-                          }}
-                          key={virus._id}
-                        >
-                          <li className="hover:bg-slate-100 border-0 border-b">
-                            {virus._id}
-                          </li>
-                        </Link>
-                      ))}
-                    </ul>
-                  ) : null}
-                  {isAutoCompleteOpen &&
-                  filterParam === "proteinname" &&
-                  suggestion &&
-                  data ? (
-                    <ul
-                      key={`${filterParam}-${suggestion}`}
-                      ref={ref}
-                      className="autocomplete w-full absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
-                    >
-                      {data.protein_structures?.map((protein) => (
-                        <Link
-                          onClick={() => {
-                            clearSuggestion();
-                            toggleMobileMenu();
-                          }}
-                          to={{
-                            pathname: `/structureindex/${encodeURIComponent(
-                              protein["Virus name(s)"]
-                            )}/${protein._id}`,
-                          }}
-                          key={protein._id}
-                        >
-                          <li className="hover:bg-slate-100 border-0 rounded-lg">
-                            {protein["Virus name abbreviation(s)"] !== ""
-                              ? `${protein["Virus name abbreviation(s)"]}: `
-                              : `${protein["Virus name(s)"]}: `}
-                            {protein.genbank_name_curated}
-                          </li>
-                        </Link>
-                      ))}
-                    </ul>
-                  ) : null}
+                  <AutocompleteDropdown
+                    data={data}
+                    isAutoCompleteOpen={isAutoCompleteOpen}
+                    filterParam={filterParam}
+                    suggestion={suggestion}
+                    clearSuggestion={clearSuggestion}
+                  />
                 </div>
               </form>
             </div>

@@ -29,7 +29,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
   const [isolateDesignations, setIsolateDesignations] = useState<string[] | null>(null);
 
   const { isLoading: downloadLoading, handleDownload } =
-    useZipDownload(searchParam);
+    useZipDownload(searchParam ?? "");
 
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
@@ -101,7 +101,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                 <option
                   key={segment}
                   value={`${segment}`}
-                  selected={currentIsolate === segment ? "selected" : ""}
+                  selected={currentIsolate === segment}
                 >
                   Isolate: {segment}
                 </option>
@@ -133,8 +133,8 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                   </h2>
                   <FeatureBrowser
                     annotations={segment.coordinates}
-                    recordID={recordID}
-                    browserWidth={50} genome_length_bp={segment.genome_length_bp}                  />
+                    recordID={recordID ?? ""}
+                    browserWidth={50} genome_length_bp={segment.genome_length_bp}/>
                 </div>
               ))}
             </div>
@@ -167,7 +167,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                   </h2>
                   <FeatureBrowser
                     annotations={segment.coordinates}
-                    recordID={recordID}
+                    recordID={recordID ?? ""}
                     browserWidth={92}
                     genome_length_bp={segment.genome_length_bp}
                   />
@@ -200,7 +200,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                 >
                   <FeatureBrowser
                     annotations={segment.coordinates}
-                    recordID={recordID}
+                    recordID={recordID ?? ""}
                     browserWidth={50} genome_length_bp={segment.genome_length_bp}                  />
                 </div>
               ))}
@@ -217,7 +217,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
                     annotations={coordinates?.segments[0]?.coordinates}
-                    recordID={recordID}
+                    recordID={recordID ?? ""}
                     browserWidth={50} genome_length_bp={coordinates?.segments[0]?.genome_length_bp}              />
             </div>
           ) : null}

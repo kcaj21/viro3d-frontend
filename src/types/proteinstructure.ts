@@ -34,7 +34,7 @@ export type ProteinStructure = {
     Species: string; 
     Exemplar_or_additional_isolate: string; 
     "Virus name(s)":  string; 
-    Virus_name_abbreviation_s_: string; 
+    "Virus name abbreviation(s)": string; 
     Virus_isolate_designation: string; 
     Virus_REFSEQ_accession: string; 
     Genome_coverage: string; 

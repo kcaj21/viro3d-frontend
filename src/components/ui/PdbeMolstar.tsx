@@ -1,22 +1,21 @@
-import React, { useEffect, createRef } from 'react';
-import { PDBeMolstarPlugin } from 'pdbe-molstar/lib';
-import { InitParams } from 'pdbe-molstar/lib/spec';
+import React, { useEffect, createRef } from "react";
+import { PDBeMolstarPlugin } from "pdbe-molstar/lib";
+import { InitParams } from "pdbe-molstar/lib/spec";
+import { api_url } from "../../utils/api";
 
 type Model = {
   modelID: string;
   defaultModel: string;
-}
+};
 
-const PDBeMolStar: React.FC<Model> = ({defaultModel, modelID}) => {
+const PDBeMolStar: React.FC<Model> = ({ defaultModel, modelID }) => {
+  const viewerContainerRef = createRef<HTMLDivElement>();
 
-  const viewerContainerRef = createRef<HTMLDivElement>()
-  
   useEffect(() => {
-
     function init() {
-      const url = `http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${modelID}.cif`
+      const url = `http://${api_url}/api/pdb/${defaultModel}-${modelID}.cif`;
 
-      const pluginInstance = new PDBeMolstarPlugin()
+      const pluginInstance = new PDBeMolstarPlugin();
 
       //Set options (Checkout available options list in the documentation)
       const options: Partial<InitParams> = {
@@ -26,10 +25,10 @@ const PDBeMolStar: React.FC<Model> = ({defaultModel, modelID}) => {
           binary: false,
         },
         hideCanvasControls: [
-          'selection',
-          'animation',
-          'expand',
-          'controlToggle',
+          "selection",
+          "animation",
+          "expand",
+          "controlToggle",
           // 'controlInfo'
         ],
         alphafoldView: true,
@@ -37,25 +36,28 @@ const PDBeMolStar: React.FC<Model> = ({defaultModel, modelID}) => {
         hideControls: true,
         sequencePanel: true,
         reactive: true,
-        hideStructure: ['het', 'water', 'nonStandard', 'carbs', 'coarse'],
+        hideStructure: ["het", "water", "nonStandard", "carbs", "coarse"],
         //remove comment-out on line below to disable ball and stick from showing when you select a residue
-        granularity: 'residueInstances'
-      }
+        granularity: "residueInstances",
+      };
 
-      if (viewerContainerRef.current === null) return
+      if (viewerContainerRef.current === null) return;
 
       //Call render method to display the 3D view
-      pluginInstance.render(viewerContainerRef.current, options)
+      pluginInstance.render(viewerContainerRef.current, options);
     }
-    init()
-  }, [modelID])
+    init();
+  }, [modelID]);
 
   return (
     <>
-        <div className="relative h-[100%]  ">
-              <div id='pdbeMolstar' ref={viewerContainerRef} style={{border: "0px"}}  >  
-              </div>
-        </div>
+      <div className="relative h-[100%]  ">
+        <div
+          id="pdbeMolstar"
+          ref={viewerContainerRef}
+          style={{ border: "0px" }}
+        ></div>
+      </div>
     </>
   );
 };

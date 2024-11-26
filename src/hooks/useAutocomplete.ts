@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
-import { api_url } from "../api";
+import { api_url } from "../utils/api";
+import { ProteinData } from "../types/proteindata";
+import { VirusData } from "../types/virusdata";
 
-export function useAutocomplete(filterParam: string, id: string, currentpage: number) {
+export function useAutocomplete(
+  filterParam: string,
+  id: string,
+  currentpage: number
+) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [resultCount, setResultCount] = useState(null);
+  const [resultCount, setResultCount] = useState<VirusData | ProteinData | null>(null);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (filterParam === "viruses" && id) {
       setIsLoading(true);
-      setData(null)
+      setData(null);
       fetch(
         `http://${api_url}/api/viruses/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
@@ -24,9 +30,9 @@ export function useAutocomplete(filterParam: string, id: string, currentpage: nu
           setData(null);
           setIsLoading(false);
         });
-    } else if(filterParam === "proteinname" && id) {
+    } else if (filterParam === "proteinname" && id) {
       setIsLoading(true);
-      setData(null)
+      setData(null);
       fetch(
         `http://${api_url}/api/proteins/proteinname/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
@@ -42,8 +48,7 @@ export function useAutocomplete(filterParam: string, id: string, currentpage: nu
           setIsLoading(false);
         });
     }
-
-  }, [ id, currentpage]);
+  }, [id, currentpage]);
 
   return { isLoading, data, resultCount };
 }

@@ -1,6 +1,6 @@
 export type VirusData = {
-    count: number;
     search_term: string;
+    count: number;
     viruses: {
       _id: string;
     }[];
