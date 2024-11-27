@@ -6,7 +6,7 @@ type TooltipProps = {
 };
 
 const ResultToolTip: React.FC<TooltipProps> = ({ text, textLength }) => {
-  const [showTooltip, setShowToolTip] = useState(false);
+  const [showTooltip, setShowToolTip] = useState<boolean>(false);
   return (
     <>
       <div

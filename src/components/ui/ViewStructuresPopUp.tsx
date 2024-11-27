@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
 type ViewStructuresPopUpProps = {
-  handleCloseViewStructurePopUpClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleCloseViewStructurePopUpClick: (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void;
   popUpVirus: string;
 };
 
@@ -10,7 +12,7 @@ const ViewStructuresPopUp: React.FC<ViewStructuresPopUpProps> = ({
   handleCloseViewStructurePopUpClick,
   popUpVirus,
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsOpen(false);
@@ -41,7 +43,15 @@ const ViewStructuresPopUp: React.FC<ViewStructuresPopUpProps> = ({
             </div>
             <div className="flex flex-col justify-between gap-2 p-4 md:p-5 rounded-b border-gray-400">
               <button
-                onClick={() => window.open(`/proteinresultspage/virus_name/${encodeURIComponent(popUpVirus)}`, "_blank", "noreferrer")}
+                onClick={() =>
+                  window.open(
+                    `/proteinresultspage/virus_name/${encodeURIComponent(
+                      popUpVirus
+                    )}`,
+                    "_blank",
+                    "noreferrer"
+                  )
+                }
                 data-modal-hide="default-modal"
                 type="button"
                 className="text-white bg-[#56b3e6] w-full hover:bg-[#61c8ff] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg lg:text-sm xs:text-sm px-5 py-2.5 text-center"

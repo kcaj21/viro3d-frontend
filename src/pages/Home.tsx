@@ -5,11 +5,10 @@ import ClusterVisualisation from "../components/ui/ClusterVisualisation";
 
 const Home: React.FC = () => {
   document.documentElement.scrollTop = 0;
-  const [isViewStructurePopUpOpen, setIsViewStructurePopUpOpen] =
-    useState(false);
-  const [isLegendPopUpOpen, setIsLegendPopUpOpen] = useState(true);
-  const [hoveredVirus, setHoveredVirus] = useState("");
-  const [popUpVirus, setPopUpVirus] = useState("");
+  const [isViewStructurePopUpOpen, setIsViewStructurePopUpOpen] = useState<boolean>(false);
+  const [isLegendPopUpOpen, setIsLegendPopUpOpen] = useState<boolean>(true);
+  const [hoveredVirus, setHoveredVirus] = useState<string>("");
+  const [popUpVirus, setPopUpVirus] = useState<string>("");
 
   const handleViewStructurePopUpClick = (virus: string) => {
     setIsViewStructurePopUpOpen(true);

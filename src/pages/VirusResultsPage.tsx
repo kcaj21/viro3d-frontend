@@ -6,7 +6,7 @@ import Pagination from "../components/ui/Pagination";
 import { useViruses } from "../hooks/useViruses";
 
 const VirusResultsPage: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const { filterParam, searchParam } = useParams();
 

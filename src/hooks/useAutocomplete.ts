@@ -8,9 +8,9 @@ export function useAutocomplete(
   id: string,
   currentpage: number
 ) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [resultCount, setResultCount] = useState<VirusData | ProteinData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [data, setData] = useState<ProteinData | VirusData | null>(null);
+  const [resultCount, setResultCount] = useState<ProteinData | VirusData | null>(null);
 
   useEffect(() => {
     if (filterParam === "viruses" && id) {

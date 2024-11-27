@@ -2,7 +2,7 @@ import { useState } from "react";
 import { api_url } from "../utils/api";
 
 export function useZipDownload(id: string) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleDownload = async (format: string) => {
     setIsLoading(true);

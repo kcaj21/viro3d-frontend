@@ -6,7 +6,7 @@ import { NodeData } from "../../types/nodedata";
 type ClusterVisualisationProps = {
   setHoveredVirus: React.Dispatch<React.SetStateAction<string>>;
   handleViewStructurePopUpClick: (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: string
   ) => void;
 };
 
@@ -14,15 +14,21 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
   setHoveredVirus,
   handleViewStructurePopUpClick,
 }) => {
-  const konvaContainerRef = useRef(null);
+  const konvaContainerRef = useRef<HTMLDivElement | null>(null);
   const selectedNodeRef = useRef<Konva.Node | null>(null);
   const stageRef = useRef<Konva.Stage | null>(null);
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const lastCenterRef = useRef(null);
-  const lastDistRef = useRef(0);
-  const dragStoppedRef = useRef(false);
+  const [containerSize, setContainerSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+  const lastCenterRef = useRef<{ x: number; y: number } | null>(null);
+  const lastDistRef = useRef<number>(0);
+  const dragStoppedRef = useRef<boolean>(false);
 
-  type Realm = "Riboviria" | "Monodnaviria" | "Unclassified" | "Varidnaviria" | "Ribozyviria" | "Duplodnaviria";
+  type Realm =
+    | "Riboviria"
+    | "Monodnaviria"
+    | "Unclassified"
+    | "Varidnaviria"
+    | "Ribozyviria"
+    | "Duplodnaviria";
 
   const colourKeys: Record<Realm, string> = {
     Riboviria: "#5cb7a8",
@@ -33,13 +39,17 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
     Duplodnaviria: "#8b81b9",
   };
 
-
   const { data } = useGraphData();
 
-  const getDistance = (p1: { x: number; y: number }, p2: { x: number; y: number }) =>
-    Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
-  
-  const getCenter = (p1: { x: number; y: number }, p2: { x: number; y: number }) => ({
+  const getDistance = (
+    p1: { x: number; y: number },
+    p2: { x: number; y: number }
+  ) => Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+
+  const getCenter = (
+    p1: { x: number; y: number },
+    p2: { x: number; y: number }
+  ) => ({
     x: (p1.x + p2.x) / 2,
     y: (p1.y + p2.y) / 2,
   });
@@ -74,7 +84,6 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
       strokeWidth: 0.015,
     });
 
-
     node.on("click", () => handleNodeClick(node, layer));
     node.on("tap", () => handleNodeClick(node, layer));
 
@@ -88,7 +97,7 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
     });
 
     layer.add(node);
-  }
+  };
 
   const handleNodeClick = (node: Konva.Node, layer: Konva.Layer) => {
     if (selectedNodeRef.current) {
@@ -97,7 +106,7 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
       (selectedNodeRef.current as unknown as Konva.Circle).zIndex(0);
     }
     const circleNode = node as Konva.Circle;
-  
+
     circleNode.stroke("orange");
     circleNode.strokeWidth(0.015);
     circleNode.moveToTop();
@@ -107,7 +116,12 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
   };
 
   useEffect(() => {
-    if (konvaContainerRef.current && !stageRef.current && containerSize.width && containerSize.height) {
+    if (
+      konvaContainerRef.current &&
+      !stageRef.current &&
+      containerSize.width &&
+      containerSize.height
+    ) {
       const initialScale = 0.7;
       const stage = new Konva.Stage({
         container: konvaContainerRef.current as unknown as HTMLDivElement,
@@ -144,13 +158,13 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
         };
       };
 
-      if(data) {
-      const centerPoint = getCenterPoint(data?.nodes);
-      stage.position({
-        x: containerSize.width / 2 - centerPoint.x,
-        y: containerSize.height / 2 - centerPoint.y,
-      });
-    }
+      if (data) {
+        const centerPoint = getCenterPoint(data?.nodes);
+        stage.position({
+          x: containerSize.width / 2 - centerPoint.x,
+          y: containerSize.height / 2 - centerPoint.y,
+        });
+      }
 
       // Define min and max radius values for nodes
       const minRadius = 0.08; // Minimum size for nodes
@@ -171,27 +185,25 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
         let scaledRadius = 12 / newScale; // Adjust the divisor to change sensitivity
         scaledRadius = Math.max(minRadius, Math.min(scaledRadius, maxRadius)); // Constrain radius
 
-        layer.getChildren().forEach((node) => {
-          if (node.className === "Circle") {
-            node.radius(scaledRadius);
-          }
+        (layer.getChildren() as Konva.Circle[]).forEach((circle) => {
+          circle.radius(scaledRadius);
         });
 
-        // Maintain position based on zoom
-        const mousePointTo = {
-          x: stage.getPointerPosition().x / oldScale - stage.x() / oldScale,
-          y: stage.getPointerPosition().y / oldScale - stage.y() / oldScale,
-        };
-        const newPos = {
-          x:
-            -(mousePointTo.x - stage.getPointerPosition().x / newScale) *
-            newScale,
-          y:
-            -(mousePointTo.y - stage.getPointerPosition().y / newScale) *
-            newScale,
-        };
-        stage.position(newPos);
-        stage.batchDraw();
+        const pointerPosition = stage.getPointerPosition();
+
+        if (pointerPosition) {
+          // Maintain position based on zoom
+          const mousePointTo = {
+            x: pointerPosition.x / oldScale - stage.x() / oldScale,
+            y: pointerPosition.y / oldScale - stage.y() / oldScale,
+          };
+          const newPos = {
+            x: -(mousePointTo.x - pointerPosition.x / newScale) * newScale,
+            y: -(mousePointTo.y - pointerPosition.y / newScale) * newScale,
+          };
+          stage.position(newPos);
+          stage.batchDraw();
+        }
       });
 
       // const minRadius = 0.08; // Minimum size for nodes
@@ -245,11 +257,9 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
           let scaledRadius = 12 / scale; // Adjust sensitivity here
           scaledRadius = Math.max(minRadius, Math.min(scaledRadius, maxRadius)); // Constrain radius
 
-          layer.getChildren().forEach((node) => {
-            if (node.className === "Circle") {
-              node.radius(scaledRadius);
-            }
-          });
+        (layer.getChildren() as Konva.Circle[]).forEach((circle) => {
+          circle.radius(scaledRadius);
+        });
 
           const dx = newCenter.x - lastCenterRef.current.x;
           const dy = newCenter.y - lastCenterRef.current.y;

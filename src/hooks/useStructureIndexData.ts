@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { api_url } from "../utils/api";
+import { ProteinStructure } from "../types/proteinstructure";
 
 export function useStructureIndexData(id: string) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [proteinInfo, setProteinInfo] = useState(null);
-  const [defaultModel, setDefaultModel] = useState("CF");
-  const [isESMFoldModelPresent, setIsESMFoldModelPresent] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [proteinInfo, setProteinInfo] = useState<ProteinStructure | null>(null);
+  const [defaultModel, setDefaultModel] = useState<string>("CF");
+  const [isESMFoldModelPresent, setIsESMFoldModelPresent] = useState<boolean>(false);
 
   const handleCollabFoldClick = () => {
     setDefaultModel("CF");

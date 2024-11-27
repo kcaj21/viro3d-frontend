@@ -8,4 +8,11 @@
       "path": "./tsconfig.node.json"
     }
   ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@sodaviz/*": ["node_modules/@sodaviz/soda/*"]
+    }
+  }
 }

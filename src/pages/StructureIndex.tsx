@@ -8,7 +8,7 @@ import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
 
-const StructureIndex: React.FC = ({}) => {
+const StructureIndex: React.FC = () => {
   const { filterParam, searchParam } = useParams();
 
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
@@ -64,7 +64,7 @@ const StructureIndex: React.FC = ({}) => {
 
             <div className="mobile-heading sm:hidden ">
               <h1 className="mx-12 text-2xl text-slate-500 ">
-                {proteinInfo["genbank_name"]}
+                {proteinInfo["genbank_name_curated"]}
               </h1>
             </div>
 

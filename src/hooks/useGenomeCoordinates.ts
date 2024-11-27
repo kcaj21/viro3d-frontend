@@ -3,7 +3,7 @@ import { Coordinates } from "../types/coordinates";
 import { api_url } from "../utils/api";
 
 export function useGenomeCoordinates(filterparam: string, id: string) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
 
   useEffect(() => {

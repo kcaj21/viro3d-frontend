@@ -6,7 +6,7 @@ type ControlsPopUpProps = {
 };
 
 const ControlsPopUp: React.FC<ControlsPopUpProps> = ({ handleClick }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsOpen(false);

@@ -5,34 +5,26 @@ import * as soda from "@sodaviz/soda";
 import { Chart } from "@sodaviz/soda";
 import * as d3 from "d3";
 import "/src/customScrollBar.css";
-
-interface CustomAnnotation extends soda.Annotation {
-  family: string;
-  gene_name: string;
-  virus_name: string;
-  pept_cat: string;
-  nt_acc: string;
-  segment: string;
-  join: string;
-  strand: string;
-}
-
-interface CustomRenderParams extends soda.RenderParams {
-  annotations: CustomAnnotation[];
-  recordID: string;
-  browserWidth: number;
-  genome_length_bp: number;
-}
+import {
+  CustomRenderParams,
+  AnnotationDatum,
+  CustomAnnotation,
+} from "../../types/feauturebrowser";
 
 const FeatureBrowser: React.FC<CustomRenderParams> = ({
   annotations,
   recordID,
   browserWidth,
-  genome_length_bp
+  genome_length_bp,
 }) => {
-  const [highlightedGene, setHighlightedGene] = useState([]);
+  const [highlightedGene, setHighlightedGene] = useState<
+    {
+      rect: SVGRectElement | null;
+      oldStyle: string | null | undefined;
+    }[]
+  >([]);
 
-  const featureViewerRef = useRef<Chart<P> | null>(null);
+  const featureViewerRef = useRef<Chart<CustomRenderParams> | null>(null);
 
   const navigate = useNavigate();
 
@@ -49,25 +41,11 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
   let mat_pept = all.filter((a) => a.pept_cat == "mat_pept");
   let selectedProtein = annotations.find(({ family }) => family === recordID);
 
-  const highestEndCoordinate = annotations.reduce((prev, current) => {
-    return prev.end > current.end ? prev : current;
-  });
-
-  const lowestStartCoordinate = annotations.reduce((prev, current) => {
-    return prev.start < current.start ? prev : current;
-  });
-
-  const domainConstraint = [
-    lowestStartCoordinate.start,
-    highestEndCoordinate.end,
-  ];
-
   async function highlightSelectedGene() {
     //check to see if there is already a gene highlighted and stored in state
 
     if (highlightedGene) {
       highlightedGene.forEach((gene) => {
-        // console.log(gene["oldStyle"]);
         gene["rect"]?.setAttribute("style", `${gene["oldStyle"]}`);
       });
     }
@@ -109,31 +87,40 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
     //finds selected protein by taking the recordID and filtering annotations for objetcs that match by the family property
     //it subtracts the start coordinate from the end coordinate and divides it by 2
     // console.log(selectedProtein?.end)
-    if(selectedProtein) {
-    let boundary =
-      (30000 - (selectedProtein.end - selectedProtein.start)) / 2;
+    if (selectedProtein) {
+      let boundary =
+        (30000 - (selectedProtein.end - selectedProtein.start)) / 2;
 
-    // the boundary variable is calculated this way so that the genome browser wont be fully zoomed in on just the selected protein, it acts as a buffer zone to ensure some other annotations are still visible on either side
-    let start = selectedProtein?.start - boundary;
-    let end = selectedProtein?.end + boundary;
+      // the boundary variable is calculated this way so that the genome browser wont be fully zoomed in on just the selected protein, it acts as a buffer zone to ensure some other annotations are still visible on either side
+      let start = selectedProtein?.start - boundary;
+      let end = selectedProtein?.end + boundary;
 
-    // if the start coordinate is < 30000, it will result in a negative number, so in this case start is set to 0
+      // if the start coordinate is < 30000, it will result in a negative number, so in this case start is set to 0
 
-    // if (end > domainConstraint[1]) {end = domainConstraint[1]}
+      // if (end > domainConstraint[1]) {end = domainConstraint[1]}
 
-    if (start < 0) {
+      if (start < 0) {
+        start = 0;
+      }
+
       return {
         annotations,
-        start: 0,
-        end: end,
+        start,
+        end,
+        recordID,
+        browserWidth,
+        genome_length_bp,
       };
-    } else {
-      return {
-        annotations,
-        start: start,
-        end: end,
-      };
-    }}
+    }
+
+    return {
+      annotations,
+      start: 0,
+      end: genome_length_bp,
+      recordID,
+      browserWidth,
+      genome_length_bp,
+    };
   };
 
   useEffect(() => {
@@ -142,8 +129,8 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
         selector: `div#${id}`,
         zoomable: true,
         rowHeight: 25,
-        //determines the genome coordinate range that you can scroll between, i think it should really always be between 0 and the end coordinate of the last gene
-        domainConstraint: () => domainConstraint,
+        //determines the genome coordinate range that you can scroll between, it is set to be between 0 and the genome_length_bp value
+        domainConstraint: () => [0, genome_length_bp],
         // constrains only zooming
         zoomConstraint: [0, 100],
         resizable: true,
@@ -203,12 +190,9 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
             // this function is evaluated when a glyph is clicked
             click: (
               // s is a d3 Selection of the glyph in the DOM
-              s: d3.Selection<any, any, any, any>,
+              _s: d3.Selection<any, any, any, any>,
               // d is the AnnotationDatum bound to the glyph
-              d: soda.AnnotationDatum<
-                CustomAnnotation,
-                Chart<CustomRenderParams>
-              >
+              d: AnnotationDatum<CustomAnnotation, Chart<CustomRenderParams>>
             ) =>
               navigate(
                 `/structureindex/${encodeURIComponent(d.a.virus_name)}/${
@@ -224,9 +208,9 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
             chart: this,
             annotations: all,
             // this function is evaluated when a glyph is moused over
-            mouseover: (s, d) => s.style("stroke", "#e2bd9d"),
+            mouseover: (s, _d) => s.style("stroke", "#e2bd9d"),
             // this function is evaluated when a glyph is no longer moused over
-            mouseout: (s, d) => s.style("stroke", "#64748b"),
+            mouseout: (s, _d) => s.style("stroke", "#64748b"),
           });
           soda.tooltip({
             chart: this,
@@ -240,12 +224,16 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
       });
 
       if (recordID && genome_length_bp > 60000 && selectedProtein) {
-        featureViewerRef.current.render(autoZoom());
+        const zoomParams = autoZoom();
+        featureViewerRef.current.render(zoomParams);
       } else {
         featureViewerRef.current.render({
           annotations,
           start: 0,
           end: genome_length_bp,
+          recordID,
+          browserWidth,
+          genome_length_bp,
         });
       }
     }
@@ -260,7 +248,7 @@ const FeatureBrowser: React.FC<CustomRenderParams> = ({
 
   return (
     <>
-      <div className={`text-slate-500 min-w-[${browserWidth}vw] max-w-full`}>
+      <div className={`text-slate-500 ${browserWidth} max-w-full`}>
         <div className="" id={id}></div>
       </div>
     </>

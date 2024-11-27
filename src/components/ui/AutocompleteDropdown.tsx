@@ -35,8 +35,6 @@ const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
     };
   }, [checkIfClickedOutside]);
 
-  
-
   return (
     <>
       {isAutoCompleteOpen && filterParam === "viruses" && suggestion && data ? (

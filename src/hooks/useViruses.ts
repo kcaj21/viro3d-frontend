@@ -7,7 +7,7 @@ export function useViruses(
   id: string,
   currentpage: number
 ) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<VirusData | null>(null);
 
   useEffect(() => {

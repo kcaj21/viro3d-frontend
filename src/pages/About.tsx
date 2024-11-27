@@ -124,12 +124,12 @@ const About: React.FC = () => {
             cvr-webresource-support@lists.cent.gla.ac.uk
           </a>
           <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
-          If you find this online resource valuable and would like to support
-          the expansion of viral protein structures, please consider sending a
-          letter of support on your institution’s letterhead. Your endorsement
-          will strengthen our funding applications and help us enhance and
-          expand this web resource.
-        </p>
+            If you find this online resource valuable and would like to support
+            the expansion of viral protein structures, please consider sending a
+            letter of support on your institution’s letterhead. Your endorsement
+            will strengthen our funding applications and help us enhance and
+            expand this web resource.
+          </p>
         </div>
       ),
     },
@@ -144,22 +144,9 @@ const About: React.FC = () => {
         </p>
       ),
     },
-    // {
-    //   title: "Feedback",
-    //   id: "Feedback",
-    //   content: (
-    //     <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
-    //       If you find this online resource valuable and would like to support
-    //       the expansion of viral protein structures, please consider sending a
-    //       letter of support on your institution’s letterhead. Your endorsement
-    //       will strengthen our funding applications and help us enhance and
-    //       expand this web resource.
-    //     </p>
-    //   ),
-    // },
   ];
 
-  const [tab, setTab] = useState("Data Collection and Structure Prediction");
+  const [tab, setTab] = useState<string>("Data Collection and Structure Prediction");
   const [, startTransition] = useTransition();
 
   const handeTabChange = (id: string) => {

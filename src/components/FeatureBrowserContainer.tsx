@@ -7,7 +7,6 @@ import InfoIcon from "./ui/InfoIcon";
 import { useZipDownload } from "../hooks/useZipDownload";
 import { Coordinates } from "../types/coordinates";
 
-
 type FeatureBrowserContainerProps = {
   coordinates: Coordinates;
   genomeLoading: boolean;
@@ -15,7 +14,7 @@ type FeatureBrowserContainerProps = {
   recordID?: string;
   isolate: string;
   filterParam: string;
-}
+};
 
 const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
   coordinates,
@@ -24,18 +23,21 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
   recordID,
   isolate,
 }) => {
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  const [currentIsolate, setCurrentIsolate] = useState("");
-  const [isolateDesignations, setIsolateDesignations] = useState<string[] | null>(null);
+  const [isPopUpOpen, setIsPopUpOpen] = useState<boolean>(false);
+  const [currentIsolate, setCurrentIsolate] = useState<string>("");
+  const [isolateDesignations, setIsolateDesignations] = useState<
+    string[] | null
+  >(null);
 
-  const { isLoading: downloadLoading, handleDownload } =
-    useZipDownload(searchParam ?? "");
+  const { isLoading: downloadLoading, handleDownload } = useZipDownload(
+    searchParam ?? ""
+  );
 
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  const areSegmentsUnique = (coords: { qualifier?: string; segments: any; }) => {
+  const areSegmentsUnique = (coords: { qualifier?: string; segments: any }) => {
     const seenSegments = new Set();
 
     for (const segment of coords.segments) {
@@ -64,7 +66,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
     setCurrentIsolate(isolate);
   }, [isolate]);
 
-  const handleChange = (e: { target: { value: string; }; }) => {
+  const handleChange = (e: { target: { value: string } }) => {
     let segmentIndex = coordinates.segments.find(
       (segment) => segment.isolate_designation === e.target.value
     );
@@ -134,7 +136,9 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID ?? ""}
-                    browserWidth={50} genome_length_bp={segment.genome_length_bp}/>
+                    browserWidth={"min-w-[50vw]"}
+                    genome_length_bp={segment.genome_length_bp}
+                  />
                 </div>
               ))}
             </div>
@@ -168,7 +172,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID ?? ""}
-                    browserWidth={92}
+                    browserWidth={"min-w-[92vw]"}
                     genome_length_bp={segment.genome_length_bp}
                   />
                 </div>
@@ -201,7 +205,9 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID ?? ""}
-                    browserWidth={50} genome_length_bp={segment.genome_length_bp}                  />
+                    browserWidth={"min-w-[50vw]"}
+                    genome_length_bp={segment.genome_length_bp}
+                  />
                 </div>
               ))}
             </div>
@@ -216,9 +222,11 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
           coordinates.segments.length === 1 ? (
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
-                    annotations={coordinates?.segments[0]?.coordinates}
-                    recordID={recordID ?? ""}
-                    browserWidth={50} genome_length_bp={coordinates?.segments[0]?.genome_length_bp}              />
+                annotations={coordinates?.segments[0]?.coordinates}
+                recordID={recordID ?? ""}
+                browserWidth={"min-w-[50vw]"}
+                genome_length_bp={coordinates?.segments[0]?.genome_length_bp}
+              />
             </div>
           ) : null}
           {isPopUpOpen ? <ControlsPopUp handleClick={handlePopUp} /> : null}

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { api_url } from "../utils/api";
 
 export function useGenomeCoordinates(id: string) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [coordinates, setCoordinates] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [coordinates, setCoordinates] = useState<boolean | null>(null);
 
   useEffect(() => {
     fetch(`http://${api_url}/api/sequencematch/${id}`)

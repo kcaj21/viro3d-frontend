@@ -7,14 +7,14 @@ import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import { useProteins } from "../hooks/useProteins";
 
-const ResultsPage: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+const ProteinResultsPage: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const { filterParam, searchParam } = useParams();
 
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     filterParam ?? "",
-    searchParam ?? "",
+    searchParam ?? ""
   );
 
   const { data, isLoading } = useProteins(
@@ -100,4 +100,4 @@ const ResultsPage: React.FC = () => {
   );
 };
 
-export default ResultsPage;
+export default ProteinResultsPage;
