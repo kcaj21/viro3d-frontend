@@ -58,7 +58,7 @@ const StructureIndex: React.FC = () => {
                 coordinates={coordinates}
                 genomeLoading={genomeLoading}
                 recordID={searchParam ?? ""}
-                isolate={proteinInfo["Virus isolate designation"]}
+                isolate={proteinInfo.Virus_isolate_designation}
               />
             ) : null}
 

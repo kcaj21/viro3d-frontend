@@ -77,15 +77,15 @@ const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
                 onClick={clearSuggestion}
                 to={{
                   pathname: `/structureindex/${encodeURIComponent(
-                    protein["Virus name(s)"]
-                  )}/${protein._id}`,
+                    protein.Virus_name_s_
+                  )}/${protein.record_id}`,
                 }}
-                key={protein._id}
+                key={protein.record_id}
               >
                 <li className="hover:bg-slate-100 border-0 rounded-lg">
-                  {protein["Virus name abbreviation(s)"] !== ""
-                    ? `${protein["Virus name abbreviation(s)"]}: `
-                    : `${protein["Virus name(s)"]}: `}
+                  {protein.Virus_name_abbreviation_s_ !== ""
+                    ? `${protein.Virus_name_abbreviation_s_}: `
+                    : `${protein.Virus_name_s_}: `}
                   {protein.genbank_name_curated}
                 </li>
               </Link>

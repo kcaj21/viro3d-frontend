@@ -1,5 +1,5 @@
 export type ProteinStructure = {
-  _id: string;
+  record_id: string;
   uniprot_id: string;
   pept_cat: string;
   protlen: number;
@@ -7,7 +7,7 @@ export type ProteinStructure = {
   gene: string;
   product: string;
   note: string;
-  protein_id: string;
+  genbank_id: string;
   mat_pept_id: string;
   reg_id: string;
   uniq_id: string;
@@ -33,9 +33,9 @@ export type ProteinStructure = {
   Subgenus: string;
   Species: string;
   Exemplar_or_additional_isolate: string;
-  "Virus name(s)": string;
-  "Virus name abbreviation(s)": string;
-  "Virus isolate designation": string;
+  Virus_name_s_: string;
+  Virus_name_abbreviation_s_: string;
+  Virus_isolate_designation: string;
   Virus_REFSEQ_accession: string;
   Genome_coverage: string;
   Genome_composition: string;

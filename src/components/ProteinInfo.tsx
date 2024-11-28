@@ -106,9 +106,9 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
                 className="hover:text-[#56b3e6]"
                 target="blank"
                 rel="noopener noreferrer"
-                href={`https://www.ncbi.nlm.nih.gov/protein/${proteinInfo["protein_id"]}`}
+                href={`https://www.ncbi.nlm.nih.gov/protein/${proteinInfo["genbank_id"]}`}
               >
-                {proteinInfo["protein_id"]}
+                {proteinInfo["genbank_id"]}
               </a>
             </dd>
             <dt className="font-extralight">Tax ID:</dt>
@@ -134,7 +134,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
               </a>
             </dd>
             <dt className="font-extralight">Virus Name:</dt>
-            <dd>{proteinInfo["Virus name(s)"]}</dd>
+            <dd>{proteinInfo.Virus_name_s_}</dd>
             <dt className="font-extralight">Species:</dt>
             <dd>{proteinInfo["Species"]}</dd>
             <dt className="font-extralight">Family:</dt>
