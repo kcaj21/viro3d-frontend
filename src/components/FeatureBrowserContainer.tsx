@@ -195,7 +195,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
               {coordinates.segments?.map((segment) => (
                 <div
                   key={segment.coordinates[0].nt_acc}
-                  id={segment._id}
+                  id={segment.nt_acc}
                   className={`drop-shadow-md ${
                     currentIsolate !== segment.isolate_designation
                       ? "hidden"

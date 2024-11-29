@@ -6,7 +6,7 @@ export type Coordinates = {
 };
 
 type Segment = {
-  _id: string;
+  nt_acc: string;
   coordinates: CustomAnnotation[];
   genome_length_bp: number;
   isolate_designation: string;
