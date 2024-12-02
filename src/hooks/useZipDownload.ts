@@ -8,8 +8,11 @@ export function useZipDownload(id: string) {
     setIsLoading(true);
     try {
       const response = await fetch(`http://${api_url}/api/zip/${id}/${format}`);
-      if (!response.ok) {
+      if (!response.ok && response.status !== 429) {
         throw new Error("Failed to download Models");
+      }
+      if(response.status === 429) {
+        alert("Too Many Requests. 60 second timeout initiated")
       }
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
