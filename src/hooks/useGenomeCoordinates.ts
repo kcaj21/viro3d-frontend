@@ -10,7 +10,7 @@ export function useGenomeCoordinates(filterparam: string, id: string) {
     if (filterparam === "virus_name") {
       setIsLoading(true);
       fetch(
-        `http://${api_url}/api/genome_coordinates/${filterparam}/?qualifier=${encodeURIComponent(
+        `${api_url}/api/genome_coordinates/${filterparam}/?qualifier=${encodeURIComponent(
           id
         )}`
       )

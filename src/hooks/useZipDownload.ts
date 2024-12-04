@@ -7,7 +7,7 @@ export function useZipDownload(id: string) {
   const handleDownload = async (format: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://${api_url}/api/zip/${id}/${format}`);
+      const response = await fetch(`${api_url}/api/zip/${id}/${format}`);
       if (!response.ok && response.status !== 429) {
         throw new Error("Failed to download Models");
       }

@@ -13,7 +13,7 @@ const PDBeMolStar: React.FC<Model> = ({ defaultModel, modelID }) => {
 
   useEffect(() => {
     function init() {
-      const url = `http://${api_url}/api/pdb/${defaultModel}-${modelID}.cif`;
+      const url = `${api_url}/api/pdb/${defaultModel}-${modelID}.cif`;
 
       const pluginInstance = new PDBeMolstarPlugin();
 

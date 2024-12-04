@@ -18,7 +18,7 @@ export function useStructureIndexData(id: string) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`http://${api_url}/api/proteins/recordid/${id}`)
+    fetch(`${api_url}/api/proteins/recordid/${id}`)
       .then((res) => res.json())
       .then(async (data) => {
         setProteinInfo(data.protein_structure);

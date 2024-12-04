@@ -8,6 +8,7 @@ import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
 import { isMobile } from 'react-device-detect';
+import { api_url } from "../utils/api";
 
 const StructureIndex: React.FC = () => {
   const { filterParam, searchParam } = useParams();
@@ -90,13 +91,13 @@ const StructureIndex: React.FC = () => {
                   <div className=" download-buttons-container flex flex-row ">
                     <a
                       className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}.cif`}
                     >
                       Download mmCIF
                     </a>
                     <a
                       className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
                     >
                       Download PDB
                     </a>
@@ -123,13 +124,13 @@ const StructureIndex: React.FC = () => {
                   <div className=" download-buttons-container flex flex-row ">
                     <a
                       className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}.cif`}
+                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}.cif`}
                     >
                       Download mmCIF
                     </a>
                     <a
                       className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`http://viro3d-dev.cvr.gla.ac.uk/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
                     >
                       Download PDB
                     </a>

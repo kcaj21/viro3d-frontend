@@ -172,7 +172,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
                   <FeatureBrowser
                     annotations={segment.coordinates}
                     recordID={recordID ?? ""}
-                    browserWidth={"min-w-[92vw]"}
+                    browserWidth={"min-w-[50vw]"}
                     genome_length_bp={segment.genome_length_bp}
                   />
                 </div>

@@ -17,7 +17,7 @@ export function useAutocomplete(
       setIsLoading(true);
       setData(null);
       fetch(
-        `http://${api_url}/api/viruses/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+        `${api_url}/api/viruses/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -34,7 +34,7 @@ export function useAutocomplete(
       setIsLoading(true);
       setData(null);
       fetch(
-        `http://${api_url}/api/proteins/proteinname/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+        `${api_url}/api/proteins/proteinname/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {

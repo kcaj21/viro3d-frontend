@@ -13,7 +13,7 @@ export function useProteins(
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `http://${api_url}/api/proteins/${filterparam}/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+      `${api_url}/api/proteins/${filterparam}/?qualifier=${id}&page_size=10&page_num=${currentpage}`
     )
       .then((res) => res.json())
       .then((data) => {

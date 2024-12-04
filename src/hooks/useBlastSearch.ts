@@ -6,7 +6,7 @@ export function useGenomeCoordinates(id: string) {
   const [coordinates, setCoordinates] = useState<boolean | null>(null);
 
   useEffect(() => {
-    fetch(`http://${api_url}/api/sequencematch/${id}`)
+    fetch(`${api_url}/api/sequencematch/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setCoordinates(data);

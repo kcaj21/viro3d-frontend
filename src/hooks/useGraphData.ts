@@ -13,7 +13,7 @@ export function useGraphData() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://${api_url}/api/graph_data/graph_data_decoded.json`
+          `${api_url}/api/graph_data/graph_data_decoded.json`
         );
 
         if (!response.ok) {

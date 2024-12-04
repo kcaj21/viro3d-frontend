@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
               <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href={`http://${api_url}/api/docs`}>API</a>
+              <a href={`${api_url}/api/docs`}>API</a>
             </button>
           </ul>
           <form
@@ -182,7 +182,7 @@ const Navbar: React.FC = () => {
               <a href="/about">About</a>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href={`http://${api_url}/api/docs`}>API</a>
+              <a href={`${api_url}/api/docs`}>API</a>
             </button>
           </ul>
           <div>
