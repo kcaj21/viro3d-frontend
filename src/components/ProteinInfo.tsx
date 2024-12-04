@@ -88,7 +88,7 @@ const ProteinInfo: React.FC<ProteinInfoProps> = ({
         </div>
         <div className="body-container xs:text-base lg:text-xl 2xl:text-2xl text-slate-500">
           <hr className=" h-0.5 my-8 bg-slate-500"></hr>
-          <dl className="grid grid-cols-2 xs:gap-4 2xl:gap-6">
+          <dl className="grid grid-cols-2 xs:gap-2 2xl:gap-4">
             <dt className="font-extralight">Uniprot ID:</dt>
             <dd className="underline">
               <a

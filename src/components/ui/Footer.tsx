@@ -1,11 +1,12 @@
 import React from "react";
+import { isMobile } from "react-device-detect";
 
 const Footer: React.FC = () => {
   return (
     <>
       <footer
         id="footer"
-        className="desktop-footer xs:hidden lg:block border-t-2  border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6]"
+        className={`desktop-footer xs:hidden lg:block border-t-2  border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6]`}
       >
         <div className="flex md:justify-center gap-8 px-8 mx-auto py-2">
           <img src="/MRC_RGB.png" width="200"></img>
@@ -14,7 +15,7 @@ const Footer: React.FC = () => {
       </footer>
       <footer
         id="footer"
-        className="mobile-footer lg:hidden border-t-2 border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6]"
+        className={`mobile-footer lg:hidden border-t-2 ${isMobile ? `hidden` : ``} border-[#d6d5d5] text-[#4a95c0] drop-shadow-md bg-[#e6e6e6]`}
       >
         <div className="flex justify-center gap-8 px-8 mx-auto py-2">
           <img src="/MRC_RGB.png" width="100"></img>

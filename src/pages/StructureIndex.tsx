@@ -7,6 +7,7 @@ import { useStructureIndexData } from "../hooks/useStructureIndexData";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
+import { isMobile } from 'react-device-detect';
 
 const StructureIndex: React.FC = () => {
   const { filterParam, searchParam } = useParams();
@@ -51,7 +52,7 @@ const StructureIndex: React.FC = () => {
                 </a>
               ) : null}
             </div>
-            {coordinates ? (
+            {coordinates && !isMobile ? (
               <FeatureBrowserContainer
                 filterParam={"virus_name"}
                 searchParam={filterParam ?? ""}

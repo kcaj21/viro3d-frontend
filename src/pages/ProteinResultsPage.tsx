@@ -6,6 +6,7 @@ import Pagination from "../components/ui/Pagination";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import { useProteins } from "../hooks/useProteins";
+import { isMobile } from "react-device-detect";
 
 const ProteinResultsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -58,7 +59,7 @@ const ProteinResultsPage: React.FC = () => {
               </div>
             ) : (
               <div className=" min-h-screen lg:mx-12 2xl:mx-0">
-                {filterParam === "virus_name" && coordinates?.segments ? (
+                {filterParam === "virus_name" && coordinates?.segments && !isMobile ? (
                   <FeatureBrowserContainer
                     searchParam={searchParam}
                     filterParam={filterParam}
