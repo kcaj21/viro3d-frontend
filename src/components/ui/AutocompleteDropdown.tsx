@@ -82,7 +82,7 @@ const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
                 }}
                 key={protein.record_id}
               >
-                <li className="hover:bg-slate-100 border-0 rounded-lg">
+                <li className="hover:bg-slate-100 border-0 border-b">
                   {protein.Virus_name_abbreviation_s_ !== ""
                     ? `${protein.Virus_name_abbreviation_s_}: `
                     : `${protein.Virus_name_s_}: `}
