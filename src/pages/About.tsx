@@ -157,7 +157,7 @@ const About: React.FC = () => {
 
   return (
     <section className="" id="/">
-      <div className="xs:mt-24 xs:mb-12 lg:mt-32 xs:mx-4 lg:mx-36 min-h-screen xs:px-8 lg:px-24 py-24 bg-[#f2f2f2] border drop-shadow-md rounded border-slate-300">
+      <div className="xs:mt-24 xs:mb-12 lg:mt-32 xs:mx-4 lg:mx-18 xl:mx-36 min-h-screen xs:px-8 lg:px-24 py-24 bg-[#f2f2f2] border drop-shadow-md rounded border-slate-300">
         <div className="mt-4 md:mt-0 flex flex-col gap-8 h-full">
           <h1 className="xs:text-3xl lg:text-6xl text-[#4a95c0] font-bold  mb-8">
             About
