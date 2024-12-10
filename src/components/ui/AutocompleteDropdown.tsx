@@ -42,6 +42,7 @@ const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
           key={`${filterParam}-${suggestion}`}
           ref={ref}
           className="autocomplete w-full lg:text-2xl xs:text-lg absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
+          onMouseDown={(e) => e.stopPropagation()}
         >
           {"viruses" in data &&
             data.viruses?.map((virus) => (
