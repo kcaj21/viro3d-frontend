@@ -41,7 +41,7 @@ const ProteinResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen xs:mt-24 xs:mb-12 sm:mt-40 my-auto xs:mx-4 md:mx-24">
+    <div className="min-h-screen xs:mt-24 xs:mb-12 sm:mt-40 my-auto xs:mx-4 xl:mx-16 2xl:mx-24">
       {!isLoading && !data ? (
         <div className="results-container flex flex-col items-center h-screen justify-center">
           <h2 className="mb-12 text-5xl text-slate-500">No Results</h2>
@@ -66,13 +66,13 @@ const ProteinResultsPage: React.FC = () => {
           ) : null}
 
           <div className="results-container relative min-h-screen mt-8 text-5xl border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
-            <div className="button-row flex flex-row justify-around font-light text-[#4a95c0]">
-              <p className="px-8 mt-8 xs:text-lg md:text-xl xl:text-3xl break-all">
+            <div className="button-row flex xs:flex-col sm:flex-row font-light text-[#4a95c0]">
+              <p className="sm:basis-1/2 2xl:basis-2/3 px-8 mt-8 xs:text-lg md:text-xl xl:text-2xl 2xl:text-3xl break-words">
                 Showing {data.count} results for: "
                 {searchParam?.substring(0, 40)}..."
               </p>
               {filterParam === "proteinname" || filterParam === "virus_name" ? (
-                <div className="flex flex-row px-8 mt-8 xs:text-lg md:text-xl xl:text-3xl">
+                <div className="sm:basis-1/2 2xl:basis-1/3 px-8 mt-8">
                   <AdvancedSearch
                     advancedSearch={advancedSearch}
                     setAdvancedSearch={setAdvancedSearch}

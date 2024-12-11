@@ -41,7 +41,7 @@ const StructureIndex: React.FC = () => {
           </div>
         ) : (
           <>
-            <div className="desktop-back-button hidden md:block py-2 ">
+            <div className="desktop-back-button hidden lg:block py-2 ">
               {filterParam ? (
                 <a
                   href={`/proteinresultspage/virus_name/${encodeURIComponent(
@@ -64,7 +64,7 @@ const StructureIndex: React.FC = () => {
               />
             ) : null}
 
-            <div className="mobile-heading sm:hidden ">
+            <div className="mobile-heading lg:hidden ">
               <h1 className="mx-12 text-2xl text-slate-500 ">
                 {proteinInfo["genbank_name_curated"]}
               </h1>

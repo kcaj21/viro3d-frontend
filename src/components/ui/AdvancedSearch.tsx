@@ -40,21 +40,19 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   console.log(filterParam)
 
   return (
-    <form className="hidden sm:flex flex-col-1 xs:w-[100%] sm:w-[55%] lg:w-[100%] border-0 border-[#f9f9f9] rounded-full xs:text-lg sm:text-base lg:text-2xl bg-[#f9f9f9]">
-      <div className="input-container relative w-full">
+      <div className="input-container relative w-full drop-shadow-md">
         <div className="flex items-center">
           <input
             placeholder={`Filter by ${filterParam === "proteinname" ? 'virus' : 'protein name'}...`}
             value={inputValue}
             onChange={handleInputChange}
-            className="text-slate-500 pl-4 outline-none sm:h-12 w-full border-0 rounded-full xs:text-lg lg:text-2xl bg-[#f9f9f9]"
+            className="text-slate-500 px-4 outline-none h-12 w-full border-0 rounded-full xs:text-lg lg:text-xl bg-[#f9f9f9]"
             type="text"
           />
-          {inputValue ? (
             <button
               type="button"
               onClick={handleClear}
-              className="mr-2 text-[#9ca3af] xs:text-sm md:text-xl hover:text-[#777d88] border-0 rounded-full hover:bg-[#4343431e]"
+              className={`${!inputValue ? 'hidden ' : 'absolute right-0'} mr-2 text-[#9ca3af] xs:text-sm md:text-xl hover:text-[#777d88] border-0 rounded-full hover:bg-[#4343431e]`}
             >
               <svg
                 fill="currentColor"
@@ -69,10 +67,8 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
                 />
               </svg>
             </button>
-          ) : null}
         </div>
       </div>
-    </form>
   );
 };
 
