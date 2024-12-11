@@ -5,13 +5,15 @@ type AdvancedSearchProps = {
   setAdvancedSearch: React.Dispatch<React.SetStateAction<string>>;
   clearAdvancedSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  filterParam: string;
 };
 
 const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   advancedSearch,
   setAdvancedSearch,
   clearAdvancedSearch,
-  setCurrentPage
+  setCurrentPage,
+  filterParam
 }) => {
   const [inputValue, setInputValue] = useState<string>(advancedSearch);
 
@@ -35,12 +37,14 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     clearAdvancedSearch(event);
   };
 
+  console.log(filterParam)
+
   return (
     <form className="hidden sm:flex flex-col-1 xs:w-[100%] sm:w-[55%] lg:w-[100%] border-0 border-[#f9f9f9] rounded-full xs:text-lg sm:text-base lg:text-2xl bg-[#f9f9f9]">
       <div className="input-container relative w-full">
         <div className="flex items-center">
           <input
-            placeholder="Filter by virus..."
+            placeholder={`Filter by ${filterParam === "proteinname" ? 'virus' : 'protein name'}...`}
             value={inputValue}
             onChange={handleInputChange}
             className="text-slate-500 pl-4 outline-none sm:h-12 w-full border-0 rounded-full xs:text-lg lg:text-2xl bg-[#f9f9f9]"
