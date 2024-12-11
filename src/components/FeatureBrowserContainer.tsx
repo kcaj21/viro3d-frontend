@@ -84,10 +84,10 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
     <>
       <div className="hidden sm:block text-slate-500 ">
         {/* The dropdown menu is rendered when:
-            - The user has selected a non-segmented virus with multiple nucleotide accession numbers (nt_acc) associated with it
-            - The user has selected a segmented virus where some/all segments are associated with multiple nucleotide accession numbers (nt_acc) 
-          If the areSegmentsUnique function returns false, this means there are multiple segments with the same name, but associated with different nt_acc's
-        */}
+        	- The user has selected a non-segmented virus with multiple nucleotide accession numbers (nt_acc) associated with it
+        	- The user has selected a segmented virus where some/all segments are associated with multiple nucleotide accession numbers (nt_acc)
+      	If the areSegmentsUnique function returns false, this means there are multiple segments with the same name, but associated with different nt_acc's
+    	*/}
         <div className="isolate-dropdown-menu flex flex-col items-center">
           <h1 className="text-center mb-6 text-2xl">{searchParam} Genome</h1>
           {(coordinates?.segments?.length > 1 &&
@@ -112,13 +112,14 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
           ) : null}
         </div>
         {/* These feature browsers are mapped when:
-            - The user has selected a SEGMENTED virus where each segment only has ONE nt_acc associated with it e.g Influenza A virus
-            - The ternary operator checks: 
-              - If the user has selected a segmented virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is FALSE 
-              - If each segment has a unique name. If they do not, that means each segment is associated with a distinct nt_acc - so we check if the areSegmentsUnique function returns TRUE
-        */}
+        	- The user has selected a SEGMENTED virus where each segment only has ONE nt_acc associated with it e.g Influenza A virus
+        	- The ternary operator checks:
+          	- If the user has selected a segmented virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is FALSE
+          	- If each segment has a unique name. If they do not, that means each segment is associated with a distinct nt_acc - so we check if the areSegmentsUnique function returns TRUE
+    	*/}
         <div className="relative">
-          {coordinates.segments[0].segment !== "Non-segmented" &&
+          {coordinates?.segments?.length > 1 &&
+          coordinates.segments[0].segment !== "Non-segmented" &&
           areSegmentsUnique(coordinates) ? (
             <div
               id="segment-container"
@@ -144,12 +145,12 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
             </div>
           ) : null}
           {/* These feature browsers are mapped when:
-            - The user has selected a SEGMENTED virus where some/all segments have more than one nt_acc associated with them e.g infectious pancreatic necrosis virus
-            - The ternary operator checks: 
-              - If the user has selected a segmented virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is FALSE 
-              - If each segment has a unique name. If they do not, that means each segment is associated with a distinct nt_acc - so we check if the areSegmentsUnique function returns FALSE
-          (the dropdown menu will be rendered in this instance)
-        */}
+        	- The user has selected a SEGMENTED virus where some/all segments have more than one nt_acc associated with them e.g infectious pancreatic necrosis virus
+        	- The ternary operator checks:
+          	- If the user has selected a segmented virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is FALSE
+          	- If each segment has a unique name. If they do not, that means each segment is associated with a distinct nt_acc - so we check if the areSegmentsUnique function returns FALSE
+      	(the dropdown menu will be rendered in this instance)
+    	*/}
           {coordinates.segments[0].segment !== "Non-segmented" &&
           !areSegmentsUnique(coordinates) ? (
             <div
@@ -180,12 +181,12 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
             </div>
           ) : null}
           {/* These feature browsers are mapped when:
-            - The user has selected a NON-SEGMENTED virus where there is MORE THAN ONE nt_acc associated with this ONE virus e.g chikungunya virus
-            - The ternary operator checks: 
-              - If the user has selected a segmented virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is TRUE 
-              - If the length of coordinates.segments > 1 - this means there is more than one nt_acc number associated with the virus
-        (the dropdown menu will be rendered in this instance)
-        */}
+        	- The user has selected a NON-SEGMENTED virus where there is MORE THAN ONE nt_acc associated with this ONE virus e.g chikungunya virus
+        	- The ternary operator checks:
+          	- If the user has selected a segmented virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is TRUE
+          	- If the length of coordinates.segments > 1 - this means there is more than one nt_acc number associated with the virus
+    	(the dropdown menu will be rendered in this instance)
+    	*/}
           {coordinates.segments[0].segment === "Non-segmented" &&
           coordinates.segments.length > 1 ? (
             <div
@@ -213,13 +214,12 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
             </div>
           ) : null}
           {/* This singular feature browser is rendered when:
-            - The user has selected a NON-SEGMENTED virus and there is only one nt_acc associated with it
-            - The ternary operator checks: 
-              - If the user has selected a NON-SEGMENTED virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is TRUE 
-              - If the length of coordinates.segments = 1; this means there is one nt_acc number associated with the virus => only one browser needs to be rendered
-        */}
-          {coordinates.segments[0].segment === "Non-segmented" &&
-          coordinates.segments.length === 1 ? (
+        	- The user has selected a NON-SEGMENTED virus and there is only one nt_acc associated with it
+        	- The ternary operator checks:
+          	- If the user has selected a NON-SEGMENTED virus. If a virus is non-segmented, it will always have a segment value of "non-segmented", so we just check if this is TRUE
+          	- If the length of coordinates.segments = 1; this means there is one nt_acc number associated with the virus => only one browser needs to be rendered
+    	*/}
+          {coordinates.segments.length === 1 ? (
             <div className="drop-shadow-md border-b-0 border-[#64748b] ">
               <FeatureBrowser
                 annotations={coordinates?.segments[0]?.coordinates}
