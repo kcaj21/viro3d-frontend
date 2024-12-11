@@ -13,21 +13,39 @@ export function useProteins(
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `${api_url}/api/proteins/${filterparam}/?qualifier=${id}${
-        advanced ? `&filter=${advanced}` : ``
-      }&page_size=10&page_num=${currentpage}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false);
-        setData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-        setData(null);
-        setIsLoading(false);
-      });
+    if (filterparam === "virus_name") {
+      fetch(
+        `${api_url}/api/proteins/${filterparam}_exact/?qualifier=${id}${
+          advanced ? `&filter=${advanced}` : ``
+        }&page_size=10&page_num=${currentpage}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setIsLoading(false);
+          setData(data);
+        })
+        .catch((error) => {
+          console.error(error);
+          setData(null);
+          setIsLoading(false);
+        });
+    } else {
+      fetch(
+        `${api_url}/api/proteins/${filterparam}/?qualifier=${id}${
+          advanced ? `&filter=${advanced}` : ``
+        }&page_size=10&page_num=${currentpage}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setIsLoading(false);
+          setData(data);
+        })
+        .catch((error) => {
+          console.error(error);
+          setData(null);
+          setIsLoading(false);
+        });
+    }
   }, [filterparam, id, currentpage, advanced]);
 
   return { isLoading, data };
