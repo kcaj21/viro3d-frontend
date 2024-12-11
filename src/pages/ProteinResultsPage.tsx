@@ -65,7 +65,7 @@ const ProteinResultsPage: React.FC = () => {
             />
           ) : null}
 
-          <div className="results-container relative min-h-screen mt-8 text-5xl border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
+          <div className="results-container relative h-[100%] mt-8 text-5xl border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
             <div className="button-row flex xs:flex-col sm:flex-row font-light text-[#4a95c0]">
               <p className="sm:basis-1/2 2xl:basis-2/3 px-8 mt-8 xs:text-lg md:text-xl xl:text-2xl 2xl:text-3xl break-words">
                 Showing {data.count} results for: "

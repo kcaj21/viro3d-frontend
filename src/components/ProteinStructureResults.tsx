@@ -28,7 +28,7 @@ const ProteinStructureResults: React.FC<ProteinStructureResultsProps> = ({
               }}
               key={protein.record_id}
             >
-              <div className="result-card-by-virus-match hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md xs:min-h-[12.5vh] xs:max-h-[12.5vh] sm:min-h-[30vh] sm:max-h-[30vh] md:min-h-[30vh] md:max-h-[30vh] lg:min-h-[15vh] lg:max-h-[15vh] flex flex-row justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
+              <div className="result-card-by-virus-match hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md  h-[100%] flex flex-row justify-between border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
                 <div className="px-4 py-2 flex flex-col justify-evenly  basis-2/3">
                   <div className="">
                     <div className=" 2xl:text-2xl  lg:text-base xs:text-xs text-[#4a95c0] font-light">
@@ -77,7 +77,7 @@ const ProteinStructureResults: React.FC<ProteinStructureResultsProps> = ({
               }}
               key={match.protein_structure.record_id}
             >
-              <div className="result-card-by-sequence-match min-h-[90vh] flex flex-col justify-between hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md xs:min-h-[20vh] xs:max-h-[20vh] sm:min-h-[35vh] sm:max-h-[35vh] md:min-h-[40vh] md:max-h-[40vh] lg:min-h-[20vh] lg:max-h-[20vh] 2xl:min-h-[20vh] 2xl:max-h-[20vh]  border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
+              <div className="result-card-by-sequence-match flex flex-col justify-between hover:-translate-y-1 xs:text-xs transition ease-in-out drop-shadow-md h-[100%]  border-2 border-[#4a95c0] hover:border-[#50bde5] rounded-md bg-[#f9f9f9]">
                 <div className="flex flex-row justify-between">
                   <div className="basis-2/3">
                     {match.protein_structure.genbank_name_curated.length <
