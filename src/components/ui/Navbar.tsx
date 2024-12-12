@@ -87,11 +87,11 @@ const Navbar: React.FC = () => {
             ></img>
           </Link>
           <ul className="sm:hidden flex p-4 md:p-0 flex-row xs:space-x-8 font-extralight xs:text-2xl text-[#4a95c0]">
-            <button className="hover:text-[#50bde5]">
-              <a href="/about">About</a>
+          <button className="hover:text-[#50bde5]">
+              <Link to="/about">About</Link>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href={`${api_url}/api/docs`}>API</a>
+              <Link to="/docs">API</Link>
             </button>
           </ul>
           <form
@@ -165,10 +165,10 @@ const Navbar: React.FC = () => {
           </form>
           <ul className="xs:hidden sm:block flex p-4 md:p-0 md:flex-row 2xl:space-x-32 xl:space-x-18 md:space-x-8 xs:space-x-2 font-extralight xs:text-sm sm:text-xl lg:text-3xl text-[#4a95c0]">
             <button className="hover:text-[#50bde5]">
-              <a href="/about">About</a>
+              <Link to="/about">About</Link>
             </button>
             <button className="hover:text-[#50bde5]">
-              <a href={`${api_url}/api/docs`}>API</a>
+              <Link to="/docs">API</Link>
             </button>
           </ul>
           <div>
