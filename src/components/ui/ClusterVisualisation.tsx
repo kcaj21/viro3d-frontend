@@ -1,13 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import Konva from "konva";
 import { useGraphData } from "../../hooks/useGraphData";
-import { NodeData } from "../../types/nodedata";
+import { NodeData } from "../../types/graphdata";
 
 type ClusterVisualisationProps = {
   setHoveredVirus: React.Dispatch<React.SetStateAction<string>>;
-  handleViewStructurePopUpClick: (
-    event: string
-  ) => void;
+  handleViewStructurePopUpClick: (event: string) => void;
 };
 
 const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
@@ -17,7 +15,10 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
   const konvaContainerRef = useRef<HTMLDivElement | null>(null);
   const selectedNodeRef = useRef<Konva.Node | null>(null);
   const stageRef = useRef<Konva.Stage | null>(null);
-  const [containerSize, setContainerSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+  const [containerSize, setContainerSize] = useState<{
+    width: number;
+    height: number;
+  }>({ width: 0, height: 0 });
   const lastCenterRef = useRef<{ x: number; y: number } | null>(null);
   const lastDistRef = useRef<number>(0);
   const dragStoppedRef = useRef<boolean>(false);
@@ -257,9 +258,9 @@ const ClusterVisualisation: React.FC<ClusterVisualisationProps> = ({
           let scaledRadius = 12 / scale; // Adjust sensitivity here
           scaledRadius = Math.max(minRadius, Math.min(scaledRadius, maxRadius)); // Constrain radius
 
-        (layer.getChildren() as Konva.Circle[]).forEach((circle) => {
-          circle.radius(scaledRadius);
-        });
+          (layer.getChildren() as Konva.Circle[]).forEach((circle) => {
+            circle.radius(scaledRadius);
+          });
 
           const dx = newCenter.x - lastCenterRef.current.x;
           const dy = newCenter.y - lastCenterRef.current.y;

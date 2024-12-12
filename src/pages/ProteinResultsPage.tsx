@@ -71,7 +71,7 @@ const ProteinResultsPage: React.FC = () => {
                 Showing {data.count} results for: "
                 {searchParam?.substring(0, 40)}..."
               </p>
-              {filterParam === "proteinname" || filterParam === "virus_name" ? (
+              {searchParam && filterParam === "proteinname" || searchParam && filterParam === "virus_name" ? (
                 <div className="sm:basis-1/2 2xl:basis-1/3 px-8 mt-8">
                   <AdvancedSearch
                     advancedSearch={advancedSearch}
@@ -79,6 +79,7 @@ const ProteinResultsPage: React.FC = () => {
                     clearAdvancedSearch={clearAdvancedSearch}
                     setCurrentPage={setCurrentPage}
                     filterParam={filterParam}
+                    searchParam={searchParam}
                   />
                 </div>
               ) : null}

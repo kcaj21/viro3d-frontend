@@ -16,19 +16,6 @@ const Navbar: React.FC = () => {
   const [searchParam, setSearchParam] = useState("");
   const [suggestion, setSuggestion] = useState("");
   const [filterParam, setFilterParam] = useState("viruses");
-  // const [show, setShow] = useState(true);
-  // const [lastScrollY, setLastScrollY] = useState(0);
-
-  // const controlNavbar = () => {
-  //   if (typeof window !== "undefined") {
-  //     if (window.scrollY > lastScrollY) {
-  //       setShow(false);
-  //     } else {
-  //       setShow(true);
-  //     }
-  //     setLastScrollY(window.scrollY);
-  //   }
-  // };
 
   const { data } = useAutocomplete(filterParam, suggestion, 0);
 
@@ -75,7 +62,6 @@ const Navbar: React.FC = () => {
     }
   };
 
-  // New function to clear the search input
   const clearSearch = () => {
     setSearchParam("");
     setSuggestion("");

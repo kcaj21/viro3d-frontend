@@ -6,6 +6,7 @@ type AdvancedSearchProps = {
   clearAdvancedSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   filterParam: string;
+  searchParam: string;
 };
 
 const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
@@ -13,9 +14,14 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   setAdvancedSearch,
   clearAdvancedSearch,
   setCurrentPage,
-  filterParam
+  filterParam,
+  searchParam
 }) => {
   const [inputValue, setInputValue] = useState<string>(advancedSearch);
+
+    useEffect(() => {
+    setInputValue("")
+  }, [filterParam, searchParam]);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -36,8 +42,6 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
     setInputValue("");
     clearAdvancedSearch(event);
   };
-
-  console.log(filterParam)
 
   return (
       <div className="input-container relative w-full drop-shadow-md">
