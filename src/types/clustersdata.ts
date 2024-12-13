@@ -15,4 +15,10 @@ type ClusterMember = {
     tax_id: number;
     species: string;
     plDDT_score: number;
+    virus_name: string;
+    family: string;
+    host: string;
+    genbank_name_curated: string;
+    uniprot_id: string;
+    nucleotide_accession_number: string;
 }

@@ -152,10 +152,11 @@ const StructureIndex: React.FC = () => {
                 </div>
               </div>
               <div className="clusters-container w-full mt-8">
-                {clusters ? (
+                {clusters && searchParam ? (
                   <ClustersContainer
                     clusters={clusters}
                     clustersLoading={clustersLoading}
+                    searchParam={searchParam}
                   />
                 ) : null}
               </div>
