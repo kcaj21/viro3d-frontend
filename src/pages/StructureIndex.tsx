@@ -7,8 +7,10 @@ import { useStructureIndexData } from "../hooks/useStructureIndexData";
 import { useGenomeCoordinates } from "../hooks/useGenomeCoordinates";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import PdbeMolstartLegend from "../components/ui/PdbeMolstarLegned";
-import { isMobile } from 'react-device-detect';
+import { isMobile } from "react-device-detect";
 import { api_url } from "../utils/api";
+import { useClusters } from "../hooks/useClusters";
+import ClustersContainer from "../components/ClustersContainer";
 
 const StructureIndex: React.FC = () => {
   const { filterParam, searchParam } = useParams();
@@ -16,6 +18,10 @@ const StructureIndex: React.FC = () => {
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
     "virus_name",
     filterParam ?? ""
+  );
+
+  const { clusters, isLoading: clustersLoading } = useClusters(
+    searchParam ?? ""
   );
 
   const {
@@ -69,80 +75,89 @@ const StructureIndex: React.FC = () => {
                 {proteinInfo["genbank_name_curated"]}
               </h1>
             </div>
+            <div className="flex flex-col gap-8">
+              <div className="structuredata-container mb-8 sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
+                {defaultModel === "CF" ? (
+                  <div className="sm:basis-1/2 xs:mx-8">
+                    {isESMFoldModelPresent ? (
+                      <div>
+                        <button
+                          className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
+                          onClick={handleESMFoldClick}
+                        >
+                          Switch to ESMFold Model
+                        </button>
+                      </div>
+                    ) : null}
+                    <PdbeMolstar
+                      defaultModel={defaultModel}
+                      modelID={searchParam ?? ""}
+                    />
 
-            <div className="sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
-              {defaultModel === "CF" ? (
-                <div className="sm:basis-1/2 xs:mx-8">
-                  {isESMFoldModelPresent ? (
-                    <div>
-                      <button
-                        className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
-                        onClick={handleESMFoldClick}
+                    <div className=" download-buttons-container flex flex-row ">
+                      <a
+                        className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                        href={`${api_url}/api/pdb/${defaultModel}-${searchParam}.cif`}
                       >
-                        Switch to ESMFold Model
-                      </button>
-                    </div>
-                  ) : null}
-                  <PdbeMolstar
-                    defaultModel={defaultModel}
-                    modelID={searchParam ?? ""}
-                  />
-
-                  <div className=" download-buttons-container flex flex-row ">
-                    <a
-                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}.cif`}
-                    >
-                      Download mmCIF
-                    </a>
-                    <a
-                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
-                    >
-                      Download PDB
-                    </a>
-                  </div>
-                  <PdbeMolstartLegend />
-                </div>
-              ) : null}
-              {defaultModel === "EF" ? (
-                <div className="sm:basis-1/2 xs:mx-8">
-                  {isESMFoldModelPresent ? (
-                    <div>
-                      <button
-                        className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
-                        onClick={handleCollabFoldClick}
+                        Download mmCIF
+                      </a>
+                      <a
+                        className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                        href={`${api_url}/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
                       >
-                        Switch to ColabFold Model
-                      </button>
+                        Download PDB
+                      </a>
                     </div>
-                  ) : null}
-                  <PdbeMolstar
-                    defaultModel={defaultModel}
-                    modelID={searchParam ?? ""}
-                  />
-                  <div className=" download-buttons-container flex flex-row ">
-                    <a
-                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}.cif`}
-                    >
-                      Download mmCIF
-                    </a>
-                    <a
-                      className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
-                      href={`${api_url}/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
-                    >
-                      Download PDB
-                    </a>
+                    <PdbeMolstartLegend />
                   </div>
-                  <PdbeMolstartLegend />
+                ) : null}
+                {defaultModel === "EF" ? (
+                  <div className="sm:basis-1/2 xs:mx-8">
+                    {isESMFoldModelPresent ? (
+                      <div>
+                        <button
+                          className="border border-[#313645]  bg-[#4a95c0] hover:bg-[#4da9ca] text-white w-full"
+                          onClick={handleCollabFoldClick}
+                        >
+                          Switch to ColabFold Model
+                        </button>
+                      </div>
+                    ) : null}
+                    <PdbeMolstar
+                      defaultModel={defaultModel}
+                      modelID={searchParam ?? ""}
+                    />
+                    <div className=" download-buttons-container flex flex-row ">
+                      <a
+                        className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                        href={`${api_url}/api/pdb/${defaultModel}-${searchParam}.cif`}
+                      >
+                        Download mmCIF
+                      </a>
+                      <a
+                        className="border border-[#313645] bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center w-full"
+                        href={`${api_url}/api/pdb/${defaultModel}-${searchParam}_relaxed.pdb`}
+                      >
+                        Download PDB
+                      </a>
+                    </div>
+                    <PdbeMolstartLegend />
+                  </div>
+                ) : null}
+                <div className="sm:basis-1/2 sm:min-w-[30vw] font-extralight ">
+                  <ProteinInfo
+                    proteinInfo={proteinInfo}
+                    defaultModel={defaultModel}
+                  />
                 </div>
-              ) : null}
-              <div className="sm:basis-1/2 sm:min-w-[30vw] font-extralight ">
-                <ProteinInfo
-                  proteinInfo={proteinInfo}
-                  defaultModel={defaultModel}
-                />
+              </div>
+              <div className="clusters-container w-full mt-8">
+                {clusters ? (
+                  <ClustersContainer
+                    clusters={clusters}
+                    clustersLoading={clustersLoading}
+                  />
+                ) : null}
               </div>
             </div>
           </>

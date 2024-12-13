@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
+import { ClustersData } from "../types/clustersdata";
 import { api_url } from "../utils/api";
 
-export function useGenomeCoordinates(id: string) {
+export function useClusters(
+  id: string,
+) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [coordinates, setCoordinates] = useState<boolean | null>(null);
+  const [clusters, setClusters] = useState<ClustersData | null>(null);
 
   useEffect(() => {
-    fetch(`${api_url}/api/sequencematch/${id}`)
+    setIsLoading(true);
+    fetch(
+      `${api_url}/api/clusters/genbank_id/?qualifier=${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        setCoordinates(data);
         setIsLoading(false);
+        setClusters(data);
       })
       .catch((error) => {
         console.error(error);
-        setCoordinates(null);
+        setClusters(null);
         setIsLoading(false);
       });
   }, [id]);
 
-  return { coordinates, isLoading };
+  return { isLoading, clusters };
 }
