@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PdbeMolstar from "../components/ui/PdbeMolstar";
 import ProteinInfo from "../components/ProteinInfo";
 import FeatureBrowserContainer from "../components/FeatureBrowserContainer";
@@ -52,14 +52,14 @@ const StructureIndex: React.FC = () => {
           <>
             <div className="desktop-back-button hidden lg:block py-2 ">
               {filterParam ? (
-                <a
-                  href={`/proteinresultspage/virus_name/${encodeURIComponent(
+                <Link
+                  to={`/proteinresultspage/virus_name/${encodeURIComponent(
                     filterParam
                   )}`}
                   className="text-xl px-2 py-2 rounded-md drop-shadow-md border-0  bg-[#4a95c0] hover:bg-[#4da9ca] text-white text-center"
                 >
                   Virus Structure List
-                </a>
+                </Link>
               ) : null}
             </div>
             {coordinates && !isMobile ? (
