@@ -30,6 +30,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
   >(null);
 
   const { isLoading: downloadLoading, handleDownload } = useZipDownload(
+    'virus',
     searchParam ?? ""
   );
 

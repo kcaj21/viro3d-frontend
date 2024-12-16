@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { api_url } from "../utils/api";
 
-export function useZipDownload(id: string) {
+export function useZipDownload(endpoint:string, id: string) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleDownload = async (format: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${api_url}/api/zip/${id}/${format}`);
+      const response = await fetch(`${api_url}/api/zip/${endpoint}/${id}/${format}`);
       if (!response.ok && response.status !== 429) {
         throw new Error("Failed to download Models");
       }
@@ -19,9 +19,9 @@ export function useZipDownload(id: string) {
       const link = document.createElement("a");
       link.href = url;
       if (format === ".cif") {
-        link.download = `${id} mmCIFs.zip`;
+        link.download = endpoint === 'virus' ? `${id} mmCIFs.zip` : `${id.slice(3, 13)}_similar_structures_mmCIFs.zip`;
       } else {
-        link.download = `${id} PDBs.zip`;
+        link.download = endpoint === 'virus' ? `${id} PDBs.zip` : `${id.slice(3, 13)}_similar_structures_PDBs.zip`;
       }
       link.click();
       window.URL.revokeObjectURL(url);
