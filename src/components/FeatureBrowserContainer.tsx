@@ -123,7 +123,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
           areSegmentsUnique(coordinates) ? (
             <div
               id="segment-container"
-              className="custom-scrollbar overflow-x-auto flex flex-grow divide-x-2 divide-[#bec4cc]"
+              className="genome-browser-custom-scrollbar overflow-x-auto flex flex-grow divide-x-2 divide-[#bec4cc]"
             >
               {coordinates.segments?.map((segment) => (
                 <div
@@ -155,7 +155,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
           !areSegmentsUnique(coordinates) ? (
             <div
               id="segment-container"
-              className="custom-scrollbar overflow-x-auto flex flex-grow "
+              className="genome-browser-custom-scrollbar overflow-x-auto flex flex-grow "
             >
               {coordinates.segments?.map((segment) => (
                 <div
@@ -191,7 +191,7 @@ const FeatureBrowserContainer: React.FC<FeatureBrowserContainerProps> = ({
           coordinates.segments.length > 1 ? (
             <div
               id="segment-container"
-              className="custom-scrollbar overflow-x-auto flex-col flex-grow divide-[#bec4cc]"
+              className="genome-browser-custom-scrollbar overflow-x-auto flex-col flex-grow divide-[#bec4cc]"
             >
               {coordinates.segments?.map((segment) => (
                 <div
