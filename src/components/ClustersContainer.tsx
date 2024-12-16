@@ -22,17 +22,17 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
       <tr
         key={member.member_record_id}
         onClick={() =>
-          navigate(`/structureindex/${member.virus_name}/${member.member_record_id}`)
+          navigate(`/structureindex/${encodeURIComponent(member.virus_name)}/${member.member_record_id}`)
         }
         className={`cursor-pointer ${
           isSelected ? "bg-[#4a95c0] text-white" : "hover:bg-[#e6e6e6]"
         }`}
       >
-        <td className="text-center">{member.member_record_id.slice(0, 10)}</td>
-        <td>{member.genbank_name_curated}</td>
-        <td>{member.virus_name}</td>
-        <td className="text-center">{member.plDDT_score}</td>
-        <td className="text-center">{member.protein_length}</td>
+        <td className="text-left pl-2">{member.member_record_id.slice(0, 10)}</td>
+        <td className="text-left">{member.genbank_name_curated}</td>
+        <td className="text-left">{member.virus_name}</td>
+        <td className="text-left">{member.plDDT_score}</td>
+        <td className="text-left">{member.protein_length}</td>
       </tr>
     );
   });
@@ -47,18 +47,18 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
         <div className="overflow-hidden">
           <table className="w-full table-fixed border-collapse border-b border-[#64748b]  ">
           <caption className="p-5 text-xl font-semibold text-left rtl:text-right bg-[#e6e6e6] text-[#636262]">
-            Cluster of Similar Structures
+            Similar Structures
             <p className="mt-1 text-lg font-normal text-gray-500">
-              Explanation of the table.
+            Clustered Based on FoldSeek Similarity Scores
             </p>
           </caption>
             <thead className="bg-[#e6e6e6] text-[#636262]  ">
               <tr className="">
-                <th className="w-1/5">Genbank ID</th>
-                <th className="w-1/5">Protein Name</th>
-                <th className="w-1/5">Virus Name</th>
-                <th className="w-1/5">pLDDT Score</th>
-                <th className="w-1/5">Length (No. of Residues)</th>
+                <th className=" pl-2 w-1/5 text-left">Genbank ID</th>
+                <th className="w-1/5 text-left">Protein Name</th>
+                <th className="w-1/5 text-left">Virus Name</th>
+                <th className="w-1/5 text-left">pLDDT Score</th>
+                <th className="w-1/5 text-left">Length (No. of Residues)</th>
               </tr>
             </thead>
           </table>

@@ -13,6 +13,9 @@ import { useClusters } from "../hooks/useClusters";
 import ClustersContainer from "../components/ClustersContainer";
 
 const StructureIndex: React.FC = () => {
+
+  document.documentElement.scrollTop = 0;
+
   const { filterParam, searchParam } = useParams();
 
   const { coordinates, isLoading: genomeLoading } = useGenomeCoordinates(
@@ -152,7 +155,7 @@ const StructureIndex: React.FC = () => {
                 </div>
               </div>
               <div className="clusters-container w-full mt-16">
-                {clusters && searchParam ? (
+                {clusters && clusters?.clusters[0].cluster_members.length > 1 && searchParam ? (
                   <ClustersContainer
                     clusters={clusters}
                     clustersLoading={clustersLoading}

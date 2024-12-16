@@ -34,6 +34,9 @@ const Home: React.FC = () => {
             <h1 className="mt-2 xl:text-3xl lg:text-2xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4] ">
               Structure-Informed Map of the Human and Animal Virosphere
             </h1>
+            <h2 className="mt-2 xl:text-xl lg:text-lg font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4] ">
+              Click Points to Explore
+            </h2>
             <h2 className="mt-2 text-2xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4]  ">
               {hoveredVirus}
             </h2>
