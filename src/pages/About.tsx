@@ -68,18 +68,116 @@ const About: React.FC = () => {
       title: "Web resource implementation",
       id: "Web resource implementation",
       content: (
-        <ul className="flex flex-col gap-2 xs:text-xl lg:text-2xl text-[#6d828d]">
-          <li>React</li>
-          <li>Typescript</li>
-          <li>FastAPI</li>
-          <li>Python</li>
-          <li>MongoDB</li>
-          <li>PDBE-Molstar Molecular Viewer</li>
-          <li>Sodaviz - Genomic Annotation Visualizer</li>
-        </ul>
+        <div className="flex flex-col xs:text-xl lg:text-2xl text-[#6d828d] justify-evenly gap-8">
+          <dl className="flex flex-col gap-4">
+            <dt className="text-3xl text-[#4a95c0]  font-bold">Frontend</dt>
+            <dd className="">
+              {" "}
+              The basis of Viro3D's frontend was developed with{" "}
+              <a
+                href="https://github.com/facebook/react"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                React
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://github.com/microsoft/TypeScript"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Typescript
+              </a>
+              . Some extra libraries were also used for certain key features:{" "}
+            </dd>
+            <p>
+              {" "}
+              <a
+                href="https://github.com/molstar/pdbe-molstar"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                PDBE-Molstar Molecular Viewer
+              </a>{" "}
+              provides the interactive 3D render of our protein structures
+            </p>
+            <p>
+              <a
+                href="https://github.com/sodaviz"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Sodaviz
+              </a>{" "}
+              is a Genomic Annotation Visualizer. We use it to display the
+              genome of each virus in our database and allow the user to browse
+              protein structures by clicking on the gene it's encoded by.
+            </p>
+            <p>
+              <a
+                href="https://github.com/konvajs/konva"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                KonvaJS
+              </a>{" "}
+              is an HTML5 Canvas JavaScript framework. We used it to construct
+              the interactive map, seen on the homepage.
+            </p>
+            <dt className="text-3xl text-[#4a95c0] font-bold mt-8">API</dt>
+            <dd className="">
+              {" "}
+              Our API was developed using{" "}
+              <a
+                href="https://github.com/fastapi/fastapi"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                FastAPI
+              </a>
+              , a Python-based framework.
+            </dd>
+            <p>
+              {" "}
+              The{" "}
+              <a
+                href="https://github.com/biopython/biopython"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Biopython
+              </a>{" "}
+              library was also incorporated. We took advantage of its NCBI
+              Blastp command-line wrapper to provide the searching by protein
+              structure sequence feature.
+            </p>
+            <dt className="text-3xl text-[#4a95c0] font-bold mt-8">Database</dt>
+            <dd className="">
+              {" "}
+              We used a self-hosted{" "}
+              <a
+                href="https://github.com/mongodb/mongo"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                MongoDB
+              </a>{" "}
+              Community Edition database. This is a document-oriented,
+              non-relational database program.{" "}
+            </dd>
+          </dl>
+        </div>
       ),
     },
-
     {
       title: "Enabling New Research",
       id: "Enabling New Research",
@@ -146,7 +244,9 @@ const About: React.FC = () => {
     },
   ];
 
-  const [tab, setTab] = useState<string>("Data Collection and Structure Prediction");
+  const [tab, setTab] = useState<string>(
+    "Data Collection and Structure Prediction"
+  );
   const [, startTransition] = useTransition();
 
   const handeTabChange = (id: string) => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api_url } from "../utils/api";
 
-export function useZipDownload(endpoint:string, id: string) {
+export function useZipDownload(endpoint:string, id: string, genbank_id?: string) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleDownload = async (format: string) => {
@@ -19,9 +19,9 @@ export function useZipDownload(endpoint:string, id: string) {
       const link = document.createElement("a");
       link.href = url;
       if (format === ".cif") {
-        link.download = endpoint === 'virus' ? `${id} mmCIFs.zip` : `${id.slice(3, 13)}_similar_structures_mmCIFs.zip`;
+        link.download = endpoint === 'virus' ? `${id} mmCIFs.zip` : `${genbank_id?.split('_')[0]}_similar_structures_mmCIFs.zip`;
       } else {
-        link.download = endpoint === 'virus' ? `${id} PDBs.zip` : `${id.slice(3, 13)}_similar_structures_PDBs.zip`;
+        link.download = endpoint === 'virus' ? `${id} PDBs.zip` : `${genbank_id?.split('_')[0]}_similar_structures_PDBs.zip`;
       }
       link.click();
       window.URL.revokeObjectURL(url);

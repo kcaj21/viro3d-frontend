@@ -105,7 +105,11 @@ const Navbar: React.FC = () => {
                 <input
                   value={decodeURIComponent(searchParam)}
                   onChange={handleText}
-                  // placeholder="Dengue Virus"
+                  placeholder={`${
+                    filterParam === "viruses" ? "Dengue Virus" : ""
+                  }${filterParam === "proteinname" ? "Glycoprotein" : ""}${
+                    filterParam === "sequencematch" ? "WEWSDVLWWIKKIAG" : ""
+                  }${filterParam === "genbankid" ? "AKO90165.1" : ""}`}
                   className="text-slate-500 pl-4 outline-none sm:h-8 xl:h-10 2xl:h-12 w-full border-none xs:text-lg lg:text-2xl bg-[#f9f9f9]"
                   type="text"
                 />
@@ -209,13 +213,22 @@ const Navbar: React.FC = () => {
         {isMobileMenuOpen ? (
           <div className=" z-10 h-[20vh] w-full">
             <ul className="sm:hidden flex p-4 md:p-0 flex-row justify-center xs:space-x-8 font-extralight xs:text-2xl text-[#4a95c0]">
-            <button onClick={toggleMobileMenu} className="hover:text-[#50bde5]">
+              <button
+                onClick={toggleMobileMenu}
+                className="hover:text-[#50bde5]"
+              >
                 <Link to="/">Home</Link>
               </button>
-              <button onClick={toggleMobileMenu} className="hover:text-[#50bde5]">
+              <button
+                onClick={toggleMobileMenu}
+                className="hover:text-[#50bde5]"
+              >
                 <Link to="/about">About</Link>
               </button>
-              <button onClick={toggleMobileMenu} className="hover:text-[#50bde5]">
+              <button
+                onClick={toggleMobileMenu}
+                className="hover:text-[#50bde5]"
+              >
                 <Link to="/docs">API</Link>
               </button>
             </ul>

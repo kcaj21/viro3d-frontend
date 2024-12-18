@@ -19,7 +19,8 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
 
   const { isLoading: downloadLoading, handleDownload } = useZipDownload(
     "cluster",
-    clusters.clusters[0].cluster_representative ?? ""
+    clusters.clusters[0].cluster_representative ?? "",
+    clusters.genbank_id
   );
 
   const clusterItems = clusters.clusters[0].cluster_members.map((member) => {
