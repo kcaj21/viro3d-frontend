@@ -12,6 +12,7 @@ import { tracking_id } from "./utils/google-analytics-id";
 import { useEffect, useState } from "react";
 import { CookieConsent } from "react-cookie-consent";
 import API from "./pages/API";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [hasConsented, setHasConsented] = useState<boolean | null>(false);
@@ -43,6 +44,7 @@ function App() {
             path="/structureindex/:filterParam/:searchParam"
             element={<StructureIndex />}
           ></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <p className="fixed z-50 2xl:text-4xl lg:text-xl  text-[#b6b6b6] bottom-0 left-0 my-2 mx-4">
           Viro3D Beta
