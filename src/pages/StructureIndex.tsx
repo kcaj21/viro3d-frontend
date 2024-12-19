@@ -13,7 +13,6 @@ import { useClusters } from "../hooks/useClusters";
 import ClustersContainer from "../components/ClustersContainer";
 
 const StructureIndex: React.FC = () => {
-
   document.documentElement.scrollTop = 0;
 
   const { filterParam, searchParam } = useParams();
@@ -31,6 +30,7 @@ const StructureIndex: React.FC = () => {
     proteinInfo,
     defaultModel,
     isESMFoldModelPresent,
+    isLoading,
     handleCollabFoldClick,
     handleESMFoldClick,
   } = useStructureIndexData(searchParam ?? "");
@@ -42,13 +42,13 @@ const StructureIndex: React.FC = () => {
   return (
     <>
       <div className="min-h-screen xs:mt-24 sm:mt-32 xs:mb-96 sm:mb-32 sm:my-auto sm:mx-4 lg:mx-8 2xl:mx-24">
-        {!proteinInfo ? (
+        {isLoading ? (
           <div className="min-h-screen">
             <div className="flex items-center justify-center gap-12">
               <LoadingSpinner />
             </div>
           </div>
-        ) : (
+        ) : proteinInfo ? (
           <>
             <div className="desktop-back-button hidden lg:block py-2 ">
               {filterParam ? (
@@ -155,7 +155,9 @@ const StructureIndex: React.FC = () => {
                 </div>
               </div>
               <div className="clusters-container w-full mt-16">
-                {clusters && clusters?.clusters[0].cluster_members.length > 1 && searchParam ? (
+                {clusters &&
+                clusters?.clusters[0].cluster_members.length > 1 &&
+                searchParam ? (
                   <ClustersContainer
                     clusters={clusters}
                     clustersLoading={clustersLoading}
@@ -165,6 +167,12 @@ const StructureIndex: React.FC = () => {
               </div>
             </div>
           </>
+        ) : (
+          <div className="results-container mt-24 flex flex-col items-center h-screen justify-center">
+            <p className="mb-12 xs:text-4xl sm:text-5xl text-slate-500">
+              Error: No data to display
+            </p>
+          </div>
         )}
       </div>
     </>

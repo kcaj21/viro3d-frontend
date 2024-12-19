@@ -19,13 +19,19 @@ export function useProteins(
           advanced ? `&filter=${advanced}` : ``
         }&page_size=10&page_num=${currentpage}`
       )
-        .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw { status: res.status, message: res.statusText };
+        }
+        return res.json();
+      })
         .then((data) => {
           setIsLoading(false);
           setData(data);
         })
         .catch((error) => {
           console.error(error);
+          if (error.status >= 500) {alert("Viro3D server is currently unavailable, please try again later.")}
           setData(null);
           setIsLoading(false);
         });
@@ -35,13 +41,19 @@ export function useProteins(
           advanced ? `&filter=${advanced}` : ``
         }&page_size=10&page_num=${currentpage}`
       )
-        .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw { status: res.status, message: res.statusText };
+        }
+        return res.json();
+      })
         .then((data) => {
           setIsLoading(false);
           setData(data);
         })
         .catch((error) => {
-          console.error(error);
+          console.error(error.status);
+          if (error.status >= 500) {alert("Viro3D server is currently unavailable, please try again later.")}
           setData(null);
           setIsLoading(false);
         });

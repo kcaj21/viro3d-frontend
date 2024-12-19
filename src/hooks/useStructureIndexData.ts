@@ -19,7 +19,12 @@ export function useStructureIndexData(id: string) {
   useEffect(() => {
     setIsLoading(true);
     fetch(`${api_url}/api/proteins/recordid/${id}`)
-      .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw { status: res.status, message: res.statusText };
+      }
+      return res.json();
+    })
       .then(async (data) => {
         setProteinInfo(data.protein_structure);
         if (
@@ -37,6 +42,7 @@ export function useStructureIndexData(id: string) {
       })
       .catch((error) => {
         console.error(error);
+        if (error.status >= 500) {alert("Viro3D server is currently unavailable, please try again later.")}        
         setProteinInfo(null);
         setIsLoading(false);
       });
