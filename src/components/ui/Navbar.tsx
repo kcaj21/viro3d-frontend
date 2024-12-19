@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
 import { useAutocomplete } from "../../hooks/useAutocomplete";
-import { api_url } from "../../utils/api";
 import AutocompleteDropdown from "./AutocompleteDropdown";
 
 type Link = {
@@ -106,7 +105,7 @@ const Navbar: React.FC = () => {
                   value={decodeURIComponent(searchParam)}
                   onChange={handleText}
                   placeholder={`${
-                    filterParam === "viruses" ? "Dengue Virus" : ""
+                    filterParam === "viruses" ? "SARS" : ""
                   }${filterParam === "proteinname" ? "Glycoprotein" : ""}${
                     filterParam === "sequencematch" ? "WEWSDVLWWIKKIAG" : ""
                   }${filterParam === "genbankid" ? "AKO90165.1" : ""}`}

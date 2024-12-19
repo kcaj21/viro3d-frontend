@@ -81,7 +81,7 @@ const StructureIndex: React.FC = () => {
             <div className="flex flex-col gap-8">
               <div className="structuredata-container xs:mb-96 md:mb-2 sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
                 {defaultModel === "CF" ? (
-                  <div className="xs:basis-1/2 xs:mx-8">
+                  <div className="basis-1/2 mx-8 flex flex-col">
                     {isESMFoldModelPresent ? (
                       <div>
                         <button

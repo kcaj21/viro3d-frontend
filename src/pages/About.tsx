@@ -35,14 +35,14 @@ const About: React.FC = () => {
             </dt>
             <dd className="">
               {" "}
-              We generated moltiple sequence alignments (MSAs) using MMseqs2
+              We generated multiple sequence alignments (MSAs) using MMseqs2
               (Steinegger and Soeding 2017) run against diverse databases
               including colabfold_envdb_202108, pdb100_230517 and uniref30_2302.
               These MSAs were used as input to LocalColabFold v.1.5.2 (Mirdita
               et al. 2022, Jumper et al. 2021) allowing structural prediction
               for 85,162 protein sequences. For each sequence, five models were
               produced, and the highest-ranked structure was refined using Amber
-              force field relaxation (Case et al. 2023) to ensure structural{" "}
+              force field relaxation (Case et al. 2023).{" "}
             </dd>
             <dt className="text-[#4a95c0] font-bold">2. ESMFold </dt>
             <dd>
@@ -54,7 +54,7 @@ const About: React.FC = () => {
             </dd>
           </dl>
           <p>
-            This dual modeling approach maximized the number of accurate
+            This dual modelling approach maximized the number of accurate
             predictions and yielded a final set of 85,162 reliable protein
             structures. The Viro3D database contains all AlphaFold2-ColabFold
             models and the ESMFold models that achieved higher confidence than
@@ -179,22 +179,6 @@ const About: React.FC = () => {
       ),
     },
     {
-      title: "Enabling New Research",
-      id: "Enabling New Research",
-      content: (
-        <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
-          Viro3D provides a vital resource for virology research, addressing a
-          gap in structural coverage and supporting functional annotation,
-          evolutionary studies, and educational applications. With extensive
-          protein models derived from state-of-the-art methods, the Viro3D web
-          resource provides structural context for lab-based investigations and
-          empowers computational investigations on the distribution of form and
-          function across human and animal virology.
-        </p>
-      ),
-    },
-
-    {
       title: "Limitations and Feedback",
       id: "Limitations and Feedback",
       content: (
@@ -207,11 +191,12 @@ const About: React.FC = () => {
             models are derived from sequence annotations, which are sometimes
             incorrect and incomplete, and can come with outdated or
             non-informative labels. We have done our best to eliminate these
-            problems, but inevitably some remain. It is important to remember
+            problems but, inevitably, some remain. It is important to remember
             that the structures are predictions and need to be interpreted with
-            care. Each model comes with confidence metrics and are shown in the
-            molecular viewer color coded by pLDDT score. Any comments or
-            feedback on Viro3D should be sent to:
+            care. Each model comes with confidence metrics (pLDDT and pTM) and
+            are shown in the molecular viewer with residues colour-coded by
+            pLDDT score. We welcome comments, feedback and suggestions. Please
+            let us know how to improve Viro3D:
           </p>
           <a
             href="mailto:cvr-webresource-support@lists.cent.gla.ac.uk"
@@ -222,11 +207,11 @@ const About: React.FC = () => {
             cvr-webresource-support@lists.cent.gla.ac.uk
           </a>
           <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
-            If you find this online resource valuable and would like to support
-            the expansion of viral protein structures, please consider sending a
-            letter of support on your institution’s letterhead. Your endorsement
-            will strengthen our funding applications and help us enhance and
-            expand this web resource.
+            If you find this resource valuable and would like to support Viro3D,
+            please consider sending a letter of support, on your institution’s
+            letterhead, to the e mail address above. Your endorsement will
+            strengthen our funding applications and allow us to enhance and
+            expand Viro3D.
           </p>
         </div>
       ),
@@ -236,9 +221,17 @@ const About: React.FC = () => {
       id: "Funding",
       content: (
         <p className="xs:text-xl lg:text-2xl text-[#6d828d]">
-          Viro3D is supported by UKRI MRC core funding to the MRC-University of
-          Glasgow Centre for Virus Research, and by grants from the Wellcome
-          Trust and Medical Research Foundation.
+          Viro3D was funded by UK Medical Research Council (MRC) support to the
+          MRC-University of Glasgow Centre for Virus Research (CVR Integrative
+          Viral Genomics and Bioinformatics Platform: MC_UU_00034/5, CVR
+          Preparedness Platform: MC_UU_00034/6 and CVR Structure-to-Function of
+          Virions Programme: MC_UU_00034/1). This research is jointly funded by
+          the MRC and the Foreign Commonwealth and Development Office (FCDO)
+          under the MRC/FCDO Concordat agreement. Additional support from the
+          Wellcome Trust and Royal Society (Sir Henry Dale Fellowship:
+          107653/Z/15/Z), Medical Research Foundation (Emerging Leaders Prize)
+          and the Darwin Trust of Edinburgh. We thank Prof. Emma Thomson and
+          Prof. Massimo Palmarini for their support of the Viro3D project.
         </p>
       ),
     },
@@ -269,6 +262,12 @@ const About: React.FC = () => {
             database is designed to support fundamental research into viral
             protein structure, function, and evolution, as well as to explore
             the contribution of viruses to overall protein structure diversity.
+            For a detailed technical description and an example of what can be
+            discovered using Viro3D please see our pre-print:
+          </p>
+          <p className="xs:text-xl lg:text-3xl text-[#4a95c0] font-semibold">
+            Viro3D: a comprehensive database of virus protein structure
+            predictions
           </p>
           <div className="flex xs:text-lg lg:text-xl xs:flex-col xs:gap-4 lg:flex-row justify-evenly mt-8 mb-8">
             <TabButton
@@ -289,13 +288,7 @@ const About: React.FC = () => {
               selectTab={() => handeTabChange("Web resource implementation")}
               active={tab === "Web resource implementation"}
             >
-              Web resource implementation
-            </TabButton>
-            <TabButton
-              selectTab={() => handeTabChange("Enabling New Research")}
-              active={tab === "Enabling New Research"}
-            >
-              Enabling New Research
+              Web Resource Implementation
             </TabButton>
             <TabButton
               selectTab={() => handeTabChange("Limitations and Feedback")}

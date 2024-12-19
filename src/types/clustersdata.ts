@@ -19,6 +19,7 @@ type ClusterMember = {
     family: string;
     host: string;
     genbank_name_curated: string;
+    genbank_id: string;
     uniprot_id: string;
     nucleotide_accession_number: string;
 }

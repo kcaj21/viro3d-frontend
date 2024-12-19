@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClustersData } from "../types/clustersdata";
 import LoadingSpinner from "./ui/LoadingSpinner";
@@ -8,6 +8,11 @@ type ClustersContainerProps = {
   clusters: ClustersData;
   clustersLoading: boolean;
   searchParam: string;
+};
+
+type SortConfig = {
+  key: string;
+  direction: "asc" | "desc";
 };
 
 const ClustersContainer: React.FC<ClustersContainerProps> = ({
@@ -23,33 +28,49 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
     clusters.genbank_id
   );
 
-  const clusterItems = clusters.clusters[0].cluster_members.map((member) => {
+  const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
+
+
+  const sortedMembers = React.useMemo(() => {
+    const members = [...clusters.clusters[0].cluster_members];
+    if (sortConfig !== null) {
+      members.sort((a, b) => {
+        const aValue = a[sortConfig.key as keyof typeof a];
+        const bValue = b[sortConfig.key as keyof typeof b];
+        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+    return members;
+  }, [clusters, sortConfig]);
+
+  const handleSort = (key: string) => {
+    setSortConfig((prev) => {
+      if (prev?.key === key) {
+        return { key, direction: prev.direction === "asc" ? "desc" : "asc" };
+      }
+      return { key, direction: "asc" };
+    });
+  };
+
+  const clusterItems = sortedMembers.map((member) => {
     const isSelected = member.member_record_id === searchParam.toString();
     return (
       <tr
         key={member.member_record_id}
         onClick={() =>
-          navigate(
-            `/structureindex/${encodeURIComponent(member.virus_name)}/${
-              member.member_record_id
-            }`
-          )
+          navigate(`/structureindex/${member.virus_name}/${member.member_record_id}`)
         }
-        className={`cursor-pointer xs:text-xs md:text-base ${
+        className={`cursor-pointer ${
           isSelected ? "bg-[#4a95c0] text-white" : "hover:bg-[#e6e6e6]"
-        } `}
+        }`}
       >
-        <td className="text-left pl-2">
-          {member.member_record_id.slice(0, 10)}
-        </td>
-        <td className="text-left xs:pl-2 md:pl-0">
-          {member.genbank_name_curated}
-        </td>
+        <td className="text-left pl-2">{member.genbank_id}</td>
+        <td className="text-left">{member.genbank_name_curated}</td>
         <td className="text-left">{member.virus_name}</td>
-        <td className="pl-2 lg:text-left xs:text-center">
-          {member.plDDT_score}
-        </td>
-        <td className="pl-2 lg:text-left xs:text-center">{member.protein_length}</td>
+        <td className="text-left pl-2">{member.plDDT_score}</td>
+        <td className="text-left pl-2">{member.protein_length}</td>
       </tr>
     );
   });
@@ -60,11 +81,14 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
     </>
   ) : (
     <>
-      <div className="border border-[#64748b] bg-[#f9f9f9] xs:mx-2 md:mx-8">
+      <div className="border rounded border-[#64748b] bg-[#f9f9f9]">
         <div className="overflow-hidden">
-          <table className="w-full table-fixed border-collapse border-b border-[#64748b]  ">
-            <caption className="p-5 md:text-xl xs:text-base font-semibold text-left rtl:text-right bg-[#e6e6e6] text-[#636262]">
-              Similar Structures
+          <table className="w-full table-fixed border-collapse border-b border-[#64748b]">
+          <caption className="p-5 md:text-xl xs:text-base font-semibold text-left rtl:text-right bg-[#e6e6e6] text-[#636262]">
+            <div className="flex flex-row justify-between">
+              <h1>Similar Structures</h1>
+              <h2 className="text-lg font-normal text-gray-500">(Click headers to sort data)</h2>
+              </div>
               <div className="flex md:flex-row xs:flex-col justify-between">
                 <p className="mt-1 md:text-lg xs:text-sm font-normal text-gray-500">
                   Clustered Based on FoldSeek Similarity Scores
@@ -74,7 +98,6 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
                     Downloading...
                   </p>
                 ) : (
-                  <div className="hidden md:block">
                   <div className="flex flex-row gap-2 mt-1 text-lg font-normal text-gray-500  ">
                     <p>Download All Similar Structures:</p>
                     <div className="flex flex-row gap-2">
@@ -94,29 +117,47 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
                       </button>
                     </div>
                   </div>
-                  </div>
                 )}
               </div>
             </caption>
-            <thead className="bg-[#e6e6e6] text-[#636262]  ">
-              <tr className="md:text-base xs:text-xs">
-                <th className=" pl-2 w-1/5 text-left">Genbank ID</th>
-                <th className="w-1/5  text-left xs:pl-2 md:pl-0">
-                  Protein Name
+            <thead className="bg-[#e6e6e6] text-[#636262]">
+              <tr>
+                <th
+                  className="w-1/5 pl-2 text-left cursor-pointer hover:text-[#56b3e6]"
+                  onClick={() => handleSort("member_record_id")}
+                >
+                  Genbank ID {sortConfig?.key === "member_record_id" && (sortConfig.direction === "asc" ? "↑" : "↓")}
                 </th>
-                <th className="w-1/5 text-left">Virus Name</th>
-                <th className="w-1/5 pl-2 lg:text-left xs:text-center">
-                  pLDDT Score
+                <th
+                  className="w-1/5 text-left  cursor-pointer hover:text-[#56b3e6]"
+                  onClick={() => handleSort("genbank_name_curated")}
+                >
+                  Protein Name {sortConfig?.key === "genbank_name_curated" && (sortConfig.direction === "asc" ? "↑" : "↓")}
                 </th>
-                <th className="w-1/5 lg:text-left xs:text-center">
-                  Length (No. of Residues)
+                <th
+                  className="w-1/5 text-left  cursor-pointer hover:text-[#56b3e6]"
+                  onClick={() => handleSort("virus_name")}
+                >
+                  Virus Name {sortConfig?.key === "virus_name" && (sortConfig.direction === "asc" ? "↑" : "↓")}
+                </th>
+                <th
+                  className="w-1/5 text-left   cursor-pointer hover:text-[#56b3e6]"
+                  onClick={() => handleSort("plDDT_score")}
+                >
+                  pLDDT Score {sortConfig?.key === "plDDT_score" && (sortConfig.direction === "asc" ? "↑" : "↓")}
+                </th>
+                <th
+                  className="w-1/5 text-left  cursor-pointer hover:text-[#56b3e6]"
+                  onClick={() => handleSort("protein_length")}
+                >
+                  Length (No. of Residues) {sortConfig?.key === "protein_length" && (sortConfig.direction === "asc" ? "↑" : "↓")}
                 </th>
               </tr>
             </thead>
           </table>
         </div>
-        <div className="max-h-[50vh] clusters-custom-scrollbar overflow-y-auto">
-          <table className="w-full  text-slate-500 table-fixed border-collapse">
+        <div className="clusters-custom-scrollbar h-[50vh] overflow-y-auto">
+          <table className="w-full text-slate-500 table-fixed border-collapse">
             <tbody>{clusterItems}</tbody>
           </table>
         </div>
