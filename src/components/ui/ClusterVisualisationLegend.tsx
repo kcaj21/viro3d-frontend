@@ -8,7 +8,7 @@ const ClusterVisualisationLegend: React.FC<ClusterVisualisationLegendProps> = ({
 
   return (
     <>
-        <div className="flex flex-col mx-2 my-2 px-2 py-2 border-0 xl:text-lg lg:text-md sm:text-xs rounded bg-[#e6e6e6de] gap-2">
+        <div className="flex flex-col mx-2 my-2 px-2 py-2 border-0 xl:text-lg lg:text-base xs:text-xs rounded bg-[#e6e6e6de] gap-2">
         <button onClick={handleLegendPopUpClick} className="text-[#6d828d] xl:text-xl lg:text-lg border-b hover:border-[#505f66] hover:text-[#505f66]">Hide Legend</button>
           <div className="inline-flex items-center">
             <span className="size-4 inline-block bg-[#8b81b9] rounded-full me-2"></span>

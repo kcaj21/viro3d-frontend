@@ -31,12 +31,9 @@ const Home: React.FC = () => {
       >
         <div className="flex flex-row absolute w-full justify-center  ">
           <div className="text-center absolute z-10 ">
-            <h1 className="mt-2 xl:text-3xl lg:text-2xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4] ">
+            <h1 className="mt-2 xl:text-3xl lg:text-xl xs:text-base  font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4] ">
               Structure-Informed Map of the Human and Animal Virosphere
             </h1>
-            <h2 className="mt-2 xl:text-xl lg:text-lg font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4] ">
-              Click Points to Explore
-            </h2>
             <h2 className="mt-2 text-2xl font-light bg-[#e6e6e6de] px-2 border-0 rounded text-[#3a5868b4]  ">
               {hoveredVirus}
             </h2>
@@ -55,7 +52,6 @@ const Home: React.FC = () => {
           />
         ) : null}
         <div className="absolute top-0 left-0 flex flex-col text-[#3a5868b4] ">
-          <h3 className="text-4xl"></h3>
         </div>
         <div className="absolute xs:bottom-0 md:top-0 left-0 flex flex-col text-[#3a5868b4] ">
           {isLegendPopUpOpen ? (
@@ -70,6 +66,19 @@ const Home: React.FC = () => {
               Legend
             </button>
           )}
+        </div>
+        <div className="xs:invisible md:visible flex flex-row absolute bottom-0 w-full justify-center border-0 rounded mb-2 ">
+          <div className="text-center flex flex-row bg-[#e6e6e6de] z-10 ">
+            <h3 className="mt-2 xl:text-3xl lg:text-2xl md:text-xl font-light  px-2 border-0 rounded text-[#3a5868b4] ">
+            Scroll to zoom /
+            </h3>
+            <h4 className="mt-2 xl:text-3xl lg:text-2xl md:text-xl font-light  px-2 border-0 rounded text-[#3a5868b4] ">
+            Drag to pan /
+            </h4>
+            <h5 className="mt-2 xl:text-3xl lg:text-2xl md:text-xl xs:text-lg  font-light  px-2 border-0 rounded text-[#3a5868b4] ">
+            Click points to explore
+            </h5>
+          </div>
         </div>
       </div>
     </>

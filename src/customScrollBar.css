@@ -1,5 +1,4 @@
-/* customScrollbar.css */
-
+/* WebKit Browsers (Chrome, Edge, Safari) */
 .genome-browser-custom-scrollbar::-webkit-scrollbar {
   -webkit-appearance: none;
   height: 6px;
@@ -35,4 +34,27 @@
 
 .clusters-custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #9b9a9a;
+}
+
+/* Firefox Browsers */
+.genome-browser-custom-scrollbar {
+  scrollbar-width: thin; 
+  scrollbar-color: #7d8ea4 #bec4cc;
+}
+
+.genome-browser-custom-scrollbar:hover {
+  scrollbar-color: #4a95c0 #bec4cc;
+}
+
+.custom-no-scrollbar {
+  scrollbar-width: none;
+}
+
+.clusters-custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #c2c2c2 #e6e6e6;
+}
+
+.clusters-custom-scrollbar:hover {
+  scrollbar-color: #9b9a9a #e6e6e6; /* Change thumb color on hover */
 }

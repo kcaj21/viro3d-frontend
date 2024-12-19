@@ -79,9 +79,9 @@ const StructureIndex: React.FC = () => {
               </h1>
             </div>
             <div className="flex flex-col gap-8">
-              <div className="structuredata-container mb-8 sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
+              <div className="structuredata-container xs:mb-96 md:mb-2 sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
                 {defaultModel === "CF" ? (
-                  <div className="sm:basis-1/2 xs:mx-8">
+                  <div className="xs:basis-1/2 xs:mx-8">
                     {isESMFoldModelPresent ? (
                       <div>
                         <button
@@ -115,7 +115,7 @@ const StructureIndex: React.FC = () => {
                   </div>
                 ) : null}
                 {defaultModel === "EF" ? (
-                  <div className="sm:basis-1/2 xs:mx-8">
+                  <div className="xs:basis-1/2 xs:mx-8">
                     {isESMFoldModelPresent ? (
                       <div>
                         <button
@@ -154,7 +154,8 @@ const StructureIndex: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="clusters-container w-full mt-16">
+              <div className="hidden lg:block">
+              <div className="clusters-container w-full xs:mt-96 md:mt-16">
                 {clusters &&
                 clusters?.clusters[0].cluster_members.length > 1 &&
                 searchParam ? (
@@ -164,6 +165,7 @@ const StructureIndex: React.FC = () => {
                     searchParam={searchParam}
                   />
                 ) : null}
+              </div>
               </div>
             </div>
           </>

@@ -35,17 +35,21 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
             }`
           )
         }
-        className={`cursor-pointer ${
+        className={`cursor-pointer xs:text-xs md:text-base ${
           isSelected ? "bg-[#4a95c0] text-white" : "hover:bg-[#e6e6e6]"
-        }`}
+        } `}
       >
         <td className="text-left pl-2">
           {member.member_record_id.slice(0, 10)}
         </td>
-        <td className="text-left">{member.genbank_name_curated}</td>
+        <td className="text-left xs:pl-2 md:pl-0">
+          {member.genbank_name_curated}
+        </td>
         <td className="text-left">{member.virus_name}</td>
-        <td className="text-left">{member.plDDT_score}</td>
-        <td className="text-left">{member.protein_length}</td>
+        <td className="pl-2 lg:text-left xs:text-center">
+          {member.plDDT_score}
+        </td>
+        <td className="pl-2 lg:text-left xs:text-center">{member.protein_length}</td>
       </tr>
     );
   });
@@ -56,19 +60,22 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
     </>
   ) : (
     <>
-      <div className="border border-[#64748b] bg-[#f9f9f9]">
+      <div className="border border-[#64748b] bg-[#f9f9f9] xs:mx-2 md:mx-8">
         <div className="overflow-hidden">
           <table className="w-full table-fixed border-collapse border-b border-[#64748b]  ">
-            <caption className="p-5 text-xl font-semibold text-left rtl:text-right bg-[#e6e6e6] text-[#636262]">
+            <caption className="p-5 md:text-xl xs:text-base font-semibold text-left rtl:text-right bg-[#e6e6e6] text-[#636262]">
               Similar Structures
-              <div className="flex flex-row justify-between">
-                <p className="mt-1 text-lg font-normal text-gray-500">
+              <div className="flex md:flex-row xs:flex-col justify-between">
+                <p className="mt-1 md:text-lg xs:text-sm font-normal text-gray-500">
                   Clustered Based on FoldSeek Similarity Scores
                 </p>
                 {downloadLoading ? (
-                  <p className="mt-1 text-lg font-normal text-gray-500">Downloading...</p>
+                  <p className="mt-1 md:text-lg xs:text-sm  font-normal text-gray-500">
+                    Downloading...
+                  </p>
                 ) : (
-                  <div className="flex flex-row gap-2 mt-1 text-lg font-normal text-gray-500">
+                  <div className="hidden md:block">
+                  <div className="flex flex-row gap-2 mt-1 text-lg font-normal text-gray-500  ">
                     <p>Download All Similar Structures:</p>
                     <div className="flex flex-row gap-2">
                       <button
@@ -87,16 +94,23 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
                       </button>
                     </div>
                   </div>
+                  </div>
                 )}
               </div>
             </caption>
             <thead className="bg-[#e6e6e6] text-[#636262]  ">
-              <tr className="">
+              <tr className="md:text-base xs:text-xs">
                 <th className=" pl-2 w-1/5 text-left">Genbank ID</th>
-                <th className="w-1/5 text-left">Protein Name</th>
+                <th className="w-1/5  text-left xs:pl-2 md:pl-0">
+                  Protein Name
+                </th>
                 <th className="w-1/5 text-left">Virus Name</th>
-                <th className="w-1/5 text-left">pLDDT Score</th>
-                <th className="w-1/5 text-left">Length (No. of Residues)</th>
+                <th className="w-1/5 pl-2 lg:text-left xs:text-center">
+                  pLDDT Score
+                </th>
+                <th className="w-1/5 lg:text-left xs:text-center">
+                  Length (No. of Residues)
+                </th>
               </tr>
             </thead>
           </table>
