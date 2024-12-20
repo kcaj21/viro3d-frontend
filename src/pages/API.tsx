@@ -1,5 +1,3 @@
-import React from 'react';
-
 const API = () => {
   return (
     <div className="mt-24">

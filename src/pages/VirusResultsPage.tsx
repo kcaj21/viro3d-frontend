@@ -29,7 +29,7 @@ const VirusResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80vh] xs:mt-24 xs:mb-12 md:mb-12 md:mt-32 xs:mx-4 sm:mt-24 xl:mb-8 2xl:mb-0 2xl:mt-40 md:mx-24 xs:text-xl 2xl:text-5xl">
+    <div className="min-h-screen xs:mt-24 xs:mb-12 xl:mb-8 2xl:mb-0 md:mt-32 xs:mx-4 sm:mt-24  2xl:mt-40 md:mx-24 xs:text-xl 2xl:text-5xl">
       <div className="results-container flex flex-col justify-between mt-8 border drop-shadow-md rounded border-slate-300 text-slate-500 bg-[#e6e6e6]">
         <div className="button-row flex flex-row justify-between xs:text-xl lg:text-2xl 2xl:text-3xl font-light text-[#4a95c0]">
           <p className="px-8 py-8 break-words">

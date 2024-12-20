@@ -34,6 +34,10 @@ const StructureIndex: React.FC = () => {
     handleESMFoldClick,
   } = useStructureIndexData(searchParam ?? "");
 
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, []);
+
   return (
     <>
       <div className="min-h-screen xs:mt-24 sm:mt-32 xs:mb-96 sm:mb-32 sm:my-auto sm:mx-4 lg:mx-8 2xl:mx-24">
