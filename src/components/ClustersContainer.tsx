@@ -35,8 +35,14 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
     const members = [...clusters.clusters[0].cluster_members];
     if (sortConfig !== null) {
       members.sort((a, b) => {
-        const aValue = a[sortConfig.key as keyof typeof a];
-        const bValue = b[sortConfig.key as keyof typeof b];
+        let aValue = a[sortConfig.key as keyof typeof a];
+        let bValue = b[sortConfig.key as keyof typeof b];
+  
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          aValue = aValue.toLowerCase();
+          bValue = bValue.toLowerCase();
+        }
+  
         if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
         if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
         return 0;
@@ -156,7 +162,7 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
             </thead>
           </table>
         </div>
-        <div className="clusters-custom-scrollbar h-[50vh] overflow-y-auto">
+        <div className="clusters-custom-scrollbar max-h-[50vh] overflow-y-auto">
           <table className="w-full text-slate-500 table-fixed border-collapse">
             <tbody>{clusterItems}</tbody>
           </table>

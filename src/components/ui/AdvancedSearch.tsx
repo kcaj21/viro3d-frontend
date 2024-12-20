@@ -47,7 +47,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       <div className="input-container relative w-full drop-shadow-md">
         <div className="flex items-center">
           <input
-            placeholder={`Filter by ${filterParam === "proteinname" ? 'virus' : 'protein name'}...`}
+            placeholder={`Filter by ${filterParam === "protein_name" ? 'virus' : 'protein name'}...`}
             value={inputValue}
             onChange={handleInputChange}
             className="text-slate-500 px-4 outline-none h-12 w-full border-0 rounded-full xs:text-lg lg:text-xl bg-[#f9f9f9]"

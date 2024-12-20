@@ -64,7 +64,7 @@ const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
       ) : null}
 
       {isAutoCompleteOpen &&
-      filterParam === "proteinname" &&
+      filterParam === "protein_name" &&
       suggestion &&
       data ? (
         <ul

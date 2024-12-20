@@ -15,7 +15,7 @@ const ProteinStructureResults: React.FC<ProteinStructureResultsProps> = ({
   filterParam,
   searchParam,
 }) => {
-  return filterParam !== "sequencematch" ? (
+  return filterParam !== "sequence_match" ? (
     <>
       <ul className="xs:px-4 sm:px-8 py-8 grid sm:grid-cols-2 xs:grid-cols-1 gap-4">
         {"protein_structures" in data &&

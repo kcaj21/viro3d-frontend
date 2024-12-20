@@ -13,7 +13,6 @@ import { useClusters } from "../hooks/useClusters";
 import ClustersContainer from "../components/ClustersContainer";
 
 const StructureIndex: React.FC = () => {
-  document.documentElement.scrollTop = 0;
 
   const { filterParam, searchParam } = useParams();
 
@@ -34,10 +33,6 @@ const StructureIndex: React.FC = () => {
     handleCollabFoldClick,
     handleESMFoldClick,
   } = useStructureIndexData(searchParam ?? "");
-
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, []);
 
   return (
     <>

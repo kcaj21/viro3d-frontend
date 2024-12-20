@@ -30,11 +30,11 @@ export function useAutocomplete(
           setData(null);
           setIsLoading(false);
         });
-    } else if (filterParam === "proteinname" && id) {
+    } else if (filterParam === "protein_name" && id) {
       setIsLoading(true);
       setData(null);
       fetch(
-        `${api_url}/api/proteins/proteinname/?qualifier=${id}&page_size=10&page_num=${currentpage}`
+        `${api_url}/api/proteins/protein_name/?qualifier=${id}&page_size=10&page_num=${currentpage}`
       )
         .then((res) => res.json())
         .then((data) => {

@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
 
   const debouncedSearch = debounce((search) => {
     if (
-      (search.length > 4 && filterParam === "proteinname") ||
+      (search.length > 4 && filterParam === "protein_name") ||
       (search.length > 2 && filterParam === "viruses")
     ) {
       setSuggestion(search);
@@ -95,9 +95,9 @@ const Navbar: React.FC = () => {
               className="bg-[#f9f9f9] rounded-full xs:text-lg sm:text-sm md:text-xl xl:text-2xl text-slate-500 sm:px-4 xl:px-6 text-center"
             >
               <option value="viruses">Virus Name</option>
-              <option value="proteinname">Protein Name</option>
-              <option value="sequencematch">Sequence</option>
-              <option value="genbankid">Protein ID</option>
+              <option value="protein_name">Protein Name</option>
+              <option value="sequence_match">Sequence</option>
+              <option value="genbank_id">Protein ID</option>
             </select>
             <div className="input-container relative w-full">
               <div className=" flex items-center">
@@ -106,9 +106,9 @@ const Navbar: React.FC = () => {
                   onChange={handleText}
                   placeholder={`${
                     filterParam === "viruses" ? "SARS" : ""
-                  }${filterParam === "proteinname" ? "Glycoprotein" : ""}${
-                    filterParam === "sequencematch" ? "WEWSDVLWWIKKIAG" : ""
-                  }${filterParam === "genbankid" ? "AKO90165.1" : ""}`}
+                  }${filterParam === "protein_name" ? "Glycoprotein" : ""}${
+                    filterParam === "sequence_match" ? "WEWSDVLWWIKKIAG" : ""
+                  }${filterParam === "genbank_id" ? "AKO90165.1" : ""}`}
                   className="text-slate-500 pl-4 outline-none sm:h-8 xl:h-10 2xl:h-12 w-full border-none xs:text-lg lg:text-2xl bg-[#f9f9f9]"
                   type="text"
                 />
@@ -242,9 +242,9 @@ const Navbar: React.FC = () => {
                   className="bg-[#f9f9f9] rounded-full text-sm w-[50%] text-slate-500 px-2 text-center"
                 >
                   <option value="viruses">Virus Name</option>
-                  <option value="proteinname">Protein Name</option>
-                  <option value="sequencematch">Sequence</option>
-                  <option value="genbankid">Protein ID</option>
+                  <option value="protein_name">Protein Name</option>
+                  <option value="sequence_match">Sequence</option>
+                  <option value="genbank_id">Protein ID</option>
                 </select>
                 <div className="input-container relative w-full">
                   <div className=" flex items-center">

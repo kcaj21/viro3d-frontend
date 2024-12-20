@@ -11,11 +11,19 @@ const About: React.FC = () => {
           Viro3D’s dataset includes 6,721 GenBank nucleotide sequences from
           4,407 virus isolates (representing 3,106 virus species). This
           constitutes all viruses with invertebrate and/or vertebrate host
-          annotations from the ICTV Virus Metadata Resource VMR MSL38 v2
-          (Lefkowitz et al. 2018). From these genomes, 71,269 protein records
-          were extracted, including 4,070 mature peptides from polyproteins and
-          11,786 protein regions from larger proteins, ensuring broad and
-          detailed representation.
+          annotations from the ICTV Virus Metadata Resource VMR MSL38 v2 (
+          <a
+            href="https://academic.oup.com/nar/article/46/D1/D708/4508876"
+            target="_blank"
+            rel="noreferrer"
+            className=" font-semibold text-[#4a95c0] underline"
+          >
+            Lefkowitz et al. 2018
+          </a>
+          ). From these genomes, 71,269 protein records were extracted,
+          including 4,070 mature peptides from polyproteins and 11,786 protein
+          regions from larger proteins, ensuring broad and detailed
+          representation.
         </p>
       ),
     },
@@ -35,22 +43,63 @@ const About: React.FC = () => {
             </dt>
             <dd className="">
               {" "}
-              We generated multiple sequence alignments (MSAs) using MMseqs2
-              (Steinegger and Soeding 2017) run against diverse databases
-              including colabfold_envdb_202108, pdb100_230517 and uniref30_2302.
-              These MSAs were used as input to LocalColabFold v.1.5.2 (Mirdita
-              et al. 2022, Jumper et al. 2021) allowing structural prediction
-              for 85,162 protein sequences. For each sequence, five models were
-              produced, and the highest-ranked structure was refined using Amber
-              force field relaxation (Case et al. 2023).{" "}
+              We generated multiple sequence alignments (MSAs) using MMseqs2 (
+              <a
+                href="https://www.nature.com/articles/nbt.3988"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Steinegger and Soeding 2017
+              </a>
+              ) run against diverse databases including colabfold_envdb_202108,
+              pdb100_230517 and uniref30_2302. These MSAs were used as input to
+              LocalColabFold v.1.5.2 (
+              <a
+                href="https://www.nature.com/articles/s41592-022-01488-1"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Mirdita et al. 2022
+              </a>
+              ,{" "}
+              <a
+                href="https://www.nature.com/articles/s41586-021-03819-2"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Jumper et al. 2021
+              </a>
+              ) allowing structural prediction for 85,162 protein sequences. For
+              each sequence, five models were produced, and the highest-ranked
+              structure was refined using Amber force field relaxation (
+              <a
+                href="https://pubs.acs.org/doi/10.1021/acs.jcim.3c01153"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Case et al. 2023
+              </a>
+              ).{" "}
             </dd>
             <dt className="text-[#4a95c0] font-bold">2. ESMFold </dt>
             <dd>
               {" "}
               Structures were also predicted with ESMFold, an alternative
-              approach built on the protein language model ESM-2 v.1.0.3 (Lin et
-              al. 2023). This resulted in 84,964 structural predictions, which
-              were also refined by relaxation using the Amber force field.{" "}
+              approach built on the protein language model ESM-2 v.1.0.3 ({" "}
+              <a
+                href="https://www.science.org/doi/10.1126/science.ade2574"
+                target="_blank"
+                rel="noreferrer"
+                className=" font-semibold text-[#4a95c0] underline"
+              >
+                Lin et al. 2023
+              </a>
+              ). This resulted in 84,964 structural predictions, which were also
+              refined by relaxation using the Amber force field.{" "}
             </dd>
           </dl>
           <p>
