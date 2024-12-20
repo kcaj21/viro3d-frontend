@@ -39,7 +39,7 @@ const StructureIndex: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen xs:mt-24 sm:mt-32 xs:mb-96 sm:mb-32 sm:my-auto sm:mx-4 lg:mx-8 2xl:mx-24">
+      <div className="min-h-screen xs:mt-24 sm:mt-32 xs:mb-4 sm:mb-32 sm:my-auto sm:mx-4 lg:mx-8 2xl:mx-24">
         {!proteinInfo ? (
           <div className="min-h-screen">
             <div className="flex items-center justify-center gap-12">
@@ -77,7 +77,7 @@ const StructureIndex: React.FC = () => {
               </h1>
             </div>
             <div className="flex flex-col gap-8">
-              <div className="structuredata-container xs:mb-96 md:mb-2 sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-32 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
+              <div className="structuredata-container xs:mb-12 md:mb-2 sm:mt-12 xs:mt-8 max-h-[100vh] xs:grid xs:grid-rows-2 xs:gap-8 md:gap-16 lg:flex lg:gap-2 xl:gap-16 lg:flex-row-1 ">
                 {defaultModel === "CF" ? (
                   <div className="basis-1/2 mx-8 flex flex-col">
                     {isESMFoldModelPresent ? (

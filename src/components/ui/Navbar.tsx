@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
 import { useAutocomplete } from "../../hooks/useAutocomplete";
 import AutocompleteDropdown from "./AutocompleteDropdown";
+import { api_url } from "../../utils/api";
 
 type Link = {
   title: string;
@@ -167,7 +168,7 @@ const Navbar: React.FC = () => {
               <Link to="/about">About</Link>
             </button>
             <button className="hover:text-[#50bde5]">
-              <Link to="/docs">API</Link>
+              <Link to={`${api_url}/docs`}>API</Link>
             </button>
           </ul>
           <div>
@@ -229,7 +230,7 @@ const Navbar: React.FC = () => {
                 onClick={toggleMobileMenu}
                 className="hover:text-[#50bde5]"
               >
-                <Link to="/docs">API</Link>
+                <Link to={`${api_url}/docs`}>API</Link>
               </button>
             </ul>
             <div className="pl-4 pr-4 ">

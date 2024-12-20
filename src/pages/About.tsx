@@ -1,5 +1,6 @@
 import React, { useState, useTransition } from "react";
 import TabButton from "../components/ui/TabButton";
+import { isMobile } from "react-device-detect";
 
 const About: React.FC = () => {
   const TAB_DATA = [
@@ -318,7 +319,7 @@ const About: React.FC = () => {
             href="https://www.biorxiv.org/content/10.1101/2024.12.19.629443v1"
             target="_blank"
             rel="noreferrer"
-            className="xs:text-xl lg:text-3xl text-[#4a95c0] hover:text-[#50bde5] hover:underline font-semibold"
+            className={`xs:text-xl lg:text-3xl text-[#4a95c0] hover:text-[#50bde5] xs:text-center md:text-left hover:underline ${isMobile ? "underline" : ""} font-semibold`}
           >
             Viro3D: a comprehensive database of virus protein structure
             predictions
