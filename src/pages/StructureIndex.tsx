@@ -29,7 +29,6 @@ const StructureIndex: React.FC = () => {
     proteinInfo,
     defaultModel,
     isESMFoldModelPresent,
-    isLoading,
     handleCollabFoldClick,
     handleESMFoldClick,
   } = useStructureIndexData(searchParam ?? "");

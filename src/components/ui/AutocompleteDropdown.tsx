@@ -71,6 +71,7 @@ const AutocompleteDropdown: React.FC<AutocompleteDropdownProps> = ({
           key={`${filterParam}-${suggestion}`}
           ref={ref}
           className="autocomplete w-full absolute z-50 max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto"
+          onMouseDown={(e) => e.stopPropagation()}
         >
           {"protein_structures" in data &&
             data.protein_structures?.map((protein) => (

@@ -1,6 +1,5 @@
 import React, { useState, useTransition } from "react";
 import TabButton from "../components/ui/TabButton";
-import { api_url } from "../utils/api";
 
 const About: React.FC = () => {
   const TAB_DATA = [
@@ -316,7 +315,7 @@ const About: React.FC = () => {
             discovered using Viro3D please see our pre-print:
           </p>
           <a
-            href={`${api_url}/api/pdfs/Viro3D.pdf`}
+            href="https://www.biorxiv.org/content/10.1101/2024.12.19.629443v1"
             target="_blank"
             rel="noreferrer"
             className="xs:text-xl lg:text-3xl text-[#4a95c0] hover:text-[#50bde5] hover:underline font-semibold"

@@ -82,7 +82,8 @@ const Navbar: React.FC = () => {
           <Link onClick={clearSuggestion} to={`/`}>
             <img
               className="xs:w-[25vw] sm:w-[15vw] md:w-[12vw] lg:w-[10vw] xl:w-[8.5vw]"
-              src="/cvrbioinformatics.png"
+              src="/Cvrbioinformatics.png"
+              alt="CVR Bioinformatics Logo"
             ></img>
           </Link>
           <form
