@@ -1,5 +1,6 @@
 import React, { useState, useTransition } from "react";
 import TabButton from "../components/ui/TabButton";
+import { api_url } from "../utils/api";
 
 const About: React.FC = () => {
   const TAB_DATA = [
@@ -16,7 +17,7 @@ const About: React.FC = () => {
             href="https://academic.oup.com/nar/article/46/D1/D708/4508876"
             target="_blank"
             rel="noreferrer"
-            className=" font-semibold text-[#4a95c0] underline"
+            className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
           >
             Lefkowitz et al. 2018
           </a>
@@ -48,7 +49,7 @@ const About: React.FC = () => {
                 href="https://www.nature.com/articles/nbt.3988"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Steinegger and Soeding 2017
               </a>
@@ -59,7 +60,7 @@ const About: React.FC = () => {
                 href="https://www.nature.com/articles/s41592-022-01488-1"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Mirdita et al. 2022
               </a>
@@ -68,7 +69,7 @@ const About: React.FC = () => {
                 href="https://www.nature.com/articles/s41586-021-03819-2"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Jumper et al. 2021
               </a>
@@ -79,7 +80,7 @@ const About: React.FC = () => {
                 href="https://pubs.acs.org/doi/10.1021/acs.jcim.3c01153"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Case et al. 2023
               </a>
@@ -94,7 +95,7 @@ const About: React.FC = () => {
                 href="https://www.science.org/doi/10.1126/science.ade2574"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Lin et al. 2023
               </a>
@@ -119,7 +120,7 @@ const About: React.FC = () => {
       content: (
         <div className="flex flex-col xs:text-xl lg:text-2xl text-[#6d828d] justify-evenly gap-8">
           <dl className="flex flex-col gap-4">
-            <dt className="text-3xl text-[#4a95c0]  font-bold">Frontend</dt>
+            <dt className="text-3xl text-[#4a95c0] font-bold">Frontend</dt>
             <dd className="">
               {" "}
               The basis of Viro3D's frontend was developed with{" "}
@@ -127,7 +128,7 @@ const About: React.FC = () => {
                 href="https://github.com/facebook/react"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 React
               </a>{" "}
@@ -136,7 +137,7 @@ const About: React.FC = () => {
                 href="https://github.com/microsoft/TypeScript"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Typescript
               </a>
@@ -148,7 +149,7 @@ const About: React.FC = () => {
                 href="https://github.com/molstar/pdbe-molstar"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 PDBE-Molstar Molecular Viewer
               </a>{" "}
@@ -159,7 +160,7 @@ const About: React.FC = () => {
                 href="https://github.com/sodaviz"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Sodaviz
               </a>{" "}
@@ -172,7 +173,7 @@ const About: React.FC = () => {
                 href="https://github.com/konvajs/konva"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 KonvaJS
               </a>{" "}
@@ -187,7 +188,7 @@ const About: React.FC = () => {
                 href="https://github.com/fastapi/fastapi"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 FastAPI
               </a>
@@ -200,7 +201,7 @@ const About: React.FC = () => {
                 href="https://github.com/biopython/biopython"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 Biopython
               </a>{" "}
@@ -216,7 +217,7 @@ const About: React.FC = () => {
                 href="https://github.com/mongodb/mongo"
                 target="_blank"
                 rel="noreferrer"
-                className=" font-semibold text-[#4a95c0] underline"
+                className=" font-semibold text-[#4a95c0] hover:text-[#50bde5] underline"
               >
                 MongoDB
               </a>{" "}
@@ -314,10 +315,15 @@ const About: React.FC = () => {
             For a detailed technical description and an example of what can be
             discovered using Viro3D please see our pre-print:
           </p>
-          <p className="xs:text-xl lg:text-3xl text-[#4a95c0] font-semibold">
+          <a
+            href={`${api_url}/api/pdfs/Viro3D.pdf`}
+            target="_blank"
+            rel="noreferrer"
+            className="xs:text-xl lg:text-3xl text-[#4a95c0] hover:text-[#50bde5] hover:underline font-semibold"
+          >
             Viro3D: a comprehensive database of virus protein structure
             predictions
-          </p>
+          </a>
           <div className="flex xs:text-lg lg:text-xl xs:flex-col xs:gap-4 lg:flex-row justify-evenly mt-8 mb-8">
             <TabButton
               selectTab={() =>
