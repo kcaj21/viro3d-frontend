@@ -41,7 +41,7 @@ const StructureIndex: React.FC = () => {
   return (
     <>
       <div className="min-h-screen xs:mt-24 sm:mt-32 xs:mb-96 sm:mb-32 sm:my-auto sm:mx-4 lg:mx-8 2xl:mx-24">
-        {isLoading ? (
+        {!proteinInfo ? (
           <div className="min-h-screen">
             <div className="flex items-center justify-center gap-12">
               <LoadingSpinner />
