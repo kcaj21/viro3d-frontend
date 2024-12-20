@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ClustersData } from "../types/clustersdata";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { useZipDownload } from "../hooks/useZipDownload";
+import { isMobile } from "react-device-detect";
 
 type ClustersContainerProps = {
   clusters: ClustersData;
@@ -68,9 +69,10 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
         onClick={() =>
           navigate(`/structureindex/${member.virus_name}/${member.member_record_id}`)
         }
-        className={`cursor-pointer ${
+        className={`cursor-pointer xs:text-xs md:text-base ${
           isSelected ? "bg-[#4a95c0] text-white" : "hover:bg-[#e6e6e6]"
-        }`}
+        }
+        ${isMobile ? "break-words" : ""}`}
       >
         <td className="text-left pl-2">{member.genbank_id}</td>
         <td className="text-left">{member.genbank_name_curated}</td>
@@ -87,13 +89,13 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
     </>
   ) : (
     <>
-      <div className="border rounded border-[#64748b] bg-[#f9f9f9]">
+      <div className="border border-[#64748b] bg-[#f9f9f9] xs:mx-2 md:mx-0">
         <div className="overflow-hidden">
           <table className="w-full table-fixed border-collapse border-b border-[#64748b]">
           <caption className="p-5 md:text-xl xs:text-base font-semibold text-left rtl:text-right bg-[#e6e6e6] text-[#636262]">
             <div className="flex flex-row justify-between">
               <h1>Similar Structures</h1>
-              <h2 className="text-lg font-normal text-gray-500">(Click headers to sort data)</h2>
+              <h2 className="xs:text-xs md:text-lg font-normal text-gray-500">(Click headers to sort data)</h2>
               </div>
               <div className="flex md:flex-row xs:flex-col justify-between">
                 <p className="mt-1 md:text-lg xs:text-sm font-normal text-gray-500">
@@ -104,7 +106,7 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
                     Downloading...
                   </p>
                 ) : (
-                  <div className="flex flex-row gap-2 mt-1 text-lg font-normal text-gray-500  ">
+                  <div className={`${isMobile ? "hidden" : ""} flex flex-row gap-2 mt-1 md:text-lg font-normal text-gray-500`}>
                     <p>Download All Similar Structures:</p>
                     <div className="flex flex-row gap-2">
                       <button
@@ -126,7 +128,7 @@ const ClustersContainer: React.FC<ClustersContainerProps> = ({
                 )}
               </div>
             </caption>
-            <thead className="bg-[#e6e6e6] text-[#636262]">
+            <thead className="bg-[#e6e6e6] md:text-base xs:text-xs text-[#636262]">
               <tr>
                 <th
                   className="w-1/5 pl-2 text-left cursor-pointer hover:text-[#56b3e6]"

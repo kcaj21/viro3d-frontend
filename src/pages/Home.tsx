@@ -25,9 +25,10 @@ const Home: React.FC = () => {
 
   return (
     <>
+    <div className="min-h-screen">
       <div
         id="konva-container"
-        className=" 2xl:mt-32 sm:mt-24 xl:h-[85vh] md:h-[85vh] md:mb-12 xs:mb-20 xs:mx-0 xs:mt-20 2xl:ml-4 md:ml-2 xs:ml-2 lg:mx-4 xs:h-[80vh] border drop-shadow-md rounded xs:w-[95vw]  sm:w-[98%] border-slate-300 text-[#4a95c0] overflow-hidden relative"
+        className=" 2xl:mt-32 sm:mt-24 md:h-[85vh] xs:mb-12 xs:mx-0 xs:mt-20 2xl:ml-4 md:ml-2 xs:ml-2 lg:mx-4 xs:h-[80vh] border drop-shadow-md rounded xs:w-[95vw]  sm:w-[98%] border-slate-300 text-[#4a95c0] overflow-hidden relative"
       >
         <div className="flex flex-row absolute w-full justify-center  ">
           <div className="text-center absolute z-10 ">
@@ -80,6 +81,7 @@ const Home: React.FC = () => {
             </h5>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

@@ -51,7 +51,7 @@ const PDBeMolStar: React.FC<Model> = ({ defaultModel, modelID }) => {
 
   return (
     <>
-      <div className="relative h-[100%]  ">
+      <div className="relative xs:h-[90%] md:h-[100%]  ">
         <div
           id="pdbeMolstar"
           ref={viewerContainerRef}

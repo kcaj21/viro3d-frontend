@@ -45,7 +45,7 @@ const ProteinResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen xs:mt-24 xs:mb-12 sm:mt-40 my-auto xs:mx-4 xl:mx-16 2xl:mx-24">
+    <div className="min-h-screen xs:mt-24 xs:mb-4 md:mb-12 sm:mt-40 my-auto xs:mx-4 xl:mx-16 2xl:mx-24">
       {filterParam === "virus_name" && coordinates?.segments && !isMobile ? (
         <FeatureBrowserContainer
           searchParam={searchParam}
